@@ -41,26 +41,17 @@ sub new {
 
     if (!defined($options{noptions})) {
         $options{options}->add_options(arguments => {
-            'api-key:s'              =>
-                { name => 'api-key' },
-            'api-path:s'             =>
-                { name => 'api_path', default => 'api' },
-            'api-version:s'          =>
-                { name => 'api_version', default => '4.0' },
-            'hostname:s'             =>
-                { name => 'hostname' },
-            'port:s'                 =>
-                { name => 'port', default => 443 },
-            'proto:s'                =>
-                { name => 'proto', default => 'https' },
-            'timeout:s'              =>
-                { name => 'timeout' },
+            'api-key:s'              => { name => 'api_key' },
+            'api-path:s'             => { name => 'api_path', default => 'api' },
+            'api-version:s'          => { name => 'api_version', default => '4.0' },
+            'hostname:s'             => { name => 'hostname' },
+            'port:s'                 => { name => 'port', default => 443 },
+            'proto:s'                => { name => 'proto', default => 'https' },
+            'timeout:s'              => { name => 'timeout' },
             'unknown-http-status:s'  =>
                 { name => 'unknown_http_status', default => '%{http_code} < 200 or %{http_code} >= 300' },
-            'warning-http-status:s'  =>
-                { name => 'warning_http_status' },
-            'critical-http-status:s' =>
-                { name => 'critical_http_status' }
+            'warning-http-status:s'  => { name => 'warning_http_status' },
+            'critical-http-status:s' => { name => 'critical_http_status' }
         });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'REST API OPTIONS', once => 1);
@@ -85,6 +76,12 @@ sub check_options {
     $self->{api_key} = defined($self->{option_results}->{api_key}) ?
         $self->{option_results}->{api_key} :
         '';
+    $self->{api_version} = defined($self->{option_results}->{api_version}) ?
+        $self->{option_results}->{api_version} :
+        '';
+    $self->{api_path} = defined($self->{option_results}->{api_path}) ?
+        $self->{option_results}->{api_path} :
+        '';
     $self->{warning_http_status} = defined($self->{option_results}->{warning_http_status}) ?
         $self->{option_results}->{warning_http_status} :
         '';
@@ -105,8 +102,6 @@ sub check_options {
         $self->{output}->add_option_msg(short_msg => 'Need to specify --api-version option.');
         $self->{output}->option_exit();
     }
-
-    $self->{cache}->check_options(option_results => $self->{option_results});
 
     return 0;
 }
@@ -147,7 +142,7 @@ sub request_api {
     push @$get_param, 'api-version=' . $self->{api_version};
 
     my ($content) = $self->{http}->request(
-        url_path        => $self->{api_path} . $options{endpoint},
+        url_path        => "/" .  $self->{api_path} . "/" . $options{endpoint},
         get_param       => $get_param,
         method          => 'GET',
         unknown_status  => $self->{unknown_http_status},
@@ -184,7 +179,7 @@ Axentia e-paper Rest API
 
 =head1 REST API OPTIONS
 
-Infinitys Rest API
+Axentia Rest API
 
 =over 8
 

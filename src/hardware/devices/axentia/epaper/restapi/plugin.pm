@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-package ivertix::plugins::hardware::devices::infinitys::restapi::plugin;
+package hardware::devices::axentia::epaper::restapi::plugin;
 
 use strict;
 use warnings;
@@ -31,11 +31,11 @@ sub new {
 
     $self->{version} = '0.1';
     $self->{modes} = {
-        'list-devices' => 'ivertix::plugins::hardware::devices::infinitys::restapi::mode::listdevices',
-        'health' => 'ivertix::plugins::hardware::devices::infinitys::restapi::mode::health'
+        'list-displays' => 'hardware::devices::axentia::epaper::restapi::mode::listdisplays',
+        'health'        => 'hardware::devices::axentia::epaper::restapi::mode::health'
     };
 
-    $self->{custom_modes}->{api} = 'ivertix::plugins::hardware::devices::infinitys::restapi::custom::api';
+    $self->{custom_modes}->{api} = 'hardware::devices::axentia::epaper::restapi::custom::api';
     return $self;
 }
 
@@ -45,6 +45,6 @@ __END__
 
 =head1 PLUGIN DESCRIPTION
 
-Check Infinitys Devices through REST API.
+Check Axentia Displays through REST API.
 
 =cut
