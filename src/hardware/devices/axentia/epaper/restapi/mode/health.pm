@@ -38,7 +38,7 @@ sub set_counters {
 
     $self->{maps_counters}->{global} = [
         { label => 'total-ok', nlabel => 'displays.total.ok.count', display_ok => 1, set => {
-            key_values            => [ { name => 'ok' }, { name => 'total' }, { name => 'ok_prct' } ],
+            key_values            => [ { name => 'total_ok' }, { name => 'total' }, { name => 'total_ok_prct' } ],
             closure_custom_output => $self->can('custom_ok_output'),
             perfdatas             => [
                 { template => '%s', min => 0, max => 'total' }
@@ -46,7 +46,7 @@ sub set_counters {
         }
         },
         { label => 'total-ok-prct', nlabel => 'displays.total.ok.percentage', display_ok => 0, set => {
-            key_values            => [ { name => 'ok_prct' }, { name => 'ok' }, { name => 'total' } ],
+            key_values            => [ { name => 'total_ok_prct' }, { name => 'ok' }, { name => 'total' } ],
             closure_custom_output => $self->can('custom_ok_output_prct'),
             perfdatas             => [
                 { template => '%.2f', unit => '%', min => 0, max => 100 }
@@ -54,7 +54,7 @@ sub set_counters {
         }
         },
         { label => 'total-error', nlabel => 'displays.total.error.count', display_ok => 0, set => {
-            key_values            => [ { name => 'error' }, { name => 'total' }, { name => 'error_prct' } ],
+            key_values            => [ { name => 'total_error' }, { name => 'total' }, { name => 'total_error_prct' } ],
             closure_custom_output => $self->can('custom_error_output'),
             perfdatas             => [
                 { template => '%s', min => 0, max => 'total' }
@@ -62,7 +62,7 @@ sub set_counters {
         }
         },
         { label => 'total-error-prct', nlabel => 'displays.total.error.percentage', display_ok => 0, set => {
-            key_values            => [ { name => 'error_prct' }, { name => 'error' }, { name => 'total' } ],
+            key_values            => [ { name => 'total_error_prct' }, { name => 'total_error' }, { name => 'total' } ],
             closure_custom_output => $self->can('custom_error_output_prct'),
             perfdatas             => [
                 { template => '%.2f', unit => '%', min => 0, max => 100 }
@@ -70,19 +70,25 @@ sub set_counters {
         }
         },
         { label => 'total-notice', nlabel => 'displays.total.notice.count', display_ok => 0, set => {
-            key_values            => [ { name => 'notice' }, { name => 'total' }, { name => 'notice_prct' } ],
-            closure_custom_output => $self->can('custom_notice_output'),
-            perfdatas             => [
-                { template => '%s', min => 0, max => 'total' }
-            ]
+            key_values            =>
+                [ { name => 'total_notice' }, { name => 'total' }, { name => 'total_notice_prct' } ],
+            closure_custom_output =>
+                $self->can('custom_notice_output'),
+            perfdatas             =>
+                [
+                    { template => '%s', min => 0, max => 'total' }
+                ]
         }
         },
         { label => 'total-notice-prct', nlabel => 'displays.total.notice.percentage', display_ok => 0, set => {
-            key_values            => [ { name => 'notice_prct' }, { name => 'notice' }, { name => 'total' } ],
-            closure_custom_output => $self->can('custom_notice_output_prct'),
-            perfdatas             => [
-                { template => '%.2f', unit => '%', min => 0, max => 100 }
-            ]
+            key_values            =>
+                [ { name => 'total_notice_prct' }, { name => 'total_notice' }, { name => 'total' } ],
+            closure_custom_output =>
+                $self->can('custom_notice_output_prct'),
+            perfdatas             =>
+                [
+                    { template => '%.2f', unit => '%', min => 0, max => 100 }
+                ]
         }
         }
     ];
@@ -109,8 +115,7 @@ sub set_counters {
             key_values      => [ { name => 'temperature' }, { name => 'display' } ],
             output_template => 'Temperature: %d C',
             perfdatas       => [
-                { value  => 'temperature', template => '%d',
-                    unit => 'C', label_extra_instance => 1 },
+                { value => 'temperature', template => '%d', unit => 'C', label_extra_instance => 1 },
             ],
         }
         },
@@ -126,8 +131,14 @@ sub set_counters {
             key_values      => [ { name => 'tcp_quality' }, { name => 'display' } ],
             output_template => 'TCP quality : %.2f%%',
             perfdatas       => [
-                { value => 'tcp_quality', template => '%.2f',
-                    min => 0, max => 100, unit => '%', label_extra_instance => 1 },
+                {
+                    value                => 'tcp_quality',
+                    template             => '%.2f',
+                    min                  => 0,
+                    max                  => 100,
+                    unit                 => '%',
+                    label_extra_instance => 1
+                },
             ],
         }
         },
@@ -135,8 +146,14 @@ sub set_counters {
             key_values      => [ { name => 'battery_status' }, { name => 'display' } ],
             output_template => 'Battery status : %.2f%%',
             perfdatas       => [
-                { value => 'battery_status', template => '%.2f',
-                    min => 0, max => 100, unit => '%', label_extra_instance => 1 },
+                {
+                    value                => 'battery_status',
+                    template             => '%.2f',
+                    min                  => 0,
+                    max                  => 100,
+                    unit                 => '%',
+                    label_extra_instance => 1
+                },
             ],
         }
         },
@@ -144,7 +161,12 @@ sub set_counters {
             key_values      => [ { name => 'battery_voltage', no_value => 0 } ],
             output_template => 'Battery voltage: %s V',
             perfdatas       => [
-                { value => 'battery_voltage', template => '%s', unit => 'V', label_extra_instance => 1 },
+                {
+                    value                => 'battery_voltage',
+                    template             => '%s',
+                    unit                 => 'V',
+                    label_extra_instance => 1
+                },
             ],
         }
         },
@@ -165,8 +187,8 @@ sub custom_ok_output_prct {
 
     return sprintf(
         'displays ok %.2f%% (%s on %s)',
-        $self->{result_values}->{ok_prct},
-        $self->{result_values}->{ok},
+        $self->{result_values}->{total_ok_prct},
+        $self->{result_values}->{total_ok},
         $self->{result_values}->{total},
     );
 }
@@ -176,8 +198,8 @@ sub custom_error_output_prct {
 
     return sprintf(
         'displays error %.2f%% (%s on %s)',
-        $self->{result_values}->{error_prct},
-        $self->{result_values}->{error},
+        $self->{result_values}->{total_error_prct},
+        $self->{result_values}->{total_error},
         $self->{result_values}->{total},
     );
 }
@@ -191,9 +213,9 @@ sub custom_ok_output {
 
     return sprintf(
         'displays ok %s on %s (%.2f%%)',
-        $self->{result_values}->{ok},
+        $self->{result_values}->{total_ok},
         $self->{result_values}->{total},
-        $self->{result_values}->{ok_prct},
+        $self->{result_values}->{total_ok_prct},
     );
 }
 
@@ -202,9 +224,9 @@ sub custom_error_output {
 
     return sprintf(
         'displays error %s on %s (%.2f%%)',
-        $self->{result_values}->{error},
+        $self->{result_values}->{total_error},
         $self->{result_values}->{total},
-        $self->{result_values}->{error_prct}
+        $self->{result_values}->{total_error_prct}
     );
 }
 
@@ -213,9 +235,9 @@ sub custom_notice_output {
 
     return sprintf(
         'displays notice %s on %s (%.2f%%)',
-        $self->{result_values}->{notice},
+        $self->{result_values}->{total_notice},
         $self->{result_values}->{total},
-        $self->{result_values}->{notice_prct}
+        $self->{result_values}->{total_notice_prct}
     );
 }
 
@@ -224,8 +246,8 @@ sub custom_notice_output_prct {
 
     return sprintf(
         'displays notice %.2f%% (%s on %s)',
-        $self->{result_values}->{notice_prct},
-        $self->{result_values}->{notice},
+        $self->{result_values}->{total_notice_prct},
+        $self->{result_values}->{total_notice},
         $self->{result_values}->{total},
     );
 }
@@ -298,15 +320,15 @@ sub manage_selection {
 
     $self->{display} = {};
     $self->{global} = {
-        total  => 0,
-        ok     => 0,
-        notice => 0,
-        error  => 0
+        total        => 0,
+        total_ok     => 0,
+        total_notice => 0,
+        total_error  => 0
     };
 
     foreach my $temp_dp (@{$temp_displays}) {
         if (defined($self->{option_results}->{display}) && $self->{option_results}->{display} ne '' &&
-            $temp_dp->{ibusId} == $self->{option_results}->{display}) {
+            $temp_dp->{ibusId} ne $self->{option_results}->{display}) {
             $self->{output}->output_add(
                 long_msg => "skipping '" . $temp_dp->{ibusId} . "': no matching display filter.",
                 debug    => 1);
@@ -343,11 +365,11 @@ sub manage_selection {
         if (defined($map_status_code->{ $temp_dp->{displayStatus} })) {
             $dp->{status} = $map_status_code->{ $temp_dp->{displayStatus}};
             if ($dp->{status} eq 'ok') {
-                $self->{global}->{ok}++;
+                $self->{global}->{total_ok}++;
             } elsif ($dp->{status} eq 'notice') {
-                $self->{global}->{notice}++;
+                $self->{global}->{total_notice}++;
             } elsif ($dp->{status} eq 'error') {
-                $self->{global}->{error}++;
+                $self->{global}->{total_error}++;
             }
         } else {
             $dp->{status} = 'NA';
@@ -363,9 +385,9 @@ sub manage_selection {
     }
 
     if ($self->{global}->{total} > 0) {
-        $self->{global}->{ok_prct} = $self->{global}->{ok} * 100 / $self->{global}->{total};
-        $self->{global}->{error_prct} = $self->{global}->{error} * 100 / $self->{global}->{total};
-        $self->{global}->{notice_prct} = $self->{global}->{notice} * 100 / $self->{global}->{total};
+        $self->{global}->{total_ok_prct} = $self->{global}->{total_ok} * 100 / $self->{global}->{total};
+        $self->{global}->{total_error_prct} = $self->{global}->{total_error} * 100 / $self->{global}->{total};
+        $self->{global}->{total_notice_prct} = $self->{global}->{total_notice} * 100 / $self->{global}->{total};
     }
 }
 
@@ -401,8 +423,8 @@ Can used special variables like: %{status}, %{display_mode}
 =item B<--warning-*> B<--critical-*>
 
 Threshold warning.
-Can be: 'total-ok', 'total-ok-prct', 'total-error', 'total-error-prct', 'temperature', 'uptime', 'tcp-quality',
-'battery-status', 'battery-voltage'.
+Can be: 'total-ok', 'total-ok-prct' (%), 'total-error', 'total-error-prct' (%), 'total-notice', 'total-notice-prct' (%), 'temperature' (C), 'uptime' (s), 'tcp-quality' (%),
+'udp-quality' (%), 'battery-status' (%), 'battery-voltage' (V).
 
 =back
 

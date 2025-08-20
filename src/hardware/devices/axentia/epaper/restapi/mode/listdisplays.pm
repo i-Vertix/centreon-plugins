@@ -110,9 +110,19 @@ sub run {
 
     my $results = $self->manage_selection(%options);
     foreach my $ibus_id (sort keys %$results) {
+        my $display = $results->{$ibus_id};
         $self->{output}->output_add(
             long_msg =>
-                join('', map("[$_: " . $results->{$ibus_id}->{$_} . ']', @labels))
+                sprintf("[ibus_id = %s] [stoppoint_name = %s] [product = %s] [ip = %s] [firmware = %s] [platform = %s] [display_mode = %s] [display_status = %s]",
+                    $display->{ibus_id},
+                    $display->{stoppoint_name},
+                    $display->{product},
+                    $display->{ip},
+                    $display->{firmware},
+                    $display->{platform},
+                    $display->{display_mode},
+                    $display->{display_status}
+                )
         );
     }
 
