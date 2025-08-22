@@ -97,7 +97,7 @@ sub set_counters {
         {
             label            => 'status',
             type             => 2,
-            unknown_default => '%{status} eq "NOT_DOCUMENTED || %{display_mode} eq "NOT_DOCUMENTED"',
+            unknown_default => '%{status} eq "NOT_DOCUMENTED" || %{display_mode} eq "NOT_DOCUMENTED"',
             critical_default => '%{status} eq "error"',
             warning_default  => '%{status} eq "notice"',
             set              => {
@@ -434,7 +434,7 @@ Filter display by ibusId.
 
 =item B<--unknown-status>
 
-Set unknown threshold for status. (Default: '%{status} eq "NOT_DOCUMENTED || %{display_mode} eq "NOT_DOCUMENTED"')
+Set unknown threshold for status. (Default: '%{status} eq "NOT_DOCUMENTED" || %{display_mode} eq "NOT_DOCUMENTED"')
 Can used special variables like: %{status}, %{display_mode}
 
 =item B<--warning--status>
