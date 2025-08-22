@@ -81,14 +81,24 @@ sub manage_selection {
         }
 
         # there can be more than one stoppoint on a display. So we make a distinct of the stoppoint names
+        my @pairs;
         my $stop_point_name = $display->{stopPointName};
-        my @names = split /\s*,\s*/, $stop_point_name;
+        if ( $stop_point_name =~ /,/ ) {
+            # Normal case: multiple pairs separated by commas
+            while ($stop_point_name =~ /\s*([^,]+,\s*[^,]+)\s*(?:,|$)/g) {
+                push @pairs, $1;# example "Bolzano, Stazione"
+            }
+        } else {
+            # Special case: no comma at all → the whole string counts as one "pair"
+            push @pairs, $stop_point_name;
+        }
+
         my %seen;
-        my @unique_name = grep {!$seen{lc $_}++} @names;
+        my @unique = grep { !$seen{ lc($_) }++ } @pairs;
 
         $results->{ $display->{ibusId} } = {
             ibus_id        => $display->{ibusId},
-            stoppoint_name => join(";", @unique_name),
+            stoppoint_name => join(";", @unique),
             product        => $display->{product},
             ip             => defined($display->{ipAddress}) ? $display->{ipAddress} : "NA",
             firmware       => $display->{firmware},

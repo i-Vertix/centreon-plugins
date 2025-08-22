@@ -350,13 +350,23 @@ sub manage_selection {
         }
 
         my $dp;
-        my $stop_point_name = $temp_dp->{stopPointName};
         # there can be more than one stoppoint on a display. So we make a distinct of the stoppoint names
-        my @names = split /\s*,\s*/, $stop_point_name;
-        my %seen;
-        my @unique_name = grep {!$seen{lc $_}++} @names;
+        my @pairs;
+        my $stop_point_name = $temp_dp->{stopPointName};
+        if ($stop_point_name =~ /,/ ) {
+            # Normal case: multiple pairs separated by commas
+            while ($stop_point_name =~ /\s*([^,]+,\s*[^,]+)\s*(?:,|$)/g) {
+                push @pairs, $1;# example "Bolzano, Stazione"
+            }
+        } else {
+            # Special case: no comma at all → the whole string counts as one "pair"
+            push @pairs, $stop_point_name;
+        }
 
-        $dp->{stoppoint_name} = join(", ", @unique_name);
+        my %seen;
+        my @unique = grep { !$seen{ lc($_) }++ } @pairs;
+
+        $dp->{stoppoint_name} = join(";", @unique);
         $dp->{product} = $temp_dp->{product};
         $dp->{platform} = $temp_dp->{platform};
         $dp->{firmware} = $temp_dp->{firmware};
