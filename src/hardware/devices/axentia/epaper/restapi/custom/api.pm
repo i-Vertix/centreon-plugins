@@ -73,9 +73,7 @@ sub set_defaults {}
 sub check_options {
     my ($self, %options) = @_;
 
-    $self->{api_key} = defined($self->{option_results}->{api_key}) ?
-        $self->{option_results}->{api_key} :
-        '';
+    $self->{api_key} = defined($self->{option_results}->{api_key}) ? $self->{option_results}->{api_key} : '';
     $self->{api_version} = defined($self->{option_results}->{api_version}) ?
         $self->{option_results}->{api_version} :
         '';
@@ -88,6 +86,11 @@ sub check_options {
     $self->{critical_http_status} = defined($self->{option_results}->{critical_http_status}) ?
         $self->{option_results}->{critical_http_status} :
         '';
+
+    if ($self->{option_results}->{api_version} !~ /^(?:1\.0|2\.0|3\.0|4\.0)$/) {
+        $self->{output}->add_option_msg(short_msg => "api version '" . $self->{option_results}->{api_version} . "' not implemented" );
+        $self->{output}->option_exit();
+    }
 
     if (!defined($self->{option_results}->{hostname}) || $self->{option_results}->{hostname} eq '') {
         $self->{output}->add_option_msg(short_msg => 'Need to specify --hostname option.');
@@ -142,7 +145,7 @@ sub request_api {
     push @$get_param, 'api-version=' . $self->{api_version};
 
     my ($content) = $self->{http}->request(
-        url_path        => "/" .  $self->{api_path} . "/" . $options{endpoint},
+        url_path        => "/" . $self->{api_path} . "/" . $options{endpoint},
         get_param       => $get_param,
         method          => 'GET',
         unknown_status  => $self->{unknown_http_status},
@@ -195,22 +198,33 @@ Port used (Default: 443)
 
 Specify https if needed (Default: 'https')
 
-=item B<--api-client-id>
+=item B<--api-key>
 
-API client id.
+API key to access iBus API.
 
-=item B<--api-client-secret>
+=item B<--api-path>
 
-API client secret.
+API path to the iBus API.
 
-=item B<--token>
+=item B<--api-version>
 
-Use token authentication. If option is empty, token is created.
-Only for test purpose because token are valid only an hour by default.
+API version to use for the iBus API. Can be '1.0', '2.0', '3.0', '4.0'
 
 =item B<--timeout>
 
 Set timeout in seconds (Default: 30).
+
+=item B<--unknown-http-status>
+
+Threshold unknown for http response code (default: '%{http_code} < 200 or %{http_code} >= 300')
+
+=item B<--warning-http-status>
+
+Warning threshold for http response code
+
+=item B<--critical-http-status>
+
+Critical threshold for http response code
 
 =back
 

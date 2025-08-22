@@ -30,10 +30,7 @@ sub new {
     my $self = $class->SUPER::new(package => __PACKAGE__, %options);
     bless $self, $class;
 
-    $options{options}->add_options(arguments =>
-        {
-            'display:s' => { name => 'display' }
-        });
+    $options{options}->add_options(arguments => { 'display:s' => { name => 'display' } });
 
     return $self;
 }
@@ -76,13 +73,14 @@ sub manage_selection {
 
     foreach my $display (@{$temp_display}) {
         if (defined($self->{option_results}->{display}) && $self->{option_results}->{display} ne '' &&
-            $display->{ibusId} == $self->{option_results}->{display}) {
+            $display->{ibusId} ne $self->{option_results}->{display}) {
             $self->{output}->output_add(
                 long_msg => "skipping '" . $display->{ibusId} . "': no matching display filter.",
                 debug    => 1);
             next;
         }
 
+        # there can be more than one stoppoint on a display. So we make a distinct of the stoppoint names
         my $stop_point_name = $display->{stopPointName};
         my @names = split /\s*,\s*/, $stop_point_name;
         my %seen;
@@ -90,9 +88,9 @@ sub manage_selection {
 
         $results->{ $display->{ibusId} } = {
             ibus_id        => $display->{ibusId},
-            stoppoint_name => join(", ", @unique_name),
+            stoppoint_name => join(";", @unique_name),
             product        => $display->{product},
-            ip             => defined($display->{ipAddress}) ? $display->{ipAddress} : "",
+            ip             => defined($display->{ipAddress}) ? $display->{ipAddress} : "NA",
             firmware       => $display->{firmware},
             platform       => $display->{platform},
             display_mode   => defined($map_display_mode->{ $display->{displayMode} }) ?
@@ -126,8 +124,7 @@ sub run {
         );
     }
 
-    $self->{output}->output_add(severity => 'OK',
-        short_msg                        => 'List devices:');
+    $self->{output}->output_add(severity => 'OK', short_msg => 'List devices:');
     $self->{output}->display(nolabel => 1, force_ignore_perfdata => 1, force_long_output => 1);
     $self->{output}->exit();
 }
@@ -143,9 +140,7 @@ sub disco_show {
 
     my $results = $self->manage_selection(%options);
     foreach (sort keys %$results) {
-        $self->{output}->add_disco_entry(
-            %{$results->{$_}}
-        );
+        $self->{output}->add_disco_entry(%{$results->{$_}});
     }
 }
 
@@ -161,7 +156,7 @@ List displays.
 
 =item B<--display>
 
-Filter display by ibusId.
+Filter displays by ibusId.
 
 =back
 

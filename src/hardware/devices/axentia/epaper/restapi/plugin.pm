@@ -45,6 +45,6 @@ __END__
 
 =head1 PLUGIN DESCRIPTION
 
-Check Axentia Displays through REST API.
+Check Axentia Displays through iBus REST API.
 
 =cut

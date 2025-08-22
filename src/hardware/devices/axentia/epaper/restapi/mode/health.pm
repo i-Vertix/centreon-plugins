@@ -97,6 +97,7 @@ sub set_counters {
         {
             label            => 'status',
             type             => 2,
+            unknown_default => '%{status} eq "NOT_DOCUMENTED || %{display_mode} eq "NOT_DOCUMENTED"',
             critical_default => '%{status} eq "error"',
             warning_default  => '%{status} eq "notice"',
             set              => {
@@ -133,6 +134,21 @@ sub set_counters {
             perfdatas       => [
                 {
                     value                => 'tcp_quality',
+                    template             => '%.2f',
+                    min                  => 0,
+                    max                  => 100,
+                    unit                 => '%',
+                    label_extra_instance => 1
+                },
+            ],
+        }
+        },
+        { label => 'udp-quality', display_ok => 0, nlabel => 'udp.quality.percentage', set => {
+            key_values      => [ { name => 'udp_quality' }, { name => 'display' } ],
+            output_template => 'UDP quality : %.2f%%',
+            perfdatas       => [
+                {
+                    value                => 'udp_quality',
                     template             => '%.2f',
                     min                  => 0,
                     max                  => 100,
@@ -288,9 +304,7 @@ sub new {
     my $self = $class->SUPER::new(package => __PACKAGE__, %options, force_new_perfdata => 1);
     bless $self, $class;
 
-    $options{options}->add_options(arguments => {
-        'display:s' => { name => 'display' }
-    });
+    $options{options}->add_options(arguments => { 'display:s' => { name => 'display' } });
 
     return $self;
 }
@@ -337,6 +351,7 @@ sub manage_selection {
 
         my $dp;
         my $stop_point_name = $temp_dp->{stopPointName};
+        # there can be more than one stoppoint on a display. So we make a distinct of the stoppoint names
         my @names = split /\s*,\s*/, $stop_point_name;
         my %seen;
         my @unique_name = grep {!$seen{lc $_}++} @names;
@@ -345,7 +360,7 @@ sub manage_selection {
         $dp->{product} = $temp_dp->{product};
         $dp->{platform} = $temp_dp->{platform};
         $dp->{firmware} = $temp_dp->{firmware};
-        $dp->{ip} = $temp_dp->{ipAddress};
+        $dp->{ip} = defined($temp_dp->{ipAddress}) ? $temp_dp->{ipAddress} : "NA";
 
         $dp->{battery_status} = $temp_dp->{batteryStatus};
         $dp->{battery_voltage} = $temp_dp->{batteryVoltage};
@@ -360,10 +375,12 @@ sub manage_selection {
         $dp->{temperature} = $temp_dp->{temperature};
         $dp->{uptime} = $temp_dp->{upTime};
 
-        $dp->{display_mode} = $map_display_mode->{ $temp_dp->{displayMode}};
+        $dp->{display_mode} = defined($map_display_mode->{ $temp_dp->{displayMode} }) ?
+            $map_display_mode->{ $temp_dp->{displayMode} } : 'NOT_DOCUMENTED';
 
         if (defined($map_status_code->{ $temp_dp->{displayStatus} })) {
-            $dp->{status} = $map_status_code->{ $temp_dp->{displayStatus}};
+            $dp->{status} = defined($map_status_code->{ $temp_dp->{displayStatus} }) ?
+                $map_status_code->{ $temp_dp->{displayStatus} } : 'NOT_DOCUMENTED';
             if ($dp->{status} eq 'ok') {
                 $self->{global}->{total_ok}++;
             } elsif ($dp->{status} eq 'notice') {
@@ -407,7 +424,7 @@ Filter display by ibusId.
 
 =item B<--unknown-status>
 
-Set unknown threshold for status.
+Set unknown threshold for status. (Default: '%{status} eq "NOT_DOCUMENTED || %{display_mode} eq "NOT_DOCUMENTED"')
 Can used special variables like: %{status}, %{display_mode}
 
 =item B<--warning--status>
