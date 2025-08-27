@@ -31,8 +31,10 @@ sub new {
 
     $self->{version} = '0.1';
     $self->{modes} = {
-        'list-displays' => 'hardware::devices::axentia::epaper::restapi::mode::listdisplays',
-        'health'        => 'hardware::devices::axentia::epaper::restapi::mode::health'
+        'health'                     => 'hardware::devices::axentia::epaper::restapi::mode::health',
+        'list-displays'              => 'hardware::devices::axentia::epaper::restapi::mode::listdisplays',
+        'operational-display-status' => 'hardware::devices::axentia::epaper::restapi::mode::operationaldisplaystatus',
+        'server-status'              => 'hardware::devices::axentia::epaper::restapi::mode::serverstatus'
     };
 
     $self->{custom_modes}->{api} = 'hardware::devices::axentia::epaper::restapi::custom::api';

@@ -25,79 +25,19 @@ use base qw(centreon::plugins::templates::counter);
 use strict;
 use warnings;
 use centreon::plugins::templates::catalog_functions qw(catalog_status_threshold_ng);
-use Date::Parse;
-use DateTime::Format::Strptime;
 
 sub set_counters {
     my ($self, %options) = @_;
 
     $self->{maps_counters_type} = [
-        { name => 'display', type => 1, cb_prefix_output => 'prefix_output', skipped_code => { -10 => 1 } },
-        { name => 'global', type => 0, skipped_code => { -10 => 1 } },
-    ];
-
-    $self->{maps_counters}->{global} = [
-        { label => 'total-ok', nlabel => 'displays.total.ok.count', display_ok => 1, set => {
-            key_values            => [ { name => 'total_ok' }, { name => 'total' }, { name => 'total_ok_prct' } ],
-            closure_custom_output => $self->can('custom_ok_output'),
-            perfdatas             => [
-                { template => '%s', min => 0, max => 'total' }
-            ]
-        }
-        },
-        { label => 'total-ok-prct', nlabel => 'displays.total.ok.percentage', display_ok => 0, set => {
-            key_values            => [ { name => 'total_ok_prct' }, { name => 'ok' }, { name => 'total' } ],
-            closure_custom_output => $self->can('custom_ok_output_prct'),
-            perfdatas             => [
-                { template => '%.2f', unit => '%', min => 0, max => 100 }
-            ]
-        }
-        },
-        { label => 'total-error', nlabel => 'displays.total.error.count', display_ok => 0, set => {
-            key_values            => [ { name => 'total_error' }, { name => 'total' }, { name => 'total_error_prct' } ],
-            closure_custom_output => $self->can('custom_error_output'),
-            perfdatas             => [
-                { template => '%s', min => 0, max => 'total' }
-            ]
-        }
-        },
-        { label => 'total-error-prct', nlabel => 'displays.total.error.percentage', display_ok => 0, set => {
-            key_values            => [ { name => 'total_error_prct' }, { name => 'total_error' }, { name => 'total' } ],
-            closure_custom_output => $self->can('custom_error_output_prct'),
-            perfdatas             => [
-                { template => '%.2f', unit => '%', min => 0, max => 100 }
-            ]
-        }
-        },
-        { label => 'total-notice', nlabel => 'displays.total.notice.count', display_ok => 0, set => {
-            key_values            =>
-                [ { name => 'total_notice' }, { name => 'total' }, { name => 'total_notice_prct' } ],
-            closure_custom_output =>
-                $self->can('custom_notice_output'),
-            perfdatas             =>
-                [
-                    { template => '%s', min => 0, max => 'total' }
-                ]
-        }
-        },
-        { label => 'total-notice-prct', nlabel => 'displays.total.notice.percentage', display_ok => 0, set => {
-            key_values            =>
-                [ { name => 'total_notice_prct' }, { name => 'total_notice' }, { name => 'total' } ],
-            closure_custom_output =>
-                $self->can('custom_notice_output_prct'),
-            perfdatas             =>
-                [
-                    { template => '%.2f', unit => '%', min => 0, max => 100 }
-                ]
-        }
-        }
+        { name => 'display', type => 1, cb_prefix_output => 'prefix_output', skipped_code => { -10 => 1 } }
     ];
 
     $self->{maps_counters}->{display} = [
         {
             label            => 'status',
             type             => 2,
-            unknown_default => '%{status} eq "NOT_DOCUMENTED" || %{display_mode} eq "NOT_DOCUMENTED"',
+            unknown_default  => '%{status} eq "unknown" || %{display_mode} eq "unknown"',
             critical_default => '%{status} eq "error"',
             warning_default  => '%{status} eq "notice"',
             set              => {
@@ -198,76 +138,6 @@ sub custom_uptime_output {
     );
 }
 
-sub custom_ok_output_prct {
-    my ($self, %options) = @_;
-
-    return sprintf(
-        'displays ok %.2f%% (%s on %s)',
-        $self->{result_values}->{total_ok_prct},
-        $self->{result_values}->{total_ok},
-        $self->{result_values}->{total},
-    );
-}
-
-sub custom_error_output_prct {
-    my ($self, %options) = @_;
-
-    return sprintf(
-        'displays error %.2f%% (%s on %s)',
-        $self->{result_values}->{total_error_prct},
-        $self->{result_values}->{total_error},
-        $self->{result_values}->{total},
-    );
-}
-
-sub custom_ok_output {
-    my ($self, %options) = @_;
-
-    return '' if $self->{result_values}->{total} == 1 &&
-        (!defined($self->{option_results}->{display}) ||
-            $self->{option_results}->{display} eq '');
-
-    return sprintf(
-        'displays ok %s on %s (%.2f%%)',
-        $self->{result_values}->{total_ok},
-        $self->{result_values}->{total},
-        $self->{result_values}->{total_ok_prct},
-    );
-}
-
-sub custom_error_output {
-    my ($self, %options) = @_;
-
-    return sprintf(
-        'displays error %s on %s (%.2f%%)',
-        $self->{result_values}->{total_error},
-        $self->{result_values}->{total},
-        $self->{result_values}->{total_error_prct}
-    );
-}
-
-sub custom_notice_output {
-    my ($self, %options) = @_;
-
-    return sprintf(
-        'displays notice %s on %s (%.2f%%)',
-        $self->{result_values}->{total_notice},
-        $self->{result_values}->{total},
-        $self->{result_values}->{total_notice_prct}
-    );
-}
-
-sub custom_notice_output_prct {
-    my ($self, %options) = @_;
-
-    return sprintf(
-        'displays notice %.2f%% (%s on %s)',
-        $self->{result_values}->{total_notice_prct},
-        $self->{result_values}->{total_notice},
-        $self->{result_values}->{total},
-    );
-}
-
 sub prefix_output {
     my ($self, %options) = @_;
     my $pref = "display '" . $options{instance_value}->{display} . "'";
@@ -333,12 +203,6 @@ sub manage_selection {
     my $temp_displays = $options{custom}->request_api(endpoint => '/Display/all/status');
 
     $self->{display} = {};
-    $self->{global} = {
-        total        => 0,
-        total_ok     => 0,
-        total_notice => 0,
-        total_error  => 0
-    };
 
     foreach my $temp_dp (@{$temp_displays}) {
         if (defined($self->{option_results}->{display}) && $self->{option_results}->{display} ne '' &&
@@ -353,7 +217,7 @@ sub manage_selection {
         # there can be more than one stoppoint on a display. So we make a distinct of the stoppoint names
         my @pairs;
         my $stop_point_name = $temp_dp->{stopPointName};
-        if ($stop_point_name =~ /,/ ) {
+        if ($stop_point_name =~ /,/) {
             # Normal case: multiple pairs separated by commas
             while ($stop_point_name =~ /\s*([^,]+,\s*[^,]+)\s*(?:,|$)/g) {
                 push @pairs, $1;# example "Bolzano, Stazione"
@@ -364,7 +228,7 @@ sub manage_selection {
         }
 
         my %seen;
-        my @unique = grep { !$seen{ lc($_) }++ } @pairs;
+        my @unique = grep {!$seen{ lc($_) }++} @pairs;
 
         $dp->{stoppoint_name} = join(";", @unique);
         $dp->{product} = $temp_dp->{product};
@@ -386,35 +250,17 @@ sub manage_selection {
         $dp->{uptime} = $temp_dp->{upTime};
 
         $dp->{display_mode} = defined($map_display_mode->{ $temp_dp->{displayMode} }) ?
-            $map_display_mode->{ $temp_dp->{displayMode} } : 'NOT_DOCUMENTED';
+            $map_display_mode->{ $temp_dp->{displayMode} } : 'unknown';
 
-        if (defined($map_status_code->{ $temp_dp->{displayStatus} })) {
-            $dp->{status} = defined($map_status_code->{ $temp_dp->{displayStatus} }) ?
-                $map_status_code->{ $temp_dp->{displayStatus} } : 'NOT_DOCUMENTED';
-            if ($dp->{status} eq 'ok') {
-                $self->{global}->{total_ok}++;
-            } elsif ($dp->{status} eq 'notice') {
-                $self->{global}->{total_notice}++;
-            } elsif ($dp->{status} eq 'error') {
-                $self->{global}->{total_error}++;
-            }
-        } else {
-            $dp->{status} = 'NA';
-        }
+        $dp->{status} = defined($map_status_code->{ $temp_dp->{displayStatus} }) ?
+            $map_status_code->{ $temp_dp->{displayStatus} } : 'unknown';
 
-        $self->{global}->{total}++;
         $self->{display}->{$temp_dp->{ibusId}} = { display => $dp->{stoppoint_name}, %{$dp} };
     }
 
     if (scalar(keys %{$self->{display}}) <= 0) {
         $self->{output}->add_option_msg(short_msg => "No displays found.");
         $self->{output}->option_exit();
-    }
-
-    if ($self->{global}->{total} > 0) {
-        $self->{global}->{total_ok_prct} = $self->{global}->{total_ok} * 100 / $self->{global}->{total};
-        $self->{global}->{total_error_prct} = $self->{global}->{total_error} * 100 / $self->{global}->{total};
-        $self->{global}->{total_notice_prct} = $self->{global}->{total_notice} * 100 / $self->{global}->{total};
     }
 }
 
@@ -434,7 +280,7 @@ Filter display by ibusId.
 
 =item B<--unknown-status>
 
-Set unknown threshold for status. (Default: '%{status} eq "NOT_DOCUMENTED" || %{display_mode} eq "NOT_DOCUMENTED"')
+Set unknown threshold for status. (Default: '%{status} eq "unknown" || %{display_mode} eq "unknown"')
 Can used special variables like: %{status}, %{display_mode}
 
 =item B<--warning--status>
@@ -450,8 +296,7 @@ Can used special variables like: %{status}, %{display_mode}
 =item B<--warning-*> B<--critical-*>
 
 Threshold warning.
-Can be: 'total-ok', 'total-ok-prct' (%), 'total-error', 'total-error-prct' (%), 'total-notice', 'total-notice-prct' (%), 'temperature' (C), 'uptime' (s), 'tcp-quality' (%),
-'udp-quality' (%), 'battery-status' (%), 'battery-voltage' (V).
+Can be: 'temperature' (C), 'uptime' (s), 'tcp-quality' (%), 'udp-quality' (%), 'battery-status' (%), 'battery-voltage' (V).
 
 =back
 
