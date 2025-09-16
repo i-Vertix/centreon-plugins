@@ -30,11 +30,12 @@ sub new {
     bless $self, $class;
 
     $self->{modes} = {
-        'cpu'              => 'centreon::common::h3c::snmp::mode::cpu',
-        'hardware'         => 'centreon::common::h3c::snmp::mode::hardware',
-        'interfaces'       => 'centreon::common::h3c::snmp::mode::interfaces', 
-        'list-interfaces'  => 'snmp_standard::mode::listinterfaces',
-        'memory'           => 'centreon::common::h3c::snmp::mode::memory',
+        'cpu'             => 'centreon::common::h3c::snmp::mode::cpu',
+        'hardware'        => 'centreon::common::h3c::snmp::mode::hardware',
+        'interfaces'      => 'centreon::common::h3c::snmp::mode::interfaces',
+        'list-interfaces' => 'snmp_standard::mode::listinterfaces',
+        'memory'          => 'centreon::common::h3c::snmp::mode::memory',
+        'irf-stack'       => 'centreon::common::h3c::snmp::mode::irfstack'
     };
 
     return $self;
