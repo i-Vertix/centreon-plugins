@@ -33,11 +33,11 @@ sub new {
     $self->{modes} = {
         'cpu'             => 'network::brocade::foundry::snmp::mode::cpu',
         'hardware'        => 'network::brocade::foundry::snmp::mode::hardware',
-        'interfaces'      => 'network::brocade::foundry::snmp::mode::interfaces',
+        'interfaces'      => 'snmp_standard::mode::interfaces',
         'list-interfaces' => 'snmp_standard::mode::listinterfaces',
-        'list-sfpports'   => 'network::brocade::foundry::snmp::mode::listsfpports',
+        'list-sfp-ports'  => 'network::brocade::foundry::snmp::mode::listsfpports',
         'memory'          => 'network::brocade::foundry::snmp::mode::memory',
-        'sfpport'         => 'network::brocade::foundry::snmp::mode::sfpport',
+        'sfp-port'         => 'network::brocade::foundry::snmp::mode::sfpport',
         'uptime'          => 'network::brocade::foundry::snmp::mode::uptime',
     };
 
