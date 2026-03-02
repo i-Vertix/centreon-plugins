@@ -54,8 +54,8 @@ sub custom_status_output {
     return sprintf(
         "Temp: %s, RX: %s, TX: %s, Bias: %s",
         $self->{result_values}->{temp_status},
-        $self->{result_values}->{tx_power_status},
         $self->{result_values}->{rx_power_status},
+        $self->{result_values}->{tx_power_status},
         $self->{result_values}->{bias_status},
     );
 }
@@ -250,7 +250,7 @@ You can use the following variables: %{temp_status}, %{tx_power_status}, %{rx_po
 
 =item B<--critical-status>
 
-Define the conditions to match for the status to be CRITICAL (%{temp_status} =~ /alarm/ || %{tx_power_status} =~ /alarm/ || %{rx_power_status} =~ /alarm/ || %{bias_status} =~ /alarm/').
+Define the conditions to match for the status to be CRITICAL '%{temp_status} =~ /alarm/ || %{tx_power_status} =~ /alarm/ || %{rx_power_status} =~ /alarm/ || %{bias_status} =~ /alarm/').
 You can use the following variables: %{temp_status}, %{tx_power_status}, %{rx_power_status}, %{bias_status}
 
 =item B<--warning-*> B<--critical-*>

@@ -37,7 +37,7 @@ sub new {
         'list-interfaces' => 'snmp_standard::mode::listinterfaces',
         'list-sfp-ports'  => 'network::brocade::foundry::snmp::mode::listsfpports',
         'memory'          => 'network::brocade::foundry::snmp::mode::memory',
-        'sfp-port'         => 'network::brocade::foundry::snmp::mode::sfpport',
+        'sfp-port'        => 'network::brocade::foundry::snmp::mode::sfpport',
         'uptime'          => 'network::brocade::foundry::snmp::mode::uptime',
     };
 
