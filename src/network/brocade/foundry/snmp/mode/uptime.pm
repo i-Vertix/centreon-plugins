@@ -46,7 +46,7 @@ sub manage_selection {
             nothing_quit => 1
         );
 
-        $self->{global}->{sysdesc} .= "Serial Number: $snmp_result->{$oid_agentSerialNumber}, Firmware: $snmp_result->{$oid_agentFirmware}";
+        $self->{global}->{sysdesc} .= " - Serial Number: $snmp_result->{$oid_agentSerialNumber}, Firmware: $snmp_result->{$oid_agentFirmware}";
     }
 }
 
