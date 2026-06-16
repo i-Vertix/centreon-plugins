@@ -1,21 +1,5 @@
 #
-# Copyright 2022 Centreon (http://www.centreon.com/)
-#
-# Centreon is a full-fledged industry-strength solution that meets
-# the needs in IT infrastructure and application monitoring for
-# service performance.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Copyright 2026 i-Vertix (http://i-vertix.com/)
 #
 
 package ivertix::plugins::hardware::devices::sadelvoip::restapi::custom::api;
@@ -23,13 +7,11 @@ package ivertix::plugins::hardware::devices::sadelvoip::restapi::custom::api;
 use strict;
 use warnings;
 use centreon::plugins::http;
-use centreon::plugins::statefile;
 use JSON::XS;
-use Digest::MD5 qw(md5_hex);
 
 sub new {
     my ($class, %options) = @_;
-    my $self  = {};
+    my $self = {};
     bless $self, $class;
 
     if (!defined($options{output})) {
@@ -40,27 +22,28 @@ sub new {
         $options{output}->add_option_msg(short_msg => "Class Custom: Need to specify 'options' argument.");
         $options{output}->option_exit();
     }
-    
+
     if (!defined($options{noptions})) {
         $options{options}->add_options(arguments => {
-            'api-client-id:s'    => { name => 'api_client_id' },
-            'api-client-secret:s'    => { name => 'api_client_secret' },
-            'api-path:s'    => { name => 'api_path' },
-            'hostname:s'        => { name => 'hostname' },
-            'port:s'            => { name => 'port' },
-            'proto:s'           => { name => 'proto' },
-            'timeout:s'         => { name => 'timeout' },
-            'unknown-http-status:s'  => { name => 'unknown_http_status' },
-            'warning-http-status:s'  => { name => 'warning_http_status' },
-            'critical-http-status:s' => { name => 'critical_http_status' },
-            'token:s'                => { name => 'token' }
+            'api-path:s'             => { name => 'api_path', default => '/api/v1' },
+            'hostname:s'             => { name => 'hostname' },
+            'port:s'                 => { name => 'port', default => 443, greater_than => 0, less_than => 65536 },
+            'proto:s'                => { name => 'proto', default => 'https', regexp_match => '^http[s]?$' },
+            'timeout:s'              => { name => 'timeout', default => 30, greater_than => 0, less_than => 120 },
+            'insecure'               => { name => 'insecure' },
+            'unknown-http-status:s'  => {
+                name    => 'unknown_http_status',
+                default => '%{http_code} < 200 or %{http_code} >= 300'
+            },
+            'warning-http-status:s'  => { name => 'warning_http_status', default => '' },
+            'critical-http-status:s' => { name => 'critical_http_status', default => '' },
+            'api-key:s'              => { name => 'api_key' }
         });
     }
     $options{options}->add_help(package => __PACKAGE__, sections => 'REST API OPTIONS', once => 1);
 
     $self->{output} = $options{output};
     $self->{http} = centreon::plugins::http->new(%options);
-    $self->{cache} = centreon::plugins::statefile->new(%options);
 
     return $self;
 }
@@ -76,36 +59,21 @@ sub set_defaults {}
 sub check_options {
     my ($self, %options) = @_;
 
-    $self->{port} = (defined($self->{option_results}->{port})) ? $self->{option_results}->{port} : 443;
-    $self->{proto} = (defined($self->{option_results}->{proto})) ? $self->{option_results}->{proto} : 'https';
-    $self->{timeout} = (defined($self->{option_results}->{timeout})) ? $self->{option_results}->{timeout} : 30;
-    $self->{api_client_id} = (defined($self->{option_results}->{api_client_id})) ? $self->{option_results}->{api_client_id} : '';
-    $self->{api_client_secret} = (defined($self->{option_results}->{api_client_secret})) ? $self->{option_results}->{api_client_secret} : '';
-    $self->{api_path} = (defined($self->{option_results}->{api_path})) ? $self->{option_results}->{api_path} : '/api/v1';
-    $self->{unknown_http_status} = (defined($self->{option_results}->{unknown_http_status})) ? $self->{option_results}->{unknown_http_status} : '%{http_code} < 200 or %{http_code} >= 300';
-    $self->{warning_http_status} = (defined($self->{option_results}->{warning_http_status})) ? $self->{option_results}->{warning_http_status} : '';
-    $self->{critical_http_status} = (defined($self->{option_results}->{critical_http_status})) ? $self->{option_results}->{critical_http_status} : '';
-    $self->{token} = $self->{option_results}->{token};
+    $self->{api_key} = $self->{option_results}->{api_key};
+    $self->{api_path} = $self->{option_results}->{api_path};
 
     if (!defined($self->{option_results}->{hostname}) || $self->{option_results}->{hostname} eq '') {
         $self->{output}->add_option_msg(short_msg => 'Need to specify --hostname option.');
         $self->{output}->option_exit();
     }
-    if (defined($self->{token})) {
-        $self->{cache}->check_options(option_results => $self->{option_results});
-        return 0 if ($self->{token} ne '');
+
+    if (defined($self->{api_key})) {
+        return 0 if ($self->{api_key} ne '');
     }
 
-    if ($self->{api_client_id} eq '') {
-        $self->{output}->add_option_msg(short_msg => 'Need to specify --api-client-id option.');
-        $self->{output}->option_exit();
+    if (defined($self->{api_path})) {
+        return 0 if ($self->{api_path} ne '');
     }
-    if ($self->{api_client_secret} eq '') {
-        $self->{output}->add_option_msg(short_msg => 'Need to specify --api-client-secret option.');
-        $self->{output}->option_exit();
-    }
-
-    $self->{cache}->check_options(option_results => $self->{option_results});
 
     return 0;
 }
@@ -113,119 +81,38 @@ sub check_options {
 sub settings {
     my ($self, %options) = @_;
 
-    return if (defined($self->{settings_done}));
     $self->{http}->add_header(key => 'Accept', value => 'application/json');
     $self->{http}->add_header(key => 'Content-Type', value => 'application/json');
+    $self->{http}->add_header(key => 'apikey', value => $self->{api_key});
     $self->{http}->set_options(%{$self->{option_results}});
-    $self->{settings_done} = 1;
-}
-
-sub get_connection_info {
-    my ($self, %options) = @_;
-
-    return $self->{option_results}->{hostname} . ':' . $self->{option_results}->{port};
-}
-
-sub get_hostname {
-    my ($self, %options) = @_;
-
-    return $self->{option_results}->{hostname};
-}
-
-sub get_token {
-    my ($self, %options) = @_;
-
-    my $has_cache_file = $self->{cache}->read(statefile => 'infinitys_' . md5_hex($self->{option_results}->{hostname} . '_' . $self->{api_client_id}));
-    my $token = $self->{cache}->get(name => 'token');
-    my $md5_secret_cache = $self->{cache}->get(name => 'md5_secret');
-    my $md5_secret = md5_hex($self->{api_client_id} . $self->{api_client_secret});
-
-    if ($has_cache_file == 0 ||
-        !defined($token) ||
-        (defined($md5_secret_cache) && $md5_secret_cache ne $md5_secret) ||
-        (time() > $self->{cache}->get(name => 'expires_on'))
-        ) {
-        my $body = { clientId => $self->{api_client_id}, clientSecret => $self->{api_client_secret} };
-        my $post_json = JSON::XS->new->utf8->encode($body);
-
-        $self->settings();
-
-        my $content = $self->{http}->request(
-            url_path        => $self->{api_path} . '/identity/auth',
-            query_form_post => $post_json,
-            method          => 'POST'
-        );
-
-        my $decoded;
-        eval {
-            $decoded = JSON::XS->new->utf8->decode($content);
-        };
-        if ($@) {
-            $self->{output}->output_add(long_msg => $content, debug => 1);
-            $self->{output}->add_option_msg(short_msg => "Cannot decode response (add --debug option to display returned content)");
-            $self->{output}->option_exit();
-        }
-        if (!($decoded->{accessToken}) || $decoded->{isError}) {
-            $self->{output}->output_add(long_msg => "Error message : " . $decoded->{message}, debug => 1);
-            $self->{output}->add_option_msg(short_msg => "Authentication endpoint returns error code '" . $decoded->{message} . "' (add --debug option for detailed message)");
-            $self->{output}->option_exit();
-        }
-
-        $token = $decoded->{accessToken};
-        my $datas = {
-            updated => time(),
-            token => $decoded->{accessToken},
-            expires_on => time() + 3300,
-            md5_secret => $md5_secret
-        };
-        $self->{cache}->write(data => $datas);
-    }
-
-    return $token;
-}
-
-sub clean_token {
-    my ($self, %options) = @_;
-
-    my $datas = { updated => time() };
-    $self->{cache}->write(data => $datas);
 }
 
 sub request_api {
     my ($self, %options) = @_;
 
-    my $token = defined($self->{token}) && $self->{token} ? $self->{token} : $self->get_token(statefile => $self->{cache});
-
     $self->settings();
-    $self->{http}->add_header(key => 'Authorization', value => 'Bearer ' . $token) if (defined($token));
+
+    my $path = $self->{api_path};
+    my $endpoint = $options{endpoint};
+
+    $path =~ s{/$}{};
+    $endpoint =~ s{^/}{};
+
+    my $url_path = "$path/$endpoint";
 
     my ($content) = $self->{http}->request(
-        url_path => $self->{api_path} . $options{endpoint},
-        get_param => $options{get_param},
-        method => $options{method},
-        unknown_status => '',
-        warning_status => '',
-        critical_status => ''
+        url_path        => $url_path,
+        get_param       => $options{get_param},
+        method          => $options{method},
+        insecure        => $self->{option_results}->{insecure},
+        unknown_status  => $self->{unknown_http_status},
+        warning_status  => $self->{warning_http_status},
+        critical_status => $self->{critical_http_status}
     );
 
-    # Maybe token is invalid. so we retry
-    if (!defined($self->{token}) || $self->{http}->get_code() >= 300) {
-        $self->clean_token();
-        $token = $self->get_token(statefile => $self->{cache});
-        $self->{http}->add_header(key => 'Authorization', value => 'Bearer ' . $token) if (defined($token));
-
-        $content = $self->{http}->request(
-            url_path => $self->{api_path} . $options{endpoint},
-            get_param => $options{get_param},
-            method => $options{method},
-            unknown_status => $self->{unknown_http_status},
-            warning_status => $self->{warning_http_status},
-            critical_status => $self->{critical_http_status}
-        );
-    }
-
     if (!defined($content) || $content eq '') {
-        $self->{output}->add_option_msg(short_msg => "API returns empty content [code: '" . $self->{http}->get_code() . "'] [message: '" . $self->{http}->get_message() . "']");
+        $self->{output}->add_option_msg(short_msg =>
+            "API returns empty content [code: '" . $self->{http}->get_code() . "'] [message: '" . $self->{http}->get_message() . "']");
         $self->{output}->option_exit();
     }
 
@@ -234,7 +121,8 @@ sub request_api {
         $decoded = JSON::XS->new->allow_nonref(1)->utf8->decode($content);
     };
     if ($@) {
-        $self->{output}->add_option_msg(short_msg => "Cannot decode response (add --debug option to display returned content)");
+        $self->{output}->add_option_msg(short_msg =>
+            "Cannot decode response (add --debug option to display returned content)");
         $self->{output}->option_exit();
     }
 
@@ -247,11 +135,11 @@ __END__
 
 =head1 NAME
 
-Infinitys Rest API
+C<SadelVoip> Rest API
 
 =head1 REST API OPTIONS
 
-Infinitys Rest API
+SadelVoip Rest API
 
 =over 8
 
@@ -267,22 +155,33 @@ Port used (Default: 443)
 
 Specify https if needed (Default: 'https')
 
-=item B<--api-client-id>
+=item B<--api-key>
 
-API client id.
+Token API key
 
-=item B<--api-client-secret>
+=item B<--api-path>
 
-API client secret.
-
-=item B<--token>
-
-Use token authentication. If option is empty, token is created.
-Only for test purpose because token are valid only an hour by default.
+Use api path. (Default: '/api/v1')
 
 =item B<--timeout>
 
 Set timeout in seconds (Default: 30).
+
+=item B<--insecure>
+
+Accept insecure SSL connections.
+
+=item B<--unknown-http-status>
+
+Threshold for unknown HTTP status (default: '%{http_code} < 200 or %{http_code} >= 300').
+
+=item B<--warning-http-status>
+
+Threshold for warning HTTP status.
+
+=item B<--critical-http-status>
+
+Threshold for critical HTTP status.
 
 =back
 
