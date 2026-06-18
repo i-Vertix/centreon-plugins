@@ -61,16 +61,17 @@ sub set_counters {
                 closure_custom_threshold_check => \&catalog_status_threshold_ng
             }
         },
-        { label => 'bit-error-rate', nlabel => 'line.bit.error.rate', display_ok => 0, set => {
+        { label => 'received-signal-strength', nlabel => 'received.signal.strength.indicator', display_ok => 1, set => {
             key_values          =>
-                [ { name => 'ber' }, { name => 'display' } ],
-            output_template     => 'bit error rate: %d',
+                [ { name => 'rssi' }, { name => 'display' } ],
+            output_template     => ' received signal strength indicator: %d',
             output_change_bytes => 1,
             perfdatas           =>
                 [
                     {
                         template             => '%d',
                         min                  => 0,
+                        min                  => 31,
                         unit                 => '',
                         label_extra_instance => 1,
                         instance_use         => 'display'
@@ -142,7 +143,7 @@ sub manage_selection {
             reachable => $map_boolean{$line->{diagnostic}->{reachable}},
             simnum    => $line->{diagnostic}->{simnum},
             busy      => $map_boolean{$line->{diagnostic}->{busy}},
-            ber       => $line->{diagnostic}->{ber},
+            rssi       => $line->{diagnostic}->{rssi},
         };
     }
 
@@ -178,11 +179,11 @@ Filter line by type (can be a regexp).
 
 Exclude line by type (can be a regexp).
 
-=item B<--warning-bit-error-rate>
+=item B<--warning-received-signal-strength>
 
 Warning thresholds.
 
-=item B<--critical-bit-error-rate>
+=item B<--critical-received-signal-strength>
 
 Critical thresholds.
 
