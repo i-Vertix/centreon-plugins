@@ -1,14 +1,144 @@
+simlet: azure-auth
+
+request:
+  - method: POST
+    uriPath: /login/tenant-ivertix/oauth2/token
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /login/tenant-ivertix/oauth2/token
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id=client-id-ivertix
+
+        - where: body
+          contains: client_secret=client-secret-ivertix
+
+        - where: body
+          contains: grant_type=client_credential
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "access_token": "token-123",
+        "token_type": "Bearer",
+        "expires_in": "3600",
+        "ext_expires_in": "3599",
+        "expires_on": "1951699200",
+        "resource": "https://localhost:6090"
+      }
+
+---
+
+simlet: azure-vnet
+
+request:
+  - method: GET
+  - uriPath: /management/vnet/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Network"
+        - where: uri
+          contains: "virtualNetworks"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/virtualNetworks/vnet-voxel",
+            "name": "vnet-voxel",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "westeurope",
+            "tags": {
+              "DateCreated": "04/09/2025",
+              "company": "i-Vertix",
+              "creator": "admtratta@leitner.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Network/virtualNetworks/vnet-drift",
+            "name": "vnet-drift",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "03/31/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/virtualNetworks/vnet-zen",
+            "name": "vnet-zen",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "05/14/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Network/virtualNetworks/vnet-grid",
+            "name": "vnet-grid",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "northeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "01/30/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          }
+        ]
+      }
+
+---
+
 simlet: azure-vm
 
 request:
   - method: GET
-    uriPath: /management/subscriptions/subscription-ivertix/resources
+  - uriPath: /management/vm/subscriptions/subscription-ivertix/resources
 
 responses:
 
-  # -------------------
-  # VERSION
-  # -------------------
   - when:
       request:
         - where: header
