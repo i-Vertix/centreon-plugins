@@ -1,0 +1,42 @@
+simlet: azure-auth
+
+request:
+  - method: POST
+    uriPath: /login/tenant-ivertix/oauth2/token
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /login/tenant-ivertix/oauth2/token
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id=client-id-ivertix
+
+        - where: body
+          contains: client_secret=client-secret-ivertix
+
+        - where: body
+          contains: grant_type=client_credential
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "access_token": "token-123",
+        "token_type": "Bearer",
+        "expires_in": "3600",
+        "ext_expires_in": "3599",
+        "expires_on": "1951699200",
+        "resource": "https://localhost:6090"
+      }

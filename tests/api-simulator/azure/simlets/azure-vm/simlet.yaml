@@ -1,0 +1,1089 @@
+simlet: azure-vm
+
+request:
+  - method: GET
+    uriPath: /management/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  # -------------------
+  # VERSION
+  # -------------------
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Compute"
+        - where: uri
+          contains: "virtualMachines"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Compute/virtualMachines/Atlas",
+            "name": "Atlas",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "84b8f82a-729f-4f47-aa7b-7da0f3ff7539",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/19/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Orion",
+            "name": "Orion",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "8d4bafcd-5390-457b-95b4-08285a54f13d",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/25/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Helios",
+            "name": "Helios",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "50326ab4-84a6-41ec-b9ca-14c298300af4",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Nova",
+            "name": "Nova",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "f6eec02f-e838-45ab-b7d9-5e42198178c1",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Titan",
+            "name": "Titan",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "9275ee23-c57b-40d1-9ab5-714e24f265b6",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Vega",
+            "name": "Vega",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "c39956a7-304e-4f94-9b2c-ab1307b952d8",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/06/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Compute/virtualMachines/Solaris",
+            "name": "Solaris",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a8bb0b2c-2d95-4480-b0bd-00ea8153631b",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "datacenter",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Nimbus",
+            "name": "Nimbus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "be2bbb16-d86e-4067-8c7a-bcfbf8859197",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Phoenix",
+            "name": "Phoenix",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "31fee55f-8abe-4262-9cf8-ed3111d8d361",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily",
+              "power off": "09/07/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Polaris",
+            "name": "Polaris",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "7c5d71aa-f12f-4981-8a31-e96bb64175be",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Compute/virtualMachines/Eclipse",
+            "name": "Eclipse",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "67de37df-2552-4a8e-b6d6-cf5d213774c2",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/06/2025",
+              "environment": "pro",
+              "it-service": "datacenter",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Sentinel",
+            "name": "Sentinel",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "18320588-0f16-4a9d-a09e-fb84b12a2fc0",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Horizon",
+            "name": "Horizon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a6cfc1d5-7bf2-4ced-bb5a-f3fb9caef3bb",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Quantum",
+            "name": "Quantum",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "fc038e35-326b-436a-9e87-741a3aab1a1d",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Matrix",
+            "name": "Matrix",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "e578fd66-97bc-44de-aab7-7223b457e333",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Vertex",
+            "name": "Vertex",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "0fd5a632-2804-46c5-ad15-4462251bb830",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-5/providers/Microsoft.Compute/virtualMachines/Apex",
+            "name": "Apex",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "6df950e9-83dd-4375-b1a4-1827d4b125db",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "datacenter",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-6/providers/Microsoft.Compute/virtualMachines/Falcon",
+            "name": "Falcon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "03c923c4-9f48-468d-9273-ce594190999f",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/06/2025",
+              "environment": "sta",
+              "it-service": "datacenter",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Griffin",
+            "name": "Griffin",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a339b5e7-2a75-4143-9d09-ce8fee9bb580",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/06/2025",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Cerberus",
+            "name": "Cerberus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "e38678b8-0bf5-4d2d-8183-25cbdcd21b8f",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/06/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-5/providers/Microsoft.Compute/virtualMachines/Kraken",
+            "name": "Kraken",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "700bf549-1cfa-40ce-9a29-431413964429",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/06/2025",
+              "environment": "sta",
+              "it-service": "datacenter",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Leviathan",
+            "name": "Leviathan",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "98e53e59-c7b5-4edb-a83b-c95811199b16",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "06/26/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Hydra",
+            "name": "Hydra",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "3"
+            ],
+            "identity": {
+              "principalId": "9c6010a4-3a01-4f09-baff-17d0e8b6cdc9",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "07/28/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Chimera",
+            "name": "Chimera",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "0e5310c4-6fb3-4601-9366-2b8804f02e00",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/04/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@leitner,.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Pegasus",
+            "name": "Pegasus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "ce0f5560-be9c-4dd6-a496-a2ba50815b9e",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "09/04/2025",
+              "backup": "daily",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "rk_restore_timestamp": "Tue, 10 Mar 2026 14:30:11 +0000",
+              "rk_source_snapshot_id": "8912bd43-be5f-438f-a589-de9061740164",
+              "rk_taskchain_id": "019cd814-45e1-7d4b-a45b-988489e7ebdc",
+              "rk_user": "admin-rm@hti-services.net",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Aurora",
+            "name": "Aurora",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "782d23e6-8184-4e9f-b930-070642de0a9e",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/04/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily",
+              "power off": "03/07/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Compute/virtualMachines/Borealis",
+            "name": "Borealis",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "ec5fc37f-9f89-4d9d-909c-b8103baab3fc",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/04/2025",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-7/providers/Microsoft.Compute/virtualMachines/Zenith",
+            "name": "Zenith",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "2087bf77-8a80-40e0-8608-bfcdb2d53cd4",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "datacenter",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-8/providers/Microsoft.Compute/virtualMachines/Meridian",
+            "name": "Meridian",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a332b70d-2860-4dff-b4fc-061182f912cc",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Obsidian",
+            "name": "Obsidian",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "165be89b-70b9-4ad2-a067-6575c0e6c01d",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Onyx",
+            "name": "Onyx",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "fdcfed84-8f74-4c57-8897-7e321cab1e9f",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Granite",
+            "name": "Granite",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "6816bb65-5696-4e29-81d2-5dc70ea9846e",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Cobalt",
+            "name": "Cobalt",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "573a9fda-e331-444d-b110-f48f2835b1b8",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Argon",
+            "name": "Argon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "7d9796c6-0b6c-4cc0-83fa-c2a55b6f0614",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Xenon",
+            "name": "Xenon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "e694a4d2-c2d0-4cd1-b012-13c058abec40",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-9/providers/Microsoft.Compute/virtualMachines/Neon",
+            "name": "Neon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "00bfb058-c2e8-4721-a8e9-e0299e33a84e",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "sta",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv",
+              "backup": "vm-plm-azu-,daily-14dd"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-8/providers/Microsoft.Compute/virtualMachines/Krypton",
+            "name": "Krypton",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "80b2b147-8858-4035-b79c-cee5195b2f64",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/05/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-10/providers/Microsoft.Compute/virtualMachines/Radon",
+            "name": "Radon",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "c8530acd-46ee-4327-b097-5cd9f2bacdc7",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "DateCreated": "09/11/2025",
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "shared sql server",
+              "environment": "pro",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Stratus",
+            "name": "Stratus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "1ad7f67e-df4a-4ba3-9bd1-ce4c15d0dd1a",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "datecreated": "04/01/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Cirrus",
+            "name": "Cirrus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "identity": {
+              "principalId": "3ae009c5-dcff-45cf-8790-c8b7d7596b8e",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "04/23/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "rk_restore_timestamp": "Fri, 24 Apr 2026 14:37:22 +0000",
+              "rk_source_snapshot_id": "955b01ba-ee62-4b1d-ad6f-4e6af77fa866",
+              "rk_taskchain_id": "019dbfdd-a945-7c3d-b41c-16671720c571",
+              "rk_user": "admin-rm@hti-services.net",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Compute/virtualMachines/Cumulus",
+            "name": "Cumulus",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a9361582-16f4-4ce0-8b58-e97f9225a3ce",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "05/06/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-11/providers/Microsoft.Compute/virtualMachines/Tempest",
+            "name": "Tempest",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "principalId": "a505ba19-f409-478c-af82-9a5de8683b76",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "05/15/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm",
+              "backup": "daily"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-12/providers/Microsoft.Compute/virtualMachines/Cyclone",
+            "name": "Cyclone",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "identity": {
+              "principalId": "9eb84825-08f4-45cc-807f-5884263d125a",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "05/19/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@hti-services.net",
+              "rk_restore_timestamp": "Tue, 19 May 2026 14:09:02 +0000",
+              "rk_source_snapshot_id": "860e22d7-d780-42c2-b4f3-4a524f0ab3b6",
+              "rk_taskchain_id": "019e4082-dc04-75e7-bf6d-19a69a8163a6",
+              "rk_user": "admin-rm@hti-services.net",
+              "workload": "backup"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-12/providers/Microsoft.Compute/virtualMachines/Vortex",
+            "name": "Vortex",
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "westeurope",
+            "identity": {
+              "principalId": "0a9e951a-ba50-4f0a-bb39-790e028937c3",
+              "tenantId": "tenant-ivertix",
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "company": "i-Vertix",
+              "datecreated": "05/19/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@hti-services.net",
+              "rk_export_source_region": "westeurope",
+              "rk_source_snapshot_id": "860e22d7-d780-42c2-b4f3-4a524f0ab3b6",
+              "rk_source_vm_name": "rg-iv-12::TESTPOLICY",
+              "rk_taskchain_id": "019e40c3-1532-75e7-8b01-66c73c226d20",
+              "rk_user": "admin-rm@hti-services.net",
+              "workload": "backup"
+            }
+          }
+        ]
+      }
