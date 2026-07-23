@@ -77,7 +77,7 @@ responses:
             "tags": {
               "DateCreated": "04/09/2025",
               "company": "i-Vertix",
-              "creator": "admtratta@leitner.com",
+              "creator": "admin-rm@i-vertix.com",
               "environment": "pro",
               "it-service": "support-iv",
               "referent": "admin-rm@i-vertix.com",
@@ -729,7 +729,7 @@ responses:
               "DateCreated": "09/04/2025",
               "environment": "pro",
               "it-service": "support-iv",
-              "referent": "admin-rm@leitner,.com",
+              "referent": "admin-rm@i-vertix.com",
               "workload": "plm",
               "backup": "daily"
             }
@@ -758,7 +758,7 @@ responses:
               "rk_restore_timestamp": "Tue, 10 Mar 2026 14:30:11 +0000",
               "rk_source_snapshot_id": "8912bd43-be5f-438f-a589-de9061740164",
               "rk_taskchain_id": "019cd814-45e1-7d4b-a45b-988489e7ebdc",
-              "rk_user": "admin-rm@hti-services.net",
+              "rk_user": "admin-rm@i-vertix.com",
               "workload": "plm"
             }
           },
@@ -1118,7 +1118,7 @@ responses:
               "rk_restore_timestamp": "Fri, 24 Apr 2026 14:37:22 +0000",
               "rk_source_snapshot_id": "955b01ba-ee62-4b1d-ad6f-4e6af77fa866",
               "rk_taskchain_id": "019dbfdd-a945-7c3d-b41c-16671720c571",
-              "rk_user": "admin-rm@hti-services.net",
+              "rk_user": "admin-rm@i-vertix.com",
               "workload": "plm"
             }
           },
@@ -1183,11 +1183,11 @@ responses:
               "datecreated": "05/19/2026",
               "environment": "pro",
               "it-service": "support-iv",
-              "referent": "admin-rm@hti-services.net",
+              "referent": "admin-rm@i-vertix.com",
               "rk_restore_timestamp": "Tue, 19 May 2026 14:09:02 +0000",
               "rk_source_snapshot_id": "860e22d7-d780-42c2-b4f3-4a524f0ab3b6",
               "rk_taskchain_id": "019e4082-dc04-75e7-bf6d-19a69a8163a6",
-              "rk_user": "admin-rm@hti-services.net",
+              "rk_user": "admin-rm@i-vertix.com",
               "workload": "backup"
             }
           },
@@ -1206,14 +1206,1154 @@ responses:
               "datecreated": "05/19/2026",
               "environment": "pro",
               "it-service": "support-iv",
-              "referent": "admin-rm@hti-services.net",
+              "referent": "admin-rm@i-vertix.com",
               "rk_export_source_region": "westeurope",
               "rk_source_snapshot_id": "860e22d7-d780-42c2-b4f3-4a524f0ab3b6",
               "rk_source_vm_name": "rg-iv-12::TESTPOLICY",
               "rk_taskchain_id": "019e40c3-1532-75e7-8b01-66c73c226d20",
-              "rk_user": "admin-rm@hti-services.net",
+              "rk_user": "admin-rm@i-vertix.com",
               "workload": "backup"
             }
           }
         ]
       }
+
+---
+
+simlet: azure-database
+
+request:
+  - method: GET
+  - uriPath: /management/sql/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Sql"
+        - where: uri
+          contains: "databases"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/master",
+            "name": "azsql-prod-core-01/master",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "GP_SYSTEM",
+              "tier": "System",
+              "family": "SYSTEM",
+              "capacity": 4
+            },
+            "kind": "v12.0,system,serverless",
+            "managedBy": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01",
+            "location": "westeurope",
+            "tags": {
+              "workload": "mulesoft",
+              "creator": "admin-rm@i-vertix.com",
+              "it-service": "support-iv",
+              "company": "i-Vertix",
+              "referent": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "datecreated": "02/03/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Sql/servers/azsql-dev-app-01/databases/master",
+            "name": "azsql-dev-app-01/master",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "GP_SYSTEM",
+              "tier": "System",
+              "family": "SYSTEM",
+              "capacity": 4
+            },
+            "kind": "v12.0,system,serverless",
+            "managedBy": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Sql/servers/azsql-dev-app-01",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "referent": "aleksey.solovey.ext@i-vertix.com",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "workload": "support-iv",
+              "it-service": "support-iv",
+              "DateCreated": "11/13/2025"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Sql/servers/azsql-dev-app-01/databases/db_platform",
+            "name": "azsql-dev-app-01/db_platform",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "11/27/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Sql/servers/azsql-dev-app-01/databases/db_backend",
+            "name": "azsql-dev-app-01/db_backend",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "12/15/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_service",
+            "name": "azsql-prod-core-01/db_service",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Basic",
+              "tier": "Basic",
+              "capacity": 5
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_system",
+            "name": "azsql-prod-core-01/db_system",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Basic",
+              "tier": "Basic",
+              "capacity": 5
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_app",
+            "name": "azsql-prod-core-01/db_app",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Basic",
+              "tier": "Basic",
+              "capacity": 5
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_main",
+            "name": "azsql-prod-core-01/db_main",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_data",
+            "name": "azsql-prod-core-01/db_data",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01/databases/db_system2",
+            "name": "azsql-prod-core-01/db_system2",
+            "type": "Microsoft.Sql/servers/databases",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard",
+              "capacity": 10
+            },
+            "kind": "v12.0,user",
+            "location": "westeurope",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "workload": "mulesoft",
+              "company": "i-Vertix",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "02/16/2026"
+            }
+          }
+        ]
+      }
+
+---
+
+simlet: azure-database
+
+request:
+  - method: GET
+  - uriPath: /management/sqlserver/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Sql"
+        - where: uri
+          contains: "servers"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Sql/servers/azsql-prod-core-01",
+            "name": "azsql-prod-core-01",
+            "type": "Microsoft.Sql/servers",
+            "kind": "v12.0",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "09/16/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Sql/servers/azsql-dev-app-01",
+            "name": "azsql-dev-app-01",
+            "type": "Microsoft.Sql/servers",
+            "kind": "v12.0",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "11/13/2025",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "support-iv"
+            }
+          }
+        ]
+      }
+      
+
+---
+
+simlet: azure-storage-account
+
+request:
+  - method: GET
+  - uriPath: /management/storageaccount/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Storage"
+        - where: uri
+          contains: "storageAccounts"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+          {
+            "value": [
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stcoreprod01",
+                "name": "stcoreprod01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Storage/storageAccounts/stplatform01",
+                "name": "stplatform01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Storage/storageAccounts/stsharedprod01",
+                "name": "stsharedprod01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Premium_LRS",
+                  "tier": "Premium"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Storage/storageAccounts/stappdata01",
+                "name": "stappdata01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Premium_LRS",
+                  "tier": "Premium"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-5/providers/Microsoft.Storage/storageAccounts/stbackend01",
+                "name": "stbackend01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-6/providers/Microsoft.Storage/storageAccounts/starchive01",
+                "name": "starchive01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_ZRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-6/providers/Microsoft.Storage/storageAccounts/stbackup01",
+                "name": "stbackup01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-7/providers/Microsoft.Storage/storageAccounts/stlogdata01",
+                "name": "stlogdata01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "Storage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-8/providers/Microsoft.Storage/storageAccounts/stmonitor01",
+                "name": "stmonitor01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-9/providers/Microsoft.Storage/storageAccounts/stmetrics01",
+                "name": "stmetrics01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-10/providers/Microsoft.Storage/storageAccounts/stconfig01",
+                "name": "stconfig01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-10/providers/Microsoft.Storage/storageAccounts/stfiles01",
+                "name": "stfiles01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-10/providers/Microsoft.Storage/storageAccounts/stblobdata01",
+                "name": "stblobdata01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-10/providers/Microsoft.Storage/storageAccounts/stdatastore01",
+                "name": "stdatastore01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-11/providers/Microsoft.Storage/storageAccounts/strepository01",
+                "name": "strepository01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-12/providers/Microsoft.Storage/storageAccounts/stintegration01",
+                "name": "stintegration01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-12/providers/Microsoft.Storage/storageAccounts/sttransfer01",
+                "name": "sttransfer01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stexchange01",
+                "name": "stexchange01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stgateway01",
+                "name": "stgateway01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-11/providers/Microsoft.Storage/storageAccounts/stservice01",
+                "name": "stservice01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-13/providers/Microsoft.Storage/storageAccounts/ststorage01",
+                "name": "ststorage01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stopsdata01",
+                "name": "stopsdata01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-11/providers/Microsoft.Storage/storageAccounts/stopslog01",
+                "name": "stopslog01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-12/providers/Microsoft.Storage/storageAccounts/stsecurity01",
+                "name": "stsecurity01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-13/providers/Microsoft.Storage/storageAccounts/staudit01",
+                "name": "staudit01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-14/providers/Microsoft.Storage/storageAccounts/stbackup02",
+                "name": "stbackup02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "PremiumV2_LRS",
+                  "tier": "Premium"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-15/providers/Microsoft.Storage/storageAccounts/starchive02",
+                "name": "starchive02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stcore02",
+                "name": "stcore02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stapp02",
+                "name": "stapp02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "PremiumV2_LRS",
+                  "tier": "Premium"
+                },
+                "kind": "FileStorage",
+                "location": "westeurope",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stdata02",
+                "name": "stdata02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "eastus2",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Storage/storageAccounts/stplatform02",
+                "name": "stplatform02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westus2",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Storage/storageAccounts/stprod01",
+                "name": "stprod01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "westcentralus",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Storage/storageAccounts/stproddata01",
+                "name": "stproddata01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "PremiumV2_LRS",
+                  "tier": "Premium"
+                },
+                "kind": "FileStorage",
+                "location": "westcentralus",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Storage/storageAccounts/stcloud01",
+                "name": "stcloud01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westcentralus",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Storage/storageAccounts/stazure01",
+                "name": "stazure01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westcentralus",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Storage/storageAccounts/stinfra01",
+                "name": "stinfra01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "westcentralus",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Storage/storageAccounts/stresource01",
+                "name": "stresource01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "Storage",
+                "location": "canadacentral",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-6/providers/Microsoft.Storage/storageAccounts/stsystem01",
+                "name": "stsystem01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "canadacentral",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-6/providers/Microsoft.Storage/storageAccounts/strepository02",
+                "name": "strepository02",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "StandardV2_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "FileStorage",
+                "location": "canadacentral",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              },
+              {
+                "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-7/providers/Microsoft.Storage/storageAccounts/stapplication01",
+                "name": "stapplication01",
+                "type": "Microsoft.Storage/storageAccounts",
+                "sku": {
+                  "name": "Standard_LRS",
+                  "tier": "Standard"
+                },
+                "kind": "StorageV2",
+                "location": "canadacentral",
+                "tags": {
+                  "datecreated": "07/23/2026",
+                  "environment": "pro",
+                  "workload": "azure files",
+                  "referent": "admin-rm@i-vertix.com",
+                  "company": "i-Vertix",
+                  "it-service": "fileshare",
+                  "creator": "admin-rm@i-vertix.com"
+                }
+              }
+            ]
+          }
