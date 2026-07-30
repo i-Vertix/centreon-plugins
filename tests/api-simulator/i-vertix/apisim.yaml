@@ -2,14 +2,14 @@ simlet: azure-auth
 
 request:
   - method: POST
-    uriPath: /login/tenant-ivertix/oauth2/token
+  - uriPath: /azure/login/tenant-ivertix/oauth2/token
 
 responses:
 
   - when:
       request:
         - where: uriPath
-          equals: /login/tenant-ivertix/oauth2/token
+          equals: /azure/login/tenant-ivertix/oauth2/token
 
         - where: header
           named: Content-Type
@@ -47,7 +47,7 @@ simlet: azure-vnet
 
 request:
   - method: GET
-  - uriPath: /management/vnet/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/vnet/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -135,7 +135,7 @@ simlet: azure-vm
 
 request:
   - method: GET
-  - uriPath: /management/vm/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/vm/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -1224,7 +1224,7 @@ simlet: azure-database
 
 request:
   - method: GET
-  - uriPath: /management/sql/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/sql/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -1469,7 +1469,7 @@ simlet: azure-servers
 
 request:
   - method: GET
-  - uriPath: /management/sqlserver/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/sqlserver/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -1532,7 +1532,7 @@ simlet: azure-storage-accounts
 
 request:
   - method: GET
-  - uriPath: /management/storageaccount/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/storageaccount/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -2363,7 +2363,7 @@ simlet: azure-netapp-pool
 
 request:
   - method: GET
-  - uriPath: /management/netapppool/subscriptions/subscription-ivertix/resources
+  - uriPath: /azure/management/netapppool/subscriptions/subscription-ivertix/resources
 
 responses:
 
@@ -2417,3 +2417,1497 @@ responses:
           }
         ]
       }
+
+---
+
+simlet: azure-netapp-pool-volumes-iv-netapp-1
+
+request:
+  - method: GET
+  - uriPath: /azure/management/netapppool/subscriptions/subscription-ivertix/resourcegroups/rg-iv-1/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-1/capacityPools/nap-pool-1/volumes
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.NetApp"
+        - where: uri
+          contains: "netAppAccounts"
+        - where: uri
+          contains: "volumes"
+        - where: uri
+          contains: "iv-netapp-1"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-sim/capacityPools/nap-pool-1/volumes",
+            "name": "iv-netapp-sim/nap-pool-1/volume-sim-xy",
+            "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+            "etag": "W/\"datetime'2026-01-22T08%3A16%3A56.0197409Z'\"",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "07/23/2026",
+              "environment": "standard",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+              "serviceLevel": "Standard",
+              "creationToken": "dba-sta",
+              "usageThreshold": 107374182400,
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "ruleIndex": 1,
+                    "unixReadOnly": false,
+                    "unixReadWrite": true,
+                    "cifs": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "allowedClients": "10.132.241.0/24,10.133.4.128/28,10.133.7.16/28,10.135.0.41,10.135.0.4",
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "hasRootAccess": true,
+                    "chownMode": "Restricted"
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "networkFeatures": "Standard",
+              "effectiveNetworkFeatures": "Standard",
+              "networkSiblingSetId": "e59dc1c1-95d1-6f7b-0c92-d2845d8622bd",
+              "storageToNetworkProximity": "T2",
+              "snapshotDirectoryVisible": true,
+              "kerberosEnabled": false,
+              "securityStyle": "Unix",
+              "smbEncryption": false,
+              "smbContinuouslyAvailable": false,
+              "encryptionKeySource": "Microsoft.KeyVault",
+              "ldapEnabled": false,
+              "unixPermissions": "0770",
+              "mountTargets": [
+                {
+                  "mountTargetId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "ipAddress": "10.132.244.75"
+                }
+              ],
+              "coolAccess": false,
+              "avsDataStore": "Disabled",
+              "isDefaultQuotaEnabled": false,
+              "defaultUserQuotaInKiBs": 0,
+              "defaultGroupQuotaInKiBs": 0,
+              "enableSubvolumes": "Disabled",
+              "maximumNumberOfFiles": 21251126,
+              "smbNonBrowsable": "Disabled",
+              "smbAccessBasedEnumeration": "Disabled",
+              "isLargeVolume": false,
+              "provisionedAvailabilityZone": "2",
+              "actualThroughputMibps": 1.562
+            },
+            "zones": [
+              "2"
+            ]
+          }
+        ]
+      }
+
+
+---
+
+simlet: azure-netapp-pool-volumes-iv-netapp-2
+
+request:
+  - method: GET
+  - uriPath: /azure/management/netapppool/subscriptions/subscription-ivertix/resourcegroups/rg-iv-2/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-2/capacityPools/nap-pool-2/volumes
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.NetApp"
+        - where: uri
+          contains: "netAppAccounts"
+        - where: uri
+          contains: "volumes"
+        - where: uri
+          contains: "iv-netapp-2"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-sim/capacityPools/nap-pool-1/volumes/volume-sim-xy",
+            "name": "iv-netapp-sim/nap-pool-1/volume-sim-xy",
+            "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+            "etag": "W/\"datetime'2026-01-22T08%3A16%3A56.0197409Z'\"",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "07/23/2026",
+              "environment": "standard",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+              "serviceLevel": "Standard",
+              "creationToken": "dba-sta",
+              "usageThreshold": 107374182400,
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "ruleIndex": 1,
+                    "unixReadOnly": false,
+                    "unixReadWrite": true,
+                    "cifs": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "allowedClients": "10.132.241.0/24,10.133.4.128/28,10.133.7.16/28,10.135.0.41,10.135.0.4",
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "hasRootAccess": true,
+                    "chownMode": "Restricted"
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "networkFeatures": "Standard",
+              "effectiveNetworkFeatures": "Standard",
+              "networkSiblingSetId": "e59dc1c1-95d1-6f7b-0c92-d2845d8622bd",
+              "storageToNetworkProximity": "T2",
+              "snapshotDirectoryVisible": true,
+              "kerberosEnabled": false,
+              "securityStyle": "Unix",
+              "smbEncryption": false,
+              "smbContinuouslyAvailable": false,
+              "encryptionKeySource": "Microsoft.KeyVault",
+              "ldapEnabled": false,
+              "unixPermissions": "0770",
+              "mountTargets": [
+                {
+                  "mountTargetId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "ipAddress": "10.132.244.75"
+                }
+              ],
+              "coolAccess": false,
+              "avsDataStore": "Disabled",
+              "isDefaultQuotaEnabled": false,
+              "defaultUserQuotaInKiBs": 0,
+              "defaultGroupQuotaInKiBs": 0,
+              "enableSubvolumes": "Disabled",
+              "maximumNumberOfFiles": 21251126,
+              "smbNonBrowsable": "Disabled",
+              "smbAccessBasedEnumeration": "Disabled",
+              "isLargeVolume": false,
+              "provisionedAvailabilityZone": "2",
+              "actualThroughputMibps": 1.562
+            },
+            "zones": [
+              "2"
+            ]
+          }
+        ]
+      }
+
+
+---
+
+simlet: velocloud-auth
+
+request:
+  - method: POST
+  - uriPath: /velocloud/portal/rest/login/enterpriseLogin
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /velocloud/portal/rest/login/enterpriseLogin
+
+        - where: body
+          contains: password
+
+        - where: body
+          contains: username
+
+    from: stub
+    status: 200
+
+    headers:
+      - "Set-Cookie: velocloud.session=cookie123; Path=/; HttpOnly; Secure; SameSite=Strict"
+
+---
+
+simlet: velocloud-enterprise
+
+request:
+  - method: POST
+  - uriPath: /velocloud/portal/rest/enterprise/getEnterprise
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Content-Type
+          equals: "application/json"
+        - where: header
+          named: Cookie
+          equals: "velocloud.session=cookie123"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "id": 1,
+        "created": "2022-02-22T16:50:00.000Z",
+        "networkId": 1,
+        "gatewayPoolId": 1,
+        "alertsEnabled": 1,
+        "operatorAlertsEnabled": 1,
+        "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+        "name": "i-Vertix Velocloud Bolzano",
+        "domain": "i-VERTIX",
+        "prefix": null,
+        "logicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+        "accountNumber": "CON-IV-1",
+        "description": null,
+        "contactName": "Mr. Black & Mr. White",
+        "contactPhone": null,
+        "contactMobile": null,
+        "contactEmail": "support@i-vertix.com",
+        "streetAddress": "A.- Volta - Str., 13A",
+        "streetAddress2": null,
+        "city": "Bolzano",
+        "state": "BZ",
+        "postalCode": "39100",
+        "country": "Italy",
+        "lat": 46.47981023101554,
+        "lon": 11.33197332905931,
+        "timezone": "Europe/Rome",
+        "locale": "en-US",
+        "bastionState": "UNCONFIGURED",
+        "modified": "2024-12-18T13:29:30.000Z"
+      }
+
+---
+
+simlet: velocloud-enterprise-edge
+
+request:
+  - method: POST
+  - uriPath: /velocloud/portal/rest/enterprise/getEnterpriseEdges
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Content-Type
+          equals: "application/json"
+        - where: header
+          named: Cookie
+          equals: "velocloud.session=cookie123"
+        - where: body
+          contains: enterpriseId
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "id": 22867,
+          "created": "2023-11-03T09:04:24.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 26535,
+          "activationKey": "5PD8-AV93-ZTPD-MPYL",
+          "activationKeyExpires": "2023-12-03T09:04:24.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2023-11-03T09:09:06.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "5.0.0",
+          "factoryBuildNumber": "R5000-20230518-MR-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:38:34.000Z",
+          "selfMacAddress": "f0:8e:db:1c:02:88",
+          "deviceId": "3B5504E1-DC45-4CE9-BA9F-685021062497",
+          "logicalId": "00c4a1ba-5bf8-455b-b4ef-39c3dce52134",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-aurora-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2026-02-23T07:56:05.000Z",
+          "serviceUpSince": "2026-02-23T07:58:29.000Z",
+          "lastContact": "2026-07-28T13:43:52.671Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:02.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T05:01:06.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 640,
+          "created": "2022-02-23T09:58:11.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 681,
+          "activationKey": "QCJN-2DUV-EPX2-PZRF",
+          "activationKeyExpires": "2022-03-25T09:58:11.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2022-03-11T10:10:01.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:38:23.000Z",
+          "selfMacAddress": "f0:8e:db:1a:0c:74",
+          "deviceId": "B9434088-8999-C344-B2F3-80E4EC46FF9C",
+          "logicalId": "f256e423-7f50-493b-94d2-d5541affb50a",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-vortex-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2026-06-09T05:11:27.000Z",
+          "serviceUpSince": "2026-06-09T05:13:09.000Z",
+          "lastContact": "2026-07-28T13:43:48.452Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:03.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T04:47:14.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 641,
+          "created": "2022-02-23T14:20:55.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 682,
+          "activationKey": "NE2W-LMXK-PBT7-CBB9",
+          "activationKeyExpires": "2022-03-25T14:20:55.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2022-02-28T07:35:52.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:36:46.000Z",
+          "selfMacAddress": "f0:8e:db:1a:0f:80",
+          "deviceId": "9E0C4F00-B1C4-6944-A5DD-D31DFB766A33",
+          "logicalId": "d51b9a7d-bb62-42f9-bf1b-c7f34aba20e2",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-quantum-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-10-12T04:20:34.000Z",
+          "serviceUpSince": "2025-10-12T04:17:37.000Z",
+          "lastContact": "2026-07-28T13:43:30.847Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:10.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T04:47:54.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 22868,
+          "created": "2023-11-03T09:25:35.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 26536,
+          "activationKey": "3PUE-Q4G5-7JKM-VB24",
+          "activationKeyExpires": "2023-12-03T09:25:35.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2023-11-03T09:29:20.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "5.0.0",
+          "factoryBuildNumber": "R5000-20230518-MR-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:40:59.000Z",
+          "selfMacAddress": "f0:8e:db:1b:f3:b4",
+          "deviceId": "B8260AF1-7EFB-46C9-8FFA-FC401B4A16EB",
+          "logicalId": "6731f55a-98ee-448c-8e2a-eff467dbd8df",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-cobalt-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-10-13T14:04:28.000Z",
+          "serviceUpSince": "2025-10-13T14:06:21.000Z",
+          "lastContact": "2026-07-28T13:43:37.753Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:06:57.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T05:01:47.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 22869,
+          "created": "2023-11-03T09:46:11.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 26537,
+          "activationKey": "UTY4-DEC5-FJMP-X483",
+          "activationKeyExpires": "2023-12-03T09:46:11.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2023-11-03T09:46:35.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "5.0.0",
+          "factoryBuildNumber": "R5000-20230518-MR-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:37:26.000Z",
+          "selfMacAddress": "f0:8e:db:1c:02:dc",
+          "deviceId": "72CBFF08-F2E1-48C4-A003-9040C2C58E8F",
+          "logicalId": "e7265323-7808-4f64-a680-01e2b896a4a4",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-titan-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2026-03-03T12:01:51.000Z",
+          "serviceUpSince": "2026-03-03T12:04:09.000Z",
+          "lastContact": "2026-07-28T13:43:54.364Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:15.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T05:01:21.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 642,
+          "created": "2022-02-23T14:34:02.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 683,
+          "activationKey": "4CYR-KEGX-FNLZ-BEYG",
+          "activationKeyExpires": "2022-03-25T14:34:02.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2022-02-28T08:03:45.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:38:24.000Z",
+          "selfMacAddress": "f0:8e:db:1a:0d:b0",
+          "deviceId": "28296CA5-4AB2-614F-B167-C3ADE90AA37E",
+          "logicalId": "c41830fd-b57c-49e8-a412-d2680d6e12c9",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-orion-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-09-25T21:27:47.000Z",
+          "serviceUpSince": "2025-09-25T21:29:32.000Z",
+          "lastContact": "2026-07-28T13:43:38.406Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:06:59.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-06-23T04:48:07.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 22870,
+          "created": "2023-11-03T10:06:45.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 26538,
+          "activationKey": "8YC3-2VUH-2NPL-2U9H",
+          "activationKeyExpires": "2023-12-03T10:06:45.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2023-11-03T10:07:09.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "5.0.0",
+          "factoryBuildNumber": "R5000-20230518-MR-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:40:19.000Z",
+          "selfMacAddress": "f0:8e:db:1c:01:00",
+          "deviceId": "F03982AB-EDBF-4604-81B3-2BAE781BEDFD",
+          "logicalId": "39164ea2-3f99-403b-9837-94ca7e56e879",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-pulse-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "OFFLINE",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-11-14T14:00:27.000Z",
+          "serviceUpSince": "2025-11-14T14:02:50.000Z",
+          "lastContact": "2025-11-27T07:22:37.000Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:02.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2025-11-27T07:24:46.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 643,
+          "created": "2022-02-23T14:39:41.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 684,
+          "activationKey": "VYS6-QGNN-394K-2FHS",
+          "activationKeyExpires": "2022-03-25T14:39:42.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2022-03-02T07:44:28.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:38:52.000Z",
+          "selfMacAddress": "f0:8e:db:1a:0e:98",
+          "deviceId": "C595F922-A15A-AB4A-8D6C-880A39A407CA",
+          "logicalId": "4d9546e7-cd13-4a18-a7fb-de2a7c41fbb1",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-vector-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2026-07-27T05:28:53.000Z",
+          "serviceUpSince": "2026-07-27T05:08:30.000Z",
+          "lastContact": "2026-07-28T13:43:50.027Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:06:56.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-07-27T05:33:46.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 644,
+          "created": "2022-02-23T14:43:58.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 685,
+          "activationKey": "T7D4-Y59L-AGD5-825L",
+          "activationKeyExpires": "2022-03-25T14:43:58.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2022-03-02T07:25:49.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-04-20T19:38:51.000Z",
+          "selfMacAddress": "f0:8e:db:1a:10:a0",
+          "deviceId": "FC414B7C-AB6F-C640-93D5-A14E981F33B0",
+          "logicalId": "6981a273-c332-4011-8e5f-70a5342c9214",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-phoenix-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "OFFLINE",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-07-21T11:28:05.000Z",
+          "serviceUpSince": "2025-07-21T11:29:22.000Z",
+          "lastContact": "2025-08-25T09:24:50.000Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "2024-03-15T02:07:10.000Z",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2025-08-25T09:27:01.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 22873,
+          "created": "2023-11-03T11:00:04.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 26541,
+          "activationKey": "KPFL-EQWL-WFER-LVVB",
+          "activationKeyExpires": "2025-11-26T08:21:09.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2023-11-03T11:01:53.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R321-20210607-MFG-GA",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2025-10-27T08:29:25.000Z",
+          "selfMacAddress": "f0:8e:db:1a:b5:28",
+          "deviceId": "9AB1C6D3-4FB8-974A-B5E1-0C9F5AB04B6F",
+          "logicalId": "0e491301-459f-4a77-958b-cfedfc13db97",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-raven-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "OFFLINE",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2025-11-23T06:56:48.000Z",
+          "serviceUpSince": "2025-11-23T06:59:09.000Z",
+          "lastContact": "2025-11-23T16:36:06.000Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_DISABLED",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "0000-00-00 00:00:00",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2025-11-23T16:38:31.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        },
+        {
+          "id": 35711,
+          "created": "2024-07-09T12:34:19.000Z",
+          "enterpriseId": 1,
+          "enterpriseLogicalId": "1abce6d2-5bf0-458d-9cf5-9f80662ab428",
+          "siteId": 39478,
+          "activationKey": "CRXK-GV5U-FAK7-ZVRK",
+          "activationKeyExpires": "2024-08-08T12:34:19.000Z",
+          "activationState": "ACTIVATED",
+          "activationTime": "2024-07-09T12:35:18.000Z",
+          "softwareVersion": "5.4.0.1",
+          "buildNumber": "R5401-20240224-GA-b8cdaadde8",
+          "factorySoftwareVersion": "3.2.1",
+          "factoryBuildNumber": "R320-20180508-GA-MFG",
+          "platformFirmwareVersion": "",
+          "platformBuildNumber": "",
+          "modemFirmwareVersion": "",
+          "modemBuildNumber": "",
+          "softwareUpdated": "2024-07-09T14:08:47.000Z",
+          "selfMacAddress": "f0:8e:db:14:18:60",
+          "deviceId": "2620B70D-BBE2-0944-BBBE-6408C34E0AFD",
+          "logicalId": "3b18afcd-0f4b-406f-a0ca-c14f1bcd31a4",
+          "serialNumber": "SE_0123456789",
+          "modelNumber": "edge510",
+          "deviceFamily": "EDGE5X0",
+          "lteRegion": null,
+          "name": "Edge-sigma-IV",
+          "dnsName": null,
+          "description": null,
+          "alertsEnabled": 1,
+          "operatorAlertsEnabled": 1,
+          "edgeState": "CONNECTED",
+          "edgeStateTime": "0000-00-00 00:00:00",
+          "isLive": 0,
+          "systemUpSince": "2024-09-21T17:26:48.000Z",
+          "serviceUpSince": "2024-12-18T09:29:54.000Z",
+          "lastContact": "2026-07-28T13:43:33.180Z",
+          "serviceState": "IN_SERVICE",
+          "endpointPkiMode": "CERTIFICATE_OPTIONAL",
+          "haState": "UNCONFIGURED",
+          "haPreviousState": "UNCONFIGURED",
+          "haLastContact": "0000-00-00 00:00:00",
+          "haSerialNumber": null,
+          "bastionState": "UNCONFIGURED",
+          "modified": "2026-07-20T21:08:46.000Z",
+          "customInfo": "test",
+          "haMode": null,
+          "standbySystemUpSince": "0000-00-00 00:00:00.000",
+          "standbyServiceUpSince": "0000-00-00 00:00:00.000",
+          "standbySoftwareVersion": null,
+          "standbyFactorySoftwareVersion": null,
+          "standbyFactoryBuildNumber": null,
+          "standbyBuildNumber": null,
+          "standbyModelNumber": null,
+          "standbyDeviceId": null,
+          "haWifiCapabilityMismatch": null,
+          "isHub": false
+        }
+      ]
+
+---
+
+simlet: velocloud-enterprise-edge-link-metrics
+
+request:
+  - method: POST
+  - uriPath: /velocloud/portal/rest/metrics/getEdgeLinkMetrics
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Content-Type
+          equals: "application/json"
+        - where: header
+          named: Cookie
+          equals: "velocloud.session=cookie123"
+        - where: body
+          contains: enterpriseId
+        - where: body
+          contains: metrics
+        - where: body
+          contains: edgeId
+        - where: body
+          contains: interval
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "linkId": 1285,
+          "linkLogicalId": "00000003-cd13-4a18-a7fb-de2a7c41fbb1",
+          "bytesRx": 89347997,
+          "link": {
+            "id": 1285,
+            "created": "2022-03-30T10:10:44.000Z",
+            "edgeId": 643,
+            "logicalId": "34:e3:80:1e:6b:71:0000",
+            "internalId": "00000003-cd13-4a18-a7fb-de2a7c41fbb1",
+            "interface": "GE3",
+            "macAddress": null,
+            "overlayType": "IPv4",
+            "ipAddress": "199.199.1.1",
+            "ipV6Address": "",
+            "netmask": null,
+            "networkSide": "WAN",
+            "networkType": "ETHERNET",
+            "displayName": "Wind Tre",
+            "userOverride": 0,
+            "isp": "Wind Tre",
+            "org": "Wind Tre",
+            "lat": 46.803398,
+            "lon": 11.9271,
+            "lastActive": "2026-07-30T09:42:47.000Z",
+            "state": "STABLE",
+            "backupState": "UNCONFIGURED",
+            "linkMode": "ACTIVE",
+            "vpnState": "STABLE",
+            "lastEvent": "2026-07-27T05:32:04.000Z",
+            "lastEventState": "STABLE",
+            "alertsEnabled": 1,
+            "operatorAlertsEnabled": 1,
+            "serviceState": "IN_SERVICE",
+            "modified": "2026-07-30T09:42:47.000Z",
+            "holdingEdgeSerialNumber": "",
+            "edgeToEdgeEncryption": 1,
+            "effectiveState": "STABLE"
+          },
+          "name": "GE3"
+        },
+        {
+          "linkId": 923,
+          "linkLogicalId": "00000004-cd13-4a18-a7fb-de2a7c41fbb1",
+          "bytesRx": 3754323,
+          "link": {
+            "id": 923,
+            "created": "2022-03-02T07:48:45.000Z",
+            "edgeId": 643,
+            "logicalId": "3c:37:12:61:0e:d4:0000",
+            "internalId": "00000004-cd13-4a18-a7fb-de2a7c41fbb1",
+            "interface": "GE4",
+            "macAddress": null,
+            "overlayType": "IPv4",
+            "ipAddress": "199.199.1.2",
+            "ipV6Address": "",
+            "netmask": null,
+            "networkSide": "WAN",
+            "networkType": "ETHERNET",
+            "displayName": "Vodafone IT",
+            "userOverride": 1,
+            "isp": "Vodafone IT",
+            "org": "Vodafone IT",
+            "lat": 43.1479,
+            "lon": 12.1097,
+            "lastActive": "2026-07-30T09:42:47.000Z",
+            "state": "STABLE",
+            "backupState": "UNCONFIGURED",
+            "linkMode": "ACTIVE",
+            "vpnState": "STABLE",
+            "lastEvent": "2026-07-30T05:30:42.000Z",
+            "lastEventState": "STABLE",
+            "alertsEnabled": 1,
+            "operatorAlertsEnabled": 1,
+            "serviceState": "IN_SERVICE",
+            "modified": "2026-07-30T09:42:47.000Z",
+            "holdingEdgeSerialNumber": "",
+            "edgeToEdgeEncryption": 1,
+            "effectiveState": "STABLE"
+          },
+          "name": "GE4"
+        }
+      ]
+
+---
+
+simlet: sadelvoip
+
+# -------------------
+# REQUEST DEFINITIONS
+# -------------------
+request:
+  - method: GET
+    uriPath: /sadelvoip/api/v1/version
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/ping
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/consoles
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/consoles/consolewebvoip1
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/users
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/users/userwebvoip1
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/lines
+
+  - method: GET
+    uriPath: /sadelvoip/api/v1/diagnostic/lines/modem3
+
+
+responses:
+
+  # -------------------
+  # VERSION
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/version
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "version": "1.2.6"
+      }
+
+  # -------------------
+  # PING
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/ping
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "timestamp": "2026-06-03T08:36:56.957Z",
+        "macAddress": "00:07:32:b9:0e:9b",
+        "dbConnection": 1
+      }
+
+  # -------------------
+  # CONSOLES
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/consoles
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "description": "consoleweb OSCaR",
+          "id": "consolewebvoip1",
+          "name": "consolewebvoip OSCaR",
+          "operator": "userwebvoip1",
+          "state": "connected"
+        },
+        {
+          "description": "consoleweb OSCaR",
+          "id": "consolewebsp1",
+          "name": "consolewebsp OSCaR",
+          "operator": "",
+          "state": "disconnected"
+        }
+      ]
+
+  # -------------------
+  # CONSOLE
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/consoles/consolewebvoip1
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "description": "consoleweb OSCaR",
+        "id": "consolewebvoip1",
+        "name": "consolewebvoip OSCaR",
+        "operator": "userwebvoip1",
+        "state": "connected"
+      }
+
+  # -------------------
+  # USERS
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/users
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "description": "",
+          "id": "user9",
+          "name": "user9",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user8",
+          "name": "user8",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user7",
+          "name": "user7",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user6",
+          "name": "user6",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user3",
+          "name": "user3",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "userwebsp1",
+          "name": "userwebsp1",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user10",
+          "name": "user10",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user1",
+          "name": "user1",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "userwebvoip1",
+          "name": "userwebvoip1",
+          "state": "connected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user2",
+          "name": "user2",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user4",
+          "name": "user4",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user5",
+          "name": "user5",
+          "state": "disconnected"
+        }
+      ]
+  
+
+  # -------------------
+  # USER
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/users/userwebvoip1
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "description": "",
+        "id": "userwebvoip1",
+        "name": "userwebvoip1",
+        "state": "connected"
+      }
+
+  # -------------------
+  # LINES
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/lines
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "modem1": {
+          "diagnostic": {
+            "ber": 0,
+            "busy": false,
+            "cell": "",
+            "fn": "",
+            "imei": "",
+            "operator": "",
+            "reachable": false,
+            "rssi": 0,
+            "simnum": "ERROR",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem1",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem2": {
+          "diagnostic": {
+            "ber": 0,
+            "busy": false,
+            "cell": "",
+            "fn": "",
+            "imei": "",
+            "operator": "",
+            "reachable": false,
+            "rssi": 0,
+            "simnum": "ERROR",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem2",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem3": {
+          "diagnostic": {
+            "ber": 99,
+            "busy": false,
+            "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+            "diverting": [],
+            "fn": "",
+            "imei": "351962026180543",
+            "operator": "vodafone IT",
+            "reachable": true,
+            "rssi": 27,
+            "simnum": "+393358382142",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem3",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem4": {
+          "diagnostic": {
+            "ber": 99,
+            "busy": false,
+            "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+            "diverting": [],
+            "fn": "",
+            "imei": "351962026180527",
+            "operator": "vodafone IT",
+            "reachable": true,
+            "rssi": 28,
+            "simnum": "+393358382148",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem4",
+            "line_type": "gsmrmodemline"
+          }
+        }
+      }
+  
+  
+
+  # -------------------
+  # LINE
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/lines/modem3
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "diagnostic": {
+          "ber": 99,
+          "busy": false,
+          "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+          "diverting": [],
+          "fn": "",
+          "imei": "351962026180543",
+          "operator": "vodafone IT",
+          "reachable": true,
+          "rssi": 27,
+          "simnum": "+393358382142",
+          "tag10": ""
+        },
+        "src": {
+          "line_id": "modem3",
+          "line_type": "gsmrmodemline"
+        }
+      }
+
+
+  # -------------------
+  # RESTRICTED
+  # -------------------
+  - when:
+      request:
+        - where: header
+          named: apikey
+          equals: "restricted"
+
+    from: stub
+    status: 403
+    body: |
+      {
+        "message": "User has no access to this method."
+      }
+
+  # -------------------
+  # INVALID KEY
+  # -------------------
+  - when:
+      request:
+        - where: header
+          named: apikey
+          not equals: "1234"
+
+    from: stub
+    status: 401
+    body: |
+      {
+        "message": "Invalid API key."
+      }
+
+  # -------------------
+  # FALLBACK
+  # -------------------
+  - from: stub
+    status: 404
+
+
