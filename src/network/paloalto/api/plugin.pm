@@ -38,8 +38,7 @@ sub new {
         'ipsec'       => 'network::paloalto::api::mode::ipsec',
         'discovery'   => 'network::paloalto::api::mode::discovery',
         'health'      => 'network::paloalto::api::mode::health',
-        'certificate' => 'network::paloalto::api::mode::certificate',
-        'sdwan'       => 'network::paloalto::api::mode::sdwan'
+        'certificate' => 'network::paloalto::api::mode::certificate'
     };
 
     $self->{custom_modes}->{api} = 'network::paloalto::api::custom::api';
