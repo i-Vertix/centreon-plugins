@@ -2652,14 +2652,14 @@ simlet: velocloud-auth
 
 request:
   - method: POST
-  - uriPath: /velocloud/portal/rest/login/enterpriseLogin
+  - uriPath: /velocloud/portal/rest/login/operatorLogin
 
 responses:
 
   - when:
       request:
         - where: uriPath
-          equals: /velocloud/portal/rest/login/enterpriseLogin
+          equals: /velocloud/portal/rest/login/operatorLogin
 
         - where: body
           contains: password
@@ -3506,6 +3506,118 @@ responses:
           "name": "GE4"
         }
       ]
+
+---
+
+simlet: paloalto-sdwan
+
+request:
+  - method: GET
+  - uriPath: /api/
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: X-PAN-KEY
+          equals: "1234"
+        - where: uriQueryParameter
+          named: "cmd"
+          contains: "sdwan"
+
+    from: stub
+    status: 200
+    body: |
+      <response status="success">
+          <result>
+              <entry>
+                  <slot_dp>slot1 dp0</slot_dp>
+                  <stats_list>
+                      <entry>
+                          <is_v6>0</is_v6>
+                          <state>up</state>
+                          <state_reason>UP/path_monitor</state_reason>
+                          <state_change>4</state_change>
+                          <state_reason_idx>7</state_reason_idx>
+                          <if_name>tl_0105_016201038940_A04</if_name>
+                          <vif_name>sdwan.902</vif_name>
+                          <conn_id>0</conn_id>
+                          <if_id>272</if_id>
+                          <latency>37</latency>
+                          <jitter>6</jitter>
+                          <loss>0</loss>
+                          <profile>N/A</profile>
+                          <policy>0</policy>
+                      </entry>
+                      <entry>
+                          <is_v6>0</is_v6>
+                          <state>up</state>
+                          <state_reason>UP/path_monitor</state_reason>
+                          <state_change>0</state_change>
+                          <state_reason_idx>7</state_reason_idx>
+                          <if_name>tl_0107_016201038940_A03</if_name>
+                          <vif_name>sdwan.902</vif_name>
+                          <conn_id>1</conn_id>
+                          <if_id>273</if_id>
+                          <latency>14</latency>
+                          <jitter>0</jitter>
+                          <loss>0</loss>
+                          <profile>N/A</profile>
+                          <policy>0</policy>
+                      </entry>
+                      <entry>
+                          <is_v6>0</is_v6>
+                          <state>up</state>
+                          <state_reason>UP/path_monitor</state_reason>
+                          <state_change>0</state_change>
+                          <state_reason_idx>7</state_reason_idx>
+                          <if_name>ethernet1/7</if_name>
+                          <vif_name>sdwan.901</vif_name>
+                          <conn_id>2</conn_id>
+                          <if_id>22</if_id>
+                          <latency>14</latency>
+                          <jitter>0</jitter>
+                          <loss>0</loss>
+                          <profile>N/A</profile>
+                          <policy>0</policy>
+                      </entry>
+                      <entry>
+                          <is_v6>0</is_v6>
+                          <state>up</state>
+                          <state_reason>UP/path_monitor</state_reason>
+                          <state_change>6</state_change>
+                          <state_reason_idx>7</state_reason_idx>
+                          <if_name>ethernet1/5</if_name>
+                          <vif_name>sdwan.901</vif_name>
+                          <conn_id>3</conn_id>
+                          <if_id>20</if_id>
+                          <latency>37</latency>
+                          <jitter>6</jitter>
+                          <loss>0</loss>
+                          <profile>N/A</profile>
+                          <policy>0</policy>
+                      </entry>
+                      <entry>
+                          <is_v6>0</is_v6>
+                          <state>up</state>
+                          <state_reason>UP/path_monitor</state_reason>
+                          <state_change>0</state_change>
+                          <state_reason_idx>7</state_reason_idx>
+                          <if_name>sdwan.902</if_name>
+                          <vif_name>sdwan.901</vif_name>
+                          <conn_id>4</conn_id>
+                          <if_id>276</if_id>
+                          <latency>14</latency>
+                          <jitter>0</jitter>
+                          <loss>0</loss>
+                          <profile>N/A</profile>
+                          <policy>0</policy>
+                      </entry>
+                  </stats_list>
+              </entry>
+          </result>
+      </response>
 
 ---
 
