@@ -3509,6 +3509,157 @@ responses:
 
 ---
 
+simlet: proxmox-auth
+
+request:
+  - method: POST
+  - uriPath: /api2/json/access/ticket
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /api2/json/access/ticket
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: username
+
+        - where: body
+          contains: password
+
+        - where: body
+          contains: realm
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "data": {
+          "cap": {
+            "storage": {
+              "Datastore.Audit": 1
+            },
+            "dc": {
+              "SDN.Audit": 1,
+              "Sys.Audit": 1
+            },
+            "sdn": {
+              "SDN.Audit": 1
+            },
+            "mapping": {
+              "Mapping.Audit": 1
+            },
+            "access": {},
+            "vms": {
+              "VM.GuestAgent.Audit": 1,
+              "VM.Audit": 1
+            },
+            "nodes": {
+              "Sys.Console": 1,
+              "Sys.Audit": 1,
+              "Sys.Syslog": 1
+            }
+          },
+          "ticket": "PVE:ivertix@pve:123::123",
+          "CSRFPreventionToken": "123:123",
+          "username": "ivertix@pve"
+        }
+      }
+
+---
+
+simlet: proxmox-version
+
+request:
+  - method: GET
+  - uriPath: /api2/json/version
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /api2/json/version
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: header
+          named: Cookie
+          equals: "PVEAuthCookie=PVE:ivertix@pve:123::123"
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "data": {
+          "version": "9.2.2",
+          "release": "9.2",
+          "repoid": "b9984c6d90a4bd80"
+        }
+      }
+
+---
+
+simlet: proxmox-nodes
+
+request:
+  - method: GET
+  - uriPath: /api2/json/cluster/resources
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /api2/json/cluster/resources
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: header
+          named: Cookie
+          equals: "PVEAuthCookie=PVE:ivertix@pve:123::123"
+
+        - where: uriQueryParameter
+          named: "type"
+          equals: "node"
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "data": [
+          {
+            "disk": 14417657856,
+            "cgroup-mode": 2,
+            "level": "c",
+            "uptime": 178,
+            "cpu": 0.0282448979591837,
+            "mem": 28063162368,
+            "maxcpu": 24,
+            "status": "online",
+            "id": "node/pve01",
+            "node": "pve01",
+            "maxdisk": 409621364736,
+            "maxmem": 67072557056,
+            "type": "node"
+          }
+        ]
+      }
+
+---
+
 simlet: paloalto-sdwan
 
 request:
@@ -3618,6 +3769,811 @@ responses:
               </entry>
           </result>
       </response>
+
+---
+
+simlet: extremecloudiq-auth
+
+request:
+  - method: POST
+  - uriPath: /login
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /login
+
+        - where: header
+          named: Content-Type
+          equals: application/json
+
+        - where: body
+          contains: username
+
+        - where: body
+          contains: password
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "access_token": "token1234",
+        "token_type": "Bearer",
+        "expires_in": 86400
+      }
+
+---
+
+simlet: extremecloudiq-devices
+
+request:
+  - method: GET
+  - uriPath: /devices
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token1234"
+        - where: uriQueryParameter
+          named: "page"
+          equals: "1"
+        - where: uriQueryParameter
+          named: "limit"
+          equals: "100"
+        - where: uriQueryParameter
+          named: "views"
+          equals: "DETAIL"
+        - where: uriQueryParameter
+          named: "deviceTypes"
+          equals: "REAL"
+
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "page": 1,
+        "count": 22,
+        "total_pages": 1,
+        "total_count": 22,
+        "data": [
+          {
+            "id": 1309243470874312,
+            "create_time": "2022-11-30T16:33:25.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-00062",
+            "mac_address": "F4CE48F7C7A4",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw06",
+            "ip_address": "10.10.102.1",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T23:16:48.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1759271552602,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874343,
+            "create_time": "2022-11-30T13:51:40.000+0000",
+            "update_time": "2026-05-12T13:12:57.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093109",
+            "mac_address": "90B832569800",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP15",
+            "ip_address": "10.10.102.2",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:45:28.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759271673870,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874375,
+            "create_time": "2022-11-30T13:51:40.000+0000",
+            "update_time": "2026-06-11T21:30:55.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093117",
+            "mac_address": "90B832569A00",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP17",
+            "ip_address": "10.10.102.2",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T07:21:22.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1785914379674,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874387,
+            "create_time": "2022-11-30T13:51:42.000+0000",
+            "update_time": "2026-05-12T13:12:57.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093088",
+            "mac_address": "90B8325692C0",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP11",
+            "ip_address": "10.10.102.3",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:40:23.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759271682945,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874405,
+            "create_time": "2022-11-30T13:51:44.000+0000",
+            "update_time": "2026-05-12T13:12:57.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093095",
+            "mac_address": "90B832569480",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP13",
+            "ip_address": "10.10.102.4",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:44:55.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759271647952,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874417,
+            "create_time": "2022-11-30T13:52:01.000+0000",
+            "update_time": "2025-11-21T16:53:44.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093165",
+            "mac_address": "90B83256A600",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP-UFF-CED",
+            "ip_address": "10.10.102.5",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2023-01-26T14:05:43.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 0,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874423,
+            "create_time": "2022-11-30T13:52:01.000+0000",
+            "update_time": "2026-05-12T13:12:57.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093089",
+            "mac_address": "90B832569300",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP14",
+            "ip_address": "10.10.102.6",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:44:55.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759271677184,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874429,
+            "create_time": "2022-11-30T13:52:02.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093086",
+            "mac_address": "90B832569240",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP-UFF-ACQUISTI",
+            "ip_address": "10.10.102.7",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:42:38.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759299421155,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874441,
+            "create_time": "2022-11-30T13:52:03.000+0000",
+            "update_time": "2026-05-12T13:12:57.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093202",
+            "mac_address": "90B83256AF40",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP12",
+            "ip_address": "10.10.102.8",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:42:58.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 1759271673096,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874447,
+            "create_time": "2022-11-30T13:52:04.000+0000",
+            "update_time": "2026-07-28T10:07:01.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093192",
+            "mac_address": "90B83256ACC0",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP-SALETTA-PT",
+            "ip_address": "10.10.102.9",
+            "software_version": "10.5.2.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2023-05-25T15:36:23.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "HiveOS 10.5r2 build-277009",
+            "description": "",
+            "system_up_time": 0,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874654,
+            "create_time": "2022-11-30T16:35:39.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-00449",
+            "mac_address": "F4CE48F7D9C8",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw04",
+            "ip_address": "10.10.102.10",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T23:17:18.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1732085119037,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874660,
+            "create_time": "2022-11-30T16:35:40.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-01165",
+            "mac_address": "F4CE48F7EBF8",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw02",
+            "ip_address": "10.10.102.11",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T23:18:45.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1751998686287,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874672,
+            "create_time": "2022-11-30T16:35:40.000+0000",
+            "update_time": "2025-11-21T16:53:44.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-00919",
+            "mac_address": "F4CE48F7E070",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw01",
+            "ip_address": "10.10.102.12",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2024-03-04T14:41:44.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1709048530975,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874678,
+            "create_time": "2022-11-30T16:35:41.000+0000",
+            "update_time": "2025-11-21T16:53:44.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-00865",
+            "mac_address": "F4CE48F7DDE8",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw05",
+            "ip_address": "10.10.102.13",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2023-08-28T13:47:01.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1685613500869,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874824,
+            "create_time": "2022-11-30T16:41:52.000+0000",
+            "update_time": "2026-08-05T08:35:26.000+0000",
+            "org_id": 0,
+            "serial_number": "2236N-40656",
+            "mac_address": "DCE650AED473",
+            "device_function": "SWITCH",
+            "product_type": "X440_G2_48p_10_G4",
+            "hostname": "Stack",
+            "ip_address": "10.10.102.14",
+            "software_version": "33.6.1.14",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T08:33:39.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "simulated": false,
+            "display_version": "33.6.1.14",
+            "system_up_time": 1785914174419,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470874840,
+            "create_time": "2022-11-30T16:42:54.000+0000",
+            "update_time": "2026-08-05T08:44:19.000+0000",
+            "org_id": 0,
+            "serial_number": "2236N-40656",
+            "service_tag": "st-null",
+            "mac_address": "DEE650AED473",
+            "device_function": "SWITCH",
+            "product_type": "X440_G2_48p_10_G4",
+            "hostname": "Stack",
+            "ip_address": "10.10.102.15",
+            "software_version": "33.6.1.14",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T08:33:39.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "simulated": false,
+            "display_version": "33.6.1.14",
+            "system_up_time": 1785914174419,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 100,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470875178,
+            "create_time": "2022-12-01T10:01:43.000+0000",
+            "update_time": "2026-08-05T08:35:26.000+0000",
+            "org_id": 0,
+            "serial_number": "2236N-41055",
+            "mac_address": "DCE650AED602",
+            "device_function": "SWITCH",
+            "product_type": "X440_G2_48p_10_G4",
+            "hostname": "Stack",
+            "ip_address": "10.10.102.16",
+            "software_version": "33.6.1.14",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T07:39:51.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "simulated": false,
+            "display_version": "33.6.1.14",
+            "system_up_time": 1785914173839,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243470933146,
+            "create_time": "2023-03-16T17:27:42.000+0000",
+            "update_time": "2026-08-05T08:35:26.000+0000",
+            "org_id": 0,
+            "serial_number": "2247N-43709",
+            "mac_address": "DCE650AF0660",
+            "device_function": "SWITCH",
+            "product_type": "X440_G2_24p_10_G4",
+            "hostname": "Stack",
+            "ip_address": "10.10.102.17",
+            "software_version": "33.6.1.14",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T07:39:51.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "192.168.100.254",
+            "simulated": false,
+            "display_version": "33.6.1.14",
+            "system_up_time": 1785914174537,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243471002056,
+            "create_time": "2024-05-28T14:01:30.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093100",
+            "mac_address": "90B8325695C0",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP16",
+            "ip_address": "10.10.102.18",
+            "software_version": "10.6.7.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:40:52.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "IQ Engine 10.6r7 build-fdaa496",
+            "description": "",
+            "system_up_time": 1759299373798,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243471003034,
+            "create_time": "2024-10-30T15:32:08.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093087",
+            "mac_address": "90B832569280",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP18",
+            "ip_address": "10.10.102.19",
+            "software_version": "10.7.3.0",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-11-20T22:44:03.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "IQ Engine 10.7r3 build-68c8fdd",
+            "description": "",
+            "system_up_time": 1759299322687,
+            "config_mismatch": true,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243471003045,
+            "create_time": "2024-11-05T08:38:57.000+0000",
+            "update_time": "2026-08-05T07:22:35.000+0000",
+            "org_id": 0,
+            "serial_number": "03052112093198",
+            "mac_address": "90B83256AE40",
+            "device_function": "AP",
+            "product_type": "AP_305C",
+            "hostname": "AP19",
+            "ip_address": "10.10.102.20",
+            "software_version": "10.7.3.0",
+            "device_admin_state": "MANAGED",
+            "connected": true,
+            "last_connect_time": "2026-08-05T08:32:11.000+0000",
+            "primary_dns_server_address": "192.168.1.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.10.102.254",
+            "ipv6_address": "0:0:0:0:0:0:0:0",
+            "ipv6_netmask": 0,
+            "simulated": false,
+            "display_version": "IQ Engine 10.7r3 build-68c8fdd",
+            "description": "",
+            "system_up_time": 1785918627705,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          },
+          {
+            "id": 1309243471003482,
+            "create_time": "2024-12-10T13:47:51.000+0000",
+            "update_time": "2026-04-16T22:13:07.000+0000",
+            "org_id": 0,
+            "serial_number": "2209G-01104",
+            "mac_address": "F4CE48F7E91C",
+            "device_function": "SWITCH",
+            "product_type": "X435_8P_4S",
+            "hostname": "Sw03",
+            "ip_address": "10.10.102.21",
+            "software_version": "32.2.1.8",
+            "device_admin_state": "UNMANAGED",
+            "connected": false,
+            "last_connect_time": "2025-06-26T05:45:10.000+0000",
+            "primary_dns_server_address": "208.67.222.222",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "",
+            "simulated": false,
+            "display_version": "32.2.1.8",
+            "system_up_time": 1733841090820,
+            "config_mismatch": false,
+            "managed_by": "XIQ",
+            "thread0_eui64": "",
+            "thread0_ext_mac": "",
+            "mgt_vlan": 1,
+            "images_names": [],
+            "visible": true
+          }
+        ]
+      }
+
+---
+
+simlet: extremecloudiq-locations
+
+request:
+  - method: GET
+  - uriPath: /locations/site
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token1234"
+        - where: uriQueryParameter
+          named: "page"
+          equals: "1"
+        - where: uriQueryParameter
+          named: "limit"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "page": 1,
+        "count": 1,
+        "total_pages": 1,
+        "total_count": 1,
+        "data": [
+          {
+            "id": 1309243470874357,
+            "create_time": "2022-11-30T13:45:47.000+0000",
+            "update_time": "2023-10-12T21:29:50.000+0000",
+            "org_id": 0,
+            "parent_id": 1309243470874354,
+            "name": "Bolzano (BZ)",
+            "unique_name": "Bolzano (BZ)",
+            "type": "Site",
+            "address": {
+              "address": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano",
+              "address2": "",
+              "city": "",
+              "state": "",
+              "postal_code": ""
+            },
+            "country_code": 0,
+            "latitude": 46.481889622482974,
+            "longitude": 11.330597659899555
+          }
+        ]
+      }
 
 ---
 
