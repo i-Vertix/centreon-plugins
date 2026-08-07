@@ -4523,7 +4523,7 @@ responses:
 
 ---
 
-simlet: extremecloudiq-locations
+simlet: extremecloudiq-locations-site
 
 request:
   - method: GET
@@ -4571,6 +4571,123 @@ responses:
             "country_code": 0,
             "latitude": 46.481889622482974,
             "longitude": 11.330597659899555
+          }
+        ]
+      }
+
+---
+
+simlet: extremecloudiq-locations-building
+
+request:
+  - method: GET
+  - uriPath: /locations/building
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token1234"
+        - where: uriQueryParameter
+          named: "page"
+          equals: "1"
+        - where: uriQueryParameter
+          named: "limit"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "page": 1,
+        "count": 1,
+        "total_pages": 1,
+        "total_count": 1,
+        "data": [
+          {
+            "id": 1309243470874360,
+            "create_time": "2022-11-30T13:45:47.000+0000",
+            "update_time": "2024-05-06T08:28:26.000+0000",
+            "org_id": 0,
+            "parent_id": 1309243470874357,
+            "name": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano",
+            "address": {
+              "address": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano)",
+              "address2": "",
+              "city": "",
+              "state": "",
+              "postal_code": ""
+            },
+            "latitude": 46.481889622482974,
+            "longitude": 11.330597659899555
+          }
+        ]
+      }
+
+---
+
+simlet: extremecloudiq-locations-floor
+
+request:
+  - method: GET
+  - uriPath: /locations/floor
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token1234"
+        - where: uriQueryParameter
+          named: "page"
+          equals: "1"
+        - where: uriQueryParameter
+          named: "limit"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "page": 1,
+        "count": 2,
+        "total_pages": 1,
+        "total_count": 2,
+        "data": [
+          {
+            "id": 1309243470874311,
+            "create_time": "2022-11-30T13:50:45.000+0000",
+            "update_time": "2022-12-22T18:00:18.000+0000",
+            "org_id": 0,
+            "parent_id": 1309243470874360,
+            "name": "floor0",
+            "unique_name": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano |floor0",
+            "environment": "AUTO_ESTIMATE",
+            "db_attenuation": 15.0,
+            "measurement_unit": "FEET",
+            "installation_height": 12.0,
+            "map_size_width": 30.0,
+            "map_size_height": 37.3318,
+            "map_name": "Primalayout.jpg"
+          },
+          {
+            "id": 1309243470874361,
+            "create_time": "2022-11-30T13:45:47.000+0000",
+            "update_time": "2022-11-30T15:00:15.000+0000",
+            "org_id": 0,
+            "parent_id": 1309243470874360,
+            "name": "Floor 1",
+            "unique_name": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano |Floor 1",
+            "environment": "AUTO_ESTIMATE",
+            "db_attenuation": 15.0,
+            "measurement_unit": "FEET",
+            "installation_height": 12.0,
+            "map_size_width": 0.0,
+            "map_size_height": 0.0,
+            "map_name": ""
           }
         ]
       }
