@@ -2675,6 +2675,33 @@ responses:
 
 ---
 
+simlet: velocloud-auth-enterprise
+
+request:
+  - method: POST
+  - uriPath: /velocloud/portal/rest/login/enterpriseLogin
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /velocloud/portal/rest/login/enterpriseLogin
+
+        - where: body
+          contains: password
+
+        - where: body
+          contains: username
+
+    from: stub
+    status: 200
+
+    headers:
+      - "Set-Cookie: velocloud.session=cookie123; Path=/; HttpOnly; Secure; SameSite=Strict"
+
+---
+
 simlet: velocloud-enterprise
 
 request:
