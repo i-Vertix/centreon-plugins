@@ -131,6 +131,54 @@ responses:
 
 ---
 
+simlet: azure-applicationgateways
+request:
+  - method: GET
+  - uriPath: /azure/management/applicationGateways/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Network"
+        - where: uri
+          contains: "applicationGateways"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/applicationGateways/ivertix-reverse-proxy-01",
+            "name": "ivertix-reverse-proxy-01",
+            "type": "Microsoft.Network/applicationGateways",
+            "location": "westeurope",
+            "zones": [
+              "1"
+            ],
+            "tags": {
+              "company": "i-Vertix",
+              "it-service": "networking infrastructure",
+              "creator": "admin-rm@i-vertix.com",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "reverse proxy",
+              "DateCreated": "08/18/2026",
+              "environment": "pro"
+            }
+          }
+        ]
+      }
+
+---
+
 simlet: azure-vm
 
 request:
