@@ -179,6 +179,231 @@ responses:
 
 ---
 
+simlet: azure-publicip
+request:
+  - method: GET
+  - uriPath: /azure/management/publicIPAddresses/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Network"
+        - where: uri
+          contains: "publicIPAddresses"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/publicIPAddresses/reverseproxy-01",
+            "name": "reverseproxy-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "westeurope",
+            "zones": [
+              "1"
+            ],
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "06/25/2024",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "reverse proxy",
+              "environment": "pro",
+              "company": "i-Vertix",
+              "it-service": "network"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Network/publicIPAddresses/vpn-01",
+            "name": "vpn-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "11/05/2024",
+              "environment": "pro",
+              "it-service": "network",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "vpn"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-3/providers/Microsoft.Network/publicIPAddresses/gateway-01",
+            "name": "gateway-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "referent": "admin-rm@i-vertix.com",
+              "it-service": "network",
+              "workload": "gateway",
+              "environment": "pro",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "12/16/2024"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-4/providers/Microsoft.Network/publicIPAddresses/itsm-01",
+            "name": "itsm-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "westeurope",
+            "tags": {
+              "datecreated": "03/31/2026",
+              "workload": "ITSM system",
+              "it-service": "network",
+              "referent": "admin-rm@i-vertix.com",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "company": "i-Vertix"
+            }
+          }
+        ]
+      }
+
+---
+
+simlet: azure-vhub
+request:
+  - method: GET
+  - uriPath: /azure/management/vhub/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Network"
+        - where: uri
+          contains: "virtualHubs"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/virtualHubs/vhub-iv-01",
+            "name": "vhub-iv-01",
+            "type": "Microsoft.Network/virtualHubs",
+            "location": "westcentralus",
+            "tags": {
+              "creator": "admin-rm@i-vertix.com",
+              "it-service": "networking infrastructure",
+              "environment": "pro",
+              "workload": "virtual wan hub",
+              "company": "i-Vertix",
+              "referent": "admin-rm@i-vertix.com",
+              "DateCreated": "21/08/2026"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/virtualHubs/vhub-iv-conn-01",
+            "name": "vhub-iv-conn-01",
+            "type": "Microsoft.Network/virtualHubs",
+            "location": "westeurope",
+            "tags": {
+              "it-service": "networking infrastructure",
+              "workload": "virtual wan hub",
+              "creator": "admin-rm@i-vertix.com",
+              "company": "i-Vertix",
+              "referent": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "DateCreated": "21/08/2026"
+            }
+          }
+        ]
+      }
+
+---
+
+simlet: azure-loadbalancer
+request:
+  - method: GET
+  - uriPath: /azure/management/loadBalancers/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.Network"
+        - where: uri
+          contains: "loadBalancers"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.Network/loadBalancers/loadbalancer-iv-01",
+            "name": "loadbalancer-iv-01",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "westeurope",
+            "tags": {
+              "referent": "admin-rm@i-vertix.com",
+              "datecreated": "21/08/2026",
+              "creator": "admin-rm@i-vertix.com",
+              "environment": "pro",
+              "workload": "pam",
+              "company": "i-Vertix",
+              "it-service": "network"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.Network/loadBalancers/loadbalancer-iv-02",
+            "name": "loadbalancer-iv-02",
+            "type": "Microsoft.Network/loadBalancers",
+            "sku": {
+              "name": "Standard"
+            },
+            "location": "northeurope",
+            "tags": {
+              "DateCreated": "21/08/2026"
+            }
+          }
+        ]
+      }
+
+---
+
 simlet: azure-vm
 
 request:
@@ -2693,7 +2918,1228 @@ responses:
         ]
       }
 
+---
 
+simlet: aws-s3
+request:
+  - method: GET
+  - uriPath: /aws/s3
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+        <ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Owner>
+            <ID>b1ec24e3bcf4067bed612679b3994b320b59cf06662616b6e233bb88f4111619</ID>
+          </Owner>
+          <Buckets>
+            <Bucket>
+              <Name>accesslog-6m</Name>
+              <CreationDate>2026-04-30T00:50:14.000Z</CreationDate>
+            <BucketArn>arn:aws:s3:::accesslog-6m</BucketArn>
+            </Bucket>
+            <Bucket>
+              <Name>i-vertix-backup</Name>
+              <CreationDate>2026-04-29T16:59:03.000Z</CreationDate>
+              <BucketArn>arn:aws:s3:::i-vertix-backup</BucketArn>
+            </Bucket>
+            <Bucket>
+              <Name>i-vertix-downloads</Name>
+              <CreationDate>2026-04-29T22:33:30.000Z</CreationDate>
+              <BucketArn>arn:aws:s3:::i-vertix-downloads</BucketArn>
+            </Bucket>
+            <Bucket>
+              <Name>i-vertix-downloads-me</Name>
+              <CreationDate>2026-05-11T11:25:12.000Z</CreationDate>
+              <BucketArn>arn:aws:s3:::i-vertix-downloads-me</BucketArn>
+            </Bucket>
+            <Bucket>
+              <Name>pgum-vmware-import</Name>
+              <CreationDate>2026-04-30T02:58:01.000Z</CreationDate>
+              <BucketArn>arn:aws:s3:::pgum-vmware-import</BucketArn>
+            </Bucket>
+          </Buckets>
+      </ListAllMyBucketsResult>
+
+---
+
+simlet: aws-ec2
+request:
+  - method: POST
+  - uriPath: /aws/ec2
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+      <requestId>770b8aa2-99cb-4c56-95c3-96148705cb3d</requestId>
+      <reservationSet>
+      <item>
+      <reservationId>r-0faee163669d242b7</reservationId>
+      <ownerId>244888420026</ownerId>
+      <groupSet/>
+      <instancesSet>
+      <item>
+      <instanceId>i-0639c33342a89ae86</instanceId>
+      <imageId>ami-063449816194d81e0</imageId>
+      <instanceState>
+      <code>16</code>
+      <name>running</name>
+      </instanceState>
+      <privateDnsName>ip-172-31-4-167.eu-west-1.compute.internal</privateDnsName>
+      <publicIpDnsNameOptions>
+      <dnsHostnameType>public-ipv4-dns-name</dnsHostnameType>
+      <publicIpv4DnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</publicIpv4DnsName>
+      </publicIpDnsNameOptions>
+      <dnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</dnsName>
+      <reason/>
+      <amiLaunchIndex>0</amiLaunchIndex>
+      <productCodes/>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <instanceType>t2.medium</instanceType>
+      <launchTime>2021-04-12T15:47:16.000Z</launchTime>
+      <placement>
+      <availabilityZone>eu-west-1c</availabilityZone>
+      <availabilityZoneId>euw1-az1</availabilityZoneId>
+      <groupName/>
+      <tenancy>default</tenancy>
+      </placement>
+      <monitoring>
+      <state>disabled</state>
+      </monitoring>
+      <subnetId>subnet-f5d8c991</subnetId>
+      <vpcId>vpc-f76b6593</vpcId>
+      <privateIpAddress>172.31.4.167</privateIpAddress>
+      <ipAddress>52.51.86.30</ipAddress>
+      <sourceDestCheck>true</sourceDestCheck>
+      <groupSet>
+      <item>
+      <groupId>sg-0d6c5a3ce0b5f80c4</groupId>
+      <groupName>launch-wizard-1</groupName>
+      </item>
+      </groupSet>
+      <architecture>x86_64</architecture>
+      <rootDeviceType>ebs</rootDeviceType>
+      <rootDeviceName>/dev/sda1</rootDeviceName>
+      <blockDeviceMapping>
+      <item>
+      <deviceName>/dev/sda1</deviceName>
+      <ebs>
+      <volumeId>vol-03231881a2c3731c1</volumeId>
+      <status>attached</status>
+      <attachTime>2021-04-12T15:18:45.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </ebs>
+      </item>
+      </blockDeviceMapping>
+      <virtualizationType>hvm</virtualizationType>
+      <clientToken/>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>portal.i-vertix.com</value>
+      </item>
+      </tagSet>
+      <hypervisor>xen</hypervisor>
+      <networkInterfaceSet>
+      <item>
+      <networkInterfaceId>eni-0bca2053e29e1b9f9</networkInterfaceId>
+      <subnetId>subnet-f5d8c991</subnetId>
+      <vpcId>vpc-f76b6593</vpcId>
+      <description/>
+      <ownerId>244888420026</ownerId>
+      <status>in-use</status>
+      <macAddress>02:9c:d1:ab:11:c1</macAddress>
+      <privateIpAddress>172.31.4.167</privateIpAddress>
+      <privateDnsName>ip-172-31-4-167.eu-west-1.compute.internal</privateDnsName>
+      <publicDnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <publicIpDnsNameOptions>
+      <dnsHostnameType>public-ipv4-dns-name</dnsHostnameType>
+      <publicIpv4DnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</publicIpv4DnsName>
+      </publicIpDnsNameOptions>
+      <sourceDestCheck>true</sourceDestCheck>
+      <groupSet>
+      <item>
+      <groupId>sg-0d6c5a3ce0b5f80c4</groupId>
+      <groupName>launch-wizard-1</groupName>
+      </item>
+      </groupSet>
+      <attachment>
+      <attachmentId>eni-attach-0c595ba782809d5ea</attachmentId>
+      <deviceIndex>0</deviceIndex>
+      <status>attached</status>
+      <attachTime>2021-04-12T15:18:44.000Z</attachTime>
+      <deleteOnTermination>true</deleteOnTermination>
+      <networkCardIndex>0</networkCardIndex>
+      </attachment>
+      <association>
+      <publicIp>52.51.86.30</publicIp>
+      <publicDnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <ipOwnerId>244888420026</ipOwnerId>
+      </association>
+      <privateIpAddressesSet>
+      <item>
+      <privateIpAddress>172.31.4.167</privateIpAddress>
+      <privateDnsName>ip-172-31-4-167.eu-west-1.compute.internal</privateDnsName>
+      <primary>true</primary>
+      <association>
+      <publicIp>52.51.86.30</publicIp>
+      <publicDnsName>ec2-52-51-86-30.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <ipOwnerId>244888420026</ipOwnerId>
+      </association>
+      </item>
+      </privateIpAddressesSet>
+      <ipv6AddressesSet/>
+      <interfaceType>interface</interfaceType>
+      <operator>
+      <managed>false</managed>
+      </operator>
+      </item>
+      </networkInterfaceSet>
+      <ebsOptimized>false</ebsOptimized>
+      <enaSupport>true</enaSupport>
+      <cpuOptions>
+      <coreCount>2</coreCount>
+      <threadsPerCore>1</threadsPerCore>
+      </cpuOptions>
+      <capacityReservationSpecification>
+      <capacityReservationPreference>open</capacityReservationPreference>
+      </capacityReservationSpecification>
+      <hibernationOptions>
+      <configured>false</configured>
+      </hibernationOptions>
+      <enclaveOptions>
+      <enabled>false</enabled>
+      </enclaveOptions>
+      <metadataOptions>
+      <state>applied</state>
+      <httpTokens>required</httpTokens>
+      <httpPutResponseHopLimit>1</httpPutResponseHopLimit>
+      <httpEndpoint>enabled</httpEndpoint>
+      <httpProtocolIpv4>enabled</httpProtocolIpv4>
+      <httpProtocolIpv6>disabled</httpProtocolIpv6>
+      <instanceMetadataTags>disabled</instanceMetadataTags>
+      </metadataOptions>
+      <maintenanceOptions>
+      <autoRecovery>default</autoRecovery>
+      <rebootMigration>default</rebootMigration>
+      </maintenanceOptions>
+      <networkPerformanceOptions>
+      <bandwidthWeighting>default</bandwidthWeighting>
+      </networkPerformanceOptions>
+      <currentInstanceBootMode>legacy-bios</currentInstanceBootMode>
+      <platformDetails>Linux/UNIX</platformDetails>
+      <usageOperation>RunInstances</usageOperation>
+      <usageOperationUpdateTime>2021-04-12T15:18:44.000Z</usageOperationUpdateTime>
+      <privateDnsNameOptions/>
+      </item>
+      </instancesSet>
+      </item>
+      <item>
+      <reservationId>r-07e5d90226f4a5887</reservationId>
+      <ownerId>244888420026</ownerId>
+      <groupSet/>
+      <instancesSet>
+      <item>
+      <instanceId>i-03f6dfd0656658a22</instanceId>
+      <imageId>ami-03491255ddfaff6f3</imageId>
+      <instanceState>
+      <code>16</code>
+      <name>running</name>
+      </instanceState>
+      <privateDnsName>ip-172-31-24-15.eu-west-1.compute.internal</privateDnsName>
+      <publicIpDnsNameOptions>
+      <dnsHostnameType>public-ipv4-dns-name</dnsHostnameType>
+      <publicIpv4DnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</publicIpv4DnsName>
+      </publicIpDnsNameOptions>
+      <dnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</dnsName>
+      <reason/>
+      <amiLaunchIndex>0</amiLaunchIndex>
+      <productCodes/>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <instanceType>t3.medium</instanceType>
+      <launchTime>2024-11-22T10:58:10.000Z</launchTime>
+      <placement>
+      <availabilityZone>eu-west-1a</availabilityZone>
+      <availabilityZoneId>euw1-az2</availabilityZoneId>
+      <groupName/>
+      <tenancy>default</tenancy>
+      </placement>
+      <monitoring>
+      <state>disabled</state>
+      </monitoring>
+      <subnetId>subnet-86fee8f0</subnetId>
+      <vpcId>vpc-f76b6593</vpcId>
+      <privateIpAddress>172.31.24.15</privateIpAddress>
+      <ipAddress>54.73.146.3</ipAddress>
+      <sourceDestCheck>true</sourceDestCheck>
+      <groupSet>
+      <item>
+      <groupId>sg-03b03bf296999352a</groupId>
+      <groupName>ivertix-itam</groupName>
+      </item>
+      </groupSet>
+      <architecture>x86_64</architecture>
+      <rootDeviceType>ebs</rootDeviceType>
+      <rootDeviceName>/dev/sda1</rootDeviceName>
+      <blockDeviceMapping>
+      <item>
+      <deviceName>/dev/sda1</deviceName>
+      <ebs>
+      <volumeId>vol-0a0861d894793124f</volumeId>
+      <status>attached</status>
+      <attachTime>2023-02-22T08:25:13.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </ebs>
+      </item>
+      </blockDeviceMapping>
+      <virtualizationType>hvm</virtualizationType>
+      <clientToken>59503c84-7244-4111-9f39-cfd04e351133</clientToken>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>web01.i-vertix.cloud</value>
+      </item>
+      </tagSet>
+      <hypervisor>xen</hypervisor>
+      <networkInterfaceSet>
+      <item>
+      <networkInterfaceId>eni-0c36832bba1a93a18</networkInterfaceId>
+      <subnetId>subnet-86fee8f0</subnetId>
+      <vpcId>vpc-f76b6593</vpcId>
+      <description/>
+      <ownerId>244888420026</ownerId>
+      <status>in-use</status>
+      <macAddress>06:73:32:07:0a:87</macAddress>
+      <privateIpAddress>172.31.24.15</privateIpAddress>
+      <privateDnsName>ip-172-31-24-15.eu-west-1.compute.internal</privateDnsName>
+      <publicDnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <publicIpDnsNameOptions>
+      <dnsHostnameType>public-ipv4-dns-name</dnsHostnameType>
+      <publicIpv4DnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</publicIpv4DnsName>
+      </publicIpDnsNameOptions>
+      <sourceDestCheck>true</sourceDestCheck>
+      <groupSet>
+      <item>
+      <groupId>sg-03b03bf296999352a</groupId>
+      <groupName>ivertix-itam</groupName>
+      </item>
+      </groupSet>
+      <attachment>
+      <attachmentId>eni-attach-016a90d2a910671ed</attachmentId>
+      <deviceIndex>0</deviceIndex>
+      <status>attached</status>
+      <attachTime>2023-02-22T08:25:12.000Z</attachTime>
+      <deleteOnTermination>true</deleteOnTermination>
+      <networkCardIndex>0</networkCardIndex>
+      </attachment>
+      <association>
+      <publicIp>54.73.146.3</publicIp>
+      <publicDnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <ipOwnerId>244888420026</ipOwnerId>
+      </association>
+      <privateIpAddressesSet>
+      <item>
+      <privateIpAddress>172.31.24.15</privateIpAddress>
+      <privateDnsName>ip-172-31-24-15.eu-west-1.compute.internal</privateDnsName>
+      <primary>true</primary>
+      <association>
+      <publicIp>54.73.146.3</publicIp>
+      <publicDnsName>ec2-54-73-146-3.eu-west-1.compute.amazonaws.com</publicDnsName>
+      <ipOwnerId>244888420026</ipOwnerId>
+      </association>
+      </item>
+      </privateIpAddressesSet>
+      <ipv6AddressesSet/>
+      <interfaceType>interface</interfaceType>
+      <operator>
+      <managed>false</managed>
+      </operator>
+      </item>
+      </networkInterfaceSet>
+      <ebsOptimized>true</ebsOptimized>
+      <enaSupport>true</enaSupport>
+      <cpuOptions>
+      <coreCount>1</coreCount>
+      <threadsPerCore>2</threadsPerCore>
+      </cpuOptions>
+      <capacityReservationSpecification>
+      <capacityReservationPreference>open</capacityReservationPreference>
+      </capacityReservationSpecification>
+      <hibernationOptions>
+      <configured>false</configured>
+      </hibernationOptions>
+      <enclaveOptions>
+      <enabled>false</enabled>
+      </enclaveOptions>
+      <metadataOptions>
+      <state>applied</state>
+      <httpTokens>required</httpTokens>
+      <httpPutResponseHopLimit>1</httpPutResponseHopLimit>
+      <httpEndpoint>enabled</httpEndpoint>
+      <httpProtocolIpv4>enabled</httpProtocolIpv4>
+      <httpProtocolIpv6>disabled</httpProtocolIpv6>
+      <instanceMetadataTags>disabled</instanceMetadataTags>
+      </metadataOptions>
+      <maintenanceOptions>
+      <autoRecovery>default</autoRecovery>
+      <rebootMigration>default</rebootMigration>
+      </maintenanceOptions>
+      <networkPerformanceOptions>
+      <bandwidthWeighting>default</bandwidthWeighting>
+      </networkPerformanceOptions>
+      <bootMode>uefi</bootMode>
+      <currentInstanceBootMode>uefi</currentInstanceBootMode>
+      <platformDetails>Linux/UNIX</platformDetails>
+      <usageOperation>RunInstances</usageOperation>
+      <usageOperationUpdateTime>2023-02-22T08:25:12.000Z</usageOperationUpdateTime>
+      <privateDnsNameOptions>
+      <hostnameType>ip-name</hostnameType>
+      <enableResourceNameDnsARecord>true</enableResourceNameDnsARecord>
+      <enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord>
+      </privateDnsNameOptions>
+      </item>
+      </instancesSet>
+      </item>
+      </reservationSet>
+      </DescribeInstancesResponse>
+
+---
+
+simlet: aws-ebs
+request:
+  - method: POST
+  - uriPath: /aws/ebs
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+      <requestId>787c30c7-ee92-4fc2-8cd1-f80e315c194a</requestId>
+      <volumeSet>
+      <item>
+      <volumeId>vol-03231881a2c3731c1</volumeId>
+      <size>100</size>
+      <snapshotId>snap-0a522dfb48c5418f1</snapshotId>
+      <availabilityZone>eu-west-1c</availabilityZone>
+      <availabilityZoneId>euw1-az1</availabilityZoneId>
+      <status>in-use</status>
+      <createTime>2021-04-12T15:18:45.168Z</createTime>
+      <attachmentSet>
+      <item>
+      <volumeId>vol-03231881a2c3731c1</volumeId>
+      <instanceId>i-0639c33342a89ae86</instanceId>
+      <device>/dev/sda1</device>
+      <status>attached</status>
+      <attachTime>2021-04-12T15:18:45.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </item>
+      </attachmentSet>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>portal.i-vertix.com</value>
+      </item>
+      </tagSet>
+      <volumeType>gp2</volumeType>
+      <iops>300</iops>
+      <encrypted>false</encrypted>
+      <multiAttachEnabled>false</multiAttachEnabled>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <volumeArn>arn:aws:ec2:eu-west-1:244888420026:volume/vol-03231881a2c3731c1</volumeArn>
+      <ownerId>244888420026</ownerId>
+      </item>
+      <item>
+      <volumeId>vol-0a0861d894793124f</volumeId>
+      <size>100</size>
+      <snapshotId>snap-0244695e74f9cc8e4</snapshotId>
+      <availabilityZone>eu-west-1a</availabilityZone>
+      <availabilityZoneId>euw1-az2</availabilityZoneId>
+      <status>in-use</status>
+      <createTime>2023-02-22T08:25:13.168Z</createTime>
+      <attachmentSet>
+      <item>
+      <volumeId>vol-0a0861d894793124f</volumeId>
+      <instanceId>i-03f6dfd0656658a22</instanceId>
+      <device>/dev/sda1</device>
+      <status>attached</status>
+      <attachTime>2023-02-22T08:25:13.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </item>
+      </attachmentSet>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>web01.i-vertix.com</value>
+      </item>
+      </tagSet>
+      <volumeType>gp3</volumeType>
+      <iops>3000</iops>
+      <encrypted>false</encrypted>
+      <multiAttachEnabled>false</multiAttachEnabled>
+      <throughput>125</throughput>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <volumeArn>arn:aws:ec2:eu-west-1:244888420026:volume/vol-0a0861d894793124f</volumeArn>
+      <ownerId>244888420026</ownerId>
+      </item>
+      </volumeSet>
+      </DescribeVolumesResponse>
+
+---
+
+simlet: aws-rds
+request:
+  - method: POST
+  - uriPath: /aws/rds
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <DescribeDBInstancesResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
+          <DescribeDBInstancesResult>
+              <DBInstances>
+                  <DBInstance>
+                      <AllocatedStorage>120</AllocatedStorage>
+                      <VPCNetworkingEnabled>true</VPCNetworkingEnabled>
+                      <AssociatedRoles/>
+                      <DBParameterGroups>
+                          <DBParameterGroup><DBParameterGroupName>default.postgres14</DBParameterGroupName><ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                          </DBParameterGroup>
+                      </DBParameterGroups>
+                      <InstanceCreateTime>2023-03-15T09:23:10.448Z</InstanceCreateTime>
+                      <DatabaseInsightsMode>standard</DatabaseInsightsMode>
+                      <StorageThroughput>125</StorageThroughput>
+                      <HttpEndpointEnabled>false</HttpEndpointEnabled>
+                      <CustomerOwnedIpEnabled>false</CustomerOwnedIpEnabled>
+                      <DBInstanceStatus>available</DBInstanceStatus>
+                      <DedicatedLogVolume>false</DedicatedLogVolume>
+                      <CACertificateIdentifier>rds-ca-rsa2048-g1</CACertificateIdentifier>
+                      <DbiResourceId>db-LWQXY2CFBG5TKXX3HWEN3OIAKE</DbiResourceId>
+                      <PreferredBackupWindow>00:02-00:32</PreferredBackupWindow>
+                      <DeletionProtection>true</DeletionProtection>
+                      <DBInstanceIdentifier>i-vertix-pluginstore-dev</DBInstanceIdentifier>
+                      <DBInstanceArn>arn:aws:rds:eu-west-1:378095865828:db:i-vertix-pluginstore-dev</DBInstanceArn>
+                      <Endpoint>
+                          <HostedZoneId>Z29XKXDKYMONMX</HostedZoneId>
+                          <Address>i-vertix-pluginstore-dev.random-dummy.eu-west-1.rds.amazonaws.com</Address>
+                          <Port>5432</Port>
+                      </Endpoint>
+                      <PubliclyAccessible>true</PubliclyAccessible>
+                      <ActivityStreamStatus>stopped</ActivityStreamStatus>
+                      <PerformanceInsightsEnabled>false</PerformanceInsightsEnabled>
+                      <DBSubnetGroup>
+                          <VpcId>vpc-iv1234</VpcId>
+                          <Subnets><Subnet>
+                                  <SubnetIdentifier>subnet-cbd2b683</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1a</Name>
+                                  </SubnetAvailabilityZone></Subnet><Subnet>
+                                  <SubnetIdentifier>subnet-cb27f191</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1b</Name>
+                                  </SubnetAvailabilityZone></Subnet><Subnet>
+                                  <SubnetIdentifier>subnet-53b22635</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1c</Name>
+                                  </SubnetAvailabilityZone></Subnet>
+                          </Subnets>
+                          <SubnetGroupStatus>Complete</SubnetGroupStatus>
+                          <DBSubnetGroupDescription>Created from the RDS Management Console</DBSubnetGroupDescription>
+                          <DBSubnetGroupName>default-vpc-iv1234</DBSubnetGroupName>
+                      </DBSubnetGroup>
+                      <VpcSecurityGroups>
+                          <VpcSecurityGroupMembership><VpcSecurityGroupId>sg-05c645199ea98c3bc</VpcSecurityGroupId><Status>active</Status>
+                          </VpcSecurityGroupMembership>
+                      </VpcSecurityGroups>
+                      <LicenseModel>postgresql-license</LicenseModel>
+                      <PendingModifiedValues/>
+                      <PreferredMaintenanceWindow>sun:04:00-sun:04:30</PreferredMaintenanceWindow>
+                      <EngineLifecycleSupport>open-source-rds-extended-support</EngineLifecycleSupport>
+                      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>
+                      <AvailabilityZone>eu-west-1c</AvailabilityZone>
+                      <DBSecurityGroups/>
+                      <IsStorageConfigUpgradeAvailable>false</IsStorageConfigUpgradeAvailable>
+                      <Iops>3000
+                      </Iops>
+                      <EnhancedMonitoringResourceArn>
+                          arn:aws:logs:eu-west-1:378095865828:log-group:RDSOSMetrics:log-stream:db-LWQXY2CFBG5TKXX3HWEN3OIAKE
+                      </EnhancedMonitoringResourceArn>
+                      <EngineVersion>14.22</EngineVersion>
+                      <MasterUsername>postgres</MasterUsername>
+                      <CertificateDetails>
+                          <ValidTill>2027-03-08T04:00:01Z</ValidTill>
+                          <CAIdentifier>rds-ca-rsa2048-g1</CAIdentifier>
+                      </CertificateDetails>
+                      <DBInstanceClass>db.t4g.small</DBInstanceClass>
+                      <ReadReplicaDBInstanceIdentifiers/>
+                      <MonitoringInterval>60
+                      </MonitoringInterval>
+                      <BackupRetentionPeriod>0</BackupRetentionPeriod>
+                      <OptionGroupMemberships>
+                          <OptionGroupMembership><OptionGroupName>default:postgres-14</OptionGroupName><Status>in-sync</Status>
+                          </OptionGroupMembership>
+
+                      </OptionGroupMemberships>
+                      <BackupTarget>region</BackupTarget>
+                      <DbInstancePort>0
+                      </DbInstancePort>
+                      <Engine>postgres</Engine>
+                      <IAMDatabaseAuthenticationEnabled>false
+                      </IAMDatabaseAuthenticationEnabled>
+                      <NetworkType>IPV4</NetworkType>
+                      <MultiAZ>false
+                      </MultiAZ>
+                      <UpgradeRolloutOrder>second</UpgradeRolloutOrder>
+                      <DomainMemberships/>
+                      <MonitoringRoleArn>arn:aws:iam::378095865828:role/rds-monitoring-role
+                      </MonitoringRoleArn>
+                      <StorageEncrypted>false
+                      </StorageEncrypted>
+                      <TagList/>
+                      <StorageType>gp3</StorageType>
+                      <CopyTagsToSnapshot>true</CopyTagsToSnapshot>
+                  </DBInstance>
+                  <DBInstance>
+                      <AllocatedStorage>60</AllocatedStorage>
+                      <VPCNetworkingEnabled>true
+                      </VPCNetworkingEnabled>
+                      <AssociatedRoles/>
+                      <DBParameterGroups>
+                          <DBParameterGroup><DBParameterGroupName>default.postgres14</DBParameterGroupName><ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                          </DBParameterGroup>
+
+                      </DBParameterGroups>
+                      <PerformanceInsightsKMSKeyId>arn:aws:kms:eu-west-1:378095865828:key/d8aac1ca-660b-4440-8ba2-4c1ea924db06
+                      </PerformanceInsightsKMSKeyId>
+                      <PerformanceInsightsRetentionPeriod>7
+                      </PerformanceInsightsRetentionPeriod>
+                      <InstanceCreateTime>2023-04-11T13:20:19.401Z
+                      </InstanceCreateTime>
+                      <DatabaseInsightsMode>standard
+                      </DatabaseInsightsMode>
+                      <StorageThroughput>125
+                      </StorageThroughput>
+                      <HttpEndpointEnabled>false
+                      </HttpEndpointEnabled>
+                      <CustomerOwnedIpEnabled>false</CustomerOwnedIpEnabled>
+                      <DBInstanceStatus>available</DBInstanceStatus>
+                      <DedicatedLogVolume>false
+                      </DedicatedLogVolume>
+                      <CACertificateIdentifier>rds-ca-rsa2048-g1
+                      </CACertificateIdentifier>
+                      <DbiResourceId>db-XDERDGPRIVBT5RQ5XH5IEKSRK4</DbiResourceId>
+                      <PreferredBackupWindow>03:25-05:25
+                      </PreferredBackupWindow>
+                      <DeletionProtection>false</DeletionProtection>
+                      <DBInstanceIdentifier>i-vertix-pluginstore-prod</DBInstanceIdentifier>
+                      <DBInstanceArn>arn:aws:rds:eu-west-1:378095865828:db:i-vertix-pluginstore-prod
+                      </DBInstanceArn>
+                      <Endpoint>
+                          <HostedZoneId>Z29XKXDKYMONMX</HostedZoneId>
+                          <Address>i-vertix-pluginstore-prod.random-dummy.eu-west-1.rds.amazonaws.com</Address>
+                          <Port>5432</Port>
+                      </Endpoint>
+                      <PubliclyAccessible>true</PubliclyAccessible>
+                      <ActivityStreamStatus>stopped
+                      </ActivityStreamStatus>
+                      <PerformanceInsightsEnabled>true
+                      </PerformanceInsightsEnabled>
+                      <DBName>portal</DBName>
+                      <DBSubnetGroup>
+                          <VpcId>vpc-iv1234</VpcId>
+                          <Subnets><Subnet>
+                                  <SubnetIdentifier>subnet-cbd2b683</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1a</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-cb27f191</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1b</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-53b22635</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1c</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                          </Subnets>
+                          <SubnetGroupStatus>Complete</SubnetGroupStatus>
+                          <DBSubnetGroupDescription>Created from the RDS ManagementConsole</DBSubnetGroupDescription>
+                          <DBSubnetGroupName>default-vpc-iv1234</DBSubnetGroupName>
+                      </DBSubnetGroup>
+
+                      <VpcSecurityGroups>
+                          <VpcSecurityGroupMembership><VpcSecurityGroupId>sg-0e11dd87b8b6652b7</VpcSecurityGroupId><Status>active</Status>
+                          </VpcSecurityGroupMembership>
+
+                      </VpcSecurityGroups>
+                      <LicenseModel>postgresql-license</LicenseModel>
+                      <PendingModifiedValues/>
+                      <PreferredMaintenanceWindow>sun:05:25-sun:07:25
+                      </PreferredMaintenanceWindow>
+                      <EngineLifecycleSupport>open-source-rds-extended-support
+                      </EngineLifecycleSupport>
+                      <AutoMinorVersionUpgrade>true
+                      </AutoMinorVersionUpgrade>
+                      <AvailabilityZone>eu-west-1a</AvailabilityZone>
+                      <DBSecurityGroups/>
+                      <IsStorageConfigUpgradeAvailable>false</IsStorageConfigUpgradeAvailable>
+                      <Iops>3000
+                      </Iops>
+                      <EnhancedMonitoringResourceArn>
+                          arn:aws:logs:eu-west-1:378095865828:log-group:RDSOSMetrics:log-stream:db-XDERDGPRIVBT5RQ5XH5IEKSRK4
+                      </EnhancedMonitoringResourceArn>
+                      <EngineVersion>14.22</EngineVersion>
+                      <MasterUsername>dwh</MasterUsername>
+                      <CertificateDetails>
+                          <ValidTill>2027-03-08T05:25:01Z</ValidTill>
+                          <CAIdentifier>rds-ca-rsa2048-g1</CAIdentifier>
+                      </CertificateDetails>
+                      <DBInstanceClass>db.t4g.large</DBInstanceClass>
+                      <ReadReplicaDBInstanceIdentifiers/>
+                      <MonitoringInterval>60
+                      </MonitoringInterval>
+                      <BackupRetentionPeriod>14</BackupRetentionPeriod>
+                      <OptionGroupMemberships>
+                          <OptionGroupMembership><OptionGroupName>default:postgres-14</OptionGroupName><Status>in-sync</Status>
+                          </OptionGroupMembership>
+
+                      </OptionGroupMemberships>
+                      <LatestRestorableTime>2026-08-21T14:01:35Z</LatestRestorableTime>
+                      <BackupTarget>region
+                      </BackupTarget>
+                      <DbInstancePort>0</DbInstancePort>
+                      <Engine>postgres</Engine>
+                      <IAMDatabaseAuthenticationEnabled>false
+                      </IAMDatabaseAuthenticationEnabled>
+                      <NetworkType>IPV4</NetworkType>
+                      <MultiAZ>false
+                      </MultiAZ>
+                      <UpgradeRolloutOrder>second</UpgradeRolloutOrder>
+                      <DomainMemberships/>
+                      <MonitoringRoleArn>arn:aws:iam::378095865828:role/rds-monitoring-role
+                      </MonitoringRoleArn>
+                      <StorageEncrypted>false
+                      </StorageEncrypted>
+                      <TagList/>
+                      <StorageType>gp3</StorageType>
+                      <CopyTagsToSnapshot>true</CopyTagsToSnapshot>
+                  </DBInstance>
+                  <DBInstance>
+                      <AllocatedStorage>60</AllocatedStorage>
+                      <VPCNetworkingEnabled>true
+                      </VPCNetworkingEnabled>
+                      <AssociatedRoles/>
+                      <DBParameterGroups>
+                          <DBParameterGroup><DBParameterGroupName>default.postgres14</DBParameterGroupName><ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                          </DBParameterGroup>
+
+                      </DBParameterGroups>
+                      <InstanceCreateTime>2023-10-02T19:48:33.292Z
+                      </InstanceCreateTime>
+                      <DatabaseInsightsMode>standard
+                      </DatabaseInsightsMode>
+                      <StorageThroughput>125
+                      </StorageThroughput>
+                      <HttpEndpointEnabled>false
+                      </HttpEndpointEnabled>
+                      <CustomerOwnedIpEnabled>false</CustomerOwnedIpEnabled>
+                      <DBInstanceStatus>available</DBInstanceStatus>
+                      <DedicatedLogVolume>false
+                      </DedicatedLogVolume>
+                      <CACertificateIdentifier>rds-ca-rsa2048-g1
+                      </CACertificateIdentifier>
+                      <DbiResourceId>db-4LLUQ772X6R24IFRO3HZ7WCX3Q</DbiResourceId>
+                      <PreferredBackupWindow>03:25-05:25
+                      </PreferredBackupWindow>
+                      <DeletionProtection>false</DeletionProtection>
+                      <DBInstanceIdentifier>i-vertix-pluginstore-test</DBInstanceIdentifier>
+                      <DBInstanceArn>arn:aws:rds:eu-west-1:378095865828:db:i-vertix-pluginstore-test
+                      </DBInstanceArn>
+                      <Endpoint>
+                          <HostedZoneId>Z29XKXDKYMONMX</HostedZoneId>
+                          <Address>i-vertix-pluginstore-test.random-dummy.eu-west-1.rds.amazonaws.com</Address>
+                          <Port>5432</Port>
+                      </Endpoint>
+                      <PubliclyAccessible>true</PubliclyAccessible>
+                      <ActivityStreamStatus>stopped
+                      </ActivityStreamStatus>
+                      <PerformanceInsightsEnabled>false
+                      </PerformanceInsightsEnabled>
+                      <DBName>portal</DBName>
+                      <DBSubnetGroup>
+                          <VpcId>vpc-iv1234</VpcId>
+                          <Subnets><Subnet>
+                                  <SubnetIdentifier>subnet-cbd2b683</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1a</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-cb27f191</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1b</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-53b22635</SubnetIdentifier>
+                                  <SubnetStatus>Active</SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-west-1c</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                          </Subnets>
+                          <SubnetGroupStatus>Complete</SubnetGroupStatus>
+                          <DBSubnetGroupDescription>Created from the RDS ManagementConsole</DBSubnetGroupDescription>
+                          <DBSubnetGroupName>default-vpc-iv1234</DBSubnetGroupName>
+                      </DBSubnetGroup>
+
+                      <VpcSecurityGroups>
+                          <VpcSecurityGroupMembership><VpcSecurityGroupId>sg-0cf902cb1957f0c3f</VpcSecurityGroupId><Status>active</Status>
+                          </VpcSecurityGroupMembership>
+
+                      </VpcSecurityGroups>
+                      <LicenseModel>postgresql-license</LicenseModel>
+                      <PendingModifiedValues/>
+                      <PreferredMaintenanceWindow>sun:05:25-sun:07:25
+                      </PreferredMaintenanceWindow>
+                      <EngineLifecycleSupport>open-source-rds-extended-support
+                      </EngineLifecycleSupport>
+                      <AutoMinorVersionUpgrade>true
+                      </AutoMinorVersionUpgrade>
+                      <AvailabilityZone>eu-west-1c</AvailabilityZone>
+                      <DBSecurityGroups/>
+                      <IsStorageConfigUpgradeAvailable>false</IsStorageConfigUpgradeAvailable>
+                      <Iops>3000
+                      </Iops>
+                      <EngineVersion>14.22</EngineVersion>
+                      <MasterUsername>dwh
+                      </MasterUsername>
+                      <CertificateDetails>
+                          <ValidTill>2027-03-08T05:25:02Z</ValidTill>
+                          <CAIdentifier>rds-ca-rsa2048-g1</CAIdentifier>
+                      </CertificateDetails>
+                      <DBInstanceClass>db.t4g.large</DBInstanceClass>
+                      <ReadReplicaDBInstanceIdentifiers/>
+                      <MonitoringInterval>0
+                      </MonitoringInterval>
+                      <BackupRetentionPeriod>14</BackupRetentionPeriod>
+                      <OptionGroupMemberships>
+                          <OptionGroupMembership><OptionGroupName>default:postgres-14</OptionGroupName><Status>in-sync</Status>
+                          </OptionGroupMembership>
+
+                      </OptionGroupMemberships>
+                      <LatestRestorableTime>2026-08-21T14:01:26Z</LatestRestorableTime>
+                      <BackupTarget>region
+                      </BackupTarget>
+                      <DbInstancePort>0</DbInstancePort>
+                      <Engine>postgres</Engine>
+                      <IAMDatabaseAuthenticationEnabled>false
+                      </IAMDatabaseAuthenticationEnabled>
+                      <NetworkType>IPV4</NetworkType>
+                      <MultiAZ>false
+                      </MultiAZ>
+                      <UpgradeRolloutOrder>second</UpgradeRolloutOrder>
+                      <DomainMemberships/>
+                      <StorageEncrypted>false
+                      </StorageEncrypted>
+                      <TagList/>
+                      <StorageType>gp3</StorageType>
+                      <CopyTagsToSnapshot>false</CopyTagsToSnapshot>
+                  </DBInstance>
+                  <DBInstance>
+                      <AllocatedStorage>1</AllocatedStorage>
+                      <VPCNetworkingEnabled>
+                          true
+                      </VPCNetworkingEnabled>
+                      <AssociatedRoles/>
+                      <DBParameterGroups>
+                          <DBParameterGroup><DBParameterGroupName>
+                                  default.aurora-postgresql17</DBParameterGroupName><ParameterApplyStatus>
+                                  in-sync</ParameterApplyStatus>
+                          </DBParameterGroup>
+
+                      </DBParameterGroups>
+                      <InstanceCreateTime>
+                          2026-03-06T09:57:20.637Z
+                      </InstanceCreateTime>
+                      <DatabaseInsightsMode>
+                          standard
+                      </DatabaseInsightsMode>
+                      <StorageThroughput>
+                          0
+                      </StorageThroughput>
+                      <HttpEndpointEnabled>
+                          false
+                      </HttpEndpointEnabled>
+                      <CustomerOwnedIpEnabled>false</CustomerOwnedIpEnabled>
+                      <DBInstanceStatus>available</DBInstanceStatus>
+                      <DedicatedLogVolume>
+                          false
+                      </DedicatedLogVolume>
+                      <DBClusterIdentifier>keycloak-dev</DBClusterIdentifier>
+                      <CACertificateIdentifier>
+                          rds-ca-rsa2048-g1
+                      </CACertificateIdentifier>
+                      <DbiResourceId>db-YGEB23UBQMEGJWZYWSULCHPK2M</DbiResourceId>
+                      <PreferredBackupWindow>
+                          20:37-21:07
+                      </PreferredBackupWindow>
+                      <DeletionProtection>false</DeletionProtection>
+                      <DBInstanceIdentifier>i-vertix-webportal-dev</DBInstanceIdentifier>
+                      <DBInstanceArn>
+                          arn:aws:rds:eu-central-1:405289160512:db:i-vertix-webportal-dev
+                      </DBInstanceArn>
+                      <Endpoint>
+                          <HostedZoneId>Z1RLNUO7B9Q6NB</HostedZoneId>
+                          <Address>i-vertix-webportal-dev.random-dummy.eu-central-1.rds.amazonaws.com</Address>
+                          <Port>5432</Port>
+                      </Endpoint>
+                      <PubliclyAccessible>false</PubliclyAccessible>
+                      <PerformanceInsightsEnabled>
+                          false
+                      </PerformanceInsightsEnabled>
+                      <DBName>i-vertix-webportal-dev</DBName>
+                      <StorageEncryptionType>sse-rds</StorageEncryptionType>
+                      <DBSubnetGroup>
+                          <VpcId>vpc-iv1234</VpcId>
+                          <Subnets><Subnet>
+                                  <SubnetIdentifier>subnet-044ce6d38030143a3</SubnetIdentifier>
+                                  <SubnetStatus>
+                                      Active
+                                  </SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-central-1b</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-000776c1ac131982f</SubnetIdentifier>
+                                  <SubnetStatus>
+                                      Active
+                                  </SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-central-1a</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                          </Subnets>
+                          <SubnetGroupStatus>Complete</SubnetGroupStatus>
+                          <DBSubnetGroupDescription>Managed by Terraform
+                          </DBSubnetGroupDescription>
+                          <DBSubnetGroupName>keycloak-dev
+                          </DBSubnetGroupName>
+                      </DBSubnetGroup>
+
+                      <VpcSecurityGroups>
+                          <VpcSecurityGroupMembership><VpcSecurityGroupId>
+                                  sg-06a04754e40d6af9f</VpcSecurityGroupId><Status>active</Status>
+                          </VpcSecurityGroupMembership>
+
+                      </VpcSecurityGroups>
+                      <LicenseModel>postgresql-license</LicenseModel>
+                      <PendingModifiedValues/>
+                      <PreferredMaintenanceWindow>
+                          tue:22:58-tue:23:28
+                      </PreferredMaintenanceWindow>
+                      <EngineLifecycleSupport>
+                          open-source-rds-extended-support
+                      </EngineLifecycleSupport>
+                      <AutoMinorVersionUpgrade>
+                          true
+                      </AutoMinorVersionUpgrade>
+                      <AvailabilityZone>eu-central-1a</AvailabilityZone>
+                      <DBSecurityGroups/>
+                      <EngineVersion>17.7</EngineVersion>
+                      <MasterUsername>
+                          keycloak
+                      </MasterUsername>
+                      <CertificateDetails>
+                          <ValidTill>2027-03-06T09:55:46Z</ValidTill>
+                          <CAIdentifier>rds-ca-rsa2048-g1
+                          </CAIdentifier>
+                      </CertificateDetails>
+                      <DBInstanceClass>db.serverless</DBInstanceClass>
+                      <ReadReplicaDBInstanceIdentifiers/>
+                      <MonitoringInterval>
+                          0
+                      </MonitoringInterval>
+                      <BackupRetentionPeriod>
+                          1
+                      </BackupRetentionPeriod>
+                      <PromotionTier>0</PromotionTier>
+                      <OptionGroupMemberships>
+                          <OptionGroupMembership><OptionGroupName>default:aurora-postgresql-17</OptionGroupName><Status>
+                                  in-sync</Status>
+                          </OptionGroupMembership>
+
+                      </OptionGroupMemberships>
+                      <BackupTarget>region</BackupTarget>
+                      <DbInstancePort>
+                          0
+                      </DbInstancePort>
+                      <Engine>aurora-postgresql</Engine>
+                      <IAMDatabaseAuthenticationEnabled>
+                          false
+                      </IAMDatabaseAuthenticationEnabled>
+                      <NetworkType>IPV4</NetworkType>
+                      <MultiAZ>
+                          false
+                      </MultiAZ>
+                      <UpgradeRolloutOrder>second</UpgradeRolloutOrder>
+                      <DomainMemberships/>
+                      <StorageEncrypted>
+                          false
+                      </StorageEncrypted>
+                      <TagList/>
+                      <StorageType>aurora</StorageType>
+                      <CopyTagsToSnapshot>false</CopyTagsToSnapshot>
+                  </DBInstance>
+                  <DBInstance>
+                      <AllocatedStorage>1</AllocatedStorage>
+                      <VPCNetworkingEnabled>
+                          true
+                      </VPCNetworkingEnabled>
+                      <AssociatedRoles/>
+                      <DBParameterGroups>
+                          <DBParameterGroup><DBParameterGroupName>
+                                  default.aurora-postgresql17</DBParameterGroupName><ParameterApplyStatus>
+                                  in-sync</ParameterApplyStatus>
+                          </DBParameterGroup>
+
+                      </DBParameterGroups>
+                      <InstanceCreateTime>
+                          2026-03-06T10:01:28.178Z
+                      </InstanceCreateTime>
+                      <DatabaseInsightsMode>
+                          standard
+                      </DatabaseInsightsMode>
+                      <StorageThroughput>
+                          0
+                      </StorageThroughput>
+                      <HttpEndpointEnabled>
+                          false
+                      </HttpEndpointEnabled>
+                      <CustomerOwnedIpEnabled>false</CustomerOwnedIpEnabled>
+                      <DBInstanceStatus>available</DBInstanceStatus>
+                      <DedicatedLogVolume>
+                          false
+                      </DedicatedLogVolume>
+                      <DBClusterIdentifier>i-vertix-webportal-prod</DBClusterIdentifier>
+                      <CACertificateIdentifier>
+                          rds-ca-rsa2048-g1
+                      </CACertificateIdentifier>
+                      <DbiResourceId>db-KBJSSQ4JTTDZL7NZG7CAE3P5BY</DbiResourceId>
+                      <PreferredBackupWindow>
+                          22:55-23:25
+                      </PreferredBackupWindow>
+                      <DeletionProtection>false</DeletionProtection>
+                      <DBInstanceIdentifier>i-vertix-webportal-prod-0</DBInstanceIdentifier>
+                      <DBInstanceArn>
+                          arn:aws:rds:eu-central-1:405289160512:db:i-vertix-webportal-prod-0
+                      </DBInstanceArn>
+                      <Endpoint>
+                          <HostedZoneId>Z1RLNUO7B9Q6NB</HostedZoneId>
+                          <Address>i-vertix-webportal-prod-0.random-dummy.eu-central-1.rds.amazonaws.com</Address>
+                          <Port>5432</Port>
+                      </Endpoint>
+                      <PubliclyAccessible>false</PubliclyAccessible>
+                      <PerformanceInsightsEnabled>
+                          false
+                      </PerformanceInsightsEnabled>
+                      <DBName>webportal</DBName>
+                      <StorageEncryptionType>sse-rds</StorageEncryptionType>
+                      <DBSubnetGroup>
+                          <VpcId>vpc-iv1234</VpcId>
+                          <Subnets><Subnet>
+                                  <SubnetIdentifier>subnet-00fe6b88673867bad</SubnetIdentifier>
+                                  <SubnetStatus>
+                                      Active
+                                  </SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-central-1b</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                              <Subnet>
+                                  <SubnetIdentifier>subnet-04ebccf11f2c60338</SubnetIdentifier>
+                                  <SubnetStatus>
+                                      Active
+                                  </SubnetStatus>
+                                  <SubnetOutpost/>
+                                  <SubnetAvailabilityZone>
+                                      <Name>eu-central-1a</Name>
+                                  </SubnetAvailabilityZone>
+
+                              </Subnet>
+
+                          </Subnets>
+                          <SubnetGroupStatus>Complete</SubnetGroupStatus>
+                          <DBSubnetGroupDescription>Managed by Terraform
+                          </DBSubnetGroupDescription>
+                          <DBSubnetGroupName>i-vertix-webportal-prod
+                          </DBSubnetGroupName>
+                      </DBSubnetGroup>
+
+                      <VpcSecurityGroups>
+                          <VpcSecurityGroupMembership><VpcSecurityGroupId>
+                                  sg-095fbabb857a16e63</VpcSecurityGroupId><Status>active</Status>
+                          </VpcSecurityGroupMembership>
+
+                      </VpcSecurityGroups>
+                      <LicenseModel>postgresql-license</LicenseModel>
+                      <PendingModifiedValues/>
+                      <PreferredMaintenanceWindow>
+                          sun:02:48-sun:03:18
+                      </PreferredMaintenanceWindow>
+                      <EngineLifecycleSupport>
+                          open-source-rds-extended-support
+                      </EngineLifecycleSupport>
+                      <AutoMinorVersionUpgrade>
+                          true
+                      </AutoMinorVersionUpgrade>
+                      <AvailabilityZone>eu-central-1b</AvailabilityZone>
+                      <DBSecurityGroups/>
+                      <EngineVersion>17.7</EngineVersion>
+                      <MasterUsername>
+                          keycloak
+                      </MasterUsername>
+                      <CertificateDetails>
+                          <ValidTill>2027-03-06T10:00:17Z</ValidTill>
+                          <CAIdentifier>rds-ca-rsa2048-g1
+                          </CAIdentifier>
+                      </CertificateDetails>
+                      <DBInstanceClass>db.serverless</DBInstanceClass>
+                      <ReadReplicaDBInstanceIdentifiers/>
+                      <MonitoringInterval>
+                          0
+                      </MonitoringInterval>
+                      <BackupRetentionPeriod>
+                          1
+                      </BackupRetentionPeriod>
+                      <PromotionTier>0</PromotionTier>
+                      <OptionGroupMemberships>
+                          <OptionGroupMembership><OptionGroupName>default:aurora-postgresql-17</OptionGroupName><Status>
+                                  in-sync</Status>
+                          </OptionGroupMembership>
+
+                      </OptionGroupMemberships>
+                      <BackupTarget>region</BackupTarget>
+                      <DbInstancePort>
+                          0
+                      </DbInstancePort>
+                      <Engine>aurora-postgresql</Engine>
+                      <IAMDatabaseAuthenticationEnabled>
+                          false
+                      </IAMDatabaseAuthenticationEnabled>
+                      <NetworkType>IPV4</NetworkType>
+                      <MultiAZ>
+                          false
+                      </MultiAZ>
+                      <UpgradeRolloutOrder>second</UpgradeRolloutOrder>
+                      <DomainMemberships/>
+                      <StorageEncrypted>
+                          false
+                      </StorageEncrypted>
+                      <TagList/>
+                      <StorageType>aurora</StorageType>
+                      <CopyTagsToSnapshot>false</CopyTagsToSnapshot>
+                  </DBInstance>
+              </DBInstances>
+          </DescribeDBInstancesResult>
+          <ResponseMetadata>
+              <RequestId>a288de4f-3c9a-4b66-ab7c-e1905fe48c68</RequestId>
+          </ResponseMetadata>
+      </DescribeDBInstancesResponse>
 ---
 
 simlet: velocloud-auth
