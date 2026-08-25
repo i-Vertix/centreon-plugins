@@ -4140,6 +4140,46 @@ responses:
               <RequestId>a288de4f-3c9a-4b66-ab7c-e1905fe48c68</RequestId>
           </ResponseMetadata>
       </DescribeDBInstancesResponse>
+
+---
+
+simlet: aws-sqs
+request:
+  - method: POST
+  - uriPath: /aws/sqs
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "QueueUrls": [
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/default-iv-prod",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/default-iv-test",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/default-iv-crm",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/slow-iv-erp-prod",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/prio-iv-erp-prod",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/slow-iv-erp-dev",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/slow-iv-erp-test",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/slow-iv-ai-dev",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-rest-api-dev",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-rest-api-test",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-rest-api-prod",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-msg-broker-prod",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-msg-broker-test",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-msg-broker-dev",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-helpdesk-queue-slow",
+          "https://sqs.eu-central-1.amazonaws.com/266646845160/ivertix-helpdesk-queue-prio"
+        ]
+      }
+
 ---
 
 simlet: velocloud-auth
