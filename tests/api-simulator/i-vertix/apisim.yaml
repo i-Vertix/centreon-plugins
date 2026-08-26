@@ -5552,6 +5552,165 @@ responses:
 
 ---
 
+simlet: aws-elasticache
+request:
+  - method: POST
+  - uriPath: /aws/elasticache
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+       <DescribeCacheClustersResponse xmlns="http://elasticache.amazonaws.com/doc/2015-02-02/">
+         <DescribeCacheClustersResult>
+            <CacheClusters>
+                <CacheCluster>
+                    <LogDeliveryConfigurations/>
+                    <CacheSubnetGroupName>redis-prod</CacheSubnetGroupName>
+                    <PreferredAvailabilityZone>eu-central-1a</PreferredAvailabilityZone>
+                    <NotificationConfiguration>
+                        <TopicStatus>active</TopicStatus>
+                        <TopicArn>arn:aws:sns:eu-central-1:dummy1234:master</TopicArn>
+                    </NotificationConfiguration>
+                    <AtRestEncryptionEnabled>false</AtRestEncryptionEnabled>
+                    <DeleteProtection>false</DeleteProtection>
+                    <CacheClusterCreateTime>2018-03-21T14:59:41.285Z</CacheClusterCreateTime>
+                    <SnapshotRetentionLimit>0</SnapshotRetentionLimit>
+                    <CacheClusterStatus>available</CacheClusterStatus>
+                    <NumCacheNodes>1</NumCacheNodes>
+                    <Engine>redis</Engine>
+                    <CacheSecurityGroups/>
+                    <CacheParameterGroup>
+                        <ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                        <CacheNodeIdsToReboot/>
+                        <CacheParameterGroupName>default.redis7</CacheParameterGroupName>
+                    </CacheParameterGroup>
+                    <ARN>arn:aws:elasticache:eu-central-1:dummy1234:cluster:redis-prod-001</ARN>
+                    <NetworkType>ipv4</NetworkType>
+                    <EngineVersion>7.1.0</EngineVersion>
+                    <CacheClusterId>redis-prod-001</CacheClusterId>
+                    <AuthTokenEnabled>false</AuthTokenEnabled>
+                    <ClientDownloadLandingPage>https://console.aws.amazon.com/elasticache/home#client-download:
+                    </ClientDownloadLandingPage>
+                    <SnapshotWindow>00:00-01:00</SnapshotWindow>
+                    <IpDiscovery>ipv4</IpDiscovery>
+                    <CacheNodeType>cache.t3.small</CacheNodeType>
+                    <PendingModifiedValues/>
+                    <PreferredMaintenanceWindow>sun:04:00-sun:05:00</PreferredMaintenanceWindow>
+                    <SecurityGroups>
+                        <member>
+                            <SecurityGroupId>sec-grp-1234</SecurityGroupId>
+                            <Status>active</Status>
+                        </member>
+                    </SecurityGroups>
+                    <TransitEncryptionEnabled>false</TransitEncryptionEnabled>
+                    <ReplicationGroupId>redis-prod</ReplicationGroupId>
+                    <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>
+                    <ReplicationGroupLogDeliveryEnabled>false</ReplicationGroupLogDeliveryEnabled>
+                </CacheCluster>
+                <CacheCluster>
+                    <LogDeliveryConfigurations/>
+                    <CacheSubnetGroupName>redis-prod</CacheSubnetGroupName>
+                    <PreferredAvailabilityZone>eu-central-1c</PreferredAvailabilityZone>
+                    <NotificationConfiguration>
+                        <TopicStatus>active</TopicStatus>
+                        <TopicArn>arn:aws:sns:eu-central-1:dummy1234:master</TopicArn>
+                    </NotificationConfiguration>
+                    <AtRestEncryptionEnabled>false</AtRestEncryptionEnabled>
+                    <DeleteProtection>false</DeleteProtection>
+                    <CacheClusterCreateTime>2018-03-21T14:59:41.285Z</CacheClusterCreateTime>
+                    <SnapshotRetentionLimit>0</SnapshotRetentionLimit>
+                    <CacheClusterStatus>available</CacheClusterStatus>
+                    <NumCacheNodes>1</NumCacheNodes>
+                    <Engine>redis</Engine>
+                    <CacheSecurityGroups/>
+                    <CacheParameterGroup>
+                        <ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                        <CacheNodeIdsToReboot/>
+                        <CacheParameterGroupName>default.redis7</CacheParameterGroupName>
+                    </CacheParameterGroup>
+                    <ARN>arn:aws:elasticache:eu-central-1:dummy1234:cluster:redis-prod-002</ARN>
+                    <NetworkType>ipv4</NetworkType>
+                    <EngineVersion>7.1.0</EngineVersion>
+                    <CacheClusterId>redis-prod-002</CacheClusterId>
+                    <AuthTokenEnabled>false</AuthTokenEnabled>
+                    <ClientDownloadLandingPage>https://console.aws.amazon.com/elasticache/home#client-download:
+                    </ClientDownloadLandingPage>
+                    <SnapshotWindow>00:00-01:00</SnapshotWindow>
+                    <IpDiscovery>ipv4</IpDiscovery>
+                    <CacheNodeType>cache.t3.small</CacheNodeType>
+                    <PendingModifiedValues/>
+                    <PreferredMaintenanceWindow>sun:04:00-sun:05:00</PreferredMaintenanceWindow>
+                    <SecurityGroups>
+                        <member>
+                            <SecurityGroupId>sec-grp-1234</SecurityGroupId>
+                            <Status>active</Status>
+                        </member>
+                    </SecurityGroups>
+                    <TransitEncryptionEnabled>false</TransitEncryptionEnabled>
+                    <ReplicationGroupId>redis-prod</ReplicationGroupId>
+                    <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>
+                    <ReplicationGroupLogDeliveryEnabled>false</ReplicationGroupLogDeliveryEnabled>
+                </CacheCluster>
+                <CacheCluster>
+                    <LogDeliveryConfigurations/>
+                    <CacheSubnetGroupName>stagin-cache-subnet</CacheSubnetGroupName>
+                    <PreferredAvailabilityZone>eu-central-1c</PreferredAvailabilityZone>
+                    <NotificationConfiguration>
+                        <TopicStatus>active</TopicStatus>
+                        <TopicArn>arn:aws:sns:eu-central-1:dummy1234:master</TopicArn>
+                    </NotificationConfiguration>
+                    <AtRestEncryptionEnabled>false</AtRestEncryptionEnabled>
+                    <DeleteProtection>false</DeleteProtection>
+                    <CacheClusterCreateTime>2018-03-01T15:17:19.552Z</CacheClusterCreateTime>
+                    <SnapshotRetentionLimit>0</SnapshotRetentionLimit>
+                    <CacheClusterStatus>available</CacheClusterStatus>
+                    <NumCacheNodes>1</NumCacheNodes>
+                    <Engine>redis</Engine>
+                    <CacheSecurityGroups/>
+                    <CacheParameterGroup>
+                        <ParameterApplyStatus>in-sync</ParameterApplyStatus>
+                        <CacheNodeIdsToReboot/>
+                        <CacheParameterGroupName>default.redis7</CacheParameterGroupName>
+                    </CacheParameterGroup>
+                    <ARN>arn:aws:elasticache:eu-central-1:dummy1234:cluster:stagin-redis-cache</ARN>
+                    <NetworkType>ipv4</NetworkType>
+                    <EngineVersion>7.1.0</EngineVersion>
+                    <CacheClusterId>redis-cache-test</CacheClusterId>
+                    <AuthTokenEnabled>false</AuthTokenEnabled>
+                    <ClientDownloadLandingPage>https://console.aws.amazon.com/elasticache/home#client-download:
+                    </ClientDownloadLandingPage>
+                    <SnapshotWindow>23:00-00:00</SnapshotWindow>
+                    <IpDiscovery>ipv4</IpDiscovery>
+                    <CacheNodeType>cache.t3.micro</CacheNodeType>
+                    <PendingModifiedValues/>
+                    <PreferredMaintenanceWindow>sun:04:00-sun:05:00</PreferredMaintenanceWindow>
+                    <SecurityGroups>
+                        <member>
+                            <SecurityGroupId>sg-23456</SecurityGroupId>
+                            <Status>active</Status>
+                        </member>
+                    </SecurityGroups>
+                    <TransitEncryptionEnabled>false</TransitEncryptionEnabled>
+                    <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>
+                    <ReplicationGroupLogDeliveryEnabled>false</ReplicationGroupLogDeliveryEnabled>
+                </CacheCluster>
+            </CacheClusters>
+        </DescribeCacheClustersResult>
+        <ResponseMetadata>
+        <RequestId>6db383f7-d411-4e3b-9c65-54f29f9b970b</RequestId>
+        </ResponseMetadata>
+        </DescribeCacheClustersResponse>
+
+---
+
 simlet: velocloud-auth
 
 request:
