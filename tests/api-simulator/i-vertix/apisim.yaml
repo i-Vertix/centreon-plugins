@@ -5711,6 +5711,466 @@ responses:
 
 ---
 
+simlet: aws-application-elb
+request:
+  - method: POST
+  - uriPath: /aws/application-elb
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <DescribeLoadBalancersResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/">
+      <DescribeLoadBalancersResult>
+        <LoadBalancers>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:959481986809:loadbalancer/app/web-loadbalancer/dummy1234
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>prod-api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-123</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-21T17:06:05.630Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-loadbalancer/dummy2345
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-loadbalancer-1650739674.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-234</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-27T07:44:47.280Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/web-dev-loadbalancer/dummy3456
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-456</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-01-24T17:12:46.920Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-dev-loadbalancer/dummy4567
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-567</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-09-10T09:24:13.970Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+        </LoadBalancers>
+      </DescribeLoadBalancersResult>
+      <ResponseMetadata>
+          <RequestId>2c5ed3dc-66f8-4362-a910-31f2050b4f43</RequestId>
+      </ResponseMetadata>
+      </DescribeLoadBalancersResponse>
+
+---
+
+simlet: aws-classic-elb
+request:
+  - method: POST
+  - uriPath: /aws/classic-elb
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <DescribeLoadBalancerDescriptionsResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/">
+      <DescribeLoadBalancerDescriptionsResult>
+        <LoadBalancerDescriptions>
+            <member>
+                <LoadBalancerName>web-loadbalancer</LoadBalancerName>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>prod-api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-123</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-21T17:06:05.630Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-loadbalancer-1650739674.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-234</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-27T07:44:47.280Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-456</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-01-24T17:12:46.920Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-567</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-09-10T09:24:13.970Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+        </LoadBalancerDescriptions>
+      </DescribeLoadBalancerDescriptionsResult>
+      <ResponseMetadata>
+          <RequestId>2c5ed3dc-66f8-4362-a910-31f2050b4f43</RequestId>
+      </ResponseMetadata>
+      </DescribeLoadBalancerDescriptionsResponse>
+
+---
+
+simlet: aws-network-elb
+request:
+  - method: POST
+  - uriPath: /aws/network-elb
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <DescribeLoadBalancersResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/">
+      <DescribeLoadBalancersResult>
+        <LoadBalancers>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:959481986809:loadbalancer/app/web-loadbalancer/dummy1234
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>prod-api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-123</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-21T17:06:05.630Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-loadbalancer/dummy2345
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-loadbalancer-1650739674.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-234</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2018-03-27T07:44:47.280Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/web-dev-loadbalancer/dummy3456
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>web-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-456</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-01-24T17:12:46.920Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+            <member>
+                <LoadBalancerArn>
+                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-dev-loadbalancer/dummy4567
+                </LoadBalancerArn>
+                <Scheme>internet-facing</Scheme>
+                <AvailabilityZones>
+                    <member>
+                        <SubnetId>subnet-1234</SubnetId>
+                        <ZoneName>eu-central-1a</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                    <member>
+                        <SubnetId>subnet-2345</SubnetId>
+                        <ZoneName>eu-central-1c</ZoneName>
+                        <LoadBalancerAddresses/>
+                    </member>
+                </AvailabilityZones>
+                <DNSName>api-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
+                <Type>application</Type>
+                <IpAddressType>ipv4</IpAddressType>
+                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
+                <VpcId>vpc-dummy-567</VpcId>
+                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
+                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
+                <CreatedTime>2019-09-10T09:24:13.970Z</CreatedTime>
+                <SecurityGroups>
+                    <member>sec-gr-123</member>
+                </SecurityGroups>
+                <State>
+                    <Code>active</Code>
+                </State>
+            </member>
+        </LoadBalancers>
+      </DescribeLoadBalancersResult>
+      <ResponseMetadata>
+          <RequestId>2c5ed3dc-66f8-4362-a910-31f2050b4f43</RequestId>
+      </ResponseMetadata>
+      </DescribeLoadBalancersResponse>
+
+---
+
 simlet: velocloud-auth
 
 request:
