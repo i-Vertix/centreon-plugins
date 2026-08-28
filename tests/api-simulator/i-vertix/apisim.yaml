@@ -6171,6 +6171,1794 @@ responses:
 
 ---
 
+simlet: cisco-webex-auth
+
+request:
+  - method: POST
+  - uriPath: /v1/access_token
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id
+
+        - where: body
+          contains: client_secret
+
+        - where: body
+          contains: grant_type
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "access_token": "token1234",
+        "expires_in": 86400
+      }
+
+---
+
+simlet: cisco-webex-workspaces
+request:
+  - method: GET
+  - uriPath: /v1/workspaces
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "items": [
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room - dummy service discovery",
+            "capacity": 7,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-03-13T10:47:25.648Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:05:09.745585911Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:50:58.984929647Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 2 - dummy service discovery",
+            "capacity": 4,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-03-02T10:02:23.359Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "camera-coverage-unknown",
+                  "createdAt": "2026-03-26T01:20:01.366092304Z",
+                  "title": "Camera coverage",
+                  "description": "Could not evaluate camera coverage, because the device type is not known or legacy type.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T16:21:23.763603865Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 3 - dummy service discovery",
+            "capacity": 8,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-13T09:23:51.872Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "camera-coverage-unknown",
+                  "createdAt": "2026-03-25T12:56:44.337104490Z",
+                  "title": "Camera coverage",
+                  "description": "Could not evaluate camera coverage, because the device type is not known or legacy type.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T12:45:03.881655985Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 4 - dummy service discovery",
+            "capacity": 4,
+            "type": "desk",
+            "sipAddress": "email@email.com",
+            "created": "2023-05-25T13:52:56.252Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-devices",
+                  "createdAt": "2026-08-26T08:01:48.010854114Z",
+                  "title": "Offline devices",
+                  "description": "There are offline devices in the workspace.",
+                  "level": "error"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 5 - dummy service discovery",
+            "capacity": 6,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-13T09:24:05.093Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-17T22:19:37.161314734Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:50:44.602516540Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:30:00.252310463Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 6 - dummy service discovery",
+            "capacity": 5,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-11T15:03:57.902Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-17T22:34:58.444756841Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:09:40.194740599Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:02:59.129910539Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 7 - dummy service discovery",
+            "capacity": 4,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-11T15:04:17.895Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:38:11.826302396Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:01:17.961008987Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 8 - dummy service discovery",
+            "capacity": 6,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-11T11:10:46.845Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:00:19.502874424Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VlOTNmNWE2LWY4ODUtNGM0NC1hNjhlLTQzN2RjMzYxNGMyMg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 9",
+            "capacity": 4,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-09T11:09:24.161Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:57:07.644235889Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-04-28T09:00:00.601631424Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2RmNTk0OTY1LTlkNDUtNDA1Yy05MWU4LWQ4ZDEzNmJiZWEyNQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 10",
+            "capacity": 6,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-11T11:11:06.029Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:00:02.933053429Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzQ5Njc1YjIwLTkzZDktNDM2MC1hZTc5LTVmNmFkNDllNGZmNQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 11",
+            "capacity": 8,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-07-28T12:44:41.638Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:31:48.596521642Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-07-28T12:44:42.336055432Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgwNmZmMGViLWRmNzItNDY3OC04Y2EzLTMyNmYyYzQxNzM1NQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 12",
+            "capacity": 6,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-01-28T14:28:52.462Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T23:05:40.760892508Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-05-08T07:57:14.606006654Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzAxNWJiZTBhLTQ3OTUtNDk2ZC1iYWU5LThlMjc1NGUzNWJhZg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 13",
+            "capacity": 6,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-08-05T13:47:06.256Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:54:04.230621063Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "accessibility-coverage",
+                  "createdAt": "2026-08-05T13:47:06.690620884Z",
+                  "title": "Accessibility",
+                  "description": "Leave enough space to move freely around the room to accommodate normal circulation while ensuring there is sufficient space for individuals with accessibility needs. Values used in this tool might be different from local accessibility regulations in your region. We are assuming a door on the side wall towards the back of the room.",
+                  "recommendedAction": "Choose a different table type, adjust the table dimensions or change the distance to the front wall. You might need to reduce the capacity of the room.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            },
+            "dimensions": {
+              "width": 350,
+              "length": 468,
+              "height": 230
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2M2ZmFkNGIzLTc3MDMtNDAxMy1hMGZkLWNlZmVjZGVkN2RlYQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 14",
+            "capacity": 8,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-07-28T13:08:45.815Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:57:46.271938850Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-07-28T13:08:46.485667358Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxMjI3Zjg2LTk3ODUtNDljZS04ZDdkLWViNTBkYzExYTdlMw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 15",
+            "capacity": 7,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-10-09T09:46:43.181Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": true,
+              "siteUrl": "barilla.webex.com"
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-17T22:57:47.562047665Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:40:23.279654030Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:06:12.687372478Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzE1ZTJlZmE0LTI1YzEtNGQwOS04Y2U1LWI0MzExMTBhNzUwYg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 16",
+            "capacity": 7,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-03-13T14:42:22.015Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-11T03:48:49.506262785Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:51:10.790212460Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NiNzg2YTBhLTkyOGUtNDIxNS1iZGJlLWJlMDE2ODEyMDcyNQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 17",
+            "capacity": 4,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-01-28T10:49:31.465Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:21:39.450342516Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T14:00:00.465351094Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzAxNmY3NjI1LThkNTEtNDRhZC1hZjMyLWVlMWFiZTYyZWFlNg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 18",
+            "capacity": 8,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-11T11:42:55.127Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T23:05:08.291998385Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:15:00.498072085Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzM0ZjRmYjdlLWEyNjctNDlmZi1iYjgxLTg1NTkxNjk4ZGM0Yw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 19",
+            "capacity": 9,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-10-08T14:44:16.204Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": true,
+              "siteUrl": "barilla.webex.com"
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:31:51.623913192Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "display-coverage",
+                  "createdAt": "2026-05-11T07:02:49.932852733Z",
+                  "title": "Display coverage",
+                  "description": "Make sure all seats are within the recommended display coverage for the chosen display size. This ensures that people in the front are not too close, and those in the back can read text on presentations and clearly see who is speaking.",
+                  "recommendedAction": "Adjust the display size, reduce the number of chairs or move the table closer to the displays. You can also consider adding repeater displays on the side wall.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T12:55:58.582078472Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NiN2M2YTcxLWJjYzEtNDdiMS1hM2Y2LWJlYTAyYzhiMjNmZA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 20",
+            "capacity": 4,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-01-28T14:19:14.919Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-17T22:07:24.033159177Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:25:22.518085717Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T12:59:47.586515341Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzg4NWRmZjg2LWU3NmEtNDA2Yy1iYzQzLTFkNmQxNTUyMjEwZg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano Meeting Room 21",
+            "capacity": 10,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-01-28T14:21:13.375Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:51:38.532056551Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T14:32:53.453141717Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzkzZWFkZDQ5LTgzYWMtNGE4ZS05ZmYwLTZjYzFhZTVlOGUyMw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjZWVlNzNmOTUtNjViOS00MTZiLThjMTMtYmIwNTE0YjU0ZDRl",
+            "locationId": "location_id_Vipiteno",
+            "displayName": "Vipiteno Meeting Room 3",
+            "capacity": 8,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-04-04T09:04:51.272Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-17T22:54:28.299915881Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:30:14.796179055Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T17:29:40.187067494Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzcwOTFmMWY0LTliMWItNDAzMy05MGFjLWM4YTc3N2I5MDA1Nw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYzZlN2I0NDAtZWMyMy00OGQzLWE1ZTEtOWQzOTdkOTllY2Q0",
+            "locationId": "location_id_Brunico",
+            "displayName": "Brunico Meeting Room 3",
+            "capacity": 10,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-10-08T08:25:44.267Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": true,
+              "siteUrl": "barilla.webex.com"
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:05:02.723457984Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-04-29T09:39:59.201957678Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2UyOWQwNWI1LTEyYmEtNGE2Mi05NDVlLTg2MjZjMzM3NWNhMg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjMmRmYTU3NjQtY2Y2OS00ZTVjLWIwMTYtYzg4OTE5MmQzZTYz",
+            "locationId": "location_id_Bressanone",
+            "displayName": "Bressanone Meeting Room 2",
+            "capacity": 10,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-23T10:04:10.195Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "camera-coverage-unknown",
+                  "createdAt": "2026-03-26T01:20:01.411018673Z",
+                  "title": "Camera coverage",
+                  "description": "Could not evaluate camera coverage, because the device type is not known or legacy type.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T15:00:02.580966806Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2E3NzZmMDM4LTk3NzYtNDk1OC04MWY3LTkxMjRlZDAxNGUwYQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTc3ODFjM2QtMzI5My00NDliLWFhYzAtYTE5ZDA2YjYwYTk2",
+            "locationId": "location_id_Bressanone",
+            "displayName": "Bressanone Meeting Room 1",
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-24T10:59:39.125Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "capacity-not-set",
+                  "createdAt": "2026-02-24T10:59:39.615552318Z",
+                  "title": "Workspace capacity not set",
+                  "description": "Adding a capacity specifies how many people can fit in the workspace.",
+                  "recommendedAction": "Set a capacity for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzIwNjlhMjcyLWVlOWYtNDk0Ni1iNDY2LTIwOTFmOTc0ZWQ2OQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTI2NjU2ZTktMGZhMC00OTQxLTg5YzYtYmUxZmIzY2UxMDI1",
+            "locationId": "location_id_Merano",
+            "displayName": "Merano Meeting Room 2",
+            "capacity": 14,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-18T15:48:52.306Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "camera-coverage-unknown",
+                  "createdAt": "2026-03-26T01:20:01.454784487Z",
+                  "title": "Camera coverage",
+                  "description": "Could not evaluate camera coverage, because the device type is not known or legacy type.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T14:00:01.486671054Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzE4YmM5MDZiLWExNDktNDY1MC04YjA0LTJiZjU4YmJkOGYyMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTI2NjU2ZTktMGZhMC00OTQxLTg5YzYtYmUxZmIzY2UxMDI1",
+            "locationId": "location_id_Merano",
+            "displayName": "Merano Meeting Room 1",
+            "capacity": 5,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-01-31T11:22:00.842Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-27T01:41:34.896500654Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T15:00:00.780145256Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IxYmI4ZTE1LTMzNjEtNDJlMS1hOGRhLTZjMTVlZWY5YWJiZA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTg0NDczMDMtMTBmNC00MDJkLTkxNTMtMzA2MDk0NzY1YzNj",
+            "locationId": "location_id_Brunico",
+            "displayName": "Brunico Meeting Room 2",
+            "capacity": 10,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-04-03T10:27:09.643Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:24:49.410180293Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T15:00:00.928893719Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzU1N2QzYmFkLWJkN2QtNDVhZC1hNGRmLTk4OTI4YThkOTBhNQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYWZkZDI1NzgtOWVkZi00MjExLTk3OTItNDZhYTk4NmMzZjEx",
+            "locationId": "location_id_Brunico",
+            "displayName": "Brunico Meeting Room",
+            "capacity": 12,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-08-01T08:10:12.398Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "offline-peripherals",
+                  "createdAt": "2026-08-25T14:29:19.419173045Z",
+                  "title": "Offline peripherals",
+                  "description": "There are offline peripherals in the workspace.",
+                  "level": "error"
+                },
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T21:52:06.358928716Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T12:49:20.023513984Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "error"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzQxMGFjNzA4LTAzNDYtNGNmMS05ZGViLWQ1MzM5ZGIzZjhkYg==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTYzNGI0OTYtMDkyYi00OGM2LTlmNjQtZjhkOGRjMDFlMTQ1",
+            "locationId": "location_id_Vipiteno",
+            "displayName": "Vipteno Meeting Room",
+            "capacity": 12,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-04-02T09:48:29.475Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:41:42.319182810Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T15:21:47.073742600Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzg0YjkzNjVmLTMyNzMtNDZkOS04NTU4LWM1OTc5MzEwYzdhYw==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjNWZlOWU4OTYtNTI5ZC00NWU0LTgyY2UtYjBiYTI1ODE1MjY1",
+            "locationId": "location_id_Laives",
+            "displayName": "Laives Meeting Room",
+            "capacity": 12,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2026-02-12T09:31:19.105Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T21:32:34.822819254Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzBiZjRlZTQzLTY5MzYtNDQzZS05MTBlLTNkMGQ5MmZlYmY1MQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYzg5Y2VhM2EtMTZiNS00NmI1LTkwNjQtYzEyMzI3YWVjMWY4",
+            "locationId": "location_id_Lana",
+            "displayName": "Lana Meeting Room",
+            "capacity": 12,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-07-29T08:08:38.283Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:55:00.466098986Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T12:59:53.377591704Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2FkNWU5NDU1LTQzOTEtNGY1ZS1iOTI2LTczYjNjMzVkZjMzYQ==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjNzU4MzA4N2YtNjhiZi00ZjJjLTkwYzYtYzcxZGZhMDI3N2Yw",
+            "locationId": "workspace_location_id_Naturno",
+            "displayName": "Naturno Meeting Room",
+            "capacity": 16,
+            "type": "meetingRoom",
+            "sipAddress": "email@email.com",
+            "created": "2025-02-13T09:50:53.197Z",
+            "calling": {
+              "type": "freeCalling"
+            },
+            "calendar": {
+              "type": "microsoft",
+              "emailAddress": "email@email.com"
+            },
+            "hotdeskingStatus": "off",
+            "deviceHostedMeetings": {
+              "enabled": false
+            },
+            "supportedDevices": "collaborationDevices",
+            "devicePlatform": "cisco",
+            "plannedMaintenance": {
+              "mode": "off"
+            },
+            "health": {
+              "issues": [
+                {
+                  "id": "mic-coverage-unknown",
+                  "createdAt": "2026-08-10T22:50:58.193403218Z",
+                  "title": "Microphone coverage",
+                  "description": "Could not detect the microphone type in this room.",
+                  "recommendedAction": "Upgrade to the latest generation of Cisco equipment, or use the equipment's data sheet to manually validate your design.",
+                  "level": "info"
+                },
+                {
+                  "id": "display-coverage",
+                  "createdAt": "2026-03-25T13:35:05.260324351Z",
+                  "title": "Display coverage",
+                  "description": "Make sure all seats are within the recommended display coverage for the chosen display size. This ensures that people in the front are not too close, and those in the back can read text on presentations and clearly see who is speaking.",
+                  "recommendedAction": "Adjust the display size, reduce the number of chairs or move the table closer to the displays. You can also consider adding repeater displays on the side wall.",
+                  "level": "info"
+                },
+                {
+                  "id": "dimensions-not-set",
+                  "createdAt": "2026-03-25T13:35:05.253194561Z",
+                  "title": "Workspace dimensions not set",
+                  "description": "Adding dimensions specifies the physical size of the workspace.",
+                  "recommendedAction": "Set dimensions for this workspace.",
+                  "level": "info"
+                }
+              ],
+              "level": "info"
+            }
+          }
+        ]
+      }
+
+---
+
+simlet: cisco-webex-workspace-locations
+request:
+  - method: GET
+  - uriPath: /v1/workspaceLocations
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "items": [
+          {
+            "id": "workspace_location_id_Bolzano",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Bolzano",
+            "latitude": 46.490672,
+            "longitude": 11.339821
+          },
+          {
+            "id": "workspace_location_id_Merano",
+            "locationId": "location_id_Merano",
+            "displayName": "Merano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Merano",
+            "latitude": 46.668169,
+            "longitude": 11.159534
+          },
+          {
+            "id": "workspace_location_id_Bressanone",
+            "locationId": "location_id_Bressanone",
+            "displayName": "Bressanone",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Bressanone",
+            "latitude": 46.715033,
+            "longitude": 11.655979
+          },
+          {
+            "id": "workspace_location_id_Brunico",
+            "locationId": "location_id_Brunico",
+            "displayName": "Brunico",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Brunico",
+            "latitude": 46.799420,
+            "longitude": 11.934288
+          },
+          {
+            "id": "workspace_location_id_Vipiteno",
+            "locationId": "location_id_Vipiteno",
+            "displayName": "Vipiteno",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Vipiteno",
+            "latitude": 46.893132,
+            "longitude": 11.429607
+          },
+          {
+            "id": "workspace_location_id_Laives",
+            "locationId": "location_id_Laives",
+            "displayName": "Laives",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Laives",
+            "latitude": 46.426795,
+            "longitude": 11.338406
+          },
+          {
+            "id": "workspace_location_id_Appiano",
+            "locationId": "location_id_Appiano",
+            "displayName": "Appiano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Appiano",
+            "latitude": 46.455333,
+            "longitude": 11.259049
+          },
+          {
+            "id": "workspace_location_id_Caldaro",
+            "locationId": "location_id_Caldaro",
+            "displayName": "Caldaro",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Caldaro",
+            "latitude": 46.413259,
+            "longitude": 11.246203
+          },
+          {
+            "id": "workspace_location_id_Lana",
+            "locationId": "location_id_Lana",
+            "displayName": "Lana",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Lana",
+            "latitude": 46.612094,
+            "longitude": 11.156527
+          },
+          {
+            "id": "workspace_location_id_Naturno",
+            "locationId": "location_id_Naturno",
+            "displayName": "Naturno",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Naturno",
+            "latitude": 46.650000,
+            "longitude": 11.005000
+          }
+        ]
+      }
+
+---
+
 simlet: velocloud-auth
 
 request:
