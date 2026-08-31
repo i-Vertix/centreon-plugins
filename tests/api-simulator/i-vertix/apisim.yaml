@@ -2972,6 +2972,332 @@ responses:
 
 ---
 
+simlet: aws-apigateway-http-rest
+request:
+  - method: GET
+  - uriPath: /aws/apigateway/REST/restapis
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "item": [
+          {
+            "apiKeySource": "HEADER",
+            "apiStatus": "AVAILABLE",
+            "binaryMediaTypes": [
+              "image/webp",
+              "image/gif",
+              "application/pdf",
+              "image/png",
+              "image/jpeg"
+            ],
+            "createdDate": 1773322092,
+            "disableExecuteApiEndpoint": false,
+            "endpointConfiguration": {
+              "ipAddressType": "ipv4",
+              "types": [
+                "REGIONAL"
+              ]
+            },
+            "id": "dummyId-123",
+            "name": "aws-iv-rest-service-prod",
+            "rootResourceId": "c4pv9uiezf",
+            "securityPolicy": "TLS_1_0",
+            "tags": {
+              "aws:cloudformation:logical-id": "RestServiceApi",
+              "aws:cloudformation:stack-id": "arn:aws:cloudformation:eu-central-1:dummyId:stack/aws-iv-rest-service-prod/30a5cf50-1e17-11f1-84b4-0ad432153893",
+              "aws:cloudformation:stack-name": "aws-iv-rest-service-prod"
+            },
+            "version": "1.0"
+          },
+          {
+            "apiKeySource": "HEADER",
+            "apiStatus": "AVAILABLE",
+            "binaryMediaTypes": [
+              "image/webp",
+              "image/gif",
+              "application/pdf",
+              "image/png",
+              "image/jpeg"
+            ],
+            "createdDate": 1771265332,
+            "disableExecuteApiEndpoint": false,
+            "endpointConfiguration": {
+              "ipAddressType": "ipv4",
+              "types": [
+                "REGIONAL"
+              ]
+            },
+            "id": "dummyId-234",
+            "name": "aws-iv-rest-service-dev",
+            "rootResourceId": "uxvres5qc1",
+            "securityPolicy": "TLS_1_0",
+            "tags": {
+              "aws:cloudformation:logical-id": "PdfServiceApi",
+              "aws:cloudformation:stack-id": "arn:aws:cloudformation:eu-central-1:dummyId:stack/aws-iv-rest-service-dev/6bbee850-0b62-11f1-87e1-02b06b8c1b65",
+              "aws:cloudformation:stack-name": "aws-iv-rest-service-dev"
+            },
+            "version": "1.0"
+          }
+        ]
+      }
+
+---
+
+simlet: aws-apigateway-http
+request:
+  - method: GET
+  - uriPath: /aws/apigateway/HTTP/restapis
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "items": [
+          {
+            "apiId": "dummy-Id-1",
+            "name": "api-core",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://m0fgkvv54d.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-11-08T08:50:29Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-2",
+            "name": "api-auth",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://m9kj4mk5y2.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-05-08T05:38:31Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-3",
+            "name": "api-user",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://md75xexpej.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-04-24T06:55:08Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-4",
+            "name": "api-account",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://mdh7kefhqb.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2024-07-16T14:42:12Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-5",
+            "name": "api-gateway",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://n7xex2efjb.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-05-11T05:40:12Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-6",
+            "name": "api-backend",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://ndwzmt6jg5.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-10-20T09:25:13Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-7",
+            "name": "api-frontend",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://nmsr3s4l0c.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-09-05T08:05:22Z",
+            "tags": {
+              "Environment": "dev",
+              "Application": "TravelSuiteMsCampaignManager"
+            },
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-8",
+            "name": "api-data",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://o51gpj3eke.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-09-22T15:37:45Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-9",
+            "name": "ivertix-api-ai-testing",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://rvujwonxm5.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2024-04-19T08:25:50Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-10",
+            "name": "ivertix-api-system-production",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://scvexqbm5f.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-11-16T10:56:23Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-11",
+            "name": "ivertix-api-platform-dev",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://u5mrc6veea.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-09-05T14:27:22Z",
+            "tags": {
+              "Environment": "dev",
+              "Application": "TravelSuiteMsTicketing"
+            },
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-12",
+            "name": "ivertix-api-management-dev",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://ud7jyemwak.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-15T07:35:41Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-13",
+            "name": "ivertix-api-monitoring-production",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://v7ivo9tfh4.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-23T05:10:00Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-14",
+            "name": "ivertix-api-gateway-production",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://vec4l8y060.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-11-16T09:35:45Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-15",
+            "name": "ivertix-api-management-testing",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://w04669cv57.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-11-21T08:39:00Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-16",
+            "name": "ivertix-api-service-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://w3bm6t3k6i.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2025-12-09T11:22:38Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-17",
+            "name": "ivertix-api-integration-dev",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://wge17w7e6f.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-22T11:26:31Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-18",
+            "name": "ivertix-api-integration-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://wv5u9m65k2.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2025-10-24T07:00:49Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-19",
+            "name": "ivertix-api-monitoring-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://y0xix9rb45.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-08-24T10:29:32Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          }
+        ]
+      }
+
+---
+
 simlet: aws-ec2
 request:
   - method: POST
@@ -6217,6 +6543,12 @@ responses:
         - where: header
           named: Authorization
           contains: "Bearer"
+        - where: uriQueryParameter
+          named: "max"
+          equals: "100"
+        - where: uriQueryParameter
+          named: "start"
+          equals: "0"
 
     from: stub
     status: 200
@@ -6226,8 +6558,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room - dummy service discovery",
             "capacity": 7,
             "type": "meetingRoom",
@@ -6274,8 +6606,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 2 - dummy service discovery",
             "capacity": 4,
             "type": "meetingRoom",
@@ -6322,8 +6654,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 3 - dummy service discovery",
             "capacity": 8,
             "type": "meetingRoom",
@@ -6370,8 +6702,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 4 - dummy service discovery",
             "capacity": 4,
             "type": "desk",
@@ -6409,8 +6741,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 5 - dummy service discovery",
             "capacity": 6,
             "type": "meetingRoom",
@@ -6464,8 +6796,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 6 - dummy service discovery",
             "capacity": 5,
             "type": "meetingRoom",
@@ -6519,8 +6851,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 7 - dummy service discovery",
             "capacity": 4,
             "type": "meetingRoom",
@@ -6567,8 +6899,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 8 - dummy service discovery",
             "capacity": 6,
             "type": "meetingRoom",
@@ -6607,8 +6939,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VlOTNmNWE2LWY4ODUtNGM0NC1hNjhlLTQzN2RjMzYxNGMyMg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 9",
             "capacity": 4,
             "type": "meetingRoom",
@@ -6655,8 +6987,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2RmNTk0OTY1LTlkNDUtNDA1Yy05MWU4LWQ4ZDEzNmJiZWEyNQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 10",
             "capacity": 6,
             "type": "meetingRoom",
@@ -6695,8 +7027,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzQ5Njc1YjIwLTkzZDktNDM2MC1hZTc5LTVmNmFkNDllNGZmNQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 11",
             "capacity": 8,
             "type": "meetingRoom",
@@ -6743,8 +7075,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgwNmZmMGViLWRmNzItNDY3OC04Y2EzLTMyNmYyYzQxNzM1NQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 12",
             "capacity": 6,
             "type": "meetingRoom",
@@ -6791,8 +7123,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzAxNWJiZTBhLTQ3OTUtNDk2ZC1iYWU5LThlMjc1NGUzNWJhZg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 13",
             "capacity": 6,
             "type": "meetingRoom",
@@ -6844,8 +7176,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2M2ZmFkNGIzLTc3MDMtNDAxMy1hMGZkLWNlZmVjZGVkN2RlYQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 14",
             "capacity": 8,
             "type": "meetingRoom",
@@ -6892,8 +7224,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxMjI3Zjg2LTk3ODUtNDljZS04ZDdkLWViNTBkYzExYTdlMw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 15",
             "capacity": 7,
             "type": "meetingRoom",
@@ -6948,8 +7280,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzE1ZTJlZmE0LTI1YzEtNGQwOS04Y2U1LWI0MzExMTBhNzUwYg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 16",
             "capacity": 7,
             "type": "meetingRoom",
@@ -6996,8 +7328,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NiNzg2YTBhLTkyOGUtNDIxNS1iZGJlLWJlMDE2ODEyMDcyNQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 17",
             "capacity": 4,
             "type": "meetingRoom",
@@ -7044,8 +7376,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzAxNmY3NjI1LThkNTEtNDRhZC1hZjMyLWVlMWFiZTYyZWFlNg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 18",
             "capacity": 8,
             "type": "meetingRoom",
@@ -7092,8 +7424,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzM0ZjRmYjdlLWEyNjctNDlmZi1iYjgxLTg1NTkxNjk4ZGM0Yw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 19",
             "capacity": 9,
             "type": "meetingRoom",
@@ -7149,8 +7481,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NiN2M2YTcxLWJjYzEtNDdiMS1hM2Y2LWJlYTAyYzhiMjNmZA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 20",
             "capacity": 4,
             "type": "meetingRoom",
@@ -7204,8 +7536,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzg4NWRmZjg2LWU3NmEtNDA2Yy1iYzQzLTFkNmQxNTUyMjEwZg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
-            "locationId": "location_id_Bolzano",
+            "workspaceLocationId": "workspace_location_id_Bolzano",
+            "locationId": "workspace_location_id_Bolzano",
             "displayName": "Bolzano Meeting Room 21",
             "capacity": 10,
             "type": "meetingRoom",
@@ -7252,8 +7584,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzkzZWFkZDQ5LTgzYWMtNGE4ZS05ZmYwLTZjYzFhZTVlOGUyMw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjZWVlNzNmOTUtNjViOS00MTZiLThjMTMtYmIwNTE0YjU0ZDRl",
-            "locationId": "location_id_Vipiteno",
+            "workspaceLocationId": "workspace_location_id_Vipiteno",
+            "locationId": "workspace_location_id_Vipiteno",
             "displayName": "Vipiteno Meeting Room 3",
             "capacity": 8,
             "type": "meetingRoom",
@@ -7307,8 +7639,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzcwOTFmMWY0LTliMWItNDAzMy05MGFjLWM4YTc3N2I5MDA1Nw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYzZlN2I0NDAtZWMyMy00OGQzLWE1ZTEtOWQzOTdkOTllY2Q0",
-            "locationId": "location_id_Brunico",
+            "workspaceLocationId": "workspace_location_id_Brunico",
+            "locationId": "workspace_location_id_Brunico",
             "displayName": "Brunico Meeting Room 3",
             "capacity": 10,
             "type": "meetingRoom",
@@ -7356,8 +7688,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2UyOWQwNWI1LTEyYmEtNGE2Mi05NDVlLTg2MjZjMzM3NWNhMg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjMmRmYTU3NjQtY2Y2OS00ZTVjLWIwMTYtYzg4OTE5MmQzZTYz",
-            "locationId": "location_id_Bressanone",
+            "workspaceLocationId": "workspace_location_id_Bressanone",
+            "locationId": "workspace_location_id_Bressanone",
             "displayName": "Bressanone Meeting Room 2",
             "capacity": 10,
             "type": "meetingRoom",
@@ -7404,8 +7736,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2E3NzZmMDM4LTk3NzYtNDk1OC04MWY3LTkxMjRlZDAxNGUwYQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTc3ODFjM2QtMzI5My00NDliLWFhYzAtYTE5ZDA2YjYwYTk2",
-            "locationId": "location_id_Bressanone",
+            "workspaceLocationId": "workspace_location_id_Bressanone",
+            "locationId": "workspace_location_id_Bressanone",
             "displayName": "Bressanone Meeting Room 1",
             "type": "meetingRoom",
             "sipAddress": "email@email.com",
@@ -7443,8 +7775,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzIwNjlhMjcyLWVlOWYtNDk0Ni1iNDY2LTIwOTFmOTc0ZWQ2OQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTI2NjU2ZTktMGZhMC00OTQxLTg5YzYtYmUxZmIzY2UxMDI1",
-            "locationId": "location_id_Merano",
+            "workspaceLocationId": "workspace_location_id_Merano",
+            "locationId": "workspace_location_id_Merano",
             "displayName": "Merano Meeting Room 2",
             "capacity": 14,
             "type": "meetingRoom",
@@ -7491,8 +7823,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzE4YmM5MDZiLWExNDktNDY1MC04YjA0LTJiZjU4YmJkOGYyMA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTI2NjU2ZTktMGZhMC00OTQxLTg5YzYtYmUxZmIzY2UxMDI1",
-            "locationId": "location_id_Merano",
+            "workspaceLocationId": "workspace_location_id_Merano",
+            "locationId": "workspace_location_id_Merano",
             "displayName": "Merano Meeting Room 1",
             "capacity": 5,
             "type": "meetingRoom",
@@ -7539,8 +7871,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IxYmI4ZTE1LTMzNjEtNDJlMS1hOGRhLTZjMTVlZWY5YWJiZA==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTg0NDczMDMtMTBmNC00MDJkLTkxNTMtMzA2MDk0NzY1YzNj",
-            "locationId": "location_id_Brunico",
+            "workspaceLocationId": "workspace_location_id_Brunico",
+            "locationId": "workspace_location_id_Brunico",
             "displayName": "Brunico Meeting Room 2",
             "capacity": 10,
             "type": "meetingRoom",
@@ -7587,8 +7919,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzU1N2QzYmFkLWJkN2QtNDVhZC1hNGRmLTk4OTI4YThkOTBhNQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYWZkZDI1NzgtOWVkZi00MjExLTk3OTItNDZhYTk4NmMzZjEx",
-            "locationId": "location_id_Brunico",
+            "workspaceLocationId": "workspace_location_id_Brunico",
+            "locationId": "workspace_location_id_Brunico",
             "displayName": "Brunico Meeting Room",
             "capacity": 12,
             "type": "meetingRoom",
@@ -7642,8 +7974,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzQxMGFjNzA4LTAzNDYtNGNmMS05ZGViLWQ1MzM5ZGIzZjhkYg==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjOTYzNGI0OTYtMDkyYi00OGM2LTlmNjQtZjhkOGRjMDFlMTQ1",
-            "locationId": "location_id_Vipiteno",
+            "workspaceLocationId": "workspace_location_id_Vipiteno",
+            "locationId": "workspace_location_id_Vipiteno",
             "displayName": "Vipteno Meeting Room",
             "capacity": 12,
             "type": "meetingRoom",
@@ -7690,8 +8022,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzg0YjkzNjVmLTMyNzMtNDZkOS04NTU4LWM1OTc5MzEwYzdhYw==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjNWZlOWU4OTYtNTI5ZC00NWU0LTgyY2UtYjBiYTI1ODE1MjY1",
-            "locationId": "location_id_Laives",
+            "workspaceLocationId": "workspace_location_id_Laives",
+            "locationId": "workspace_location_id_Laives",
             "displayName": "Laives Meeting Room",
             "capacity": 12,
             "type": "meetingRoom",
@@ -7730,8 +8062,8 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzBiZjRlZTQzLTY5MzYtNDQzZS05MTBlLTNkMGQ5MmZlYmY1MQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYzg5Y2VhM2EtMTZiNS00NmI1LTkwNjQtYzEyMzI3YWVjMWY4",
-            "locationId": "location_id_Lana",
+            "workspaceLocationId": "workspace_location_id_Lana",
+            "locationId": "workspace_location_id_Lana",
             "displayName": "Lana Meeting Room",
             "capacity": 12,
             "type": "meetingRoom",
@@ -7778,7 +8110,7 @@ responses:
           {
             "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2FkNWU5NDU1LTQzOTEtNGY1ZS1iOTI2LTczYjNjMzVkZjMzYQ==",
             "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
-            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjNzU4MzA4N2YtNjhiZi00ZjJjLTkwYzYtYzcxZGZhMDI3N2Yw",
+            "workspaceLocationId": "workspace_location_id_Naturno",
             "locationId": "workspace_location_id_Naturno",
             "displayName": "Naturno Meeting Room",
             "capacity": 16,
@@ -7834,6 +8166,22 @@ responses:
         ]
       }
 
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+        - where: uriQueryParameter
+          named: "max"
+          equals: "100"
+        - where: uriQueryParameter
+          named: "start"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {}
 ---
 
 simlet: cisco-webex-workspace-locations
@@ -7956,6 +8304,1420 @@ responses:
           }
         ]
       }
+
+---
+
+simlet: cisco-webex-workspace-devices
+request:
+  - method: GET
+  - uriPath: /v1/devices
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+        - where: uriQueryParameter
+          named: "max"
+          equals: "100"
+        - where: uriQueryParameter
+          named: "start"
+          equals: "0"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "items": [
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2IyZjRiN2VhLTU1NWUtNDM2OS04MDg4LThhMjM1MTFiYzkxOA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzgxOGJhYzQ2LTg5ZTUtNGM0Mi1hMGIwLWRiYTQ4Y2IzNGZjNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2U2YTk4ODc0LTc2MzEtNDQ1OS04MTc3LTRhZDU4ZGRkZjhhNQ=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2NlYTFlNTllLTdiNDAtNDU0OC1iZjdhLTVkMDU0MDA3OGI3ZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzMxMjRhZDA5LTFlYjMtNGI5Ny05MTYwLWM1NWE4NWNlYmNjZA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFL2VhOWFkZTMyLWRjYTMtNDhiOS1hNjVlLTljMmRhYjk2MjYzZg=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzJhODJiMzc3LTMxYjEtNGJmMi1hZGU4LTc5YzAwZTJmMGU4MA=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzBhNTFjZjE3LWQyNGQtM2FkNy05OGY0LWQwYTYyZDBkOGZlNA==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMGE1MWNmMTctZDI0ZC0zYWQ3LTk4ZjQtZDBhNjJkMGQ4ZmU0",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Microphone",
+            "type": "microphone",
+            "tags": [],
+            "ip": "",
+            "serial": "",
+            "software": "",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-08-10T23:00:04.582Z",
+            "firstSeen": "2026-08-10T23:00:04.582Z",
+            "lastSeen": "2026-08-27T14:22:40.152Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzJkMDJiNGYyLTZkODQtMzNkYi05MjI5LWNlZDhlOWU1ZWNkMQ==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvMmQwMmI0ZjItNmQ4NC0zM2RiLTkyMjktY2VkOGU5ZTVlY2Qx",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "SAM SAMSUNG",
+            "type": "monitor",
+            "tags": [],
+            "serial": "H1AK500000",
+            "software": "NA",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-07-03T08:55:21.411Z",
+            "firstSeen": "2026-07-03T08:55:21.411Z",
+            "lastSeen": "2026-08-27T14:22:40.163Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFLzcxYTZhM2Y3LWY4NmUtMzJlNi05Y2EzLTJjNTIwYTg1YjBiNw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvNzFhNmEzZjctZjg2ZS0zMmU2LTljYTMtMmM1MjBhODViMGI3",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "QM75C",
+            "type": "monitor",
+            "tags": [],
+            "serial": "0QR7HNIY302072E",
+            "software": "S-PTMLWWC-1080.7,S-PLBINSS-1013",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "disconnected",
+            "created": "2026-01-28T13:58:52.408Z",
+            "firstSeen": "2026-01-28T13:58:52.408Z",
+            "lastSeen": "2026-06-22T22:55:15.549Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "UNKNOWN",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BFUklQSEVSQUwvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2UzZDljYTZlLWMzNTEtM2EwZS1iNzEzLTBlYjc3MTk2YWQ5Mw==",
+            "webexDeviceId": null,
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZTNkOWNhNmUtYzM1MS0zYTBlLWI3MTMtMGViNzcxOTZhZDkz",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [],
+            "permissions": [],
+            "product": "Cisco Room Navigator",
+            "type": "accessory",
+            "tags": [],
+            "ip": "169.254.1.41",
+            "mac": "f0:03:bc:93:60:58",
+            "serial": "FOC2930J13K",
+            "software": "ce26.8.1.6.e4f8f07bed3",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.188Z",
+            "firstSeen": "2026-01-28T13:58:43.188Z",
+            "lastSeen": "2026-08-27T14:22:40.143Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw=="
+          },
+          {
+            "id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "callingDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0NBTExJTkdfREVWSUNFL2YwZGFjY2Q2LWNlMDUtNTc1Ny1iZDg3LWNkNGNhM2ExYTQ2OQ==",
+            "webexDeviceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL0RFVklDRS9lNjBjOWZhYS1lMGZlLTRiZTctODc1NS01NzE0Y2VlNjc4Y2E=",
+            "deviceId": "Y2lzY29zcGFyazovL29yZ0lkPTFjOThjOThmLThlNmMtNGE3ZC1hMDgxLWZiYzIzZmZiYzAxNy9ERVZJQ0VfSUQvZjBkYWNjZDYtY2UwNS01NzU3LWJkODctY2Q0Y2EzYTFhNDY5",
+            "displayName": "Bolzano Meeting Room 1",
+            "placeId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzczMTVlOGRiLTU2NzctNGZkOC1hYmVmLWY1MzdiYTEyNmUzMA==",
+            "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTc",
+            "capabilities": [
+              "xapi"
+            ],
+            "permissions": [
+              "xapi"
+            ],
+            "product": "Cisco Room Bar",
+            "type": "roomdesk",
+            "tags": [],
+            "ip": "10.60.190.173",
+            "mac": "EC:DD:24:C7:74:F0",
+            "serial": "FOC2930JEAD",
+            "activeInterface": "LAN",
+            "software": "RoomOS 26.8.1.6 e4f8f07bed3",
+            "upgradeChannel": "Stable",
+            "primarySipUrl": "parma_alveari@barilla.rooms.webex.com",
+            "sipUrls": [
+              "parma_alveari@barilla.rooms.webex.com"
+            ],
+            "errorCodes": [],
+            "connectionStatus": "connected",
+            "created": "2026-01-28T13:58:43.164Z",
+            "firstSeen": "2026-01-28T13:58:43.164Z",
+            "lastSeen": "2026-08-27T14:22:40.054Z",
+            "workspaceLocationId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dPUktTUEFDRV9MT0NBVElPTi8xYzk4Yzk4Zi04ZTZjLTRhN2QtYTA4MS1mYmMyM2ZmYmMwMTcjYmJmYmJiMTItZjM3Zi00OTlkLThlZjgtYzM4NGY5NjBjY2Q3",
+            "locationId": "location_id_Bolzano",
+            "managedBy": "CISCO",
+            "devicePlatform": "cisco",
+            "lifecycle": "ACTIVE",
+            "plannedMaintenance": "off",
+            "workspaceId": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1BMQUNFLzY5ZjM4MzI2LTQ5ZjQtNGJjZC04YTRhLWQ5NjUzNGFhZmEzNw=="
+          }
+        ]
+      }
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+        - where: uriQueryParameter
+          named: "max"
+          equals: "100"
+        - where: uriQueryParameter
+          named: "start"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {}
 
 ---
 
