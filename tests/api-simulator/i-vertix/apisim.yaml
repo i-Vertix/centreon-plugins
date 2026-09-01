@@ -3056,7 +3056,7 @@ responses:
 simlet: aws-apigateway-http
 request:
   - method: GET
-  - uriPath: /aws/apigateway/HTTP/restapis
+  - uriPath: /aws/apigateway/HTTP/v2/apis
 
 responses:
 
@@ -3283,7 +3283,229 @@ responses:
           },
           {
             "apiId": "dummy-Id-19",
-            "name": "ivertix-api-monitoring-test",
+            "name": "ivertix-api-analysis-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://y0xix9rb45.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-08-24T10:29:32Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-20",
+            "name": "api-storage",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://m0fgkvv54d.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-11-08T08:50:29Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-21",
+            "name": "api-file",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://m9kj4mk5y2.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-05-08T05:38:31Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-22",
+            "name": "api-document",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://md75xexpej.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-04-24T06:55:08Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-23",
+            "name": "api-inventory",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://mdh7kefhqb.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2024-07-16T14:42:12Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-24",
+            "name": "api-network",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://n7xex2efjb.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-05-11T05:40:12Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-25",
+            "name": "api-device",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://ndwzmt6jg5.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-10-20T09:25:13Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-26",
+            "name": "api-servicebus",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://nmsr3s4l0c.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-09-05T08:05:22Z",
+            "tags": {
+              "Environment": "dev",
+              "Application": "TravelSuiteMsCampaignManager"
+            },
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-27",
+            "name": "api-orchestration",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://o51gpj3eke.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-09-22T15:37:45Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-28",
+            "name": "ivertix-api-workflow-testing",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://rvujwonxm5.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2024-04-19T08:25:50Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-29",
+            "name": "ivertix-api-provisioning-production",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://scvexqbm5f.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-11-16T10:56:23Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-30",
+            "name": "ivertix-api-automation-dev",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://u5mrc6veea.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-09-05T14:27:22Z",
+            "tags": {
+              "Environment": "dev",
+              "Application": "TravelSuiteMsTicketing"
+            },
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-31",
+            "name": "ivertix-api-security-dev",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://ud7jyemwak.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-15T07:35:41Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-32",
+            "name": "ivertix-api-audit-production",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://v7ivo9tfh4.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-23T05:10:00Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-33",
+            "name": "ivertix-api-logging-production",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://vec4l8y060.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2022-11-16T09:35:45Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-34",
+            "name": "ivertix-api-metrics-testing",
+            "protocolType": "HTTP",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://w04669cv57.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2023-11-21T08:39:00Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-35",
+            "name": "ivertix-api-health-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://w3bm6t3k6i.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2025-12-09T11:22:38Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-36",
+            "name": "ivertix-api-discovery-dev",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://wge17w7e6f.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2026-06-22T11:26:31Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-37",
+            "name": "ivertix-api-configuration-test",
+            "protocolType": "HTTP",
+            "ipAddressType": "ipv4",
+            "routeSelectionExpression": "$request.method $request.path",
+            "apiKeySelectionExpression": "$request.header.x-api-key",
+            "apiEndpoint": "https://wv5u9m65k2.execute-api.eu-central-1.amazonaws.com",
+            "createdDate": "2025-10-24T07:00:49Z",
+            "tags": {},
+            "disableExecuteApiEndpoint": false
+          },
+          {
+            "apiId": "dummy-Id-38",
+            "name": "ivertix-api-resource-test",
             "protocolType": "HTTP",
             "ipAddressType": "ipv4",
             "routeSelectionExpression": "$request.method $request.path",
@@ -6041,310 +6263,6 @@ simlet: aws-application-elb
 request:
   - method: POST
   - uriPath: /aws/application-elb
-
-responses:
-
-  - when:
-      request:
-        - where: header
-          named: Authorization
-          contains: "Credential"
-
-    from: stub
-    status: 200
-    body: |
-      <DescribeLoadBalancersResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/">
-      <DescribeLoadBalancersResult>
-        <LoadBalancers>
-            <member>
-                <LoadBalancerArn>
-                    arn:aws:elasticloadbalancing:eu-central-1:959481986809:loadbalancer/app/web-loadbalancer/dummy1234
-                </LoadBalancerArn>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>web-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>prod-api-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-123</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2018-03-21T17:06:05.630Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerArn>
-                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-loadbalancer/dummy2345
-                </LoadBalancerArn>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>api-loadbalancer-1650739674.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-234</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2018-03-27T07:44:47.280Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerArn>
-                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/web-dev-loadbalancer/dummy3456
-                </LoadBalancerArn>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>web-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-456</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2019-01-24T17:12:46.920Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerArn>
-                    arn:aws:elasticloadbalancing:eu-central-1:1234:loadbalancer/app/api-dev-loadbalancer/dummy4567
-                </LoadBalancerArn>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>api-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-567</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2019-09-10T09:24:13.970Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-        </LoadBalancers>
-      </DescribeLoadBalancersResult>
-      <ResponseMetadata>
-          <RequestId>2c5ed3dc-66f8-4362-a910-31f2050b4f43</RequestId>
-      </ResponseMetadata>
-      </DescribeLoadBalancersResponse>
-
----
-
-simlet: aws-classic-elb
-request:
-  - method: POST
-  - uriPath: /aws/classic-elb
-
-responses:
-
-  - when:
-      request:
-        - where: header
-          named: Authorization
-          contains: "Credential"
-
-    from: stub
-    status: 200
-    body: |
-      <DescribeLoadBalancerDescriptionsResponse xmlns="http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/">
-      <DescribeLoadBalancerDescriptionsResult>
-        <LoadBalancerDescriptions>
-            <member>
-                <LoadBalancerName>web-loadbalancer</LoadBalancerName>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>web-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>prod-api-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-123</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2018-03-21T17:06:05.630Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>api-loadbalancer-1650739674.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>api-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-234</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2018-03-27T07:44:47.280Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>web-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>web-dev-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-456</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2019-01-24T17:12:46.920Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-            <member>
-                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
-                <Scheme>internet-facing</Scheme>
-                <AvailabilityZones>
-                    <member>
-                        <SubnetId>subnet-1234</SubnetId>
-                        <ZoneName>eu-central-1a</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                    <member>
-                        <SubnetId>subnet-2345</SubnetId>
-                        <ZoneName>eu-central-1c</ZoneName>
-                        <LoadBalancerAddresses/>
-                    </member>
-                </AvailabilityZones>
-                <DNSName>api-dev-loadbalancer-1234.eu-central-1.elb.amazonaws.com</DNSName>
-                <Type>application</Type>
-                <IpAddressType>ipv4</IpAddressType>
-                <LoadBalancerName>api-dev-loadbalancer</LoadBalancerName>
-                <VpcId>vpc-dummy-567</VpcId>
-                <CanonicalHostedZoneId>ZONE-DUMMY-123</CanonicalHostedZoneId>
-                <EnablePrefixForIpv6SourceNat>off</EnablePrefixForIpv6SourceNat>
-                <CreatedTime>2019-09-10T09:24:13.970Z</CreatedTime>
-                <SecurityGroups>
-                    <member>sec-gr-123</member>
-                </SecurityGroups>
-                <State>
-                    <Code>active</Code>
-                </State>
-            </member>
-        </LoadBalancerDescriptions>
-      </DescribeLoadBalancerDescriptionsResult>
-      <ResponseMetadata>
-          <RequestId>2c5ed3dc-66f8-4362-a910-31f2050b4f43</RequestId>
-      </ResponseMetadata>
-      </DescribeLoadBalancerDescriptionsResponse>
-
----
-
-simlet: aws-network-elb
-request:
-  - method: POST
-  - uriPath: /aws/network-elb
 
 responses:
 
