@@ -1,0 +1,3 @@
+#!/bin/bash
+# Fake mtr returning the report of a path that changed (see mtr)
+MTR_FIXTURE_PREFIX=mtr-changed exec "$(dirname "$0")/mtr" "$@"

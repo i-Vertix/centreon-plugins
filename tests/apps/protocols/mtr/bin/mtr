@@ -1,0 +1,19 @@
+#!/bin/bash
+# Fake mtr for the robot tests: prints the report stored in
+# ../data/<prefix>_<target>.json (or .txt for a broken report), where <target>
+# is the last argument and <prefix> is MTR_FIXTURE_PREFIX (default: mtr).
+
+if [[ " $* " != *" --json "* ]]; then
+    echo "mtr: this fake only supports --json" >&2
+    exit 1
+fi
+
+target="${!#}"
+for fixture in "$(dirname "$0")/../data/${MTR_FIXTURE_PREFIX:-mtr}_${target}".{json,txt}; do
+    if [[ -f "$fixture" ]]; then
+        cat "$fixture"
+        exit 0
+    fi
+done
+echo "mtr: Failed to resolve host: ${target}: Name or service not known" >&2
+exit 1

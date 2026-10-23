@@ -1,0 +1,58 @@
+{
+  "report": {
+    "mtr": {
+      "src": "poller.example",
+      "dst": "loss.example",
+      "tos": "0x0",
+      "psize": "64",
+      "bitpattern": "0x00",
+      "tests": "10"
+    },
+    "hubs": [
+      {
+        "count": 1,
+        "host": "192.0.2.1",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 0.5,
+        "Avg": 0.55,
+        "Best": 0.4,
+        "Wrst": 0.8,
+        "StDev": 0.1
+      },
+      {
+        "count": 2,
+        "host": "???",
+        "Loss%": 100.0,
+        "Snt": 10,
+        "Last": 0.0,
+        "Avg": 0.0,
+        "Best": 0.0,
+        "Wrst": 0.0,
+        "StDev": 0.0
+      },
+      {
+        "count": 3,
+        "host": "198.51.100.7",
+        "Loss%": 10.0,
+        "Snt": 10,
+        "Last": 25.1,
+        "Avg": 30.42,
+        "Best": 20.03,
+        "Wrst": 55.8,
+        "StDev": 9.71
+      },
+      {
+        "count": 4,
+        "host": "203.0.113.50",
+        "Loss%": 30.0,
+        "Snt": 10,
+        "Last": 120.4,
+        "Avg": 95.25,
+        "Best": 80.12,
+        "Wrst": 150.33,
+        "StDev": 21.5
+      }
+    ]
+  }
+}

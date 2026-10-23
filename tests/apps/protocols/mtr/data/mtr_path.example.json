@@ -1,0 +1,80 @@
+{
+  "report": {
+    "mtr": {
+      "src": "poller.example",
+      "dst": "path.example",
+      "tos": "0x0",
+      "psize": "64",
+      "bitpattern": "0x00",
+      "tests": "10"
+    },
+    "hubs": [
+      {
+        "count": "1",
+        "host": "198.51.100.1",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 1.41,
+        "Avg": 1.8,
+        "Best": 0.78,
+        "Wrst": 5.06,
+        "StDev": 1.21
+      },
+      {
+        "count": "2",
+        "host": "198.51.100.2",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 1.24,
+        "Avg": 1.29,
+        "Best": 1.2,
+        "Wrst": 1.42,
+        "StDev": 0.07
+      },
+      {
+        "count": "3",
+        "host": "198.51.100.3",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 0.8,
+        "Avg": 0.8,
+        "Best": 0.71,
+        "Wrst": 0.9,
+        "StDev": 0.06
+      },
+      {
+        "count": "4",
+        "host": "198.51.100.4",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 1.81,
+        "Avg": 3.4,
+        "Best": 1.81,
+        "Wrst": 12.04,
+        "StDev": 3.33
+      },
+      {
+        "count": "5",
+        "host": "198.51.100.5",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 1.57,
+        "Avg": 2.15,
+        "Best": 1.52,
+        "Wrst": 6.06,
+        "StDev": 1.38
+      },
+      {
+        "count": "6",
+        "host": "192.0.2.100",
+        "Loss%": 0.0,
+        "Snt": 10,
+        "Last": 0.85,
+        "Avg": 1.5,
+        "Best": 0.82,
+        "Wrst": 6.84,
+        "StDev": 1.88
+      }
+    ]
+  }
+}
