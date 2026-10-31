@@ -12341,30 +12341,12 @@ simlet: sadelvoip
 # -------------------
 # REQUEST DEFINITIONS
 # -------------------
+# only the method was evaluated in the former per-path list, so this simlet caught every GET request;
+# the single paths are matched in the responses below
 request:
   - method: GET
-    uriPath: /sadelvoip/api/v1/version
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/ping
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/consoles
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/consoles/consolewebvoip1
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/users
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/users/userwebvoip1
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/lines
-
-  - method: GET
-    uriPath: /sadelvoip/api/v1/diagnostic/lines/modem3
+  - where: uriPath
+    contains: /sadelvoip/api/v1/
 
 
 responses:
