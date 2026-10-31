@@ -129,8 +129,6 @@ sub new {
     bless $self, $class;
 
     $options{options}->add_options(arguments => {
-        'filter-operation:s'  => { redirect => 'include_operation' },
-        'filter-vpg-id:s'     => { redirect => 'include_vpg_id' },
         'include-operation:s' => { name => 'include_operation', default => '' },
         'exclude-operation:s' => { name => 'exclude_operation', default => '' },
         'include-vpg-id:s'    => { name => 'include_vpg_id', default => '' },

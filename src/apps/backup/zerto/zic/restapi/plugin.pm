@@ -31,6 +31,7 @@ sub new {
 
     $self->{modes} = {
         'alerts'               => 'apps::backup::zerto::zic::restapi::mode::alerts',
+        'discovery'            => 'apps::backup::zerto::zic::restapi::mode::discovery',
         'license'              => 'apps::backup::zerto::zic::restapi::mode::license',
         'list-member-accounts' => 'apps::backup::zerto::zic::restapi::mode::listmemberaccounts',
         'list-vpgs'            => 'apps::backup::zerto::zic::restapi::mode::listvpgs',

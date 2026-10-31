@@ -225,8 +225,6 @@ sub new {
     bless $self, $class;
 
     $options{options}->add_options(arguments => {
-        'filter-id:s'                 => { redirect => 'include_id' },
-        'filter-name:s'               => { redirect => 'include_name' },
         'include-id:s'                => { name => 'include_id', default => '' },
         'exclude-id:s'                => { name => 'exclude_id', default => '' },
         'include-name:s'              => { name => 'include_name', default => '' },
