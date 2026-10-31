@@ -1801,6 +1801,44 @@ responses:
 
 ---
 
+simlet: azure-postgresql
+
+request:
+  - method: GET
+  - uriPath: /azure/management/postgresql/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.DBforPostgreSQL/flexibleServers/postgres-flex-prod-1",
+            "name": "postgres-flex-prod-1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "location": "northeurope",
+            "tags": {}
+          }
+        ]
+      }
+
+---
+
 simlet: azure-storage-accounts
 
 request:
@@ -12699,4 +12737,598 @@ responses:
   - from: stub
     status: 404
 
+
+---
+
+simlet: zerto-zic-auth
+
+request:
+  - method: POST
+  - uriPath: /auth/realms/zerto/protocol/openid-connect/token
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /auth/realms/zerto/protocol/openid-connect/token
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id=zic-monitoring
+
+        - where: body
+          contains: client_secret=secret-123
+
+        - where: body
+          contains: grant_type=client_credentials
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "access_token": "zic-token-123",
+        "expires_in": 1800,
+        "token_type": "Bearer"
+      }
+
+---
+
+simlet: zerto-zic-vpgs
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/vpgs
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/vpgs
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "vpgs": [
+          {
+            "vpgId": "vpg-0001",
+            "vpgState": "Protecting",
+            "vpgInfo": {
+              "general": {
+                "name": "web-frontend",
+                "description": "",
+                "protectedRegion": {
+                  "id": "us-east-1",
+                  "name": "us-east-1"
+                },
+                "protectedAccount": {
+                  "accountId": "111111111111",
+                  "description": "prod",
+                  "status": "Ready"
+                },
+                "recoveryRegion": {
+                  "id": "eu-central-1",
+                  "name": "eu-central-1"
+                },
+                "recoveryAccount": {
+                  "accountId": "222222222222",
+                  "description": "dr",
+                  "status": "Ready"
+                }
+              },
+              "protectedResources": {
+                "vms": [
+                  {
+                    "id": "i-0000"
+                  },
+                  {
+                    "id": "i-0001"
+                  },
+                  {
+                    "id": "i-0002"
+                  }
+                ]
+              },
+              "replication": {
+                "sla": {
+                  "history": "1.00:00:00",
+                  "rpo": "00:15:00",
+                  "rpoAlert": "00:30:00"
+                }
+              }
+            },
+            "recoveryInfo": {
+              "failoverTestResult": {
+                "lastSucceeded": "2026-10-21T12:00:00.000000Z"
+              }
+            },
+            "replicationInfo": {
+              "replicationStatistics": {
+                "replicationData": {
+                  "latestCheckpoint": {
+                    "timeStamp": "2026-10-31T11:48:00.000000Z",
+                    "checkpointTag": null
+                  },
+                  "earliestCheckpoint": {
+                    "timeStamp": "2026-10-30T12:00:00.000000Z"
+                  },
+                  "progress": 100,
+                  "isRecovered": false
+                },
+                "actualRpo": "00:12:30",
+                "actualHistory": "1.02:00:00",
+                "protectionStatus": "MeetingSLA"
+              },
+              "replicationIssues": []
+            }
+          },
+          {
+            "vpgId": "vpg-0002",
+            "vpgState": "Protecting",
+            "vpgInfo": {
+              "general": {
+                "name": "erp-database",
+                "description": "",
+                "protectedRegion": {
+                  "id": "us-east-1",
+                  "name": "us-east-1"
+                },
+                "protectedAccount": {
+                  "accountId": "111111111111",
+                  "description": "prod",
+                  "status": "Ready"
+                },
+                "recoveryRegion": {
+                  "id": "eu-central-1",
+                  "name": "eu-central-1"
+                },
+                "recoveryAccount": {
+                  "accountId": "222222222222",
+                  "description": "dr",
+                  "status": "Ready"
+                }
+              },
+              "protectedResources": {
+                "vms": [
+                  {
+                    "id": "i-0000"
+                  },
+                  {
+                    "id": "i-0001"
+                  }
+                ]
+              },
+              "replication": {
+                "sla": {
+                  "history": "PT24H",
+                  "rpo": "PT15M",
+                  "rpoAlert": "00:30:00"
+                }
+              }
+            },
+            "recoveryInfo": {
+              "failoverTestResult": {
+                "lastSucceeded": "2026-09-16T12:00:00.000000Z"
+              }
+            },
+            "replicationInfo": {
+              "replicationStatistics": {
+                "replicationData": {
+                  "latestCheckpoint": {
+                    "timeStamp": "2026-10-31T11:13:00.000000Z",
+                    "checkpointTag": null
+                  },
+                  "earliestCheckpoint": {
+                    "timeStamp": "2026-10-30T12:00:00.000000Z"
+                  },
+                  "progress": 100,
+                  "isRecovered": false
+                },
+                "actualRpo": "00:47:00",
+                "actualHistory": "23:00:00",
+                "protectionStatus": "RpoNotMeetingSLA"
+              },
+              "replicationIssues": [
+                "Snapshot copy for i-0001 delayed"
+              ]
+            }
+          },
+          {
+            "vpgId": "vpg-0003",
+            "vpgState": "NeedsConfiguration",
+            "vpgInfo": {
+              "general": {
+                "name": "file-server",
+                "description": "",
+                "protectedRegion": {
+                  "id": "us-east-1",
+                  "name": "us-east-1"
+                },
+                "protectedAccount": {
+                  "accountId": "111111111111",
+                  "description": "prod",
+                  "status": "Ready"
+                },
+                "recoveryRegion": {
+                  "id": "eu-central-1",
+                  "name": "eu-central-1"
+                },
+                "recoveryAccount": {
+                  "accountId": "222222222222",
+                  "description": "dr",
+                  "status": "Ready"
+                }
+              },
+              "protectedResources": {
+                "vms": [
+                  {
+                    "id": "i-0000"
+                  }
+                ]
+              },
+              "replication": {
+                "sla": {
+                  "history": "1.00:00:00",
+                  "rpo": "00:15:00",
+                  "rpoAlert": "00:30:00"
+                }
+              }
+            },
+            "recoveryInfo": {
+              "failoverTestResult": {
+                "lastSucceeded": null
+              }
+            },
+            "replicationInfo": {
+              "replicationStatistics": {
+                "replicationData": {
+                  "latestCheckpoint": {
+                    "timeStamp": "2026-10-31T11:55:00.000000Z",
+                    "checkpointTag": null
+                  },
+                  "earliestCheckpoint": {
+                    "timeStamp": "2026-10-30T12:00:00.000000Z"
+                  },
+                  "progress": 42,
+                  "isRecovered": false
+                },
+                "actualRpo": null,
+                "actualHistory": null,
+                "protectionStatus": "Initializing"
+              },
+              "replicationIssues": []
+            }
+          }
+        ],
+        "vpgsWithoutData": [
+          "vpg-0099"
+        ]
+      }
+
+---
+
+simlet: zerto-zic-alerts
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/alerts
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/alerts
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "alerts": [
+          {
+            "alertKey": {
+              "failedEntityIdentifier": "vpg-0002",
+              "failureType": "RPO"
+            },
+            "alertEntity": "VPG",
+            "alertLevel": "Warning",
+            "alertDescription": "VPG vpg-0002 does not meet RPO SLA requirements.",
+            "startTime": "2026-10-31T11:30:00.000000Z",
+            "alertHelpId": "ZIC0002",
+            "vpgId": "vpg-0002",
+            "isDismissed": false,
+            "reasons": null
+          },
+          {
+            "alertKey": {
+              "failedEntityIdentifier": "vpg-0003",
+              "failureType": "NeedsConfig"
+            },
+            "alertEntity": "VPG",
+            "alertLevel": "Warning",
+            "alertDescription": "VPG vpg-0003 is in the NeedConfiguration state.",
+            "startTime": "2026-10-31T09:00:00.000000Z",
+            "alertHelpId": "ZIC0004",
+            "vpgId": "vpg-0003",
+            "isDismissed": false,
+            "reasons": null
+          },
+          {
+            "alertKey": {
+              "failedEntityIdentifier": "license",
+              "failureType": "License"
+            },
+            "alertEntity": "ZIC",
+            "alertLevel": "Warning",
+            "alertDescription": "Your license is due to expire in 20 days. To continue uninterrupted VM protection, update your license.",
+            "startTime": "2026-10-29T12:00:00.000000Z",
+            "alertHelpId": "ZIC0005",
+            "vpgId": null,
+            "isDismissed": false,
+            "reasons": null
+          }
+        ]
+      }
+
+---
+
+simlet: zerto-zic-license
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/license
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/license
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "details": {
+          "licenseKey": "XXXX-XXXX",
+          "licenseType": "Subscription",
+          "expiryDate": "2026-11-20",
+          "isExpired": false,
+          "maxVms": 50
+        },
+        "usage": {
+          "totalVmsCount": 41
+        }
+      }
+
+---
+
+simlet: zerto-zic-tasks
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/tasks
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/tasks
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "tasks": [
+          {
+            "taskId": {
+              "id": "task-0003"
+            },
+            "startTime": "2026-10-31T10:25:00.000000Z",
+            "endTime": null,
+            "status": "Running",
+            "progress": 63.5,
+            "vpgId": "vpg-0001",
+            "memberAccountId": null,
+            "operationType": "FailoverTest",
+            "taskResult": null
+          },
+          {
+            "taskId": {
+              "id": "task-0002"
+            },
+            "startTime": "2026-10-31T07:00:00.000000Z",
+            "endTime": "2026-10-31T08:00:00.000000Z",
+            "status": "Completed",
+            "progress": 100,
+            "vpgId": "vpg-0003",
+            "memberAccountId": null,
+            "operationType": "UpdateVpg",
+            "taskResult": {
+              "taskCompletionStatus": "Failed",
+              "failureReason": "Subnet subnet-0abc not found in recovery region",
+              "specificTaskResult": null
+            }
+          },
+          {
+            "taskId": {
+              "id": "task-0001"
+            },
+            "startTime": "2026-10-31T06:00:00.000000Z",
+            "endTime": "2026-10-31T06:10:00.000000Z",
+            "status": "Completed",
+            "progress": 100,
+            "vpgId": "vpg-0002",
+            "memberAccountId": null,
+            "operationType": "CreateVpg",
+            "taskResult": {
+              "taskCompletionStatus": "Success",
+              "failureReason": null,
+              "specificTaskResult": null
+            }
+          },
+          {
+            "taskId": {
+              "id": "task-0000"
+            },
+            "startTime": "2026-10-28T12:00:00.000000Z",
+            "endTime": "2026-10-28T12:00:00.000000Z",
+            "status": "Completed",
+            "progress": 100,
+            "vpgId": null,
+            "memberAccountId": "111111111111",
+            "operationType": "CreateMemberAccount",
+            "taskResult": {
+              "taskCompletionStatus": "Failed",
+              "failureReason": "old failure",
+              "specificTaskResult": null
+            }
+          }
+        ]
+      }
+
+---
+
+simlet: zerto-zic-memberaccounts
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/memberaccounts
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/memberaccounts
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "accounts": [
+          {
+            "accountId": {
+              "id": "111111111111"
+            },
+            "description": "prod",
+            "externalId": "ext-1",
+            "cmksPerRegion": [],
+            "status": "Ready",
+            "statusDescription": null
+          },
+          {
+            "accountId": {
+              "id": "222222222222"
+            },
+            "description": "dr",
+            "externalId": "ext-2",
+            "cmksPerRegion": [],
+            "status": "NotReady",
+            "statusDescription": "Cannot assume role ZertoInCloudRole"
+          }
+        ]
+      }
+
+---
+
+simlet: zerto-zic-memberaccounts-statistics
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/memberaccounts/statistics
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/memberaccounts/statistics
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "accounts": [
+          {
+            "accountId": {
+              "id": "111111111111"
+            },
+            "protectedVms": 6,
+            "totalVpgs": 3
+          },
+          {
+            "accountId": {
+              "id": "222222222222"
+            },
+            "protectedVms": 0,
+            "totalVpgs": 0
+          }
+        ]
+      }
 
