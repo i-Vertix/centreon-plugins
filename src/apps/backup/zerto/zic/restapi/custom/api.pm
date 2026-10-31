@@ -147,6 +147,9 @@ sub get_token {
         if is_empty($content);
 
     my $decoded = json_decode($content, output => $self->{output}, no_exit => 1);
+    # a non-JSON error page (proxy, wrong realm or path) is reported with its HTTP status
+    $self->{output}->option_exit(short_msg => "Authentication endpoint error [code: '" . $self->{http}->get_code() . "'] [message: '" . $self->{http}->get_message() . "'] (add --debug option to display returned content)")
+        if ref($decoded) ne 'HASH' && ($self->{http}->get_code() < 200 || $self->{http}->get_code() >= 300);
     $self->{output}->option_exit(short_msg => MSG_JSON_DECODE_ERROR)
         unless ref($decoded) eq 'HASH';
 

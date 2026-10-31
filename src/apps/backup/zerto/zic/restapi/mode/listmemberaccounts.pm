@@ -32,7 +32,6 @@ sub new {
     bless $self, $class;
 
     $options{options}->add_options(arguments => {
-        'filter-description:s'  => { redirect => 'include_description' },
         'include-description:s' => { name => 'include_description', default => '' },
         'exclude-description:s' => { name => 'exclude_description', default => '' }
     });

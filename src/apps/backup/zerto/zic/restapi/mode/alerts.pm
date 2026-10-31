@@ -115,9 +115,6 @@ sub new {
     bless $self, $class;
 
     $options{options}->add_options(arguments => {
-        'filter-type:s'     => { redirect => 'include_type' },
-        'filter-entity:s'   => { redirect => 'include_entity' },
-        'filter-vpg-id:s'   => { redirect => 'include_vpg_id' },
         'include-type:s'    => { name => 'include_type', default => '' },
         'exclude-type:s'    => { name => 'exclude_type', default => '' },
         'include-entity:s'  => { name => 'include_entity', default => '' },
