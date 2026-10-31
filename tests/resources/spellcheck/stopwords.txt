@@ -178,6 +178,7 @@ JSONPath
 Kairos
 kccevent
 keepass
+Keycloak
 Keysight
 kubectl
 Kubernetes
@@ -319,6 +320,7 @@ ReplicaJobSession
 RestAPI
 RFC1628
 RMAN
+RPO
 RRDCached
 rsrp
 rsrq
@@ -416,6 +418,8 @@ VIRSHCLI
 VM
 VMs
 VMware
+VPG
+VPGs
 VMWARE
 vpn
 VPN
@@ -446,5 +450,7 @@ XCP-ng
 Xen
 XPath
 ZDX
+Zerto
 ZFS
+ZIC
 Zscaler
