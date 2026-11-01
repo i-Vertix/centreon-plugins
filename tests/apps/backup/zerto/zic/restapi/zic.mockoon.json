@@ -1,0 +1,618 @@
+{
+    "uuid": "d4abee8d-1d33-5fbe-bd8c-f363f28dda83",
+    "lastMigration": 33,
+    "name": "Zerto In-Cloud",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "folders": [],
+    "routes": [
+        {
+            "uuid": "c5d71106-02fd-56d0-9bd1-acbbc28b7c3e",
+            "type": "http",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "auth/realms/zerto/protocol/openid-connect/token",
+            "responses": [
+                {
+                    "uuid": "c1a87fce-ace7-5d2b-aeae-8e99abf95f7c",
+                    "body": "{\n  \"access_token\": \"zic-token-123\",\n  \"expires_in\": 1800,\n  \"token_type\": \"Bearer\"\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "client credentials",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "client_id",
+                            "value": "zic-monitoring",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "client_secret",
+                            "value": "secret-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "grant_type",
+                            "value": "client_credentials",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "f59bc038-2a10-52a0-905e-45d5cf148c92",
+                    "body": "{\n  \"access_token\": \"zic-token-123\",\n  \"expires_in\": 1800,\n  \"token_type\": \"Bearer\"\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "password grant",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "client_id",
+                            "value": "zic-monitoring",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "username",
+                            "value": "monitor",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "password",
+                            "value": "pass-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "grant_type",
+                            "value": "password",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "9eef5201-ed58-5ef0-b1a9-ec83e2cb4b06",
+                    "body": "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"Invalid client credentials\"\n}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid credentials",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "9858489d-7bff-5413-afd7-3d41043b691e",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/vpgs",
+            "responses": [
+                {
+                    "uuid": "49b577b1-8169-5ebd-9607-4b9962251601",
+                    "body": "{{setVar 'tsm2820' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-2820)}}\n{{setVar 'tsm300' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-300)}}\n{{setVar 'tsm3888000' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-3888000)}}\n{{setVar 'tsm720' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-720)}}\n{{setVar 'tsm86400' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-86400)}}\n{{setVar 'tsm864000' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-864000)}}\n{\n  \"vpgs\": [\n    {\n      \"vpgId\": \"vpg-0001\",\n      \"vpgState\": \"Protecting\",\n      \"vpgInfo\": {\n        \"general\": {\n          \"name\": \"web-frontend\",\n          \"description\": \"\",\n          \"protectedRegion\": {\n            \"id\": \"us-east-1\",\n            \"name\": \"us-east-1\"\n          },\n          \"protectedAccount\": {\n            \"accountId\": \"111111111111\",\n            \"description\": \"prod\",\n            \"status\": \"Ready\"\n          },\n          \"recoveryRegion\": {\n            \"id\": \"eu-central-1\",\n            \"name\": \"eu-central-1\"\n          },\n          \"recoveryAccount\": {\n            \"accountId\": \"222222222222\",\n            \"description\": \"dr\",\n            \"status\": \"Ready\"\n          }\n        },\n        \"protectedResources\": {\n          \"vms\": [\n            {\n              \"id\": \"i-0000\"\n            },\n            {\n              \"id\": \"i-0001\"\n            },\n            {\n              \"id\": \"i-0002\"\n            }\n          ]\n        },\n        \"replication\": {\n          \"sla\": {\n            \"history\": \"1.00:00:00\",\n            \"rpo\": \"00:15:00\",\n            \"rpoAlert\": \"00:30:00\"\n          }\n        }\n      },\n      \"recoveryInfo\": {\n        \"failoverTestResult\": {\n          \"lastSucceeded\": \"{{getVar 'tsm864000'}}\"\n        }\n      },\n      \"replicationInfo\": {\n        \"replicationStatistics\": {\n          \"replicationData\": {\n            \"latestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm720'}}\",\n              \"checkpointTag\": null\n            },\n            \"earliestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm86400'}}\"\n            },\n            \"progress\": 100,\n            \"isRecovered\": false\n          },\n          \"actualRpo\": \"00:12:30\",\n          \"actualHistory\": \"1.02:00:00\",\n          \"protectionStatus\": \"MeetingSLA\"\n        },\n        \"replicationIssues\": []\n      }\n    },\n    {\n      \"vpgId\": \"vpg-0002\",\n      \"vpgState\": \"Protecting\",\n      \"vpgInfo\": {\n        \"general\": {\n          \"name\": \"erp-database\",\n          \"description\": \"\",\n          \"protectedRegion\": {\n            \"id\": \"us-east-1\",\n            \"name\": \"us-east-1\"\n          },\n          \"protectedAccount\": {\n            \"accountId\": \"111111111111\",\n            \"description\": \"prod\",\n            \"status\": \"Ready\"\n          },\n          \"recoveryRegion\": {\n            \"id\": \"eu-central-1\",\n            \"name\": \"eu-central-1\"\n          },\n          \"recoveryAccount\": {\n            \"accountId\": \"222222222222\",\n            \"description\": \"dr\",\n            \"status\": \"Ready\"\n          }\n        },\n        \"protectedResources\": {\n          \"vms\": [\n            {\n              \"id\": \"i-0000\"\n            },\n            {\n              \"id\": \"i-0001\"\n            }\n          ]\n        },\n        \"replication\": {\n          \"sla\": {\n            \"history\": \"PT24H\",\n            \"rpo\": \"PT15M\",\n            \"rpoAlert\": \"00:30:00\"\n          }\n        }\n      },\n      \"recoveryInfo\": {\n        \"failoverTestResult\": {\n          \"lastSucceeded\": \"{{getVar 'tsm3888000'}}\"\n        }\n      },\n      \"replicationInfo\": {\n        \"replicationStatistics\": {\n          \"replicationData\": {\n            \"latestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm2820'}}\",\n              \"checkpointTag\": null\n            },\n            \"earliestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm86400'}}\"\n            },\n            \"progress\": 100,\n            \"isRecovered\": false\n          },\n          \"actualRpo\": \"00:47:00\",\n          \"actualHistory\": \"23:00:00\",\n          \"protectionStatus\": \"RpoNotMeetingSLA\"\n        },\n        \"replicationIssues\": [\n          \"Snapshot copy for i-0001 delayed\"\n        ]\n      }\n    },\n    {\n      \"vpgId\": \"vpg-0003\",\n      \"vpgState\": \"NeedsConfiguration\",\n      \"vpgInfo\": {\n        \"general\": {\n          \"name\": \"file-server\",\n          \"description\": \"\",\n          \"protectedRegion\": {\n            \"id\": \"us-east-1\",\n            \"name\": \"us-east-1\"\n          },\n          \"protectedAccount\": {\n            \"accountId\": \"111111111111\",\n            \"description\": \"prod\",\n            \"status\": \"Ready\"\n          },\n          \"recoveryRegion\": {\n            \"id\": \"eu-central-1\",\n            \"name\": \"eu-central-1\"\n          },\n          \"recoveryAccount\": {\n            \"accountId\": \"222222222222\",\n            \"description\": \"dr\",\n            \"status\": \"Ready\"\n          }\n        },\n        \"protectedResources\": {\n          \"vms\": [\n            {\n              \"id\": \"i-0000\"\n            }\n          ]\n        },\n        \"replication\": {\n          \"sla\": {\n            \"history\": \"1.00:00:00\",\n            \"rpo\": \"00:15:00\",\n            \"rpoAlert\": \"00:30:00\"\n          }\n        }\n      },\n      \"recoveryInfo\": {\n        \"failoverTestResult\": {\n          \"lastSucceeded\": null\n        }\n      },\n      \"replicationInfo\": {\n        \"replicationStatistics\": {\n          \"replicationData\": {\n            \"latestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm300'}}\",\n              \"checkpointTag\": null\n            },\n            \"earliestCheckpoint\": {\n              \"timeStamp\": \"{{getVar 'tsm86400'}}\"\n            },\n            \"progress\": 42,\n            \"isRecovered\": false\n          },\n          \"actualRpo\": null,\n          \"actualHistory\": null,\n          \"protectionStatus\": \"Initializing\"\n        },\n        \"replicationIssues\": []\n      }\n    }\n  ],\n  \"vpgsWithoutData\": [\n    \"vpg-0099\"\n  ]\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "80080fa6-477d-55d5-b784-3308e6e8384c",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "d4a17955-c8ec-57b3-af0a-eb16deddb4f5",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/alerts",
+            "responses": [
+                {
+                    "uuid": "700b4573-715a-5131-ab72-7cf383f184c5",
+                    "body": "{{setVar 'tsm10800' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-10800)}}\n{{setVar 'tsm172800' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-172800)}}\n{{setVar 'tsm1800' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-1800)}}\n{\n  \"alerts\": [\n    {\n      \"alertKey\": {\n        \"failedEntityIdentifier\": \"vpg-0002\",\n        \"failureType\": \"RPO\"\n      },\n      \"alertEntity\": \"VPG\",\n      \"alertLevel\": \"Warning\",\n      \"alertDescription\": \"VPG vpg-0002 does not meet RPO SLA requirements.\",\n      \"startTime\": \"{{getVar 'tsm1800'}}\",\n      \"alertHelpId\": \"ZIC0002\",\n      \"vpgId\": \"vpg-0002\",\n      \"isDismissed\": false,\n      \"reasons\": null\n    },\n    {\n      \"alertKey\": {\n        \"failedEntityIdentifier\": \"vpg-0003\",\n        \"failureType\": \"NeedsConfig\"\n      },\n      \"alertEntity\": \"VPG\",\n      \"alertLevel\": \"Warning\",\n      \"alertDescription\": \"VPG vpg-0003 is in the NeedConfiguration state.\",\n      \"startTime\": \"{{getVar 'tsm10800'}}\",\n      \"alertHelpId\": \"ZIC0004\",\n      \"vpgId\": \"vpg-0003\",\n      \"isDismissed\": false,\n      \"reasons\": null\n    },\n    {\n      \"alertKey\": {\n        \"failedEntityIdentifier\": \"license\",\n        \"failureType\": \"License\"\n      },\n      \"alertEntity\": \"ZIC\",\n      \"alertLevel\": \"Warning\",\n      \"alertDescription\": \"Your license is due to expire in 20 days. To continue uninterrupted VM protection, update your license.\",\n      \"startTime\": \"{{getVar 'tsm172800'}}\",\n      \"alertHelpId\": \"ZIC0005\",\n      \"vpgId\": null,\n      \"isDismissed\": false,\n      \"reasons\": null\n    }\n  ]\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "e36dbae4-ba83-58c2-b38c-802f2c809881",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "6aa180ec-7575-5acf-ac9c-3061ce071002",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/zicconfiguration/license",
+            "responses": [
+                {
+                    "uuid": "2be2def8-375d-56c4-b5d5-60a468ac3855",
+                    "body": "{{setVar 'dayp20' (dateTimeShift date=(now) format='yyyy-MM-dd' days=20)}}\n{\n  \"details\": {\n    \"licenseKey\": \"XXXX-XXXX\",\n    \"licenseType\": \"Subscription\",\n    \"expiryDate\": \"{{getVar 'dayp20'}}\",\n    \"isExpired\": false,\n    \"maxVms\": 50\n  },\n  \"usage\": {\n    \"totalVmsCount\": 41\n  }\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "4421a175-8ebd-58d7-b33c-939517ca3ffc",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "5b05fcbf-dfc5-51ca-b443-642c441c84b1",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/tasks",
+            "responses": [
+                {
+                    "uuid": "ac72fd98-0713-56f2-ae27-83a3e49d4e66",
+                    "body": "{{setVar 'tsm14400' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-14400)}}\n{{setVar 'tsm18000' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-18000)}}\n{{setVar 'tsm21000' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-21000)}}\n{{setVar 'tsm21600' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-21600)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-259200)}}\n{{setVar 'tsm5700' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=-5700)}}\n{\n  \"tasks\": [\n    {\n      \"taskId\": {\n        \"id\": \"task-0003\"\n      },\n      \"startTime\": \"{{getVar 'tsm5700'}}\",\n      \"endTime\": null,\n      \"status\": \"Running\",\n      \"progress\": 63.5,\n      \"vpgId\": \"vpg-0001\",\n      \"memberAccountId\": null,\n      \"operationType\": \"FailoverTest\",\n      \"taskResult\": null\n    },\n    {\n      \"taskId\": {\n        \"id\": \"task-0002\"\n      },\n      \"startTime\": \"{{getVar 'tsm18000'}}\",\n      \"endTime\": \"{{getVar 'tsm14400'}}\",\n      \"status\": \"Completed\",\n      \"progress\": 100,\n      \"vpgId\": \"vpg-0003\",\n      \"memberAccountId\": null,\n      \"operationType\": \"UpdateVpg\",\n      \"taskResult\": {\n        \"taskCompletionStatus\": \"Failed\",\n        \"failureReason\": \"Subnet subnet-0abc not found in recovery region\",\n        \"specificTaskResult\": null\n      }\n    },\n    {\n      \"taskId\": {\n        \"id\": \"task-0001\"\n      },\n      \"startTime\": \"{{getVar 'tsm21600'}}\",\n      \"endTime\": \"{{getVar 'tsm21000'}}\",\n      \"status\": \"Completed\",\n      \"progress\": 100,\n      \"vpgId\": \"vpg-0002\",\n      \"memberAccountId\": null,\n      \"operationType\": \"CreateVpg\",\n      \"taskResult\": {\n        \"taskCompletionStatus\": \"Success\",\n        \"failureReason\": null,\n        \"specificTaskResult\": null\n      }\n    },\n    {\n      \"taskId\": {\n        \"id\": \"task-0000\"\n      },\n      \"startTime\": \"{{getVar 'tsm259200'}}\",\n      \"endTime\": \"{{getVar 'tsm259200'}}\",\n      \"status\": \"Completed\",\n      \"progress\": 100,\n      \"vpgId\": null,\n      \"memberAccountId\": \"111111111111\",\n      \"operationType\": \"CreateMemberAccount\",\n      \"taskResult\": {\n        \"taskCompletionStatus\": \"Failed\",\n        \"failureReason\": \"old failure\",\n        \"specificTaskResult\": null\n      }\n    }\n  ]\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "7791e8b9-a1b9-5ab4-9621-e34cc975a8c1",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "a5c4510e-5f31-5a25-8358-7f0b43a90bca",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/zicconfiguration/memberaccounts",
+            "responses": [
+                {
+                    "uuid": "9917eefd-fe44-58a3-ae1c-ad8f2abb5eb8",
+                    "body": "{\n  \"accounts\": [\n    {\n      \"accountId\": {\n        \"id\": \"111111111111\"\n      },\n      \"description\": \"prod\",\n      \"externalId\": \"ext-1\",\n      \"cmksPerRegion\": [],\n      \"status\": \"Ready\",\n      \"statusDescription\": null\n    },\n    {\n      \"accountId\": {\n        \"id\": \"222222222222\"\n      },\n      \"description\": \"dr\",\n      \"externalId\": \"ext-2\",\n      \"cmksPerRegion\": [],\n      \"status\": \"NotReady\",\n      \"statusDescription\": \"Cannot assume role ZertoInCloudRole\"\n    }\n  ]\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "93684bfa-46ae-5a88-8314-cda0e1a689ed",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "91a4d2f5-7d19-57ef-866b-44850b354350",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "zic/api/v2/zicconfiguration/memberaccounts/statistics",
+            "responses": [
+                {
+                    "uuid": "89fdb4a3-8854-58a6-84df-099189d3f229",
+                    "body": "{\n  \"accounts\": [\n    {\n      \"accountId\": {\n        \"id\": \"111111111111\"\n      },\n      \"protectedVms\": 6,\n      \"totalVpgs\": 3\n    },\n    {\n      \"accountId\": {\n        \"id\": \"222222222222\"\n      },\n      \"protectedVms\": 0,\n      \"totalVpgs\": 0\n    }\n  ]\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "authorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zic-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "dfdcc072-bd01-5d89-a9d2-fdb100fb8b94",
+                    "body": "{\"error\": \"invalid token\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid token",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        }
+    ],
+    "rootChildren": [
+        {
+            "type": "route",
+            "uuid": "c5d71106-02fd-56d0-9bd1-acbbc28b7c3e"
+        },
+        {
+            "type": "route",
+            "uuid": "9858489d-7bff-5413-afd7-3d41043b691e"
+        },
+        {
+            "type": "route",
+            "uuid": "d4a17955-c8ec-57b3-af0a-eb16deddb4f5"
+        },
+        {
+            "type": "route",
+            "uuid": "6aa180ec-7575-5acf-ac9c-3061ce071002"
+        },
+        {
+            "type": "route",
+            "uuid": "5b05fcbf-dfc5-51ca-b443-642c441c84b1"
+        },
+        {
+            "type": "route",
+            "uuid": "a5c4510e-5f31-5a25-8358-7f0b43a90bca"
+        },
+        {
+            "type": "route",
+            "uuid": "91a4d2f5-7d19-57ef-866b-44850b354350"
+        }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+        "enabled": false,
+        "type": "CERT",
+        "pfxPath": "",
+        "certPath": "",
+        "keyPath": "",
+        "caPath": "",
+        "passphrase": ""
+    },
+    "cors": true,
+    "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/json"
+        }
+    ],
+    "proxyReqHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "proxyResHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "data": [],
+    "callbacks": []
+}
