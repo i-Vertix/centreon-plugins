@@ -1,0 +1,653 @@
+{
+  "uuid": "5c2d7e1a-3b4f-4a6d-9c8e-0f1a2b3c4d5e",
+  "lastMigration": 33,
+  "name": "Sangfor SCP",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "19932b05-be20-5bcf-ab1d-a89f266b4db8",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/public-key",
+      "responses": [
+        {
+          "uuid": "81b14423-162d-56fa-9f8e-218b67e22969",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"public_key\": \"C7F2ABE22B30E3E4DA0145D9D3A236EEA004F0ACAFDED014BAE1522D1D50FA7F6D92A6364A606AABA4E802F6FA5041852312F6706A06418EAD634FE554446CAF3DBA050D8DD3086D858051E5F51361C9C6ECCE4E56C8C99D4DDFFFA580C4FCC5FC2138153D085F1EAF7E03472788322294510AE5EA3CB963B756B2DDF3FA74F5BE3FB30892C4563FB4FDEBC06173508AE7D589F153ACB4F3CF88EC8CCB5011FCFF76CF8894C00D226B290731F3DF6AE8964FF64F076BBC0CFE0B791625383296B60B222D3301ED0BAD3C3A462E16321A113990598BFB2F361BF712BED65B2A4DD715A09D2554300CC134C19560C569104EB72A88382EF034DAC4BFFF08F131FB\\n\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "70e86e46-cc41-5a97-97e4-e149bd301beb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/v2/public-key",
+      "responses": [
+        {
+          "uuid": "16d06572-6487-5aae-bc2b-f8a7c515e3a8",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"public_key\": \"C7F2ABE22B30E3E4DA0145D9D3A236EEA004F0ACAFDED014BAE1522D1D50FA7F6D92A6364A606AABA4E802F6FA5041852312F6706A06418EAD634FE554446CAF3DBA050D8DD3086D858051E5F51361C9C6ECCE4E56C8C99D4DDFFFA580C4FCC5FC2138153D085F1EAF7E03472788322294510AE5EA3CB963B756B2DDF3FA74F5BE3FB30892C4563FB4FDEBC06173508AE7D589F153ACB4F3CF88EC8CCB5011FCFF76CF8894C00D226B290731F3DF6AE8964FF64F076BBC0CFE0B791625383296B60B222D3301ED0BAD3C3A462E16321A113990598BFB2F361BF712BED65B2A4DD715A09D2554300CC134C19560C569104EB72A88382EF034DAC4BFFF08F131FB\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "81abdb9c-8866-5b9d-95be-4e4b5e072e4a",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "janus/authenticate",
+      "responses": [
+        {
+          "uuid": "d22fc754-6256-5b3d-88d2-295011a9d354",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"access\": {\n      \"token\": {\n        \"issued_at\": \"2026-10-31T06:31:41.000000Z\",\n        \"expires\": \"2099-01-01T00:00:00.000000Z\",\n        \"id\": \"0123456789abcdef0123456789abcdef\",\n        \"tenant\": {\n          \"id\": \"cf92f8d651c24ed6938b186e252ee0bc\",\n          \"enabled\": true,\n          \"description\": \"\",\n          \"name\": \"admin\"\n        },\n        \"audit_ids\": []\n      },\n      \"user\": {\n        \"username\": \"monitoring\",\n        \"roles_links\": [],\n        \"name\": \"monitoring\",\n        \"roles\": [\n          {\n            \"name\": \"admin\"\n          }\n        ],\n        \"id\": \"349c19d7653349e1a8918326aacb4430\"\n      }\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "ba0f43c3-d7fb-5ae9-852d-358b57420bb6",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "janus/v2/authenticate",
+      "responses": [
+        {
+          "uuid": "f54841dd-5097-5b80-8418-0104ac339a7a",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"access\": {\n      \"token\": {\n        \"issued_at\": \"2026-10-31T06:31:41.000000Z\",\n        \"expires\": \"2099-01-01T00:00:00.000000Z\",\n        \"id\": \"0123456789abcdef0123456789abcdef\",\n        \"tenant\": {\n          \"id\": \"cf92f8d651c24ed6938b186e252ee0bc\",\n          \"enabled\": true,\n          \"description\": \"\",\n          \"name\": \"admin\"\n        },\n        \"audit_ids\": []\n      },\n      \"user\": {\n        \"username\": \"monitoring\",\n        \"roles_links\": [],\n        \"name\": \"monitoring\",\n        \"roles\": [\n          {\n            \"name\": \"admin\"\n          }\n        ],\n        \"id\": \"349c19d7653349e1a8918326aacb4430\"\n      }\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "26582ff6-1233-5780-95ad-8f86ffcf5862",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/azs",
+      "responses": [
+        {
+          "uuid": "75db814a-d99a-56b0-a83f-819986288769",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": [\n    {\n      \"status\": \"normal\",\n      \"description\": \"\",\n      \"tag\": \"private\",\n      \"version\": \"6.9.0\",\n      \"type\": \"hci\",\n      \"id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"name\": \"pool-prod\"\n    },\n    {\n      \"status\": \"offline\",\n      \"description\": \"\",\n      \"tag\": \"public\",\n      \"version\": \"6.8.0\",\n      \"type\": \"hci\",\n      \"id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n      \"name\": \"pool-lab\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "868375b6-2859-52c5-8a6b-58cd3a09b3e6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/azs/a1b2c3d4-0000-4000-8000-000000000001",
+      "responses": [
+        {
+          "uuid": "1dcd48a3-9545-5ea7-85e9-d0ac81b9fc1b",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"status\": \"normal\",\n    \"description\": \"\",\n    \"tag\": \"private\",\n    \"version\": \"6.9.0\",\n    \"type\": \"hci\",\n    \"id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n    \"name\": \"pool-prod\",\n    \"physical_resources\": [\n      {\n        \"unit\": \"mb\",\n        \"total\": 3133440.0,\n        \"name\": \"storage\",\n        \"used\": 173357.0\n      },\n      {\n        \"unit\": \"mhz\",\n        \"total\": 105355.97,\n        \"name\": \"cpu\",\n        \"used\": 27743.74\n      },\n      {\n        \"unit\": \"mb\",\n        \"total\": 98304.0,\n        \"name\": \"memory\",\n        \"used\": 46717.49\n      },\n      {\n        \"unit\": \"\",\n        \"total\": 0,\n        \"name\": \"gpu\",\n        \"used\": 0.0\n      },\n      {\n        \"unit\": \"mb\",\n        \"total\": 0,\n        \"name\": \"gpu_mem\",\n        \"used\": 0\n      }\n    ],\n    \"virtual_resources\": [\n      {\n        \"name\": \"cpu\",\n        \"limit\": -1,\n        \"allocated\": 274,\n        \"total\": 30.0,\n        \"occupied\": 89,\n        \"unit\": \"Core\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0a60c21e-790d-5b74-a8a1-54121109b3fc",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/azs/a1b2c3d4-0000-4000-8000-000000000002",
+      "responses": [
+        {
+          "uuid": "185b4442-f05f-5d85-b298-3bae52904d9f",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"status\": \"offline\",\n    \"description\": \"\",\n    \"tag\": \"public\",\n    \"version\": \"6.8.0\",\n    \"type\": \"hci\",\n    \"id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n    \"name\": \"pool-lab\",\n    \"physical_resources\": [\n      {\n        \"unit\": \"mb\",\n        \"total\": 2854884.0,\n        \"name\": \"storage\",\n        \"used\": 156326.0\n      },\n      {\n        \"unit\": \"mhz\",\n        \"total\": 62253.72,\n        \"name\": \"cpu\",\n        \"used\": 29051.74\n      },\n      {\n        \"unit\": \"mb\",\n        \"total\": 122880.0,\n        \"name\": \"memory\",\n        \"used\": 50054.02\n      },\n      {\n        \"unit\": \"\",\n        \"total\": 0,\n        \"name\": \"gpu\",\n        \"used\": 0.0\n      },\n      {\n        \"unit\": \"mb\",\n        \"total\": 0,\n        \"name\": \"gpu_mem\",\n        \"used\": 0\n      }\n    ],\n    \"virtual_resources\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "97b55cb6-6ede-5df1-8a8a-50bba5cd8d5b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/clusters",
+      "responses": [
+        {
+          "uuid": "1c92a29a-7f72-58d5-96e0-65fda6bd039b",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"total_size\": 1,\n    \"page_num\": 0,\n    \"page_size\": 100,\n    \"next_page_num\": \"\",\n    \"data\": [\n      {\n        \"status\": \"master_offline\",\n        \"authorize_mode\": \"platform\",\n        \"name\": \"cluster-lab\",\n        \"project_ids\": [],\n        \"storage\": {\n          \"total_mb\": 3899436.0,\n          \"used_mb\": 2945566.0,\n          \"ratio\": 0.76\n        },\n        \"cpu\": {\n          \"total_mhz\": 95788.28,\n          \"ratio\": 0.46,\n          \"used_mhz\": 44062.61\n        },\n        \"version\": \"6.7.0\",\n        \"memory\": {\n          \"total_mb\": 262144.0,\n          \"used_mb\": 131072.0,\n          \"ratio\": 0.5\n        },\n        \"type\": \"hci\",\n        \"id\": \"c1d2e3f4-0000-4000-8000-000000000002\",\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n        \"description\": \"\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "az_id=a1b2c3d4-0000-4000-8000-000000000002",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "az_id",
+              "value": "a1b2c3d4-0000-4000-8000-000000000002",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2e0122a5-acee-559e-a148-4a6f69005c91",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"total_size\": 2,\n    \"page_num\": 0,\n    \"page_size\": 100,\n    \"next_page_num\": \"\",\n    \"data\": [\n      {\n        \"status\": \"normal\",\n        \"authorize_mode\": \"cluster\",\n        \"name\": \"cluster-prod\",\n        \"project_ids\": [],\n        \"storage\": {\n          \"total_mb\": 23543766.0,\n          \"used_mb\": 1535376.0,\n          \"ratio\": 0.07\n        },\n        \"cpu\": {\n          \"total_mhz\": 287462.28,\n          \"ratio\": 0.1,\n          \"used_mhz\": 29710.45\n        },\n        \"version\": \"6.8.0\",\n        \"memory\": {\n          \"total_mb\": 393216.0,\n          \"used_mb\": 105635.09,\n          \"ratio\": 0.27\n        },\n        \"type\": \"hci\",\n        \"id\": \"c1d2e3f4-0000-4000-8000-000000000001\",\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n        \"description\": \"\"\n      },\n      {\n        \"status\": \"master_offline\",\n        \"authorize_mode\": \"platform\",\n        \"name\": \"cluster-lab\",\n        \"project_ids\": [],\n        \"storage\": {\n          \"total_mb\": 3899436.0,\n          \"used_mb\": 2945566.0,\n          \"ratio\": 0.76\n        },\n        \"cpu\": {\n          \"total_mhz\": 95788.28,\n          \"ratio\": 0.46,\n          \"used_mhz\": 44062.61\n        },\n        \"version\": \"6.7.0\",\n        \"memory\": {\n          \"total_mb\": 262144.0,\n          \"used_mb\": 131072.0,\n          \"ratio\": 0.5\n        },\n        \"type\": \"hci\",\n        \"id\": \"c1d2e3f4-0000-4000-8000-000000000002\",\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n        \"description\": \"\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c3bb2e4b-8af9-5bfa-9fed-12696c0fbc5a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/hosts",
+      "responses": [
+        {
+          "uuid": "766f0e47-dac4-58b2-ab67-a83a1dcc555f",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": [\n    {\n      \"status\": \"running\",\n      \"description\": \"\",\n      \"ip\": \"192.0.2.11\",\n      \"storage\": {\n        \"total_mb\": 4105435.99\n      },\n      \"cpu\": {\n        \"used_mhz\": 11883.6,\n        \"allocation_ratio\": 2.5,\n        \"ratio\": 0.45,\n        \"allocation_max\": 0.0,\n        \"cores_per_socket\": 4,\n        \"socket_count\": 1,\n        \"total_mhz\": 26408.0,\n        \"type\": \"Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz\",\n        \"core_count\": 4\n      },\n      \"reserves\": {\n        \"memory_mb\": 4096\n      },\n      \"memory\": {\n        \"total_mb\": 32768.0,\n        \"allocation_ratio\": 1.0,\n        \"allocation_max\": 0.0,\n        \"used_mb\": 17039.36,\n        \"ratio\": 0.52\n      },\n      \"gpu\": {\n        \"used\": 0.0,\n        \"ratio\": 0.0,\n        \"memory_used_mb\": 0.0,\n        \"memory_ratio\": 0.0,\n        \"total\": 0,\n        \"memory_total_mb\": 0.0\n      },\n      \"alarm_count\": 0,\n      \"is_use_vs\": 1,\n      \"type\": \"h\",\n      \"id\": \"host-0a1b2c3d4e01\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"name\": \"192.0.2.11\"\n    },\n    {\n      \"status\": \"offline\",\n      \"description\": \"\",\n      \"ip\": \"192.0.2.12\",\n      \"storage\": {\n        \"total_mb\": 4105435.99\n      },\n      \"cpu\": {\n        \"used_mhz\": 12939.92,\n        \"allocation_ratio\": 2.5,\n        \"ratio\": 0.49,\n        \"allocation_max\": 0.0,\n        \"cores_per_socket\": 4,\n        \"socket_count\": 1,\n        \"total_mhz\": 26408.0,\n        \"type\": \"Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz\",\n        \"core_count\": 4\n      },\n      \"reserves\": {\n        \"memory_mb\": 4096\n      },\n      \"memory\": {\n        \"total_mb\": 32768.0,\n        \"allocation_ratio\": 1.0,\n        \"allocation_max\": 0.0,\n        \"used_mb\": 19333.12,\n        \"ratio\": 0.59\n      },\n      \"gpu\": {\n        \"used\": 0.0,\n        \"ratio\": 0.0,\n        \"memory_used_mb\": 0.0,\n        \"memory_ratio\": 0.0,\n        \"total\": 0,\n        \"memory_total_mb\": 0.0\n      },\n      \"alarm_count\": 2,\n      \"is_use_vs\": 1,\n      \"type\": \"h\",\n      \"id\": \"host-0a1b2c3d4e02\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n      \"name\": \"192.0.2.12\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "393b1de8-3eb2-5132-8cbb-f346082c257d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/storages",
+      "responses": [
+        {
+          "uuid": "0084a1de-61cf-5e97-bde4-43692a920b40",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": [\n    {\n      \"status\": \"ok\",\n      \"write_byteps\": 524288.0,\n      \"ratio\": 0.0,\n      \"description\": \"\",\n      \"max_write_byteps\": 60030976.0,\n      \"read_byteps\": 1048576.0,\n      \"total_mb\": 520192,\n      \"name\": \"datastore-vs\",\n      \"used_mb\": 1367,\n      \"max_read_byteps\": 132593664.0,\n      \"storage_tag_id\": \"11111111-1111-1111-1111-111111111111\",\n      \"type\": \"vs\",\n      \"id\": \"e396b491_vs_vol_rep2\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"target\": \"\"\n    },\n    {\n      \"status\": \"offline\",\n      \"write_byteps\": 0.0,\n      \"ratio\": 0.0,\n      \"description\": \"Local storage of the node\",\n      \"max_write_byteps\": 60030976.0,\n      \"read_byteps\": 0.0,\n      \"total_mb\": 0,\n      \"name\": \"node1_local\",\n      \"used_mb\": 0,\n      \"max_read_byteps\": 132593664.0,\n      \"storage_tag_id\": \"\",\n      \"type\": \"local\",\n      \"id\": \"350014ee2b684e903_001b21d61e70\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"target\": \"\"\n    },\n    {\n      \"status\": \"alarm\",\n      \"write_byteps\": 15659008.0,\n      \"ratio\": 0.82,\n      \"description\": \"\",\n      \"max_write_byteps\": 15659008.0,\n      \"read_byteps\": 35479552.0,\n      \"total_mb\": 2251776,\n      \"name\": \"iscsi-01\",\n      \"used_mb\": 1843200,\n      \"max_read_byteps\": 35479552.0,\n      \"storage_tag_id\": \"11111111-1111-1111-1111-111111111111\",\n      \"type\": \"iscsi\",\n      \"id\": \"1SANGFOR_ASAN-00a-299e-4c5c-b2d2-14c5fc6f319b\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n      \"target\": \"iqn.2015-08.com.example.asan:iscsi-01\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b54ccca4-8c5f-5728-9e41-60ce6fef97b6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20190725/servers",
+      "responses": [
+        {
+          "uuid": "9023fb17-e7cb-51aa-b0b3-3c2c16c3ff8a",
+          "body": "{\n  \"message\": \"\",\n  \"errcode\": \"\",\n  \"data\": {\n    \"total_size\": 1,\n    \"page_num\": 0,\n    \"page_size\": 100,\n    \"next_page_num\": \"\",\n    \"data\": [\n      {\n        \"id\": \"f1e2d3c4-0000-4000-8000-000000000002\",\n        \"name\": \"db-01\",\n        \"status\": \"running\",\n        \"power_state\": \"on\",\n        \"is_stopped\": 0,\n        \"type\": \"hci\",\n        \"vmtype\": \"vm\",\n        \"os_type\": \"l2664\",\n        \"os_name\": \"Debian GNU/Linux 12\",\n        \"description\": \"\",\n        \"uptime\": 86400,\n        \"shutdown_duration\": 0,\n        \"ips\": [],\n        \"user_id\": null,\n        \"user_name\": \"\",\n        \"project_id\": \"f866c39e45754bd78f9e3d7d4632bcbc\",\n        \"project_name\": \"admin\",\n        \"cores_per_socket\": 1,\n        \"sockets\": 1,\n        \"cores\": 1,\n        \"mhz\": 4402.0,\n        \"memory_mb\": 8192.0,\n        \"networks\": [\n          {\n            \"vif_id\": \"net0\",\n            \"connect\": 1,\n            \"mac_address\": \"FE:FC:FE:34:89:D9\",\n            \"model\": \"virtio\",\n            \"ip_address\": \"198.51.100.22\",\n            \"ipv6_address\": \"\"\n          }\n        ],\n        \"disks\": [\n          {\n            \"id\": \"ide0\",\n            \"size_mb\": 102400.0,\n            \"storage_id\": \"e396b491_vs_vol_rep2\",\n            \"storage_name\": \"datastore-vs\",\n            \"preallocate\": \"off\"\n          }\n        ],\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n        \"az_name\": \"pool-prod\",\n        \"host_id\": \"host-0a1b2c3d4e01\",\n        \"host_name\": \"192.0.2.11\",\n        \"storage_id\": \"e396b491_vs_vol_rep2\",\n        \"storage_name\": \"datastore-vs\",\n        \"cpu_status\": {\n          \"total_mhz\": 4402.0,\n          \"ratio\": 0.75,\n          \"used_mhz\": 3301.5\n        },\n        \"memory_status\": {\n          \"used_mb\": 7372.8,\n          \"total_mb\": 8192.0,\n          \"ratio\": 0.9\n        },\n        \"storage_status\": {\n          \"used_mb\": 81920.0,\n          \"total_mb\": 102400.0,\n          \"storage_file_size_mb\": 81920.0,\n          \"ratio\": 0.8\n        },\n        \"io_status\": {\n          \"read_speed_byteps\": 5242880.0,\n          \"write_speed_byteps\": 10485760.0,\n          \"read_iops\": 150.0,\n          \"write_iops\": 420.0\n        },\n        \"network_status\": {\n          \"read_speed_bitps\": 12000000.0,\n          \"write_speed_bitps\": 8000000.0\n        },\n        \"alarm\": {\n          \"alarm_info\": [],\n          \"alarm\": 1\n        },\n        \"warning\": {\n          \"warning_info\": \"\",\n          \"warning\": 0,\n          \"warning_type\": \"\"\n        },\n        \"vtool_installed\": 1,\n        \"os_installed\": 1,\n        \"tags\": [],\n        \"expire_time\": \"unlimited\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "ids=f1e2d3c4-0000-4000-8000-000000000002",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "ids",
+              "value": "f1e2d3c4-0000-4000-8000-000000000002",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0e7c9c29-d7c4-5e80-8e9c-43fc8da4a453",
+          "body": "{\n  \"message\": \"\",\n  \"errcode\": \"\",\n  \"data\": {\n    \"total_size\": 3,\n    \"page_num\": 1,\n    \"page_size\": 100,\n    \"next_page_num\": \"\",\n    \"data\": [\n      {\n        \"id\": \"f1e2d3c4-0000-4000-8000-000000000003\",\n        \"name\": \"test-01\",\n        \"status\": \"stopped\",\n        \"power_state\": \"off\",\n        \"is_stopped\": 1,\n        \"type\": \"hci\",\n        \"vmtype\": \"vm\",\n        \"os_type\": \"l2664\",\n        \"os_name\": \"Debian GNU/Linux 12\",\n        \"description\": \"\",\n        \"uptime\": 0,\n        \"shutdown_duration\": 0,\n        \"ips\": [],\n        \"user_id\": null,\n        \"user_name\": \"\",\n        \"project_id\": \"f866c39e45754bd78f9e3d7d4632bcbc\",\n        \"project_name\": \"admin\",\n        \"cores_per_socket\": 1,\n        \"sockets\": 1,\n        \"cores\": 1,\n        \"mhz\": 2201.0,\n        \"memory_mb\": 4096.0,\n        \"networks\": [\n          {\n            \"vif_id\": \"net0\",\n            \"connect\": 1,\n            \"mac_address\": \"FE:FC:FE:34:89:D9\",\n            \"model\": \"virtio\",\n            \"ip_address\": \"198.51.100.23\",\n            \"ipv6_address\": \"\"\n          }\n        ],\n        \"disks\": [\n          {\n            \"id\": \"ide0\",\n            \"size_mb\": 40960.0,\n            \"storage_id\": \"e396b491_vs_vol_rep2\",\n            \"storage_name\": \"datastore-vs\",\n            \"preallocate\": \"off\"\n          }\n        ],\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n        \"az_name\": \"pool-lab\",\n        \"host_id\": \"host-0a1b2c3d4e02\",\n        \"host_name\": \"192.0.2.12\",\n        \"storage_id\": \"e396b491_vs_vol_rep2\",\n        \"storage_name\": \"datastore-vs\",\n        \"cpu_status\": {\n          \"total_mhz\": 2201.0,\n          \"ratio\": 0.0,\n          \"used_mhz\": 0.0\n        },\n        \"memory_status\": {\n          \"used_mb\": 0.0,\n          \"total_mb\": 4096.0,\n          \"ratio\": 0.0\n        },\n        \"storage_status\": {\n          \"used_mb\": 1024.0,\n          \"total_mb\": 40960.0,\n          \"storage_file_size_mb\": 1024.0,\n          \"ratio\": 0.03\n        },\n        \"io_status\": {\n          \"read_speed_byteps\": 0.0,\n          \"write_speed_byteps\": 0.0,\n          \"read_iops\": 0.0,\n          \"write_iops\": 0.0\n        },\n        \"network_status\": {\n          \"read_speed_bitps\": 0.0,\n          \"write_speed_bitps\": 0.0\n        },\n        \"alarm\": {\n          \"alarm_info\": [],\n          \"alarm\": 0\n        },\n        \"warning\": {\n          \"warning_info\": \"\",\n          \"warning\": 0,\n          \"warning_type\": \"\"\n        },\n        \"vtool_installed\": 1,\n        \"os_installed\": 1,\n        \"tags\": [],\n        \"expire_time\": \"unlimited\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "page_num=1",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "page_num",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cca4c4cb-9389-5905-ad9f-39eedb9726a2",
+          "body": "{\n  \"message\": \"\",\n  \"errcode\": \"\",\n  \"data\": {\n    \"total_size\": 3,\n    \"page_num\": 0,\n    \"page_size\": 100,\n    \"next_page_num\": \"1\",\n    \"data\": [\n      {\n        \"id\": \"f1e2d3c4-0000-4000-8000-000000000001\",\n        \"name\": \"web-01\",\n        \"status\": \"running\",\n        \"power_state\": \"on\",\n        \"is_stopped\": 0,\n        \"type\": \"hci\",\n        \"vmtype\": \"vm\",\n        \"os_type\": \"l2664\",\n        \"os_name\": \"Debian GNU/Linux 12\",\n        \"description\": \"\",\n        \"uptime\": 5797965,\n        \"shutdown_duration\": 0,\n        \"ips\": [],\n        \"user_id\": null,\n        \"user_name\": \"\",\n        \"project_id\": \"f866c39e45754bd78f9e3d7d4632bcbc\",\n        \"project_name\": \"admin\",\n        \"cores_per_socket\": 1,\n        \"sockets\": 1,\n        \"cores\": 1,\n        \"mhz\": 2201.0,\n        \"memory_mb\": 2048.0,\n        \"networks\": [\n          {\n            \"vif_id\": \"net0\",\n            \"connect\": 1,\n            \"mac_address\": \"FE:FC:FE:34:89:D9\",\n            \"model\": \"virtio\",\n            \"ip_address\": \"198.51.100.21\",\n            \"ipv6_address\": \"\"\n          }\n        ],\n        \"disks\": [\n          {\n            \"id\": \"ide0\",\n            \"size_mb\": 2048.0,\n            \"storage_id\": \"e396b491_vs_vol_rep2\",\n            \"storage_name\": \"datastore-vs\",\n            \"preallocate\": \"off\"\n          }\n        ],\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n        \"az_name\": \"pool-prod\",\n        \"host_id\": \"host-0a1b2c3d4e01\",\n        \"host_name\": \"192.0.2.11\",\n        \"storage_id\": \"e396b491_vs_vol_rep2\",\n        \"storage_name\": \"datastore-vs\",\n        \"cpu_status\": {\n          \"total_mhz\": 2201.0,\n          \"ratio\": 0.01,\n          \"used_mhz\": 22.01\n        },\n        \"memory_status\": {\n          \"used_mb\": 40.78,\n          \"total_mb\": 2048.0,\n          \"ratio\": 0.02\n        },\n        \"storage_status\": {\n          \"used_mb\": 1280.31,\n          \"total_mb\": 2048.0,\n          \"storage_file_size_mb\": 1280.31,\n          \"ratio\": 0.63\n        },\n        \"io_status\": {\n          \"read_speed_byteps\": 1048576.0,\n          \"write_speed_byteps\": 2097152.0,\n          \"read_iops\": 12.5,\n          \"write_iops\": 30.0\n        },\n        \"network_status\": {\n          \"read_speed_bitps\": 2000000.0,\n          \"write_speed_bitps\": 500000.0\n        },\n        \"alarm\": {\n          \"alarm_info\": [],\n          \"alarm\": 0\n        },\n        \"warning\": {\n          \"warning_info\": \"vmTools is not installed on the VM\",\n          \"warning\": 1,\n          \"warning_type\": \"vtool_uninstalled\"\n        },\n        \"vtool_installed\": 0,\n        \"os_installed\": 1,\n        \"tags\": [],\n        \"expire_time\": \"unlimited\"\n      },\n      {\n        \"id\": \"f1e2d3c4-0000-4000-8000-000000000002\",\n        \"name\": \"db-01\",\n        \"status\": \"running\",\n        \"power_state\": \"on\",\n        \"is_stopped\": 0,\n        \"type\": \"hci\",\n        \"vmtype\": \"vm\",\n        \"os_type\": \"l2664\",\n        \"os_name\": \"Debian GNU/Linux 12\",\n        \"description\": \"\",\n        \"uptime\": 86400,\n        \"shutdown_duration\": 0,\n        \"ips\": [],\n        \"user_id\": null,\n        \"user_name\": \"\",\n        \"project_id\": \"f866c39e45754bd78f9e3d7d4632bcbc\",\n        \"project_name\": \"admin\",\n        \"cores_per_socket\": 1,\n        \"sockets\": 1,\n        \"cores\": 1,\n        \"mhz\": 4402.0,\n        \"memory_mb\": 8192.0,\n        \"networks\": [\n          {\n            \"vif_id\": \"net0\",\n            \"connect\": 1,\n            \"mac_address\": \"FE:FC:FE:34:89:D9\",\n            \"model\": \"virtio\",\n            \"ip_address\": \"198.51.100.22\",\n            \"ipv6_address\": \"\"\n          }\n        ],\n        \"disks\": [\n          {\n            \"id\": \"ide0\",\n            \"size_mb\": 102400.0,\n            \"storage_id\": \"e396b491_vs_vol_rep2\",\n            \"storage_name\": \"datastore-vs\",\n            \"preallocate\": \"off\"\n          }\n        ],\n        \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n        \"az_name\": \"pool-prod\",\n        \"host_id\": \"host-0a1b2c3d4e01\",\n        \"host_name\": \"192.0.2.11\",\n        \"storage_id\": \"e396b491_vs_vol_rep2\",\n        \"storage_name\": \"datastore-vs\",\n        \"cpu_status\": {\n          \"total_mhz\": 4402.0,\n          \"ratio\": 0.75,\n          \"used_mhz\": 3301.5\n        },\n        \"memory_status\": {\n          \"used_mb\": 7372.8,\n          \"total_mb\": 8192.0,\n          \"ratio\": 0.9\n        },\n        \"storage_status\": {\n          \"used_mb\": 81920.0,\n          \"total_mb\": 102400.0,\n          \"storage_file_size_mb\": 81920.0,\n          \"ratio\": 0.8\n        },\n        \"io_status\": {\n          \"read_speed_byteps\": 5242880.0,\n          \"write_speed_byteps\": 10485760.0,\n          \"read_iops\": 150.0,\n          \"write_iops\": 420.0\n        },\n        \"network_status\": {\n          \"read_speed_bitps\": 12000000.0,\n          \"write_speed_bitps\": 8000000.0\n        },\n        \"alarm\": {\n          \"alarm_info\": [],\n          \"alarm\": 1\n        },\n        \"warning\": {\n          \"warning_info\": \"\",\n          \"warning\": 0,\n          \"warning_type\": \"\"\n        },\n        \"vtool_installed\": 1,\n        \"os_installed\": 1,\n        \"tags\": [],\n        \"expire_time\": \"unlimited\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2f3f63f3-7367-5cea-bea0-465da9d35388",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20190725/alarms",
+      "responses": [
+        {
+          "uuid": "5592501a-c371-5fa4-9bcd-ef69b2257041",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": [\n    {\n      \"status\": \"open\",\n      \"remark\": \"\",\n      \"user_id\": \"cb086d2d2d7d430b93f7230072435454\",\n      \"description\": \"The CPU usage of the node (192.0.2.12) is 96.35%, higher than 95%.\",\n      \"level\": \"p1\",\n      \"start_time\": \"2026-10-30 17:30:46\",\n      \"object_type\": \"host\",\n      \"updated_at\": \"2026-10-31 10:25:46\",\n      \"object_id\": \"host-0a1b2c3d4e02\",\n      \"policy_name\": \"Host CPU usage\",\n      \"alarm_advice\": \"\",\n      \"converge_count\": 41,\n      \"object_name\": \"192.0.2.12\",\n      \"az_name\": \"pool-lab\",\n      \"project_id\": \"7b5a0cd057d446d6a2df8d5fdc91e95e\",\n      \"id\": \"7adf0fc8-b72c-4abc-b069-1c6b8a2a2900\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000002\",\n      \"policy_id\": \"5096cb3a-dae3-4860-b738-bffe1d227a96\"\n    },\n    {\n      \"status\": \"ack\",\n      \"remark\": \"known\",\n      \"user_id\": \"cb086d2d2d7d430b93f7230072435454\",\n      \"description\": \"CPU underclocking happened on the node (192.0.2.11).\",\n      \"level\": \"p2\",\n      \"start_time\": \"2026-10-06 15:02:31\",\n      \"object_type\": \"host\",\n      \"updated_at\": \"2026-10-31 10:08:45\",\n      \"object_id\": \"host-0a1b2c3d4e01\",\n      \"policy_name\": \"Host CPU Underclocking\",\n      \"alarm_advice\": \"\",\n      \"converge_count\": 172,\n      \"object_name\": \"192.0.2.11\",\n      \"az_name\": \"pool-prod\",\n      \"project_id\": \"7b5a0cd057d446d6a2df8d5fdc91e95e\",\n      \"id\": \"7608afd4-fb78-464c-9ee6-32969f5ac4f4\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"policy_id\": \"5a433827-4f69-4f00-8751-2494685a8cb1\"\n    },\n    {\n      \"status\": \"open\",\n      \"remark\": \"\",\n      \"user_id\": \"cb086d2d2d7d430b93f7230072435454\",\n      \"description\": \"The storage network interface of the virtual datastore uses a gigabit network.\",\n      \"level\": \"p3\",\n      \"start_time\": \"2026-10-17 12:00:20\",\n      \"object_type\": \"storage\",\n      \"updated_at\": \"2026-10-31 10:29:02\",\n      \"object_id\": \"datastore-vs\",\n      \"policy_name\": \"Virtual storage network bandwidth detection\",\n      \"alarm_advice\": \"\",\n      \"converge_count\": 79,\n      \"object_name\": \"datastore-vs\",\n      \"az_name\": \"pool-prod\",\n      \"project_id\": \"7b5a0cd057d446d6a2df8d5fdc91e95e\",\n      \"id\": \"d9ca5141-3764-45cb-bbed-cea9c301fe77\",\n      \"az_id\": \"a1b2c3d4-0000-4000-8000-000000000001\",\n      \"policy_id\": \"4de9b61b-40ec-4863-951c-9479538a0784\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "540ec282-3f42-50b1-9478-240d0f203f1f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/licenses/summary",
+      "responses": [
+        {
+          "uuid": "269c0211-9d76-58db-b89d-1b799df00528",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"status\": 0,\n    \"username\": \"sangfor\",\n    \"server_timestamp\": 1793000000,\n    \"key_timestamp\": 1793000002,\n    \"key_id\": \"FEFCFE9FC93A0000\",\n    \"products\": [\n      {\n        \"software_time\": {\n          \"expire_timestamp\": \"1798831818\",\n          \"name\": \"Software_Expiration_Date\",\n          \"remain_timestamp\": 5831818\n        },\n        \"service_time\": {\n          \"expire_timestamp\": \"1795000000\",\n          \"name\": \"Service_Expiration_Date\",\n          \"remain_timestamp\": 2000000\n        },\n        \"activated\": 1,\n        \"name\": \"aCloud\",\n        \"disable\": 0\n      },\n      {\n        \"software_time\": {\n          \"expire_timestamp\": \"unlimited\",\n          \"name\": \"Software_Expiration_Date\",\n          \"remain_timestamp\": -1\n        },\n        \"service_time\": {\n          \"expire_timestamp\": \"1824536000\",\n          \"name\": \"Service_Expiration_Date\",\n          \"remain_timestamp\": 31536000\n        },\n        \"activated\": 1,\n        \"name\": \"aSV\",\n        \"disable\": 0\n      },\n      {\n        \"software_time\": {\n          \"expire_timestamp\": \"1625500799\",\n          \"name\": \"Software_Expiration_Date\",\n          \"remain_timestamp\": 0\n        },\n        \"service_time\": {},\n        \"activated\": 0,\n        \"name\": \"NGAF\",\n        \"disable\": 1\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "fbaa3d81-33ad-5787-883f-6c23be4cf6be",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/system/maintenance",
+      "responses": [
+        {
+          "uuid": "ec4c8a85-d03f-5221-ad11-9959b3e3086d",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"maintain_mode\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "fc33c2bd-42d7-52c1-b955-c891457859e8",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "janus/20180725/system/version",
+      "responses": [
+        {
+          "uuid": "7580817f-7ca0-5d97-b5d7-3de2784e6552",
+          "body": "{\n  \"message\": \"\",\n  \"code\": 0,\n  \"data\": {\n    \"build_version\": \"SCP6.11.3_B-2026-04-30_10:00:00\",\n    \"custom_version\": []\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "19932b05-be20-5bcf-ab1d-a89f266b4db8"
+    },
+    {
+      "type": "route",
+      "uuid": "70e86e46-cc41-5a97-97e4-e149bd301beb"
+    },
+    {
+      "type": "route",
+      "uuid": "81abdb9c-8866-5b9d-95be-4e4b5e072e4a"
+    },
+    {
+      "type": "route",
+      "uuid": "ba0f43c3-d7fb-5ae9-852d-358b57420bb6"
+    },
+    {
+      "type": "route",
+      "uuid": "26582ff6-1233-5780-95ad-8f86ffcf5862"
+    },
+    {
+      "type": "route",
+      "uuid": "868375b6-2859-52c5-8a6b-58cd3a09b3e6"
+    },
+    {
+      "type": "route",
+      "uuid": "0a60c21e-790d-5b74-a8a1-54121109b3fc"
+    },
+    {
+      "type": "route",
+      "uuid": "97b55cb6-6ede-5df1-8a8a-50bba5cd8d5b"
+    },
+    {
+      "type": "route",
+      "uuid": "c3bb2e4b-8af9-5bfa-9fed-12696c0fbc5a"
+    },
+    {
+      "type": "route",
+      "uuid": "393b1de8-3eb2-5132-8cbb-f346082c257d"
+    },
+    {
+      "type": "route",
+      "uuid": "b54ccca4-8c5f-5728-9e41-60ce6fef97b6"
+    },
+    {
+      "type": "route",
+      "uuid": "2f3f63f3-7367-5cea-bea0-465da9d35388"
+    },
+    {
+      "type": "route",
+      "uuid": "540ec282-3f42-50b1-9478-240d0f203f1f"
+    },
+    {
+      "type": "route",
+      "uuid": "fbaa3d81-33ad-5787-883f-6c23be4cf6be"
+    },
+    {
+      "type": "route",
+      "uuid": "fc33c2bd-42d7-52c1-b955-c891457859e8"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

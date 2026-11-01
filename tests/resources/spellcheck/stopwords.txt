@@ -327,6 +327,7 @@ rssi
 RTT
 Rubrik
 µs
+Sangfor
 Sansymphony
 SAS
 scenarii
