@@ -128,6 +128,8 @@ sub new {
         'exclude-vm:s'        => { name => 'exclude_vm', default => '' },
         'include-vpg:s'       => { name => 'include_vpg', default => '' },
         'exclude-vpg:s'       => { name => 'exclude_vpg', default => '' },
+        'include-vpg-id:s'    => { name => 'include_vpg_id', default => '' },
+        'exclude-vpg-id:s'    => { name => 'exclude_vpg_id', default => '' },
         'include-datastore:s' => { name => 'include_datastore', default => '' },
         'exclude-datastore:s' => { name => 'exclude_datastore', default => '' },
         'skip-volumes'        => { name => 'skip_volumes' }
@@ -155,6 +157,7 @@ sub manage_selection {
         next if is_excluded($name, $self->{option_results}->{include_name}, $self->{option_results}->{exclude_name}, output => $self->{output});
         next if is_excluded($vm, $self->{option_results}->{include_vm}, $self->{option_results}->{exclude_vm}, output => $self->{output});
         next if is_excluded($vpg, $self->{option_results}->{include_vpg}, $self->{option_results}->{exclude_vpg}, output => $self->{output});
+        next if is_excluded($volume->{Vpg}->{Identifier} // '', $self->{option_results}->{include_vpg_id}, $self->{option_results}->{exclude_vpg_id}, output => $self->{output});
         next if is_excluded($datastore, $self->{option_results}->{include_datastore}, $self->{option_results}->{exclude_datastore}, output => $self->{output});
 
         my $type = enum_name(value => $volume->{VolumeType}, map => $map_volume_type);
@@ -222,6 +225,14 @@ Filter volumes by VPG name (can be a regexp).
 =item B<--exclude-vpg>
 
 Exclude volumes by VPG name (can be a regexp).
+
+=item B<--include-vpg-id>
+
+Filter volumes by VPG ID (can be a regexp).
+
+=item B<--exclude-vpg-id>
+
+Exclude volumes by VPG ID (can be a regexp).
 
 =item B<--include-datastore>
 
