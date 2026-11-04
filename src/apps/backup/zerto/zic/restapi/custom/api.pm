@@ -1,5 +1,5 @@
 #
-# Copyright 2026 Centreon (http://www.centreon.com/)
+# Copyright 2026-Present Centreon (http://www.centreon.com/)
 #
 # Centreon is a full-fledged industry-strength solution that meets
 # the needs in IT infrastructure and application monitoring for
@@ -291,20 +291,22 @@ sub timespan_to_seconds {
 sub date_to_epoch {
     my ($self, %options) = @_;
 
-    return undef
-        if is_empty($options{value})
-            || $options{value} !~ /^\s*(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?)?\s*(Z|[+-]\d{2}:?\d{2})?\s*$/i;
+    return undef if is_empty($options{value});
 
-    my $tz = defined($7) && uc($7) ne 'Z' ? $7 : 'UTC';
-    $tz =~ s/://;
+    # captured into variables: the substitution on the time zone would reset $1 to $6
+    my ($year, $month, $day, $hour, $minute, $second, $tz) =
+        $options{value} =~ /^\s*(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?)?\s*(Z|[+-]\d{2}:?\d{2})?\s*$/i;
+    return undef unless defined($year);
+
+    $tz = defined($tz) && uc($tz) ne 'Z' ? $tz =~ s/://r : 'UTC';
 
     my $dt = DateTime->new(
-        year      => $1,
-        month     => $2,
-        day       => $3,
-        hour      => $4 // 0,
-        minute    => $5 // 0,
-        second    => $6 // 0,
+        year      => $year,
+        month     => $month,
+        day       => $day,
+        hour      => $hour // 0,
+        minute    => $minute // 0,
+        second    => $second // 0,
         time_zone => $tz
     );
 
