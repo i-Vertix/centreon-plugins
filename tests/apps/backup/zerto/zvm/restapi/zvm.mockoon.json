@@ -1,0 +1,1350 @@
+{
+    "uuid": "2d1990b9-17e7-5c0b-9bfe-be2098c34151",
+    "lastMigration": 33,
+    "name": "Zerto Virtual Manager",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "folders": [],
+    "routes": [
+        {
+            "uuid": "8ff51653-cf02-50b1-84b0-69eeffb84ac4",
+            "type": "http",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "auth/realms/zerto/protocol/openid-connect/token",
+            "responses": [
+                {
+                    "uuid": "a5a941d0-a6a7-524f-94b5-b0bbb851ad46",
+                    "body": "{\n  \"access_token\": \"zvm-token-123\",\n  \"expires_in\": 300,\n  \"token_type\": \"Bearer\"\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "client credentials",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "client_id",
+                            "value": "zvm-monitoring",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "client_secret",
+                            "value": "secret-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "grant_type",
+                            "value": "client_credentials",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "7656115b-630f-5955-8ed4-c55ddd1827f5",
+                    "body": "{\n  \"access_token\": \"zvm-token-123\",\n  \"expires_in\": 300,\n  \"token_type\": \"Bearer\"\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "password grant",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "client_id",
+                            "value": "zvm-monitoring",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "username",
+                            "value": "monitor",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "password",
+                            "value": "pass-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "grant_type",
+                            "value": "password",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "b768b6ba-5957-54a4-934a-768769f71a2e",
+                    "body": "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"Invalid client or Invalid client credentials\"\n}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid credentials",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "92f6a2e3-3cd7-5d9c-967b-790ce97dc5a8",
+            "type": "http",
+            "documentation": "",
+            "method": "post",
+            "endpoint": "v1/session/add",
+            "responses": [
+                {
+                    "uuid": "4200313e-14b3-52df-8296-0558dca08af0",
+                    "body": "",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "session",
+                    "headers": [
+                        {
+                            "key": "x-zerto-session",
+                            "value": "zvm-session-123"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Basic bW9uaXRvcjpwYXNzLTEyMw==",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "b768b6ba-5957-54a4-934a-768769f71a2e",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "invalid credentials",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "3802240e-a09c-5c0b-98d1-c0c80926aa4c",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/vpgs",
+            "responses": [
+                {
+                    "uuid": "c1e78a8d-4534-5d35-aeec-2ad983fd8ad9",
+                    "body": "{{setVar 'tsm864000' (dateTimeShift date=(now) format='T' seconds=-864000)}}\n[\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"Priority\": 1,\n    \"ActualRPO\": 8,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 1440,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 42,\n    \"ThroughputInMB\": 1.5,\n    \"UsedStorageInMB\": 20480,\n    \"ProvisionedStorageInMB\": 40960,\n    \"VmsCount\": 3,\n    \"LastTest\": \"/Date({{getVar 'tsm864000'}})/\",\n    \"ProgressPercentage\": 0,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n    \"VpgName\": \"erp-database\",\n    \"Status\": 3,\n    \"SubStatus\": 6,\n    \"Priority\": 2,\n    \"ActualRPO\": 840,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 1200,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 310,\n    \"ThroughputInMB\": 12.25,\n    \"UsedStorageInMB\": 102400,\n    \"ProvisionedStorageInMB\": 204800,\n    \"VmsCount\": 2,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 37.5,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n    \"VpgName\": \"file-server\",\n    \"Status\": 2,\n    \"SubStatus\": 31,\n    \"Priority\": 0,\n    \"ActualRPO\": 4200,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 60,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 0,\n    \"ThroughputInMB\": 0,\n    \"UsedStorageInMB\": 51200,\n    \"ProvisionedStorageInMB\": 102400,\n    \"VmsCount\": 1,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 0,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000003\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n    \"VpgName\": \"archive\",\n    \"Status\": 0,\n    \"SubStatus\": 1,\n    \"Priority\": 0,\n    \"ActualRPO\": -1,\n    \"ConfiguredRpoSeconds\": 600,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 0,\n      \"ConfiguredHistoryInMinutes\": 720\n    },\n    \"IOPS\": 5,\n    \"ThroughputInMB\": 0.5,\n    \"UsedStorageInMB\": 1024,\n    \"ProvisionedStorageInMB\": 8192,\n    \"VmsCount\": 1,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 42,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000004\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vpgs all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "80b9ae50-5645-5a00-aa44-7cd1d6d3c60e",
+                    "body": "{{setVar 'tsm864000' (dateTimeShift date=(now) format='T' seconds=-864000)}}\n[\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"Priority\": 1,\n    \"ActualRPO\": 8,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 1440,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 42,\n    \"ThroughputInMB\": 1.5,\n    \"UsedStorageInMB\": 20480,\n    \"ProvisionedStorageInMB\": 40960,\n    \"VmsCount\": 3,\n    \"LastTest\": \"/Date({{getVar 'tsm864000'}})/\",\n    \"ProgressPercentage\": 0,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n    \"VpgName\": \"erp-database\",\n    \"Status\": 3,\n    \"SubStatus\": 6,\n    \"Priority\": 2,\n    \"ActualRPO\": 840,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 1200,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 310,\n    \"ThroughputInMB\": 12.25,\n    \"UsedStorageInMB\": 102400,\n    \"ProvisionedStorageInMB\": 204800,\n    \"VmsCount\": 2,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 37.5,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n    \"VpgName\": \"file-server\",\n    \"Status\": 2,\n    \"SubStatus\": 31,\n    \"Priority\": 0,\n    \"ActualRPO\": 4200,\n    \"ConfiguredRpoSeconds\": 300,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 60,\n      \"ConfiguredHistoryInMinutes\": 1440\n    },\n    \"IOPS\": 0,\n    \"ThroughputInMB\": 0,\n    \"UsedStorageInMB\": 51200,\n    \"ProvisionedStorageInMB\": 102400,\n    \"VmsCount\": 1,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 0,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000003\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  },\n  {\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n    \"VpgName\": \"archive\",\n    \"Status\": 0,\n    \"SubStatus\": 1,\n    \"Priority\": 0,\n    \"ActualRPO\": -1,\n    \"ConfiguredRpoSeconds\": 600,\n    \"HistoryStatusApi\": {\n      \"ActualHistoryInMinutes\": 0,\n      \"ConfiguredHistoryInMinutes\": 720\n    },\n    \"IOPS\": 5,\n    \"ThroughputInMB\": 0.5,\n    \"UsedStorageInMB\": 1024,\n    \"ProvisionedStorageInMB\": 8192,\n    \"VmsCount\": 1,\n    \"LastTest\": null,\n    \"ProgressPercentage\": 42,\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000004\",\n      \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n      \"rel\": null,\n      \"type\": \"vpgs\"\n    },\n    \"OrganizationName\": \"\",\n    \"ServiceProfileName\": \"\",\n    \"ServiceProfileIdentifier\": null,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"SourceSite\": \"site-a\",\n    \"TargetSite\": \"site-b\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vpgs all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "be269074-01c0-532f-a719-e1235ab53414",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/vpgs unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "b97d1612-e91e-5e5c-a037-522301dbfb08",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/vras",
+            "responses": [
+                {
+                    "uuid": "e383f80f-5b8e-51a4-8501-f01a77159991",
+                    "body": "[\n  {\n    \"VraIdentifier\": 1001,\n    \"VraIdentifierStr\": \"1001\",\n    \"VraName\": \"Z-VRA-esx01.example\",\n    \"Status\": 0,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 0\n    },\n    \"VraGroup\": \"default_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.21\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1001\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 4,\n      \"Volumes\": 9,\n      \"Vpgs\": 3\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 0,\n      \"Volumes\": 0,\n      \"Vpgs\": 0\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.21\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1001\",\n      \"identifier\": \"1001\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  },\n  {\n    \"VraIdentifier\": 1002,\n    \"VraIdentifierStr\": \"1002\",\n    \"VraName\": \"Z-VRA-esx02.example\",\n    \"Status\": 9,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 1\n    },\n    \"VraGroup\": \"default_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.22\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1002\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 2,\n      \"Volumes\": 4,\n      \"Vpgs\": 1\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 1,\n      \"Volumes\": 2,\n      \"Vpgs\": 1\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.22\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1002\",\n      \"identifier\": \"1002\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  },\n  {\n    \"VraIdentifier\": 1003,\n    \"VraIdentifierStr\": \"1003\",\n    \"VraName\": \"Z-VRA-esx03.example\",\n    \"Status\": 6,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 2\n    },\n    \"VraGroup\": \"dr_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.23\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1003\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 0,\n      \"Volumes\": 0,\n      \"Vpgs\": 0\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 3,\n      \"Volumes\": 6,\n      \"Vpgs\": 2\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.23\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1003\",\n      \"identifier\": \"1003\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vras all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "54a7371c-b370-5b96-bcb9-cfacfa793a18",
+                    "body": "[\n  {\n    \"VraIdentifier\": 1001,\n    \"VraIdentifierStr\": \"1001\",\n    \"VraName\": \"Z-VRA-esx01.example\",\n    \"Status\": 0,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 0\n    },\n    \"VraGroup\": \"default_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.21\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1001\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 4,\n      \"Volumes\": 9,\n      \"Vpgs\": 3\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 0,\n      \"Volumes\": 0,\n      \"Vpgs\": 0\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.21\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1001\",\n      \"identifier\": \"1001\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  },\n  {\n    \"VraIdentifier\": 1002,\n    \"VraIdentifierStr\": \"1002\",\n    \"VraName\": \"Z-VRA-esx02.example\",\n    \"Status\": 9,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 1\n    },\n    \"VraGroup\": \"default_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.22\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1002\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 2,\n      \"Volumes\": 4,\n      \"Vpgs\": 1\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 1,\n      \"Volumes\": 2,\n      \"Vpgs\": 1\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.22\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1002\",\n      \"identifier\": \"1002\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  },\n  {\n    \"VraIdentifier\": 1003,\n    \"VraIdentifierStr\": \"1003\",\n    \"VraName\": \"Z-VRA-esx03.example\",\n    \"Status\": 6,\n    \"VraAlerts\": {\n      \"VraAlertsStatus\": 2\n    },\n    \"VraGroup\": \"dr_group\",\n    \"VraVersion\": \"10.9.0\",\n    \"HostVersion\": \"8.0.3\",\n    \"IpAddress\": \"192.0.2.23\",\n    \"MemoryInGB\": 3,\n    \"Progress\": 0,\n    \"SelfProtectedVpgs\": 0,\n    \"HostIdentifier\": \"srv-0001.host-1003\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"DatastoreClusterName\": null,\n    \"NetworkName\": \"vm-network\",\n    \"ProtectedCounters\": {\n      \"Vms\": 0,\n      \"Volumes\": 0,\n      \"Vpgs\": 0\n    },\n    \"RecoveryCounters\": {\n      \"Vms\": 3,\n      \"Volumes\": 6,\n      \"Vpgs\": 2\n    },\n    \"VraNetworkDataApi\": {\n      \"DefaultGateway\": \"192.0.2.1\",\n      \"SubnetMask\": \"255.255.255.0\",\n      \"VraIPAddress\": \"192.0.2.23\",\n      \"VraIPConfigurationTypeApi\": \"Static\"\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vras/1003\",\n      \"identifier\": \"1003\",\n      \"rel\": null,\n      \"type\": \"vras\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vras all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "e6382c07-4361-593b-b83f-e889435ade5d",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/vras unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "80fa3528-3231-579c-b915-72961cff3bd4",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/alerts",
+            "responses": [
+                {
+                    "uuid": "1fdc7b22-7ab3-57fa-b121-aebd063f0099",
+                    "body": "{{setVar 'tsm1800' (dateTimeShift date=(now) format='T' seconds=-1800)}}\n{{setVar 'tsm7200' (dateTimeShift date=(now) format='T' seconds=-7200)}}\n{{setVar 'tsm172800' (dateTimeShift date=(now) format='T' seconds=-172800)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"AffectedVpgs\": [\n      {\n        \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"rel\": null,\n        \"type\": \"vpgs\"\n      }\n    ],\n    \"AffectedZorgs\": [],\n    \"Description\": \"VPG erp-database target RPO exceeded.\",\n    \"Entity\": \"Vpg\",\n    \"HelpIdentifier\": \"VPG0009\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0001\",\n      \"identifier\": \"al-0001\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm1800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Wrong host password for esx03.example.\",\n    \"Entity\": \"Vra\",\n    \"HelpIdentifier\": \"VRA0050\",\n    \"IsDismissed\": false,\n    \"Level\": \"Error\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0002\",\n      \"identifier\": \"al-0002\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm7200'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Upgrade available.\",\n    \"Entity\": \"Zvm\",\n    \"HelpIdentifier\": \"ZVM0006\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0003\",\n      \"identifier\": \"al-0003\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm172800'}})/\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/alerts not dismissed bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "query",
+                            "modifier": "isDismissed",
+                            "value": "false",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "15ad20d6-310d-5f9d-9a35-4f50e39f5b07",
+                    "body": "{{setVar 'tsm1800' (dateTimeShift date=(now) format='T' seconds=-1800)}}\n{{setVar 'tsm7200' (dateTimeShift date=(now) format='T' seconds=-7200)}}\n{{setVar 'tsm172800' (dateTimeShift date=(now) format='T' seconds=-172800)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"AffectedVpgs\": [\n      {\n        \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"rel\": null,\n        \"type\": \"vpgs\"\n      }\n    ],\n    \"AffectedZorgs\": [],\n    \"Description\": \"VPG erp-database target RPO exceeded.\",\n    \"Entity\": \"Vpg\",\n    \"HelpIdentifier\": \"VPG0009\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0001\",\n      \"identifier\": \"al-0001\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm1800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Wrong host password for esx03.example.\",\n    \"Entity\": \"Vra\",\n    \"HelpIdentifier\": \"VRA0050\",\n    \"IsDismissed\": false,\n    \"Level\": \"Error\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0002\",\n      \"identifier\": \"al-0002\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm7200'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Upgrade available.\",\n    \"Entity\": \"Zvm\",\n    \"HelpIdentifier\": \"ZVM0006\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0003\",\n      \"identifier\": \"al-0003\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm172800'}})/\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/alerts not dismissed session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "query",
+                            "modifier": "isDismissed",
+                            "value": "false",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "30af4eb7-f0d8-58c1-ac51-3856e13a25c3",
+                    "body": "{{setVar 'tsm1800' (dateTimeShift date=(now) format='T' seconds=-1800)}}\n{{setVar 'tsm7200' (dateTimeShift date=(now) format='T' seconds=-7200)}}\n{{setVar 'tsm172800' (dateTimeShift date=(now) format='T' seconds=-172800)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"AffectedVpgs\": [\n      {\n        \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"rel\": null,\n        \"type\": \"vpgs\"\n      }\n    ],\n    \"AffectedZorgs\": [],\n    \"Description\": \"VPG erp-database target RPO exceeded.\",\n    \"Entity\": \"Vpg\",\n    \"HelpIdentifier\": \"VPG0009\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0001\",\n      \"identifier\": \"al-0001\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm1800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Wrong host password for esx03.example.\",\n    \"Entity\": \"Vra\",\n    \"HelpIdentifier\": \"VRA0050\",\n    \"IsDismissed\": false,\n    \"Level\": \"Error\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0002\",\n      \"identifier\": \"al-0002\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm7200'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Upgrade available.\",\n    \"Entity\": \"Zvm\",\n    \"HelpIdentifier\": \"ZVM0006\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0003\",\n      \"identifier\": \"al-0003\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm172800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"License about to expire.\",\n    \"Entity\": \"License\",\n    \"HelpIdentifier\": \"LIC0003\",\n    \"IsDismissed\": true,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0004\",\n      \"identifier\": \"al-0004\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm259200'}})/\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/alerts all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "ff0fb94f-bd8e-5eb2-be18-10867a10aedb",
+                    "body": "{{setVar 'tsm1800' (dateTimeShift date=(now) format='T' seconds=-1800)}}\n{{setVar 'tsm7200' (dateTimeShift date=(now) format='T' seconds=-7200)}}\n{{setVar 'tsm172800' (dateTimeShift date=(now) format='T' seconds=-172800)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"AffectedVpgs\": [\n      {\n        \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n        \"rel\": null,\n        \"type\": \"vpgs\"\n      }\n    ],\n    \"AffectedZorgs\": [],\n    \"Description\": \"VPG erp-database target RPO exceeded.\",\n    \"Entity\": \"Vpg\",\n    \"HelpIdentifier\": \"VPG0009\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0001\",\n      \"identifier\": \"al-0001\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm1800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Wrong host password for esx03.example.\",\n    \"Entity\": \"Vra\",\n    \"HelpIdentifier\": \"VRA0050\",\n    \"IsDismissed\": false,\n    \"Level\": \"Error\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0002\",\n      \"identifier\": \"al-0002\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm7200'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"Upgrade available.\",\n    \"Entity\": \"Zvm\",\n    \"HelpIdentifier\": \"ZVM0006\",\n    \"IsDismissed\": false,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0003\",\n      \"identifier\": \"al-0003\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm172800'}})/\"\n  },\n  {\n    \"AffectedVpgs\": [],\n    \"AffectedZorgs\": [],\n    \"Description\": \"License about to expire.\",\n    \"Entity\": \"License\",\n    \"HelpIdentifier\": \"LIC0003\",\n    \"IsDismissed\": true,\n    \"Level\": \"Warning\",\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/alerts/al-0004\",\n      \"identifier\": \"al-0004\",\n      \"rel\": null,\n      \"type\": \"alerts\"\n    },\n    \"Site\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"TurnedOn\": \"/Date({{getVar 'tsm259200'}})/\"\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/alerts all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "2e895ad1-3b7a-5393-a7c9-fb12022bf85f",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/alerts unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "945f52e6-b417-5574-a583-eb3e97430e8c",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/tasks",
+            "responses": [
+                {
+                    "uuid": "2360a55c-2dbf-51d3-871e-1f6dcd2fd48d",
+                    "body": "{{setVar 'tsm5700' (dateTimeShift date=(now) format='T' seconds=-5700)}}\n{{setVar 'tsm21600' (dateTimeShift date=(now) format='T' seconds=-21600)}}\n{{setVar 'tsm21000' (dateTimeShift date=(now) format='T' seconds=-21000)}}\n{{setVar 'tsm18000' (dateTimeShift date=(now) format='T' seconds=-18000)}}\n{{setVar 'tsm14400' (dateTimeShift date=(now) format='T' seconds=-14400)}}\n{{setVar 'tsm10800' (dateTimeShift date=(now) format='T' seconds=-10800)}}\n{{setVar 'tsm9000' (dateTimeShift date=(now) format='T' seconds=-9000)}}\n{{setVar 'tsm259300' (dateTimeShift date=(now) format='T' seconds=-259300)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"FailOverTest\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm5700'}})/\",\n    \"Completed\": \"/Date(-62135596800000)/\",\n    \"Status\": {\n      \"Progress\": 63,\n      \"State\": 1\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000001\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"UpdateProtectionGroup\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm21600'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm21000'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 6\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"InstallVra\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"Host esx03.example is not reachable.\",\n    \"Started\": \"/Date({{getVar 'tsm18000'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm14400'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 4\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": []\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"InitFullSync\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm10800'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm9000'}})/\",\n    \"Status\": {\n      \"Progress\": 20,\n      \"State\": 5\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000003\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"Move\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm259300'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm259200'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 6\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000004\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/tasks all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "cd955152-d79d-5e30-9403-80593b90909f",
+                    "body": "{{setVar 'tsm5700' (dateTimeShift date=(now) format='T' seconds=-5700)}}\n{{setVar 'tsm21600' (dateTimeShift date=(now) format='T' seconds=-21600)}}\n{{setVar 'tsm21000' (dateTimeShift date=(now) format='T' seconds=-21000)}}\n{{setVar 'tsm18000' (dateTimeShift date=(now) format='T' seconds=-18000)}}\n{{setVar 'tsm14400' (dateTimeShift date=(now) format='T' seconds=-14400)}}\n{{setVar 'tsm10800' (dateTimeShift date=(now) format='T' seconds=-10800)}}\n{{setVar 'tsm9000' (dateTimeShift date=(now) format='T' seconds=-9000)}}\n{{setVar 'tsm259300' (dateTimeShift date=(now) format='T' seconds=-259300)}}\n{{setVar 'tsm259200' (dateTimeShift date=(now) format='T' seconds=-259200)}}\n[\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"FailOverTest\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm5700'}})/\",\n    \"Completed\": \"/Date(-62135596800000)/\",\n    \"Status\": {\n      \"Progress\": 63,\n      \"State\": 1\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000001\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000001.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"UpdateProtectionGroup\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm21600'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm21000'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 6\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000002\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000002.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"InstallVra\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"Host esx03.example is not reachable.\",\n    \"Started\": \"/Date({{getVar 'tsm18000'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm14400'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 4\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": []\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000003.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"InitFullSync\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm10800'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm9000'}})/\",\n    \"Status\": {\n      \"Progress\": 20,\n      \"State\": 5\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000003\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000004.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  },\n  {\n    \"TaskIdentifier\": \"c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n    \"Type\": \"Move\",\n    \"InitiatedBy\": \"admin\",\n    \"IsCancellable\": false,\n    \"CompleteReason\": \"\",\n    \"Started\": \"/Date({{getVar 'tsm259300'}})/\",\n    \"Completed\": \"/Date({{getVar 'tsm259200'}})/\",\n    \"Status\": {\n      \"Progress\": 100,\n      \"State\": 6\n    },\n    \"RelatedEntities\": {\n      \"Hosts\": [],\n      \"Sites\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n          \"rel\": null,\n          \"type\": \"localsite\"\n        }\n      ],\n      \"Vpgs\": [\n        {\n          \"href\": \"https://zvm-a.example/v1/vpgs/b7e4a2c1-0000-4d3e-9f10-000000000004\",\n          \"identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000004\",\n          \"rel\": null,\n          \"type\": \"vpgs\"\n        }\n      ]\n    },\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/tasks/c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"c0ffee00-0000-4000-8000-000000000005.f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"tasks\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/tasks all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "ac7c8080-0a16-5d7d-b756-202d3ebf8acf",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/tasks unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "24a6c272-472c-5aee-80a9-94298d731504",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/license",
+            "responses": [
+                {
+                    "uuid": "13351ad1-8d86-50d8-9115-6149264edd32",
+                    "body": "{{setVar 'expiry' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=3891600)}}\n{\n  \"Details\": {\n    \"ExpiryTime\": \"{{getVar 'expiry'}}\",\n    \"LicenseKey\": \"EXAMPLE-LICENSE-KEY\",\n    \"LicenseType\": \"EnterpriseCloud\",\n    \"MaxVms\": 50\n  },\n  \"Usage\": {\n    \"SitesUsage\": [\n      {\n        \"ProtectedVmsCount\": 7,\n        \"SiteIdentifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n        \"SiteName\": \"site-a\"\n      },\n      {\n        \"ProtectedVmsCount\": 0,\n        \"SiteIdentifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n        \"SiteName\": \"site-b\"\n      }\n    ],\n    \"TotalVmsCount\": 7\n  }\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/license all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "ab3dab57-1065-557d-8d02-2b1d25d970fc",
+                    "body": "{{setVar 'expiry' (dateTimeShift date=(now) format='yyyy-MM-dd\\'T\\'HH:mm:ss.SSS\\'Z\\'' seconds=3891600)}}\n{\n  \"Details\": {\n    \"ExpiryTime\": \"{{getVar 'expiry'}}\",\n    \"LicenseKey\": \"EXAMPLE-LICENSE-KEY\",\n    \"LicenseType\": \"EnterpriseCloud\",\n    \"MaxVms\": 50\n  },\n  \"Usage\": {\n    \"SitesUsage\": [\n      {\n        \"ProtectedVmsCount\": 7,\n        \"SiteIdentifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n        \"SiteName\": \"site-a\"\n      },\n      {\n        \"ProtectedVmsCount\": 0,\n        \"SiteIdentifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n        \"SiteName\": \"site-b\"\n      }\n    ],\n    \"TotalVmsCount\": 7\n  }\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/license all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "4c42b279-8324-53e4-9747-968c2d8d07db",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/license unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "5aaa596e-ef72-5eff-891b-7536b9a9cea1",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/peersites",
+            "responses": [
+                {
+                    "uuid": "2c30d494-9f0c-55de-8c53-bc863b0cdcd2",
+                    "body": "[\n  {\n    \"SiteIdentifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n    \"PeerSiteName\": \"site-b\",\n    \"HostName\": \"zvm-b.example\",\n    \"Port\": 9071,\n    \"Location\": \"Datacenter B\",\n    \"PairingStatus\": 0,\n    \"Version\": \"10.9.0\",\n    \"IncomingThroughputInMb\": 25.5,\n    \"OutgoingBandWidth\": -1,\n    \"ProvisionedStorage\": 409600,\n    \"UsedStorage\": 174080,\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    }\n  },\n  {\n    \"SiteIdentifier\": \"f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n    \"PeerSiteName\": \"site-c\",\n    \"HostName\": \"198.51.100.30\",\n    \"Port\": 9071,\n    \"Location\": \"Datacenter C\",\n    \"PairingStatus\": 2,\n    \"Version\": \"10.0.70\",\n    \"IncomingThroughputInMb\": 0,\n    \"OutgoingBandWidth\": -1,\n    \"ProvisionedStorage\": 0,\n    \"UsedStorage\": 0,\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n      \"identifier\": \"f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/peersites all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "41bb85f6-d2fb-5bb2-ab02-ff90e9f8479a",
+                    "body": "[\n  {\n    \"SiteIdentifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n    \"PeerSiteName\": \"site-b\",\n    \"HostName\": \"zvm-b.example\",\n    \"Port\": 9071,\n    \"Location\": \"Datacenter B\",\n    \"PairingStatus\": 0,\n    \"Version\": \"10.9.0\",\n    \"IncomingThroughputInMb\": 25.5,\n    \"OutgoingBandWidth\": -1,\n    \"ProvisionedStorage\": 409600,\n    \"UsedStorage\": 174080,\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    }\n  },\n  {\n    \"SiteIdentifier\": \"f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n    \"PeerSiteName\": \"site-c\",\n    \"HostName\": \"198.51.100.30\",\n    \"Port\": 9071,\n    \"Location\": \"Datacenter C\",\n    \"PairingStatus\": 2,\n    \"Version\": \"10.0.70\",\n    \"IncomingThroughputInMb\": 0,\n    \"OutgoingBandWidth\": -1,\n    \"ProvisionedStorage\": 0,\n    \"UsedStorage\": 0,\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n      \"identifier\": \"f2a1c3d4-3333-4a5b-8c6d-000000000003\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/peersites all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "03637da4-149a-57a1-bc44-f72621696216",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/peersites unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "745d0305-31c7-5f17-8ea0-7a503a1cb2a2",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/datastores",
+            "responses": [
+                {
+                    "uuid": "51c14441-983b-57d6-bb98-7a8786ba19df",
+                    "body": "[\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000011\"\n      ],\n      \"OwningDatastoreCluster\": {\n        \"DatastoreClusterIdentifier\": \"srv-0001.group-p100\",\n        \"DatastoreClusterName\": \"dsc-prod\"\n      },\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-11\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Normal\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"Normal\",\n      \"NumIncomingVMs\": 0,\n      \"NumOutgoingVMs\": 4,\n      \"NumVRAs\": 1,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 536870912000,\n          \"FreeInBytes\": 323713236992,\n          \"ProvisionedInBytes\": 213157675008,\n          \"UsedInBytes\": 213157675008\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 13422821376,\n            \"UsedInBytes\": 13422821376\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 21474836480,\n            \"UsedInBytes\": 21474836480\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  },\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000012\"\n      ],\n      \"OwningDatastoreCluster\": {\n        \"DatastoreClusterIdentifier\": \"srv-0001.group-p100\",\n        \"DatastoreClusterName\": \"dsc-prod\"\n      },\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-12\",\n    \"DatastoreName\": \"ds-prod-02\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Error\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"Normal\",\n      \"NumIncomingVMs\": 0,\n      \"NumOutgoingVMs\": 2,\n      \"NumVRAs\": 0,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 1099511627776,\n          \"FreeInBytes\": 54975581388,\n          \"ProvisionedInBytes\": 1044536046388,\n          \"UsedInBytes\": 1044536046388\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 107374182400,\n            \"UsedInBytes\": 107374182400\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  },\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000021\"\n      ],\n      \"OwningDatastoreCluster\": null,\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-21\",\n    \"DatastoreName\": \"ds-dr-01\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Normal\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"InMaintenance\",\n      \"NumIncomingVMs\": 7,\n      \"NumOutgoingVMs\": 0,\n      \"NumVRAs\": 2,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 2199023255552,\n          \"FreeInBytes\": 1649267441664,\n          \"ProvisionedInBytes\": 549755813888,\n          \"UsedInBytes\": 549755813888\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 2147483648,\n            \"UsedInBytes\": 2147483648\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 21474836480,\n            \"UsedInBytes\": 21474836480\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/datastores all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "0b5cdbfb-69c8-5bfb-b7b9-aff414af66c8",
+                    "body": "[\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000011\"\n      ],\n      \"OwningDatastoreCluster\": {\n        \"DatastoreClusterIdentifier\": \"srv-0001.group-p100\",\n        \"DatastoreClusterName\": \"dsc-prod\"\n      },\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-11\",\n    \"DatastoreName\": \"ds-prod-01\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Normal\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"Normal\",\n      \"NumIncomingVMs\": 0,\n      \"NumOutgoingVMs\": 4,\n      \"NumVRAs\": 1,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 536870912000,\n          \"FreeInBytes\": 323713236992,\n          \"ProvisionedInBytes\": 213157675008,\n          \"UsedInBytes\": 213157675008\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 13422821376,\n            \"UsedInBytes\": 13422821376\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 21474836480,\n            \"UsedInBytes\": 21474836480\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  },\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000012\"\n      ],\n      \"OwningDatastoreCluster\": {\n        \"DatastoreClusterIdentifier\": \"srv-0001.group-p100\",\n        \"DatastoreClusterName\": \"dsc-prod\"\n      },\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-12\",\n    \"DatastoreName\": \"ds-prod-02\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Error\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"Normal\",\n      \"NumIncomingVMs\": 0,\n      \"NumOutgoingVMs\": 2,\n      \"NumVRAs\": 0,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 1099511627776,\n          \"FreeInBytes\": 54975581388,\n          \"ProvisionedInBytes\": 1044536046388,\n          \"UsedInBytes\": 1044536046388\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 107374182400,\n            \"UsedInBytes\": 107374182400\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  },\n  {\n    \"Config\": {\n      \"Devices\": [\n        \"naa.60000000000000000000000000000021\"\n      ],\n      \"OwningDatastoreCluster\": null,\n      \"Type\": null\n    },\n    \"DatastoreIdentifier\": \"srv-0001.datastore-21\",\n    \"DatastoreName\": \"ds-dr-01\",\n    \"Health\": {\n      \"Alerts\": [],\n      \"Status\": \"Normal\"\n    },\n    \"Stats\": {\n      \"AvailabilityStatus\": \"InMaintenance\",\n      \"NumIncomingVMs\": 7,\n      \"NumOutgoingVMs\": 0,\n      \"NumVRAs\": 2,\n      \"Usage\": {\n        \"Datastore\": {\n          \"CapacityInBytes\": 2199023255552,\n          \"FreeInBytes\": 1649267441664,\n          \"ProvisionedInBytes\": 549755813888,\n          \"UsedInBytes\": 549755813888\n        },\n        \"Zerto\": {\n          \"Appliances\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Journal\": {\n            \"ProvisionedInBytes\": 2147483648,\n            \"UsedInBytes\": 2147483648\n          },\n          \"Protected\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Recovery\": {\n            \"ProvisionedInBytes\": 21474836480,\n            \"UsedInBytes\": 21474836480\n          },\n          \"Scratch\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          },\n          \"Unknown\": {\n            \"ProvisionedInBytes\": 0,\n            \"UsedInBytes\": 0\n          }\n        }\n      }\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/datastores all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "49e080fa-4888-5604-9be5-8e3a203f2b04",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/datastores unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "93d8aa31-e6cb-582c-ae3e-b6e925c9a5ea",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/vms",
+            "responses": [
+                {
+                    "uuid": "cc6261d6-39e0-5a1a-9cf9-fcd0822c7f55",
+                    "body": "[\n  {\n    \"VmIdentifier\": \"srv-0001.vm-101\",\n    \"VmName\": \"web01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"ActualRPO\": 8,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 10240,\n    \"ProvisionedStorageInMB\": 20480,\n    \"JournalUsedStorageMb\": 2048,\n    \"JournalHardLimit\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 153600\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 115200\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-101\",\n      \"identifier\": \"srv-0001.vm-101\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-102\",\n    \"VmName\": \"web02\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"ActualRPO\": 9,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 10240,\n    \"ProvisionedStorageInMB\": 20480,\n    \"JournalUsedStorageMb\": 1024,\n    \"JournalHardLimit\": {\n      \"LimitType\": 2,\n      \"LimitValue\": 50\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 2,\n      \"LimitValue\": 37\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-102\",\n      \"identifier\": \"srv-0001.vm-102\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-201\",\n    \"VmName\": \"erp-db01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n    \"VpgName\": \"erp-database\",\n    \"Status\": 3,\n    \"SubStatus\": 6,\n    \"ActualRPO\": 840,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 102400,\n    \"ProvisionedStorageInMB\": 204800,\n    \"JournalUsedStorageMb\": 140000,\n    \"JournalHardLimit\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 153600\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 115200\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-201\",\n      \"identifier\": \"srv-0001.vm-201\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-301\",\n    \"VmName\": \"fs01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n    \"VpgName\": \"file-server\",\n    \"Status\": 2,\n    \"SubStatus\": 31,\n    \"ActualRPO\": 4200,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 51200,\n    \"ProvisionedStorageInMB\": 102400,\n    \"JournalUsedStorageMb\": 0,\n    \"JournalHardLimit\": {\n      \"LimitType\": 0,\n      \"LimitValue\": 0\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 0,\n      \"LimitValue\": 0\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-301\",\n      \"identifier\": \"srv-0001.vm-301\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vms all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "e5fc048f-9194-5f80-8bd4-e847ad0f8ed2",
+                    "body": "[\n  {\n    \"VmIdentifier\": \"srv-0001.vm-101\",\n    \"VmName\": \"web01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"ActualRPO\": 8,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 10240,\n    \"ProvisionedStorageInMB\": 20480,\n    \"JournalUsedStorageMb\": 2048,\n    \"JournalHardLimit\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 153600\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 115200\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-101\",\n      \"identifier\": \"srv-0001.vm-101\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-102\",\n    \"VmName\": \"web02\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n    \"VpgName\": \"web-frontend\",\n    \"Status\": 1,\n    \"SubStatus\": 0,\n    \"ActualRPO\": 9,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 10240,\n    \"ProvisionedStorageInMB\": 20480,\n    \"JournalUsedStorageMb\": 1024,\n    \"JournalHardLimit\": {\n      \"LimitType\": 2,\n      \"LimitValue\": 50\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 2,\n      \"LimitValue\": 37\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-102\",\n      \"identifier\": \"srv-0001.vm-102\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-201\",\n    \"VmName\": \"erp-db01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n    \"VpgName\": \"erp-database\",\n    \"Status\": 3,\n    \"SubStatus\": 6,\n    \"ActualRPO\": 840,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 102400,\n    \"ProvisionedStorageInMB\": 204800,\n    \"JournalUsedStorageMb\": 140000,\n    \"JournalHardLimit\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 153600\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 1,\n      \"LimitValue\": 115200\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-201\",\n      \"identifier\": \"srv-0001.vm-201\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  },\n  {\n    \"VmIdentifier\": \"srv-0001.vm-301\",\n    \"VmName\": \"fs01\",\n    \"VpgIdentifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000003\",\n    \"VpgName\": \"file-server\",\n    \"Status\": 2,\n    \"SubStatus\": 31,\n    \"ActualRPO\": 4200,\n    \"IOPs\": 12,\n    \"ThroughputInMB\": 0.5,\n    \"OutgoingBandWidthInMbps\": 4.48681640625,\n    \"UsedStorageInMB\": 51200,\n    \"ProvisionedStorageInMB\": 102400,\n    \"JournalUsedStorageMb\": 0,\n    \"JournalHardLimit\": {\n      \"LimitType\": 0,\n      \"LimitValue\": 0\n    },\n    \"JournalWarningThreshold\": {\n      \"LimitType\": 0,\n      \"LimitValue\": 0\n    },\n    \"Entities\": {\n      \"Protected\": 0,\n      \"Recovery\": 0,\n      \"Source\": 0,\n      \"Target\": 0\n    },\n    \"EnabledActions\": {\n      \"IsFlrEnabled\": true\n    },\n    \"HardwareVersion\": \"vmx-19\",\n    \"IsVmExists\": true,\n    \"LastTest\": null,\n    \"Priority\": 1,\n    \"ProtectedSite\": {\n      \"href\": \"https://zvm-a.example/v1/localsite/f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"identifier\": \"f2a1c3d4-1111-4a5b-8c6d-000000000001\",\n      \"rel\": null,\n      \"type\": \"localsite\"\n    },\n    \"RecoverySite\": {\n      \"href\": \"https://zvm-a.example/v1/peersites/f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"identifier\": \"f2a1c3d4-2222-4a5b-8c6d-000000000002\",\n      \"rel\": null,\n      \"type\": \"peersites\"\n    },\n    \"RecoveryHostIdentifier\": \"srv-0002.host-2001\",\n    \"Volumes\": [\n      {\n        \"VmVolumeIdentifier\": \"scsi:0:0\"\n      }\n    ],\n    \"Link\": {\n      \"href\": \"https://zvm-a.example/v1/vms/srv-0001.vm-301\",\n      \"identifier\": \"srv-0001.vm-301\",\n      \"rel\": null,\n      \"type\": \"vms\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/vms all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "f04ea629-77e8-53be-afcf-8216550ea8ce",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/vms unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "34ba72c1-bdbb-5c2e-bf0a-b47bb09876e8",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "v1/volumes",
+            "responses": [
+                {
+                    "uuid": "f9a3070f-b50b-5a33-9faf-fc30eaea17cd",
+                    "body": "[\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"journal-web01.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/journal-web01.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/journal-web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 4294967296,\n      \"UsedInBytes\": 2147483648\n    },\n    \"VolumeType\": \"Journal\",\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/volumes journal bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "query",
+                            "modifier": "volumeType",
+                            "value": "Journal",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "1dc6167b-5175-52c0-88dc-ab9af4adbe61",
+                    "body": "[\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"journal-web01.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/journal-web01.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/journal-web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 4294967296,\n      \"UsedInBytes\": 2147483648\n    },\n    \"VolumeType\": \"Journal\",\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/volumes journal session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "query",
+                            "modifier": "volumeType",
+                            "value": "Journal",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "73ef1aad-1b06-5d30-bdf2-40807212058e",
+                    "body": "[\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-01\",\n      \"Name\": \"ds-prod-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Path\": {\n      \"FileName\": \"web01.vmdk\",\n      \"Full\": \"[ds-prod-01] web01/web01.vmdk\",\n      \"Relative\": \"web01/web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 42949672960,\n      \"UsedInBytes\": 21474836480\n    },\n    \"VolumeType\": 0,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"journal-web01.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/journal-web01.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/journal-web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 4294967296,\n      \"UsedInBytes\": 2147483648\n    },\n    \"VolumeType\": \"Journal\",\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"web01-recovery.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/web01-recovery.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/web01-recovery.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 42949672960,\n      \"UsedInBytes\": 21474836480\n    },\n    \"VolumeType\": 1,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-02\",\n      \"Name\": \"ds-prod-02\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.erp-db01\",\n      \"Name\": \"erp-db01\"\n    },\n    \"Path\": {\n      \"FileName\": \"erp-db01.vmdk\",\n      \"Full\": \"[ds-prod-02] erp-db01/erp-db01.vmdk\",\n      \"Relative\": \"erp-db01/erp-db01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.erp-db01\",\n      \"Name\": \"erp-db01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 214748364800,\n      \"UsedInBytes\": 107374182400\n    },\n    \"VolumeType\": 0,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"Name\": \"erp-database\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-01\",\n      \"Name\": \"ds-prod-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx01.example\",\n      \"Name\": \"Z-VRA-esx01.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"Z-VRA-esx01.vmdk\",\n      \"Full\": \"[ds-prod-01] Z-VRA-esx01/Z-VRA-esx01.vmdk\",\n      \"Relative\": \"Z-VRA-esx01/Z-VRA-esx01.vmdk\"\n    },\n    \"ProtectedVm\": null,\n    \"Size\": {\n      \"ProvisionedInBytes\": 13422821376,\n      \"UsedInBytes\": 13422821376\n    },\n    \"VolumeType\": 6,\n    \"Vpg\": null\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/volumes all bearer",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer zvm-token-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "b343c545-de4b-59f8-b296-57ab2913ccf3",
+                    "body": "[\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-01\",\n      \"Name\": \"ds-prod-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Path\": {\n      \"FileName\": \"web01.vmdk\",\n      \"Full\": \"[ds-prod-01] web01/web01.vmdk\",\n      \"Relative\": \"web01/web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 42949672960,\n      \"UsedInBytes\": 21474836480\n    },\n    \"VolumeType\": 0,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"journal-web01.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/journal-web01.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/journal-web01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 4294967296,\n      \"UsedInBytes\": 2147483648\n    },\n    \"VolumeType\": \"Journal\",\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-dr-01\",\n      \"Name\": \"ds-dr-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx02.example\",\n      \"Name\": \"Z-VRA-esx02.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"web01-recovery.vmdk\",\n      \"Full\": \"[ds-dr-01] Z-VRA-esx02/web01-recovery.vmdk\",\n      \"Relative\": \"Z-VRA-esx02/web01-recovery.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.web01\",\n      \"Name\": \"web01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 42949672960,\n      \"UsedInBytes\": 21474836480\n    },\n    \"VolumeType\": 1,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000001\",\n      \"Name\": \"web-frontend\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-02\",\n      \"Name\": \"ds-prod-02\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.erp-db01\",\n      \"Name\": \"erp-db01\"\n    },\n    \"Path\": {\n      \"FileName\": \"erp-db01.vmdk\",\n      \"Full\": \"[ds-prod-02] erp-db01/erp-db01.vmdk\",\n      \"Relative\": \"erp-db01/erp-db01.vmdk\"\n    },\n    \"ProtectedVm\": {\n      \"Identifier\": \"srv-0001.erp-db01\",\n      \"Name\": \"erp-db01\"\n    },\n    \"Size\": {\n      \"ProvisionedInBytes\": 214748364800,\n      \"UsedInBytes\": 107374182400\n    },\n    \"VolumeType\": 0,\n    \"Vpg\": {\n      \"Identifier\": \"b7e4a2c1-0000-4d3e-9f10-000000000002\",\n      \"Name\": \"erp-database\"\n    }\n  },\n  {\n    \"Datastore\": {\n      \"Identifier\": \"srv-0001.ds-prod-01\",\n      \"Name\": \"ds-prod-01\"\n    },\n    \"IsThinProvisioned\": true,\n    \"OwningVM\": {\n      \"Identifier\": \"srv-0001.Z-VRA-esx01.example\",\n      \"Name\": \"Z-VRA-esx01.example\"\n    },\n    \"Path\": {\n      \"FileName\": \"Z-VRA-esx01.vmdk\",\n      \"Full\": \"[ds-prod-01] Z-VRA-esx01/Z-VRA-esx01.vmdk\",\n      \"Relative\": \"Z-VRA-esx01/Z-VRA-esx01.vmdk\"\n    },\n    \"ProtectedVm\": null,\n    \"Size\": {\n      \"ProvisionedInBytes\": 13422821376,\n      \"UsedInBytes\": 13422821376\n    },\n    \"VolumeType\": 6,\n    \"Vpg\": null\n  }\n]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "v1/volumes all session",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "x-zerto-session",
+                            "value": "zvm-session-123",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "572e4029-5b25-5c31-8d6e-45f387ac1c82",
+                    "body": "{\"Message\": \"Authorization has been denied for this request.\"}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "v1/volumes unauthorized",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        }
+    ],
+    "rootChildren": [
+        {
+            "type": "route",
+            "uuid": "8ff51653-cf02-50b1-84b0-69eeffb84ac4"
+        },
+        {
+            "type": "route",
+            "uuid": "92f6a2e3-3cd7-5d9c-967b-790ce97dc5a8"
+        },
+        {
+            "type": "route",
+            "uuid": "3802240e-a09c-5c0b-98d1-c0c80926aa4c"
+        },
+        {
+            "type": "route",
+            "uuid": "b97d1612-e91e-5e5c-a037-522301dbfb08"
+        },
+        {
+            "type": "route",
+            "uuid": "80fa3528-3231-579c-b915-72961cff3bd4"
+        },
+        {
+            "type": "route",
+            "uuid": "945f52e6-b417-5574-a583-eb3e97430e8c"
+        },
+        {
+            "type": "route",
+            "uuid": "24a6c272-472c-5aee-80a9-94298d731504"
+        },
+        {
+            "type": "route",
+            "uuid": "5aaa596e-ef72-5eff-891b-7536b9a9cea1"
+        },
+        {
+            "type": "route",
+            "uuid": "745d0305-31c7-5f17-8ea0-7a503a1cb2a2"
+        },
+        {
+            "type": "route",
+            "uuid": "93d8aa31-e6cb-582c-ae3e-b6e925c9a5ea"
+        },
+        {
+            "type": "route",
+            "uuid": "34ba72c1-bdbb-5c2e-bf0a-b47bb09876e8"
+        }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+        "enabled": false,
+        "type": "CERT",
+        "pfxPath": "",
+        "certPath": "",
+        "keyPath": "",
+        "caPath": "",
+        "passphrase": ""
+    },
+    "cors": true,
+    "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/json"
+        }
+    ],
+    "proxyReqHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "proxyResHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "data": [],
+    "callbacks": []
+}
