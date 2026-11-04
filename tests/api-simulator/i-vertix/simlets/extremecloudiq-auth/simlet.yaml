@@ -1,0 +1,32 @@
+simlet: extremecloudiq-auth
+
+request:
+  - method: POST
+  - uriPath: /login
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /login
+
+        - where: header
+          named: Content-Type
+          equals: application/json
+
+        - where: body
+          contains: username
+
+        - where: body
+          contains: password
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "access_token": "token1234",
+        "token_type": "Bearer",
+        "expires_in": 86400
+      }

@@ -1,0 +1,58 @@
+simlet: azure-netapp-pool
+
+request:
+  - method: GET
+  - uriPath: /azure/management/netapppool/subscriptions/subscription-ivertix/resources
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.NetApp"
+        - where: uri
+          contains: "netAppAccounts"
+        - where: uriQueryParameter
+          named: "api-version"
+          equals: "2018-01-01"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-1/capacityPools/nap-pool-1",
+            "name": "iv-netapp-1/nap-pool-1",
+            "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "07/23/2026",
+              "environment": "standard",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          },
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-2/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-2/capacityPools/nap-pool-2",
+            "name": "iv-netapp-2/nap-pool-2",
+            "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "07/23/2026",
+              "environment": "pro",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            }
+          }
+        ]
+      }

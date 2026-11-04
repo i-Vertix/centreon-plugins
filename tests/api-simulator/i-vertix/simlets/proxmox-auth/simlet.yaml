@@ -1,0 +1,62 @@
+simlet: proxmox-auth
+
+request:
+  - method: POST
+  - uriPath: /api2/json/access/ticket
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /api2/json/access/ticket
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: username
+
+        - where: body
+          contains: password
+
+        - where: body
+          contains: realm
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "data": {
+          "cap": {
+            "storage": {
+              "Datastore.Audit": 1
+            },
+            "dc": {
+              "SDN.Audit": 1,
+              "Sys.Audit": 1
+            },
+            "sdn": {
+              "SDN.Audit": 1
+            },
+            "mapping": {
+              "Mapping.Audit": 1
+            },
+            "access": {},
+            "vms": {
+              "VM.GuestAgent.Audit": 1,
+              "VM.Audit": 1
+            },
+            "nodes": {
+              "Sys.Console": 1,
+              "Sys.Audit": 1,
+              "Sys.Syslog": 1
+            }
+          },
+          "ticket": "PVE:ivertix@pve:123::123",
+          "CSRFPreventionToken": "123:123",
+          "username": "ivertix@pve"
+        }
+      }

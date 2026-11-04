@@ -1,0 +1,110 @@
+simlet: azure-netapp-pool-volumes-iv-netapp-2
+
+request:
+  - method: GET
+  - uriPath: /azure/management/netapppool/subscriptions/subscription-ivertix/resourcegroups/rg-iv-2/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-2/capacityPools/nap-pool-2/volumes
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token-123"
+        - where: uri
+          contains: "Microsoft.NetApp"
+        - where: uri
+          contains: "netAppAccounts"
+        - where: uri
+          contains: "volumes"
+        - where: uri
+          contains: "iv-netapp-2"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subscription-ivertix/resourceGroups/rg-iv-1/providers/Microsoft.NetApp/netAppAccounts/iv-netapp-sim/capacityPools/nap-pool-1/volumes/volume-sim-xy",
+            "name": "iv-netapp-sim/nap-pool-1/volume-sim-xy",
+            "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+            "etag": "W/\"datetime'2026-01-22T08%3A16%3A56.0197409Z'\"",
+            "location": "westeurope",
+            "tags": {
+              "company": "i-Vertix",
+              "creator": "admin-rm@i-vertix.com",
+              "DateCreated": "07/23/2026",
+              "environment": "standard",
+              "it-service": "support-iv",
+              "referent": "admin-rm@i-vertix.com",
+              "workload": "plm"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+              "serviceLevel": "Standard",
+              "creationToken": "dba-sta",
+              "usageThreshold": 107374182400,
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "ruleIndex": 1,
+                    "unixReadOnly": false,
+                    "unixReadWrite": true,
+                    "cifs": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "allowedClients": "10.132.241.0/24,10.133.4.128/28,10.133.7.16/28,10.135.0.41,10.135.0.4",
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "hasRootAccess": true,
+                    "chownMode": "Restricted"
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "networkFeatures": "Standard",
+              "effectiveNetworkFeatures": "Standard",
+              "networkSiblingSetId": "e59dc1c1-95d1-6f7b-0c92-d2845d8622bd",
+              "storageToNetworkProximity": "T2",
+              "snapshotDirectoryVisible": true,
+              "kerberosEnabled": false,
+              "securityStyle": "Unix",
+              "smbEncryption": false,
+              "smbContinuouslyAvailable": false,
+              "encryptionKeySource": "Microsoft.KeyVault",
+              "ldapEnabled": false,
+              "unixPermissions": "0770",
+              "mountTargets": [
+                {
+                  "mountTargetId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "fileSystemId": "c70ad74f-5584-5aa8-98de-78c09c352d2b",
+                  "ipAddress": "10.132.244.75"
+                }
+              ],
+              "coolAccess": false,
+              "avsDataStore": "Disabled",
+              "isDefaultQuotaEnabled": false,
+              "defaultUserQuotaInKiBs": 0,
+              "defaultGroupQuotaInKiBs": 0,
+              "enableSubvolumes": "Disabled",
+              "maximumNumberOfFiles": 21251126,
+              "smbNonBrowsable": "Disabled",
+              "smbAccessBasedEnumeration": "Disabled",
+              "isLargeVolume": false,
+              "provisionedAvailabilityZone": "2",
+              "actualThroughputMibps": 1.562
+            },
+            "zones": [
+              "2"
+            ]
+          }
+        ]
+      }

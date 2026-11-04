@@ -1,0 +1,382 @@
+simlet: sadelvoip
+
+# -------------------
+# REQUEST DEFINITIONS
+# -------------------
+# only the method was evaluated in the former per-path list, so this simlet caught every GET request;
+# the single paths are matched in the responses below
+request:
+  - method: GET
+  - where: uriPath
+    contains: /sadelvoip/api/v1/
+
+
+responses:
+
+  # -------------------
+  # VERSION
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/version
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "version": "1.2.6"
+      }
+
+  # -------------------
+  # PING
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/ping
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "timestamp": "2026-06-03T08:36:56.957Z",
+        "macAddress": "00:07:32:b9:0e:9b",
+        "dbConnection": 1
+      }
+
+  # -------------------
+  # CONSOLES
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/consoles
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "description": "consoleweb OSCaR",
+          "id": "consolewebvoip1",
+          "name": "consolewebvoip OSCaR",
+          "operator": "userwebvoip1",
+          "state": "connected"
+        },
+        {
+          "description": "consoleweb OSCaR",
+          "id": "consolewebsp1",
+          "name": "consolewebsp OSCaR",
+          "operator": "",
+          "state": "disconnected"
+        }
+      ]
+
+  # -------------------
+  # CONSOLE
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/consoles/consolewebvoip1
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "description": "consoleweb OSCaR",
+        "id": "consolewebvoip1",
+        "name": "consolewebvoip OSCaR",
+        "operator": "userwebvoip1",
+        "state": "connected"
+      }
+
+  # -------------------
+  # USERS
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/users
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      [
+        {
+          "description": "",
+          "id": "user9",
+          "name": "user9",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user8",
+          "name": "user8",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user7",
+          "name": "user7",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user6",
+          "name": "user6",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user3",
+          "name": "user3",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "userwebsp1",
+          "name": "userwebsp1",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user10",
+          "name": "user10",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user1",
+          "name": "user1",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "userwebvoip1",
+          "name": "userwebvoip1",
+          "state": "connected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user2",
+          "name": "user2",
+          "state": "disconnected"
+        },
+        {
+          "description": "Simple Operator",
+          "id": "user4",
+          "name": "user4",
+          "state": "disconnected"
+        },
+        {
+          "description": "",
+          "id": "user5",
+          "name": "user5",
+          "state": "disconnected"
+        }
+      ]
+  
+
+  # -------------------
+  # USER
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/users/userwebvoip1
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "description": "",
+        "id": "userwebvoip1",
+        "name": "userwebvoip1",
+        "state": "connected"
+      }
+
+  # -------------------
+  # LINES
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/lines
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "modem1": {
+          "diagnostic": {
+            "ber": 0,
+            "busy": false,
+            "cell": "",
+            "fn": "",
+            "imei": "",
+            "operator": "",
+            "reachable": false,
+            "rssi": 0,
+            "simnum": "ERROR",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem1",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem2": {
+          "diagnostic": {
+            "ber": 0,
+            "busy": false,
+            "cell": "",
+            "fn": "",
+            "imei": "",
+            "operator": "",
+            "reachable": false,
+            "rssi": 0,
+            "simnum": "ERROR",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem2",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem3": {
+          "diagnostic": {
+            "ber": 99,
+            "busy": false,
+            "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+            "diverting": [],
+            "fn": "",
+            "imei": "351962026180543",
+            "operator": "vodafone IT",
+            "reachable": true,
+            "rssi": 27,
+            "simnum": "+393358382142",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem3",
+            "line_type": "gsmrmodemline"
+          }
+        },
+        "modem4": {
+          "diagnostic": {
+            "ber": 99,
+            "busy": false,
+            "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+            "diverting": [],
+            "fn": "",
+            "imei": "351962026180527",
+            "operator": "vodafone IT",
+            "reachable": true,
+            "rssi": 28,
+            "simnum": "+393358382148",
+            "tag10": ""
+          },
+          "src": {
+            "line_id": "modem4",
+            "line_type": "gsmrmodemline"
+          }
+        }
+      }
+  
+  
+
+  # -------------------
+  # LINE
+  # -------------------
+  - when:
+      request:
+        - where: uriPath
+          equals: /sadelvoip/api/v1/diagnostic/lines/modem3
+        - where: header
+          named: apikey
+          equals: "1234"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "diagnostic": {
+          "ber": 99,
+          "busy": false,
+          "cell": "LAC=4E62 cell=DAD7 BSIC=62 ch=35",
+          "diverting": [],
+          "fn": "",
+          "imei": "351962026180543",
+          "operator": "vodafone IT",
+          "reachable": true,
+          "rssi": 27,
+          "simnum": "+393358382142",
+          "tag10": ""
+        },
+        "src": {
+          "line_id": "modem3",
+          "line_type": "gsmrmodemline"
+        }
+      }
+
+
+  # -------------------
+  # RESTRICTED
+  # -------------------
+  - when:
+      request:
+        - where: header
+          named: apikey
+          equals: "restricted"
+
+    from: stub
+    status: 403
+    body: |
+      {
+        "message": "User has no access to this method."
+      }
+
+  # -------------------
+  # INVALID KEY
+  # -------------------
+  - when:
+      request:
+        - where: header
+          named: apikey
+          not equals: "1234"
+
+    from: stub
+    status: 401
+    body: |
+      {
+        "message": "Invalid API key."
+      }
+
+  # -------------------
+  # FALLBACK
+  # -------------------
+  - from: stub
+    status: 404

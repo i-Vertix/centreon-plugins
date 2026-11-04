@@ -1,0 +1,120 @@
+simlet: cisco-webex-workspace-locations
+request:
+  - method: GET
+  - uriPath: /v1/workspaceLocations
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Bearer"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "items": [
+          {
+            "id": "workspace_location_id_Bolzano",
+            "locationId": "location_id_Bolzano",
+            "displayName": "Bolzano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Bolzano",
+            "latitude": 46.490672,
+            "longitude": 11.339821
+          },
+          {
+            "id": "workspace_location_id_Merano",
+            "locationId": "location_id_Merano",
+            "displayName": "Merano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Merano",
+            "latitude": 46.668169,
+            "longitude": 11.159534
+          },
+          {
+            "id": "workspace_location_id_Bressanone",
+            "locationId": "location_id_Bressanone",
+            "displayName": "Bressanone",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Bressanone",
+            "latitude": 46.715033,
+            "longitude": 11.655979
+          },
+          {
+            "id": "workspace_location_id_Brunico",
+            "locationId": "location_id_Brunico",
+            "displayName": "Brunico",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Brunico",
+            "latitude": 46.799420,
+            "longitude": 11.934288
+          },
+          {
+            "id": "workspace_location_id_Vipiteno",
+            "locationId": "location_id_Vipiteno",
+            "displayName": "Vipiteno",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Vipiteno",
+            "latitude": 46.893132,
+            "longitude": 11.429607
+          },
+          {
+            "id": "workspace_location_id_Laives",
+            "locationId": "location_id_Laives",
+            "displayName": "Laives",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Laives",
+            "latitude": 46.426795,
+            "longitude": 11.338406
+          },
+          {
+            "id": "workspace_location_id_Appiano",
+            "locationId": "location_id_Appiano",
+            "displayName": "Appiano",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Appiano",
+            "latitude": 46.455333,
+            "longitude": 11.259049
+          },
+          {
+            "id": "workspace_location_id_Caldaro",
+            "locationId": "location_id_Caldaro",
+            "displayName": "Caldaro",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Caldaro",
+            "latitude": 46.413259,
+            "longitude": 11.246203
+          },
+          {
+            "id": "workspace_location_id_Lana",
+            "locationId": "location_id_Lana",
+            "displayName": "Lana",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Lana",
+            "latitude": 46.612094,
+            "longitude": 11.156527
+          },
+          {
+            "id": "workspace_location_id_Naturno",
+            "locationId": "location_id_Naturno",
+            "displayName": "Naturno",
+            "address": "Centro",
+            "countryCode": "IT",
+            "cityName": "Naturno",
+            "latitude": 46.650000,
+            "longitude": 11.005000
+          }
+        ]
+      }

@@ -1,0 +1,72 @@
+simlet: zerto-zic-auth
+
+request:
+  - method: POST
+  - uriPath: /auth/realms/zerto/protocol/openid-connect/token
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /auth/realms/zerto/protocol/openid-connect/token
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id=zic-monitoring
+
+        - where: body
+          contains: client_secret=secret-123
+
+        - where: body
+          contains: grant_type=client_credentials
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "access_token": "zic-token-123",
+        "expires_in": 1800,
+        "token_type": "Bearer"
+      }
+
+  # Zerto ZVM (apps::backup::zerto::zvm::restapi): same Keycloak token path as ZIC
+  - when:
+      request:
+        - where: uriPath
+          equals: /auth/realms/zerto/protocol/openid-connect/token
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id=zvm-monitoring
+
+        - where: body
+          contains: client_secret=secret-123
+
+        - where: body
+          contains: grant_type=client_credentials
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "access_token": "zvm-token-123",
+        "expires_in": 1800,
+        "token_type": "Bearer"
+      }

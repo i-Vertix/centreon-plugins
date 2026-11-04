@@ -1,0 +1,32 @@
+simlet: proxmox-version
+
+request:
+  - method: GET
+  - uriPath: /api2/json/version
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /api2/json/version
+
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: header
+          named: Cookie
+          equals: "PVEAuthCookie=PVE:ivertix@pve:123::123"
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "data": {
+          "version": "9.2.2",
+          "release": "9.2",
+          "repoid": "b9984c6d90a4bd80"
+        }
+      }

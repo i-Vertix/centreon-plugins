@@ -1,0 +1,37 @@
+simlet: zerto-zic-license
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/license
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/license
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "details": {
+          "licenseKey": "XXXX-XXXX",
+          "licenseType": "Subscription",
+          "expiryDate": "2026-11-20",
+          "isExpired": false,
+          "maxVms": 50
+        },
+        "usage": {
+          "totalVmsCount": 41
+        }
+      }

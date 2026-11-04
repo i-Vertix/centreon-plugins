@@ -71,11 +71,12 @@ Execution chain: `src/centreon_plugins.pl` → `centreon::plugins::script` (pars
 
 Developer docs: `doc/en/developer/plugins_global.md` (layout, style, output/perfdata rules, discovery), `tutorial-api.md`, `tutorial-snmp.md`, `tutorial-service_discovery.md`.
 
-## API simulator (`tests/api-simulator/i-vertix/apisim.yaml`)
+## API simulator (`tests/api-simulator/i-vertix/`)
 
-One YAML file of apisimulator *simlets* separated by `---`. Each simlet has a `simlet:` name, a top-level `request:` matcher (method + path) and `responses:` with `when: request:` conditions (`uriPath`, `uri contains`, `uriQueryParameter`, `header`, `body contains`) and a `from: stub` response.
+An [API Simulator](https://apisimulator.io/docs/) 1.13 simulation in the "directory per simlet" layout: every simlet is `simlets/<simlet-name>/simlet.yaml`, names prefixed with the product (`azure-vnet`, `zerto-zic-vpgs`, ...); `apisim.yaml` is intentionally empty (comments only). Each simlet has a `simlet:` name (keep it equal to the directory name), a top-level `request:` matcher (method + path) and `responses:` with `when: request:` conditions (`uriPath`, `uri contains`, `uriQueryParameter`, `header`, `body contains`) and a `from: stub` response.
 
-- Simlets are matched **in file order**; a simlet whose top-level `request` is too broad swallows requests meant for later simlets. Keep top-level matchers specific (e.g. `where: uriPath contains: /sadelvoip/api/v1/`) and put a final `- from: stub` / `status: 404` fallback inside a simlet that matches by prefix.
+- Simlets with the same `rank` are evaluated **in no particular order**, so top-level matchers of different simlets must not overlap (use exact `uriPath`, or `where: uriPath contains: /<product>/...`); if they have to overlap, give the more specific simlet a higher `rank:`. A simlet that matches by prefix should end with a `- from: stub` / `status: 404` fallback response.
+- Deployment: the simulator runs on the simulation VM (`10.10.100.22`, alias `i-vertix-simulation-vm`) as `apisimulator.service`, loading `/var/www/apisimulator/examples/i-vertix` (`apisim.yaml` + `simlets/`). Simlet files are only read at start-up, so changes need `systemctl restart apisimulator.service`. Always back up that directory (`/root/apisim-backups/i-vertix-<timestamp>.tar.gz`) before replacing it, and check `apisimulator.log` in it for `Loaded N simlets` / `API Simulator started`. A second instance for testing can be started with `bin/apisimulator start <dir> -p 6091 -admin_port 6191` from `/var/www/apisimulator`.
 - Paths are namespaced per product (`/azure/...`, `/aws/...`, `/velocloud/...`, `/zic/...`, `/zvm/...`, `/sadelvoip/...`), and fake credentials are fixed values (e.g. `Bearer token-123`, `client-id-ivertix`, `apikey: 1234`).
 - Plugins are pointed at it with `--hostname=i-vertix-simulation-vm --port=6090 --proto=http` plus the product path prefix where the plugin allows a base URL/path option.
 - A local (unversioned) `.git/hooks/pre-push` refuses to push `tests/api-simulator/` to any branch other than `ivertix-custom-plugins`; never bypass it to publish simulator data elsewhere.

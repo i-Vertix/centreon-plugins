@@ -1,0 +1,48 @@
+simlet: extremecloudiq-locations-building
+
+request:
+  - method: GET
+  - uriPath: /locations/building
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          equals: "Bearer token1234"
+        - where: uriQueryParameter
+          named: "page"
+          equals: "1"
+        - where: uriQueryParameter
+          named: "limit"
+          equals: "100"
+
+    from: stub
+    status: 200
+    body: |
+      {
+        "page": 1,
+        "count": 1,
+        "total_pages": 1,
+        "total_count": 1,
+        "data": [
+          {
+            "id": 1309243470874360,
+            "create_time": "2022-11-30T13:45:47.000+0000",
+            "update_time": "2024-05-06T08:28:26.000+0000",
+            "org_id": 0,
+            "parent_id": 1309243470874357,
+            "name": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano",
+            "address": {
+              "address": "NOI Techpark Südtirol, A.- Volta - Str., 13A, 39100 Bolzano)",
+              "address2": "",
+              "city": "",
+              "state": "",
+              "postal_code": ""
+            },
+            "latitude": 46.481889622482974,
+            "longitude": 11.330597659899555
+          }
+        ]
+      }

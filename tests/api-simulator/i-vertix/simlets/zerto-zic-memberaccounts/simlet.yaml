@@ -1,0 +1,49 @@
+simlet: zerto-zic-memberaccounts
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/memberaccounts
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/memberaccounts
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "accounts": [
+          {
+            "accountId": {
+              "id": "111111111111"
+            },
+            "description": "prod",
+            "externalId": "ext-1",
+            "cmksPerRegion": [],
+            "status": "Ready",
+            "statusDescription": null
+          },
+          {
+            "accountId": {
+              "id": "222222222222"
+            },
+            "description": "dr",
+            "externalId": "ext-2",
+            "cmksPerRegion": [],
+            "status": "NotReady",
+            "statusDescription": "Cannot assume role ZertoInCloudRole"
+          }
+        ]
+      }

@@ -1,0 +1,95 @@
+simlet: aws-ebs
+request:
+  - method: POST
+  - uriPath: /aws/ebs
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Authorization
+          contains: "Credential"
+
+    from: stub
+    status: 200
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <DescribeVolumesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
+      <requestId>787c30c7-ee92-4fc2-8cd1-f80e315c194a</requestId>
+      <volumeSet>
+      <item>
+      <volumeId>vol-03231881a2c3731c1</volumeId>
+      <size>100</size>
+      <snapshotId>snap-0a522dfb48c5418f1</snapshotId>
+      <availabilityZone>eu-west-1c</availabilityZone>
+      <availabilityZoneId>euw1-az1</availabilityZoneId>
+      <status>in-use</status>
+      <createTime>2021-04-12T15:18:45.168Z</createTime>
+      <attachmentSet>
+      <item>
+      <volumeId>vol-03231881a2c3731c1</volumeId>
+      <instanceId>i-0639c33342a89ae86</instanceId>
+      <device>/dev/sda1</device>
+      <status>attached</status>
+      <attachTime>2021-04-12T15:18:45.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </item>
+      </attachmentSet>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>portal.i-vertix.com</value>
+      </item>
+      </tagSet>
+      <volumeType>gp2</volumeType>
+      <iops>300</iops>
+      <encrypted>false</encrypted>
+      <multiAttachEnabled>false</multiAttachEnabled>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <volumeArn>arn:aws:ec2:eu-west-1:244888420026:volume/vol-03231881a2c3731c1</volumeArn>
+      <ownerId>244888420026</ownerId>
+      </item>
+      <item>
+      <volumeId>vol-0a0861d894793124f</volumeId>
+      <size>100</size>
+      <snapshotId>snap-0244695e74f9cc8e4</snapshotId>
+      <availabilityZone>eu-west-1a</availabilityZone>
+      <availabilityZoneId>euw1-az2</availabilityZoneId>
+      <status>in-use</status>
+      <createTime>2023-02-22T08:25:13.168Z</createTime>
+      <attachmentSet>
+      <item>
+      <volumeId>vol-0a0861d894793124f</volumeId>
+      <instanceId>i-03f6dfd0656658a22</instanceId>
+      <device>/dev/sda1</device>
+      <status>attached</status>
+      <attachTime>2023-02-22T08:25:13.000Z</attachTime>
+      <deleteOnTermination>false</deleteOnTermination>
+      <ebsCardIndex>0</ebsCardIndex>
+      </item>
+      </attachmentSet>
+      <tagSet>
+      <item>
+      <key>Name</key>
+      <value>web01.i-vertix.com</value>
+      </item>
+      </tagSet>
+      <volumeType>gp3</volumeType>
+      <iops>3000</iops>
+      <encrypted>false</encrypted>
+      <multiAttachEnabled>false</multiAttachEnabled>
+      <throughput>125</throughput>
+      <operator>
+      <managed>false</managed>
+      <hiddenByDefault>false</hiddenByDefault>
+      </operator>
+      <volumeArn>arn:aws:ec2:eu-west-1:244888420026:volume/vol-0a0861d894793124f</volumeArn>
+      <ownerId>244888420026</ownerId>
+      </item>
+      </volumeSet>
+      </DescribeVolumesResponse>

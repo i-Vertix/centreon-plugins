@@ -1,0 +1,31 @@
+simlet: cisco-webex-auth
+
+request:
+  - method: POST
+  - uriPath: /v1/access_token
+
+responses:
+
+  - when:
+      request:
+        - where: header
+          named: Content-Type
+          equals: application/x-www-form-urlencoded
+
+        - where: body
+          contains: client_id
+
+        - where: body
+          contains: client_secret
+
+        - where: body
+          contains: grant_type
+
+    from: stub
+    status: 200
+
+    body: |
+      {
+        "access_token": "token1234",
+        "expires_in": 86400
+      }

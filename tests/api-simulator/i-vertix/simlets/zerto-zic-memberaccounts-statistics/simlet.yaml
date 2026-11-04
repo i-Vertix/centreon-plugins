@@ -1,0 +1,43 @@
+simlet: zerto-zic-memberaccounts-statistics
+
+request:
+  - method: GET
+  - uriPath: /zic/api/v2/zicconfiguration/memberaccounts/statistics
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /zic/api/v2/zicconfiguration/memberaccounts/statistics
+
+        - where: header
+          named: Authorization
+          equals: "Bearer zic-token-123"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "accounts": [
+          {
+            "accountId": {
+              "id": "111111111111"
+            },
+            "protectedVms": 6,
+            "totalVpgs": 3
+          },
+          {
+            "accountId": {
+              "id": "222222222222"
+            },
+            "protectedVms": 0,
+            "totalVpgs": 0
+          }
+        ]
+      }
