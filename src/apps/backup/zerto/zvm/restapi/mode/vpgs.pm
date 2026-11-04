@@ -137,7 +137,7 @@ sub set_counters {
             label            => 'status',
             type             => COUNTER_KIND_TEXT,
             warning_default  => '%{status} =~ /RpoNotMeetingSLA|HistoryNotMeetingSLA/i || %{substatus} =~ /Paused|DisconnectedFromPeer|BeforeCommit/i',
-            critical_default => '%{status} =~ /^NotMeetingSLA$/i || %{substatus} =~ /Error|NeedsConfiguration/i',
+            critical_default => '%{status} eq "NotMeetingSLA" || %{substatus} =~ /Error|NeedsConfiguration/i',
             set              => {
                 key_values                     => [
                     { name => 'name' }, { name => 'id' }, { name => 'status' }, { name => 'substatus' }, { name => 'priority' }
@@ -323,7 +323,7 @@ C<JournalStorageError>, C<RecoveryStorageError>.
 
 =item B<--critical-status>
 
-Define the conditions to match for the status to be CRITICAL (default: C<'%{status} =~ /^NotMeetingSLA$/i || %{substatus} =~ /Error|NeedsConfiguration/i'>).
+Define the conditions to match for the status to be CRITICAL (default: C<'%{status} eq "NotMeetingSLA" || %{substatus} =~ /Error|NeedsConfiguration/i'>).
 You can use the following variables: C<%{name}>, C<%{id}>, C<%{status}>, C<%{substatus}>, C<%{priority}>.
 
 =item B<--warning-vpgs-total>
