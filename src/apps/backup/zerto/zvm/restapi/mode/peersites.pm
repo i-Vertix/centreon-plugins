@@ -88,7 +88,7 @@ sub set_counters {
         {
             label            => 'status',
             type             => COUNTER_KIND_TEXT,
-            warning_default  => '%{pairing_status} =~ /^Pairing$/i',
+            warning_default  => '%{pairing_status} eq "Pairing"',
             critical_default => '%{pairing_status} =~ /Unpaired/i',
             set              => {
                 key_values                     => [
@@ -203,7 +203,7 @@ You can use the following variables: C<%{name}>, C<%{id}>, C<%{hostname}>, C<%{l
 
 =item B<--warning-status>
 
-Define the conditions to match for the status to be WARNING (default: C<'%{pairing_status} =~ /^Pairing$/i'>).
+Define the conditions to match for the status to be WARNING (default: C<'%{pairing_status} eq "Pairing"'>).
 You can use the following variables: C<%{name}>, C<%{id}>, C<%{hostname}>, C<%{location}>, C<%{pairing_status}>, C<%{version}>.
 C<%{pairing_status}> can be: C<Paired>, C<Pairing>, C<Unpaired>.
 
