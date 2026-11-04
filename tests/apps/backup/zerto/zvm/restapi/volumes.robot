@@ -58,3 +58,9 @@ Volumes ${tc}
     ...    8
     ...    --volume-type=Other
     ...    UNKNOWN: Unknown volume type 'Other'. Accepted values: Protected, Recovery, Journal, Scratch, Appliances, Unknown.
+    ...    9
+    ...    --include-vpg-id=0001 --skip-volumes
+    ...    OK: All volume types are ok | 'Journal#volumes.total.count'=1;;;0; 'Journal#volumes.space.used.bytes'=2147483648B;;;0; 'Journal#volumes.space.provisioned.bytes'=4294967296B;;;0; 'Protected#volumes.total.count'=1;;;0; 'Protected#volumes.space.used.bytes'=21474836480B;;;0; 'Protected#volumes.space.provisioned.bytes'=42949672960B;;;0; 'Recovery#volumes.total.count'=1;;;0; 'Recovery#volumes.space.used.bytes'=21474836480B;;;0; 'Recovery#volumes.space.provisioned.bytes'=42949672960B;;;0;
+    ...    10
+    ...    --exclude-vpg-id=0001
+    ...    OK: All volume types are ok - All volumes are ok | 'Appliances#volumes.total.count'=1;;;0; 'Appliances#volumes.space.used.bytes'=13422821376B;;;0; 'Appliances#volumes.space.provisioned.bytes'=13422821376B;;;0; 'Protected#volumes.total.count'=1;;;0; 'Protected#volumes.space.used.bytes'=107374182400B;;;0; 'Protected#volumes.space.provisioned.bytes'=214748364800B;;;0; '[ds-prod-01] Z-VRA-esx01/Z-VRA-esx01.vmdk#volume.space.used.bytes'=13422821376B;;;0; '[ds-prod-01] Z-VRA-esx01/Z-VRA-esx01.vmdk#volume.space.provisioned.bytes'=13422821376B;;;0; '[ds-prod-02] erp-db01/erp-db01.vmdk#volume.space.used.bytes'=107374182400B;;;0; '[ds-prod-02] erp-db01/erp-db01.vmdk#volume.space.provisioned.bytes'=214748364800B;;;0;

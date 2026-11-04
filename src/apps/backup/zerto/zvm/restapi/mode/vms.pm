@@ -195,8 +195,10 @@ sub new {
     $options{options}->add_options(arguments => {
         'include-name:s' => { name => 'include_name', default => '' },
         'exclude-name:s' => { name => 'exclude_name', default => '' },
-        'include-vpg:s'  => { name => 'include_vpg', default => '' },
-        'exclude-vpg:s'  => { name => 'exclude_vpg', default => '' }
+        'include-vpg:s'    => { name => 'include_vpg', default => '' },
+        'exclude-vpg:s'    => { name => 'exclude_vpg', default => '' },
+        'include-vpg-id:s' => { name => 'include_vpg_id', default => '' },
+        'exclude-vpg-id:s' => { name => 'exclude_vpg_id', default => '' }
     });
 
     return $self;
@@ -217,6 +219,7 @@ sub manage_selection {
 
         next if is_excluded($name, $self->{option_results}->{include_name}, $self->{option_results}->{exclude_name}, output => $self->{output});
         next if is_excluded($vpg, $self->{option_results}->{include_vpg}, $self->{option_results}->{exclude_vpg}, output => $self->{output});
+        next if is_excluded($vm->{VpgIdentifier} // '', $self->{option_results}->{include_vpg_id}, $self->{option_results}->{exclude_vpg_id}, output => $self->{output});
 
         my $status = enum_name(value => $vm->{Status}, map => $map_vpg_status);
         $self->{global}->{total}++;
@@ -281,6 +284,14 @@ Filter VMs by VPG name (can be a regexp).
 =item B<--exclude-vpg>
 
 Exclude VMs by VPG name (can be a regexp).
+
+=item B<--include-vpg-id>
+
+Filter VMs by VPG ID (can be a regexp).
+
+=item B<--exclude-vpg-id>
+
+Exclude VMs by VPG ID (can be a regexp).
 
 =item B<--unknown-status>
 
