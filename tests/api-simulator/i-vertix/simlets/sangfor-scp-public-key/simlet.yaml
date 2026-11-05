@@ -1,0 +1,34 @@
+simlet: sangfor-scp-public-key
+
+# Sangfor SCP: public key modulus of the token authentication (v2)
+# plugin options: --hostname=i-vertix-simulation-vm --port=6090 --proto=http and either
+#   --access-key=sangfor-monitoring --secret-key=<any> (EC2, the signature is not verified)
+#   or --api-username=monitoring --api-password=<any> (token auth v2, the password is not verified)
+# both send an Authorization header containing "sangfor-monitoring"
+
+request:
+  - method: GET
+  - uriPath: /janus/v2/public-key
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/v2/public-key
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": {
+          "public_key": "C7F2ABE22B30E3E4DA0145D9D3A236EEA004F0ACAFDED014BAE1522D1D50FA7F6D92A6364A606AABA4E802F6FA5041852312F6706A06418EAD634FE554446CAF3DBA050D8DD3086D858051E5F51361C9C6ECCE4E56C8C99D4DDFFFA580C4FCC5FC2138153D085F1EAF7E03472788322294510AE5EA3CB963B756B2DDF3FA74F5BE3FB30892C4563FB4FDEBC06173508AE7D589F153ACB4F3CF88EC8CCB5011FCFF76CF8894C00D226B290731F3DF6AE8964FF64F076BBC0CFE0B791625383296B60B222D3301ED0BAD3C3A462E16321A113990598BFB2F361BF712BED65B2A4DD715A09D2554300CC134C19560C569104EB72A88382EF034DAC4BFFF08F131FB"
+        }
+      }

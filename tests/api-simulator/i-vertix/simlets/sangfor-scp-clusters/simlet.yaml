@@ -1,0 +1,172 @@
+simlet: sangfor-scp-clusters
+
+# Sangfor SCP: clusters
+# plugin options: --hostname=i-vertix-simulation-vm --port=6090 --proto=http and either
+#   --access-key=sangfor-monitoring --secret-key=<any> (EC2, the signature is not verified)
+#   or --api-username=monitoring --api-password=<any> (token auth v2, the password is not verified)
+# both send an Authorization header containing "sangfor-monitoring"
+
+request:
+  - method: GET
+  - uriPath: /janus/20180725/clusters
+
+responses:
+
+  # clusters of the resource pool pool-lab
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/20180725/clusters
+
+        - where: header
+          named: Authorization
+          contains: "sangfor-monitoring"
+
+        - where: uriQueryParameter
+          named: "az_id"
+          equals: "a1b2c3d4-0000-4000-8000-000000000002"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": {
+          "total_size": 1,
+          "page_num": 0,
+          "page_size": 100,
+          "next_page_num": "",
+          "data": [
+            {
+              "status": "master_offline",
+              "authorize_mode": "platform",
+              "name": "cluster-lab",
+              "project_ids": [],
+              "storage": {
+                "total_mb": 3899436.0,
+                "used_mb": 2945566.0,
+                "ratio": 0.76
+              },
+              "cpu": {
+                "total_mhz": 95788.28,
+                "ratio": 0.46,
+                "used_mhz": 44062.61
+              },
+              "version": "6.7.0",
+              "memory": {
+                "total_mb": 262144.0,
+                "used_mb": 131072.0,
+                "ratio": 0.5
+              },
+              "type": "hci",
+              "id": "c1d2e3f4-0000-4000-8000-000000000002",
+              "az_id": "a1b2c3d4-0000-4000-8000-000000000002",
+              "description": ""
+            }
+          ]
+        }
+      }
+
+  # default
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/20180725/clusters
+
+        - where: header
+          named: Authorization
+          contains: "sangfor-monitoring"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": {
+          "total_size": 2,
+          "page_num": 0,
+          "page_size": 100,
+          "next_page_num": "",
+          "data": [
+            {
+              "status": "normal",
+              "authorize_mode": "cluster",
+              "name": "cluster-prod",
+              "project_ids": [],
+              "storage": {
+                "total_mb": 23543766.0,
+                "used_mb": 1535376.0,
+                "ratio": 0.07
+              },
+              "cpu": {
+                "total_mhz": 287462.28,
+                "ratio": 0.1,
+                "used_mhz": 29710.45
+              },
+              "version": "6.8.0",
+              "memory": {
+                "total_mb": 393216.0,
+                "used_mb": 105635.09,
+                "ratio": 0.27
+              },
+              "type": "hci",
+              "id": "c1d2e3f4-0000-4000-8000-000000000001",
+              "az_id": "a1b2c3d4-0000-4000-8000-000000000001",
+              "description": ""
+            },
+            {
+              "status": "master_offline",
+              "authorize_mode": "platform",
+              "name": "cluster-lab",
+              "project_ids": [],
+              "storage": {
+                "total_mb": 3899436.0,
+                "used_mb": 2945566.0,
+                "ratio": 0.76
+              },
+              "cpu": {
+                "total_mhz": 95788.28,
+                "ratio": 0.46,
+                "used_mhz": 44062.61
+              },
+              "version": "6.7.0",
+              "memory": {
+                "total_mb": 262144.0,
+                "used_mb": 131072.0,
+                "ratio": 0.5
+              },
+              "type": "hci",
+              "id": "c1d2e3f4-0000-4000-8000-000000000002",
+              "az_id": "a1b2c3d4-0000-4000-8000-000000000002",
+              "description": ""
+            }
+          ]
+        }
+      }
+
+  # FALLBACK: missing or unknown credentials
+  - from: stub
+    status: 401
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "Unauthorized",
+        "code": 401,
+        "data": {}
+      }

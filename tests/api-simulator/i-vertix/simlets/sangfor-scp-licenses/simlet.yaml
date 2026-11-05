@@ -1,0 +1,100 @@
+simlet: sangfor-scp-licenses
+
+# Sangfor SCP: licensing information
+# plugin options: --hostname=i-vertix-simulation-vm --port=6090 --proto=http and either
+#   --access-key=sangfor-monitoring --secret-key=<any> (EC2, the signature is not verified)
+#   or --api-username=monitoring --api-password=<any> (token auth v2, the password is not verified)
+# both send an Authorization header containing "sangfor-monitoring"
+
+request:
+  - method: GET
+  - uriPath: /janus/20180725/licenses/summary
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/20180725/licenses/summary
+
+        - where: header
+          named: Authorization
+          contains: "sangfor-monitoring"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": {
+          "status": 0,
+          "username": "sangfor",
+          "server_timestamp": 1793000000,
+          "key_timestamp": 1793000002,
+          "key_id": "FEFCFE9FC93A0000",
+          "products": [
+            {
+              "software_time": {
+                "expire_timestamp": "1798831818",
+                "name": "Software_Expiration_Date",
+                "remain_timestamp": 5831818
+              },
+              "service_time": {
+                "expire_timestamp": "1795000000",
+                "name": "Service_Expiration_Date",
+                "remain_timestamp": 2000000
+              },
+              "activated": 1,
+              "name": "aCloud",
+              "disable": 0
+            },
+            {
+              "software_time": {
+                "expire_timestamp": "unlimited",
+                "name": "Software_Expiration_Date",
+                "remain_timestamp": -1
+              },
+              "service_time": {
+                "expire_timestamp": "1824536000",
+                "name": "Service_Expiration_Date",
+                "remain_timestamp": 31536000
+              },
+              "activated": 1,
+              "name": "aSV",
+              "disable": 0
+            },
+            {
+              "software_time": {
+                "expire_timestamp": "1625500799",
+                "name": "Software_Expiration_Date",
+                "remain_timestamp": 0
+              },
+              "service_time": {},
+              "activated": 0,
+              "name": "NGAF",
+              "disable": 1
+            }
+          ]
+        }
+      }
+
+  # FALLBACK: missing or unknown credentials
+  - from: stub
+    status: 401
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "Unauthorized",
+        "code": 401,
+        "data": {}
+      }

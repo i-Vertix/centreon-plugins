@@ -1,0 +1,112 @@
+simlet: sangfor-scp-alarms
+
+# Sangfor SCP: realtime alarms
+# plugin options: --hostname=i-vertix-simulation-vm --port=6090 --proto=http and either
+#   --access-key=sangfor-monitoring --secret-key=<any> (EC2, the signature is not verified)
+#   or --api-username=monitoring --api-password=<any> (token auth v2, the password is not verified)
+# both send an Authorization header containing "sangfor-monitoring"
+
+request:
+  - method: GET
+  - uriPath: /janus/20190725/alarms
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/20190725/alarms
+
+        - where: header
+          named: Authorization
+          contains: "sangfor-monitoring"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": [
+          {
+            "status": "open",
+            "remark": "",
+            "user_id": "cb086d2d2d7d430b93f7230072435454",
+            "description": "The CPU usage of the node (192.0.2.12) is 96.35%, higher than 95%.",
+            "level": "p1",
+            "start_time": "2026-10-30 17:30:46",
+            "object_type": "host",
+            "updated_at": "2026-10-31 10:25:46",
+            "object_id": "host-0a1b2c3d4e02",
+            "policy_name": "Host CPU usage",
+            "alarm_advice": "",
+            "converge_count": 41,
+            "object_name": "192.0.2.12",
+            "az_name": "pool-lab",
+            "project_id": "7b5a0cd057d446d6a2df8d5fdc91e95e",
+            "id": "7adf0fc8-b72c-4abc-b069-1c6b8a2a2900",
+            "az_id": "a1b2c3d4-0000-4000-8000-000000000002",
+            "policy_id": "5096cb3a-dae3-4860-b738-bffe1d227a96"
+          },
+          {
+            "status": "ack",
+            "remark": "known",
+            "user_id": "cb086d2d2d7d430b93f7230072435454",
+            "description": "CPU underclocking happened on the node (192.0.2.11).",
+            "level": "p2",
+            "start_time": "2026-10-06 15:02:31",
+            "object_type": "host",
+            "updated_at": "2026-10-31 10:08:45",
+            "object_id": "host-0a1b2c3d4e01",
+            "policy_name": "Host CPU Underclocking",
+            "alarm_advice": "",
+            "converge_count": 172,
+            "object_name": "192.0.2.11",
+            "az_name": "pool-prod",
+            "project_id": "7b5a0cd057d446d6a2df8d5fdc91e95e",
+            "id": "7608afd4-fb78-464c-9ee6-32969f5ac4f4",
+            "az_id": "a1b2c3d4-0000-4000-8000-000000000001",
+            "policy_id": "5a433827-4f69-4f00-8751-2494685a8cb1"
+          },
+          {
+            "status": "open",
+            "remark": "",
+            "user_id": "cb086d2d2d7d430b93f7230072435454",
+            "description": "The storage network interface of the virtual datastore uses a gigabit network.",
+            "level": "p3",
+            "start_time": "2026-10-17 12:00:20",
+            "object_type": "storage",
+            "updated_at": "2026-10-31 10:29:02",
+            "object_id": "datastore-vs",
+            "policy_name": "Virtual storage network bandwidth detection",
+            "alarm_advice": "",
+            "converge_count": 79,
+            "object_name": "datastore-vs",
+            "az_name": "pool-prod",
+            "project_id": "7b5a0cd057d446d6a2df8d5fdc91e95e",
+            "id": "d9ca5141-3764-45cb-bbed-cea9c301fe77",
+            "az_id": "a1b2c3d4-0000-4000-8000-000000000001",
+            "policy_id": "4de9b61b-40ec-4863-951c-9479538a0784"
+          }
+        ]
+      }
+
+  # FALLBACK: missing or unknown credentials
+  - from: stub
+    status: 401
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "Unauthorized",
+        "code": 401,
+        "data": {}
+      }

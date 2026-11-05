@@ -1,0 +1,138 @@
+simlet: sangfor-scp-hosts
+
+# Sangfor SCP: physical hosts (nodes)
+# plugin options: --hostname=i-vertix-simulation-vm --port=6090 --proto=http and either
+#   --access-key=sangfor-monitoring --secret-key=<any> (EC2, the signature is not verified)
+#   or --api-username=monitoring --api-password=<any> (token auth v2, the password is not verified)
+# both send an Authorization header containing "sangfor-monitoring"
+
+request:
+  - method: GET
+  - uriPath: /janus/20180725/hosts
+
+responses:
+
+  - when:
+      request:
+        - where: uriPath
+          equals: /janus/20180725/hosts
+
+        - where: header
+          named: Authorization
+          contains: "sangfor-monitoring"
+
+    from: stub
+    status: 200
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "",
+        "code": 0,
+        "data": [
+          {
+            "status": "running",
+            "description": "",
+            "ip": "192.0.2.11",
+            "storage": {
+              "total_mb": 4105435.99
+            },
+            "cpu": {
+              "used_mhz": 11883.6,
+              "allocation_ratio": 2.5,
+              "ratio": 0.45,
+              "allocation_max": 0.0,
+              "cores_per_socket": 4,
+              "socket_count": 1,
+              "total_mhz": 26408.0,
+              "type": "Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz",
+              "core_count": 4
+            },
+            "reserves": {
+              "memory_mb": 4096
+            },
+            "memory": {
+              "total_mb": 32768.0,
+              "allocation_ratio": 1.0,
+              "allocation_max": 0.0,
+              "used_mb": 17039.36,
+              "ratio": 0.52
+            },
+            "gpu": {
+              "used": 0.0,
+              "ratio": 0.0,
+              "memory_used_mb": 0.0,
+              "memory_ratio": 0.0,
+              "total": 0,
+              "memory_total_mb": 0.0
+            },
+            "alarm_count": 0,
+            "is_use_vs": 1,
+            "type": "h",
+            "id": "host-0a1b2c3d4e01",
+            "az_id": "a1b2c3d4-0000-4000-8000-000000000001",
+            "name": "192.0.2.11"
+          },
+          {
+            "status": "offline",
+            "description": "",
+            "ip": "192.0.2.12",
+            "storage": {
+              "total_mb": 4105435.99
+            },
+            "cpu": {
+              "used_mhz": 12939.92,
+              "allocation_ratio": 2.5,
+              "ratio": 0.49,
+              "allocation_max": 0.0,
+              "cores_per_socket": 4,
+              "socket_count": 1,
+              "total_mhz": 26408.0,
+              "type": "Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz",
+              "core_count": 4
+            },
+            "reserves": {
+              "memory_mb": 4096
+            },
+            "memory": {
+              "total_mb": 32768.0,
+              "allocation_ratio": 1.0,
+              "allocation_max": 0.0,
+              "used_mb": 19333.12,
+              "ratio": 0.59
+            },
+            "gpu": {
+              "used": 0.0,
+              "ratio": 0.0,
+              "memory_used_mb": 0.0,
+              "memory_ratio": 0.0,
+              "total": 0,
+              "memory_total_mb": 0.0
+            },
+            "alarm_count": 2,
+            "is_use_vs": 1,
+            "type": "h",
+            "id": "host-0a1b2c3d4e02",
+            "az_id": "a1b2c3d4-0000-4000-8000-000000000002",
+            "name": "192.0.2.12"
+          }
+        ]
+      }
+
+  # FALLBACK: missing or unknown credentials
+  - from: stub
+    status: 401
+
+    headers:
+      - name: Content-Type
+        value: application/json
+
+    body: |
+      {
+        "message": "Unauthorized",
+        "code": 401,
+        "data": {}
+      }
