@@ -1,6 +1,0 @@
-# i-Vertix API simulation
-#
-# Every simlet lives in its own file: simlets/<simlet-name>/simlet.yaml
-# (simlet names are prefixed with the product, e.g. azure-vnet, zerto-zic-vpgs).
-# Simlets with the same rank are matched in no particular order, so keep the
-# top-level request matchers of different simlets disjoint (or set a rank).

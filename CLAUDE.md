@@ -8,7 +8,7 @@ A fork of [centreon-plugins](https://github.com/centreon/centreon-plugins): Perl
 
 i-Vertix additions on top of upstream:
 - `src/ivertix/plugins/` – in-house plugins (namespace `ivertix::plugins::...`, copyright header `i-Vertix`), built on the same framework as upstream.
-- `tests/api-simulator/i-vertix/apisim.yaml` – REST API simulator data (see below). It lives **only** on branch `ivertix-custom-plugins`, which is checked out permanently in this worktree (`C:\dev\centreon-plugins-apisim`) and is never PR'd. Feature/plugin work happens on other branches (from `develop`); simulator data is edited and committed here only.
+- Branch `ivertix-custom-plugins` is checked out permanently in this worktree (`C:\dev\centreon-plugins-apisim`) and is never PR'd. Feature/plugin work happens on other branches (from `develop`). The API simulator data used to live here and is now in its own repository (see below).
 
 ## Commands
 
@@ -71,12 +71,6 @@ Execution chain: `src/centreon_plugins.pl` → `centreon::plugins::script` (pars
 
 Developer docs: `doc/en/developer/plugins_global.md` (layout, style, output/perfdata rules, discovery), `tutorial-api.md`, `tutorial-snmp.md`, `tutorial-service_discovery.md`.
 
-## API simulator (`tests/api-simulator/i-vertix/`)
+## API simulator
 
-An [API Simulator](https://apisimulator.io/docs/) 1.13 simulation in the "directory per simlet" layout: every simlet is `simlets/<simlet-name>/simlet.yaml`, names prefixed with the product (`azure-vnet`, `zerto-zic-vpgs`, ...); `apisim.yaml` is intentionally empty (comments only). Each simlet has a `simlet:` name (keep it equal to the directory name), a top-level `request:` matcher (method + path) and `responses:` with `when: request:` conditions (`uriPath`, `uri contains`, `uriQueryParameter`, `header`, `body contains`) and a `from: stub` response.
-
-- Simlets with the same `rank` are evaluated **in no particular order**, so top-level matchers of different simlets must not overlap (use exact `uriPath`, or `where: uriPath contains: /<product>/...`); if they have to overlap, give the more specific simlet a higher `rank:`. A simlet that matches by prefix should end with a `- from: stub` / `status: 404` fallback response.
-- Deployment: the simulator runs on the simulation VM (`10.10.100.22`, alias `i-vertix-simulation-vm`) as `apisimulator.service`, loading `/var/www/apisimulator/examples/i-vertix` (`apisim.yaml` + `simlets/`). Simlet files are only read at start-up, so changes need `systemctl restart apisimulator.service`. Always back up that directory (`/root/apisim-backups/i-vertix-<timestamp>.tar.gz`) before replacing it, and check `apisimulator.log` in it for `Loaded N simlets` / `API Simulator started`. A second instance for testing can be started with `bin/apisimulator start <dir> -p 6091 -admin_port 6191` from `/var/www/apisimulator`.
-- Paths are namespaced per product (`/azure/...`, `/aws/...`, `/velocloud/...`, `/zic/...`, `/zvm/...`, `/sadelvoip/...`), and fake credentials are fixed values (e.g. `Bearer token-123`, `client-id-ivertix`, `apikey: 1234`).
-- Plugins are pointed at it with `--hostname=i-vertix-simulation-vm --port=6090 --proto=http` plus the product path prefix where the plugin allows a base URL/path option.
-- A local (unversioned) `.git/hooks/pre-push` refuses to push `tests/api-simulator/` to any branch other than `ivertix-custom-plugins`; never bypass it to publish simulator data elsewhere.
+The REST API simulator data (API Simulator simlets) moved to its own repository `centreon-plugin-restapi-sim` (Bitbucket `pgumdev/centreon-plugin-restapi-sim`, local `C:\dev\centreon-plugin-restapi-sim`); edit, commit and deploy simlets there. Plugins are tested against it with `--hostname=i-vertix-simulation-vm --port=6090 --proto=http` (from Windows: `10.10.100.22`) plus the product path prefix where the plugin allows a base URL/path option.
