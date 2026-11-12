@@ -36,6 +36,7 @@ sub new {
         'license'         => 'apps::backup::zerto::zvm::restapi::mode::license',
         'list-datastores' => 'apps::backup::zerto::zvm::restapi::mode::listdatastores',
         'list-peer-sites' => 'apps::backup::zerto::zvm::restapi::mode::listpeersites',
+        'list-vms'        => 'apps::backup::zerto::zvm::restapi::mode::listvms',
         'list-vpgs'       => 'apps::backup::zerto::zvm::restapi::mode::listvpgs',
         'list-vras'       => 'apps::backup::zerto::zvm::restapi::mode::listvras',
         'peer-sites'      => 'apps::backup::zerto::zvm::restapi::mode::peersites',
