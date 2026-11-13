@@ -61,10 +61,16 @@ Snapshots ${tc}
     ...    CRITICAL: Backup group 'host/srv01' [datastore: store01] [comment: host-srv01] last snapshot size: 50.00 GB | 'backupgroups.total.count'=1;;;0; 'snapshots.total.count'=1;;;0; 'store01~host/srv01#backupgroup.snapshot.last.size.bytes'=53687091200B;;0:1000000000;0; 'store01~host/srv01#backupgroup.snapshots.count'=1;;;0; 'store01~host/srv01#backupgroup.snapshots.verify.failed.count'=0;;;0;
     ...    9
     ...    --include-id=nomatch
-    ...    UNKNOWN: No backup group found. skipping datastore 'store02': cannot read its snapshots
+    ...    OK: Backup groups total: 0, snapshots: 0 | 'backupgroups.total.count'=0;;;0; 'snapshots.total.count'=0;;;0;
     ...    10
     ...    --warning-snapshots-total=:5 --critical-groups-total=:4
     ...    CRITICAL: Backup groups total: 6, snapshots: 10 - Backup group 'vm/101' [datastore: store01] [comment: vm-101] last snapshot verification: failed | 'backupgroups.total.count'=6;;0:4;0; 'snapshots.total.count'=10;0:5;;0; 's3store01~vm/300#backupgroup.snapshot.last.size.bytes'=21474837325B;;;0; 's3store01~vm/300#backupgroup.snapshots.count'=2;;;0; 's3store01~vm/300#backupgroup.snapshots.verify.failed.count'=0;;;0; 'store01~ct/200#backupgroup.snapshot.last.size.bytes'=2147484500B;;;0; 'store01~ct/200#backupgroup.snapshots.count'=1;;;0; 'store01~ct/200#backupgroup.snapshots.verify.failed.count'=0;;;0; 'store01~host/srv01#backupgroup.snapshot.last.size.bytes'=53687091200B;;;0; 'store01~host/srv01#backupgroup.snapshots.count'=1;;;0; 'store01~host/srv01#backupgroup.snapshots.verify.failed.count'=0;;;0; 'store01~vm/100#backupgroup.snapshot.last.size.bytes'=118111601493B;;;0; 'store01~vm/100#backupgroup.snapshots.count'=2;;;0; 'store01~vm/100#backupgroup.snapshots.verify.failed.count'=0;;;0; 'store01~vm/101#backupgroup.snapshot.last.size.bytes'=4831839092B;;;0; 'store01~vm/101#backupgroup.snapshots.count'=2;;;0; 'store01~vm/101#backupgroup.snapshots.verify.failed.count'=1;;;0; 'store01~vm/102#backupgroup.snapshot.last.size.bytes'=34359739226B;;;0; 'store01~vm/102#backupgroup.snapshots.count'=2;;;0; 'store01~vm/102#backupgroup.snapshots.verify.failed.count'=1;;;0;
+    ...    11
+    ...    --include-datastore=nomatch
+    ...    UNKNOWN: No datastore found.
+    ...    12
+    ...    --include-datastore=usb01 --critical-groups-total=1:
+    ...    CRITICAL: Backup groups total: 0 | 'backupgroups.total.count'=0;;1:;0; 'snapshots.total.count'=0;;;0;
 
 Snapshots Age ${tc}
     [Tags]    apps    proxmox    restapi

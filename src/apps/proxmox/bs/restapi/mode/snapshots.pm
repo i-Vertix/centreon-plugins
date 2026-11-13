@@ -166,11 +166,13 @@ sub manage_selection {
     my $datastores = $options{custom}->get_datastores();
 
     my $current_time = time();
+    my $datastores_found = 0;
     $self->{global} = { groups => 0, snapshots => 0 };
     $self->{groups} = {};
     foreach my $datastore (sort { ($a->{store} // '') cmp ($b->{store} // '') } @$datastores) {
         my $store = $datastore->{store} // next;
         next if is_excluded($store, $self->{option_results}->{include_datastore}, $self->{option_results}->{exclude_datastore}, output => $self->{output});
+        $datastores_found++;
 
         # the snapshots of an unmounted or offline datastore cannot be read
         my $maintenance = maintenance_type(value => $datastore->{maintenance});
@@ -223,8 +225,9 @@ sub manage_selection {
     }
     $self->{global}->{groups} = scalar(keys %{$self->{groups}});
 
-    $self->{output}->option_exit(short_msg => 'No backup group found.')
-        unless $self->{global}->{groups};
+    # no backup group (empty or unmounted datastore) is not an error: --critical-groups-total=1: alerts on it
+    $self->{output}->option_exit(short_msg => 'No datastore found.')
+        unless $datastores_found;
 }
 
 1;
@@ -237,6 +240,7 @@ Check the backup groups (all the snapshots of a VM, a container or a host) of th
 age, size and verification of the last snapshot.
 Unmounted datastores, datastores in C<offline>, C<unmount> or C<delete> maintenance
 and datastores whose snapshots cannot be read are skipped (use the C<datastore-usage> mode to check them).
+No backup group is not an error: use C<--critical-groups-total=1:> to alert on it.
 
 =over 8
 
