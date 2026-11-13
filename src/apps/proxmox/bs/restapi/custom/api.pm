@@ -346,7 +346,7 @@ Define the node name (default: C<localhost>).
 
 =item B<--api-token-id>
 
-Define the API token ID, e.g. C<monitoring@pbs!centreon>.
+Define the API token ID, e.g. C<monitoring@pbs!user-api>.
 
 =item B<--api-token-secret>
 
