@@ -1,0 +1,806 @@
+{
+  "uuid": "d28e5f4f-fa78-58bb-bf02-d4e07ae2f041",
+  "lastMigration": 33,
+  "name": "Proxmox Backup Server",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "ca2061ef-6d24-5b25-9807-96051bafee42",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api2/json/access/ticket",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "d0eff77b-26d8-5180-aa25-c8f031fcfdc2",
+          "body": "{\n  \"data\": {\n    \"CSRFPreventionToken\": \"6A43615D:csrf-token-123\",\n    \"ticket\": \"PBS:monitor@pbs:6A43615D::ticket-123\",\n    \"username\": \"monitor@pbs\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "ticket",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "monitor@pbs",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "pass-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0c08140e-549b-51b3-83d8-b9f41ac464f6",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "ticket unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "82934303-064d-5ea6-bc50-aa6aa49b1632",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/version",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "4a7417da-b2a1-5b0e-bbe0-da72ca1c99bb",
+          "body": "{\n  \"data\": {\n    \"release\": \"18\",\n    \"repoid\": \"0123456789abcdef0123456789abcdef01234567\",\n    \"version\": \"4.0\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/version",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3e206e99-f88f-521f-8a90-f1c3b68795e7",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/version unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "5dcd75c7-4aef-56e9-8c07-761454ff2d0d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/nodes/localhost/status",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "c0acd26e-4aa1-5674-80fc-2743d8e7140f",
+          "body": "{\n  \"data\": {\n    \"boot-info\": {\n      \"mode\": \"legacy-bios\",\n      \"secureboot\": false\n    },\n    \"cpu\": 0.0536665301106104,\n    \"cpuinfo\": {\n      \"cpus\": 4,\n      \"model\": \"QEMU Virtual CPU version 2.5+\",\n      \"sockets\": 2\n    },\n    \"current-kernel\": {\n      \"machine\": \"x86_64\",\n      \"release\": \"6.14.11-1-pve\",\n      \"sysname\": \"Linux\",\n      \"version\": \"#1 SMP PREEMPT_DYNAMIC PMX 6.14.11-1 (2025-08-26T16:06Z)\"\n    },\n    \"info\": {\n      \"fingerprint\": \"ab:cd:ef:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef:01:23:45:67:89:ab:cd:ef:01:23:45:67:89\"\n    },\n    \"kversion\": \"Linux 6.14.11-1-pve #1 SMP PREEMPT_DYNAMIC PMX 6.14.11-1 (2025-08-26T16:06Z)\",\n    \"loadavg\": [\n      0.26,\n      0.24,\n      0.24\n    ],\n    \"memory\": {\n      \"free\": 135147520,\n      \"total\": 4106833920,\n      \"used\": 676208640\n    },\n    \"root\": {\n      \"avail\": 3170152448,\n      \"total\": 10979876864,\n      \"used\": 7229652992\n    },\n    \"swap\": {\n      \"free\": 1041059840,\n      \"total\": 1073737728,\n      \"used\": 32677888\n    },\n    \"uptime\": 24623987,\n    \"wait\": 0.0020833333333333333\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/nodes/localhost/status",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2fa38c9e-605b-56d8-82de-52cc51cfb98a",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/nodes/localhost/status unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "5f368e4e-a0e6-5f6c-b716-f9c254381576",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/nodes/localhost/services",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "b01b0704-cc3f-5f4b-8ef5-dfc371372802",
+          "body": "{\n  \"data\": [\n    {\n      \"desc\": \"Proxmox Backup API Server\",\n      \"name\": \"proxmox-backup\",\n      \"service\": \"proxmox-backup\",\n      \"state\": \"running\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"Proxmox Backup API Proxy Server\",\n      \"name\": \"proxmox-backup-proxy\",\n      \"service\": \"proxmox-backup-proxy\",\n      \"state\": \"running\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"OpenBSD Secure Shell server\",\n      \"name\": \"sshd\",\n      \"service\": \"sshd\",\n      \"state\": \"running\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"Journal Service\",\n      \"name\": \"systemd-journald\",\n      \"service\": \"systemd-journald\",\n      \"state\": \"running\",\n      \"unit-state\": \"static\"\n    },\n    {\n      \"desc\": \"Regular background program processing daemon\",\n      \"name\": \"cron\",\n      \"service\": \"cron\",\n      \"state\": \"running\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"Postfix Mail Transport Agent (main/default instance)\",\n      \"name\": \"postfix\",\n      \"service\": \"postfix\",\n      \"state\": \"dead\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"chrony, an NTP client/server\",\n      \"name\": \"chrony\",\n      \"service\": \"chrony\",\n      \"state\": \"running\",\n      \"unit-state\": \"enabled\"\n    },\n    {\n      \"desc\": \"Self Monitoring and Reporting Technology (SMART) Daemon\",\n      \"name\": \"smartmontools\",\n      \"service\": \"smartmontools\",\n      \"state\": \"dead\",\n      \"unit-state\": \"disabled\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/nodes/localhost/services",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "93db9231-2467-5d2e-9150-0a92abf4c77f",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/nodes/localhost/services unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "0d2d7bc7-af54-5367-8741-7f1f365d7d6a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/nodes/localhost/disks/list",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "3177eea5-e110-5382-84c1-0291874f720d",
+          "body": "{\n  \"data\": [\n    {\n      \"devpath\": \"/dev/nvme0n1\",\n      \"disk-type\": \"ssd\",\n      \"gpt\": true,\n      \"model\": \"SAMPLE NVMe SSD 1TB\",\n      \"name\": \"nvme0n1\",\n      \"partitions\": null,\n      \"rpm\": null,\n      \"serial\": \"S0000000000001\",\n      \"size\": 1000204886016,\n      \"status\": \"passed\",\n      \"used\": \"zfs\",\n      \"vendor\": \"unknown\",\n      \"wearout\": 85,\n      \"wwn\": null\n    },\n    {\n      \"devpath\": \"/dev/sda\",\n      \"disk-type\": \"hdd\",\n      \"gpt\": true,\n      \"model\": \"QEMU_HARDDISK\",\n      \"name\": \"sda\",\n      \"partitions\": null,\n      \"rpm\": null,\n      \"serial\": \"drive-scsi0\",\n      \"size\": 12884901888,\n      \"status\": \"passed\",\n      \"used\": \"lvm\",\n      \"vendor\": \"QEMU\",\n      \"wearout\": null,\n      \"wwn\": null\n    },\n    {\n      \"devpath\": \"/dev/sdb\",\n      \"disk-type\": \"hdd\",\n      \"gpt\": true,\n      \"model\": \"QEMU_HARDDISK\",\n      \"name\": \"sdb\",\n      \"partitions\": null,\n      \"rpm\": null,\n      \"serial\": \"drive-scsi1\",\n      \"size\": 96636764160,\n      \"status\": \"passed\",\n      \"used\": \"zfs\",\n      \"vendor\": \"QEMU\",\n      \"wearout\": null,\n      \"wwn\": null\n    },\n    {\n      \"devpath\": \"/dev/sdc\",\n      \"disk-type\": \"hdd\",\n      \"gpt\": true,\n      \"model\": \"SAMPLE HDD 4TB\",\n      \"name\": \"sdc\",\n      \"partitions\": null,\n      \"rpm\": 7200,\n      \"serial\": \"Z0000001\",\n      \"size\": 4000787030016,\n      \"status\": \"failed\",\n      \"used\": \"filesystem\",\n      \"vendor\": \"ATA\",\n      \"wearout\": null,\n      \"wwn\": \"0x5000000000000001\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/nodes/localhost/disks/list",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "daf47f9a-daef-5dee-bd5f-33b50767bc9a",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/nodes/localhost/disks/list unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "cae37cc4-ab17-5d04-ae15-996e552b1f34",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/nodes/localhost/tasks",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "b1c9f41a-a971-50b5-83da-437ebe6f2cdd",
+          "body": "{\n  \"data\": [\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B01:6A42D001:backup:store01\\\\x3act/200:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-600}},\n      \"worker_type\": \"backup\",\n      \"worker_id\": \"store01:ct/200\",\n      \"user\": \"root@pam\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B02:6A42D002:backup:store01\\\\x3avm/102:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-3600}},\n      \"worker_type\": \"backup\",\n      \"worker_id\": \"store01:vm/102\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-3505}},\n      \"status\": \"backup failed: connection error: Connection reset by peer\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B03:6A42D003:backup:store01\\\\x3avm/100:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-7200}},\n      \"worker_type\": \"backup\",\n      \"worker_id\": \"store01:vm/100\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-7080}},\n      \"status\": \"OK\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B04:6A42D004:backup:store01\\\\x3avm/101:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-10800}},\n      \"worker_type\": \"backup\",\n      \"worker_id\": \"store01:vm/101\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-10736}},\n      \"status\": \"OK\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B05:6A42D005:prunejob:store01\\\\x3ap\\\\x2d1a2b3c4d\\\\x2d5e6f:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-14400}},\n      \"worker_type\": \"prunejob\",\n      \"worker_id\": \"store01:p-1a2b3c4d-5e6f\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-14388}},\n      \"status\": \"WARNINGS: 1\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B06:6A42D006:garbage_collection:store01:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-21600}},\n      \"worker_type\": \"garbage_collection\",\n      \"worker_id\": \"store01\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-18000}},\n      \"status\": \"OK\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B07:6A42D007:verificationjob:store01\\\\x3av\\\\x2d0a1b2c3d\\\\x2d4e5f:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-28800}},\n      \"worker_type\": \"verificationjob\",\n      \"worker_id\": \"store01:v-0a1b2c3d-4e5f\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-23400}},\n      \"status\": \"OK\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B08:6A42D008:syncjob:s3store01\\\\x3as\\\\x2d6f5e4d3c\\\\x2d2b1a:sync@pbs:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-36000}},\n      \"worker_type\": \"syncjob\",\n      \"worker_id\": \"s3store01:s-6f5e4d3c-2b1a\",\n      \"user\": \"sync@pbs\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-34200}},\n      \"status\": \"OK\"\n    },\n    {\n      \"upid\": \"UPID:pbs01:00000371:000001DA:00018B09:6A42D009:backup:store01\\\\x3avm/100:root@pam:\",\n      \"node\": \"localhost\",\n      \"pid\": 881,\n      \"pstart\": 474,\n      \"starttime\": {{dateTimeShift date=(now) format='t' seconds=-108000}},\n      \"worker_type\": \"backup\",\n      \"worker_id\": \"store01:vm/100\",\n      \"user\": \"root@pam\",\n      \"endtime\": {{dateTimeShift date=(now) format='t' seconds=-107882}},\n      \"status\": \"OK\"\n    }\n  ],\n  \"total\": 9\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/nodes/localhost/tasks",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "901f3f63-6c41-5a76-92ef-6985d46a1e90",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/nodes/localhost/tasks unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "a3849819-89f6-5c40-8530-b5e7c94ed8a6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/admin/datastore",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "5aa8ee68-fcee-5cff-abbd-109e31580ae8",
+          "body": "{\n  \"data\": [\n    {\n      \"comment\": \"main datastore\",\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"store01\"\n    },\n    {\n      \"comment\": null,\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"store02\"\n    },\n    {\n      \"backend-type\": \"s3\",\n      \"comment\": \"offsite copy\",\n      \"maintenance\": \"type=read-only,message=migration\",\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"s3store01\"\n    },\n    {\n      \"comment\": \"rotating USB disk\",\n      \"mount-status\": \"notmounted\",\n      \"store\": \"usb01\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/admin/datastore",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3773bbb9-0cba-5eb2-b3ed-dae334755aae",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/admin/datastore unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "786320a0-6927-5fb5-bee7-a41981d6b81b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/status/datastore-usage",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "7207513f-44ff-5787-846b-4c9592adaa0a",
+          "body": "{\n  \"data\": [\n    {\n      \"avail\": 4108636389376,\n      \"estimated-full-date\": {{dateTimeShift date=(now) format='t' seconds=34560600}},\n      \"gc-status\": {\n        \"cache-stats\": {\n          \"hits\": 4116617,\n          \"misses\": 1165461\n        },\n        \"disk-bytes\": 1967132806207,\n        \"disk-chunks\": 1165459,\n        \"index-data-bytes\": 22154639218965,\n        \"index-file-count\": 777,\n        \"pending-bytes\": 0,\n        \"pending-chunks\": 0,\n        \"removed-bad\": 0,\n        \"removed-bytes\": 590241140734,\n        \"removed-chunks\": 412249,\n        \"still-bad\": 0,\n        \"upid\": \"UPID:pbs01:00000371:000001DA:000187A6:6A40F0A0:garbage_collection:store01:root@pam:\"\n      },\n      \"history\": [],\n      \"history-delta\": 1800,\n      \"history-start\": 1780150555,\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"store01\",\n      \"total\": 16000000983040,\n      \"used\": 11891364593664\n    },\n    {\n      \"avail\": -1,\n      \"error\": \"unable to open chunk store at \\\"/mnt/datastore/store02/.chunks\\\" - No such file or directory\",\n      \"gc-status\": {},\n      \"history-delta\": 0,\n      \"history-start\": 0,\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"store02\",\n      \"total\": 0,\n      \"used\": 0\n    },\n    {\n      \"avail\": 512000000000,\n      \"backend-type\": \"s3\",\n      \"estimated-full-date\": {{dateTimeShift date=(now) format='t' seconds=-2592000}},\n      \"gc-status\": {\n        \"disk-bytes\": 4300000000000,\n        \"disk-chunks\": 2500000,\n        \"index-data-bytes\": 12900000000000,\n        \"index-file-count\": 120,\n        \"pending-bytes\": 21474836480,\n        \"pending-chunks\": 9000,\n        \"removed-bad\": 0,\n        \"removed-bytes\": 0,\n        \"removed-chunks\": 0,\n        \"still-bad\": 3,\n        \"upid\": \"UPID:pbs01:00000371:000001DA:000188A0:6A41A000:garbage_collection:s3store01:root@pam:\"\n      },\n      \"history\": [],\n      \"history-delta\": 1800,\n      \"history-start\": 1780150555,\n      \"mount-status\": \"nonremovable\",\n      \"store\": \"s3store01\",\n      \"total\": 5000000000000,\n      \"used\": 4488000000000\n    },\n    {\n      \"avail\": -1,\n      \"gc-status\": {},\n      \"history-delta\": 0,\n      \"history-start\": 0,\n      \"mount-status\": \"notmounted\",\n      \"store\": \"usb01\",\n      \"total\": 0,\n      \"used\": 0\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/status/datastore-usage",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d35cf74c-5a33-5a21-b184-6dd9c6fba7bc",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/status/datastore-usage unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "55902fba-0bf4-55a0-b91f-c859a979a876",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/admin/datastore/store01/snapshots",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "f772f2d5-ee84-51a2-a503-598855e6a4fc",
+          "body": "{\n  \"data\": [\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"100\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-7200}},\n      \"comment\": \"vm-100\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 118111600640\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 118111601493,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-100:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"100\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-93600}},\n      \"comment\": \"vm-100\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 118111600643\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 118111601496,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-100:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"101\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-10800}},\n      \"comment\": \"vm-101\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 4831838239\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 4831839092,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"failed\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-101:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"101\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-97200}},\n      \"comment\": \"vm-101\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 4831838242\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 4831839095,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-101:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"102\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-180000}},\n      \"comment\": \"vm-102\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 34359738373\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 34359739226,\n      \"owner\": \"root@pam\",\n      \"protected\": false\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"102\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-266400}},\n      \"comment\": \"vm-102\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 34359738377\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 34359739230,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"failed\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-102:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"ct\",\n      \"backup-id\": \"200\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-3600}},\n      \"comment\": \"ct-200\",\n      \"files\": [\n        {\n          \"filename\": \"pct.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 412\n        },\n        {\n          \"filename\": \"root.pxar.didx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 2147483000\n        },\n        {\n          \"filename\": \"catalog.pcat1.didx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 622\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 2147484500,\n      \"owner\": \"root@pam\",\n      \"protected\": true\n    },\n    {\n      \"backup-type\": \"host\",\n      \"backup-id\": \"srv01\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-18000}},\n      \"comment\": \"host-srv01\",\n      \"files\": [\n        {\n          \"filename\": \"root.pxar.didx\",\n          \"crypt-mode\": \"encrypt\",\n          \"size\": 53687090000\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 53687091200,\n      \"owner\": \"backup@pbs\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C05:6A42D500:verify:store01\\\\x3ahost-srv01:root@pam:\"\n      }\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/admin/datastore/store01/snapshots",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "111f7f26-f716-5b7f-a97f-997c520e36f8",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/admin/datastore/store01/snapshots unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "54c86d59-4887-598b-9661-72f8ab082611",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/admin/datastore/s3store01/snapshots",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "85c5618d-8b4e-528e-a02c-ee6c60507397",
+          "body": "{\n  \"data\": [\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"300\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-14400}},\n      \"comment\": \"vm-300\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 21474836472\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 21474837325,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-300:root@pam:\"\n      }\n    },\n    {\n      \"backup-type\": \"vm\",\n      \"backup-id\": \"300\",\n      \"backup-time\": {{dateTimeShift date=(now) format='t' seconds=-100800}},\n      \"comment\": \"vm-300\",\n      \"files\": [\n        {\n          \"filename\": \"qemu-server.conf.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 387\n        },\n        {\n          \"filename\": \"drive-scsi0.img.fidx\",\n          \"crypt-mode\": \"none\",\n          \"size\": 21474836477\n        },\n        {\n          \"filename\": \"index.json.blob\",\n          \"crypt-mode\": \"none\",\n          \"size\": 466\n        },\n        {\n          \"filename\": \"client.log.blob\"\n        }\n      ],\n      \"size\": 21474837330,\n      \"owner\": \"root@pam\",\n      \"protected\": false,\n      \"verification\": {\n        \"state\": \"ok\",\n        \"upid\": \"UPID:pbs01:00000371:000001DA:00018C03:6A42D500:verify:store01\\\\x3avm-300:root@pam:\"\n      }\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "api2/json/admin/datastore/s3store01/snapshots",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1956d13d-b12e-59f4-aac5-918e210b700b",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/admin/datastore/s3store01/snapshots unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    },
+    {
+      "uuid": "7e2ba404-0047-5861-be4a-4f90add380f5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api2/json/admin/datastore/store02/snapshots",
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0,
+      "responses": [
+        {
+          "uuid": "22315a92-5c01-5c79-986f-c6b5b372eefe",
+          "body": "{\n  \"data\": null,\n  \"message\": \"unable to open chunk store at \\\"/mnt/datastore/store02/.chunks\\\" - No such file or directory\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "api2/json/admin/datastore/store02/snapshots",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "PBSAPIToken=monitor@pbs!centreon:token-123",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "Cookie",
+              "value": "PBSAuthCookie=PBS:monitor@pbs:6A43615D::ticket-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1639bfed-56f2-5090-817f-3402763d42b1",
+          "body": "{\n  \"data\": null,\n  \"message\": \"authentication failed - invalid credentials\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "api2/json/admin/datastore/store02/snapshots unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ]
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "ca2061ef-6d24-5b25-9807-96051bafee42"
+    },
+    {
+      "type": "route",
+      "uuid": "82934303-064d-5ea6-bc50-aa6aa49b1632"
+    },
+    {
+      "type": "route",
+      "uuid": "5dcd75c7-4aef-56e9-8c07-761454ff2d0d"
+    },
+    {
+      "type": "route",
+      "uuid": "5f368e4e-a0e6-5f6c-b716-f9c254381576"
+    },
+    {
+      "type": "route",
+      "uuid": "0d2d7bc7-af54-5367-8741-7f1f365d7d6a"
+    },
+    {
+      "type": "route",
+      "uuid": "cae37cc4-ab17-5d04-ae15-996e552b1f34"
+    },
+    {
+      "type": "route",
+      "uuid": "a3849819-89f6-5c40-8530-b5e7c94ed8a6"
+    },
+    {
+      "type": "route",
+      "uuid": "786320a0-6927-5fb5-bee7-a41981d6b81b"
+    },
+    {
+      "type": "route",
+      "uuid": "55902fba-0bf4-55a0-b91f-c859a979a876"
+    },
+    {
+      "type": "route",
+      "uuid": "54c86d59-4887-598b-9661-72f8ab082611"
+    },
+    {
+      "type": "route",
+      "uuid": "7e2ba404-0047-5861-be4a-4f90add380f5"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
